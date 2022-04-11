@@ -20,3 +20,9 @@ use App\Http\Controllers\TestRegisterController;
 
 Route::get('/', [TestRegisterController::class, 'index']);
 Route::post('/', [TestRegisterController::class, 'store']);
+
+Route::get('/home', function(){
+    return view('layouts.base_layout',[
+
+    ]);
+});

@@ -5381,7 +5381,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     recommendedImageURL: function recommendedImageURL() {
-      return "/images/recommended-menu-" + this.menu + ".jpg";
+      return "/images/food" + this.menu + ".png";
     }
   },
   mounted: function mounted() {
@@ -28005,10 +28005,10 @@ var render = function () {
   return _c("div", { staticClass: "col-lg-4" }, [
     _c("img", {
       staticClass: "recommended-menu",
-      attrs: { src: _vm.recommendedImageURL(), alt: "recommended-menu.jpg" },
+      attrs: { src: _vm.recommendedImageURL(), alt: "food.png" },
     }),
     _vm._v(" "),
-    _c("button", [_vm._v("Button")]),
+    _c("button", { staticClass: "btn-menu" }, [_vm._v("ORDER")]),
   ])
 }
 var staticRenderFns = []

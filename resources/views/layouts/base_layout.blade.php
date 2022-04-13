@@ -13,47 +13,72 @@
 
     {{-- My Style --}}
     <link rel="stylesheet" href="/css/home.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet"/>
+	  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    
     <title>Pinocone</title>
   </head>
   
   <body>
     <div id="Hero-Image">
-      <div id="Hero-Text">
-        <h1>Hero image</h1>
-        <p>Description</p>
-        <button>Button</button>
-      </div>
+        <div id="Hero-Text">
+          <h1>We are here to help</h1>
+          <p>We can offer you very good deals on a frequent basis.</p>
+          <button class="btn-body">Check our full menu listing</button>
+        </div>
     </div>
 
-    <div id="About-Us">
-      <div class="row">
-        <div class="col-lg-7">
-          <img class="about-us" src="/images/about-us.jpg" alt="about-us.jpg"/>
-        </div>
-        
-        <div class="col-lg-5">
-          <div id="About-Text">
-            <h1>About Us</h1>
-            <p>Description</p>
-            <button>Learn more</button>
-          </div>
-        </div>
+    <div>
+      <div id="About-Us">
+		    <div class="row">
+  			  <div class="col-lg-7">
+				    <img class="about-us" src="/images/about-us.jpeg" alt="about-us.jpeg"/>
+			    </div>
+			
+	  		  <div class="col-lg-5">
+				    <div id="About-Text">
+			        <h1>About Us</h1>
+			        <p>Pinocone Catering Company of Sarawak is one of the few catering companies that offers catering services especially to schools and other companies in the state.</p>
+			        <button class="btn-body">Learn more</button>
+      			</div>
+			    </div>
+      	</div>
       </div>
     </div>
   
     <div id="Hero-Image-2">
-      <div id="Hero-Text-2">
-        <h1>Title over image</h1>
-      </div>
+        <div id="Hero-Text-2">
+          <h1>JOIN US AND GET DISCOUNTS UP TO 50%</h1>
+          <button class="btn-body">SIGN UP NOW</button>
+        </div>
     </div>
 
-    <div>
-      <h1 id="Why-Heading">Why Choose Us</h1>
-    	<img class="why-choose-us" src="/images/why-choose-us-1.jpg" alt="why-choose-us.jpg"/>
-      <img class="why-choose-us" src="/images/why-choose-us-2.jpg" alt="why-choose-us.jpg"/>
-      <img class="why-choose-us" src="/images/why-choose-us-3.jpg" alt="why-choose-us.jpg"/>
-      <img class="why-choose-us" src="/images/why-choose-us-4.jpg" alt="why-choose-us.jpg"/>
+    <div id="Order-Steps">
+		<h1 id="Order-Heading">Order in 4 Simple Steps</h1>
+      	<div class="responsive">
+	        <div class="gallery">
+	        	<img src="/images/step1.png" alt="step1.png" width="600" height="400">
+	        </div>
+      	</div>
+		
+      	<div class="responsive">
+	        <div class="gallery">
+	          <img src="/images/step2.png" alt="step2.png" width="600" height="400">
+	        </div>
+      	</div>
+		
+      	<div class="responsive">
+	        <div class="gallery">
+	          <img src="/images/step3.png" alt="step3.png" width="600" height="400">
+	        </div>
+      	</div>
+		
+      	<div class="responsive">
+	        <div class="gallery">
+	          <img src="/images/step4.png" alt="step4.png" width="600" height="400">
+	        </div>
+      	</div>
     </div>
 
     {{-- Vue Components --}}
@@ -72,61 +97,68 @@
 		  </div>
 	  </div>
 
-    <footer>
-      <div>
-        <img id="Footer-Logo" src="/images/logo.png" alt="LOGO" />
-        <p>Description</p>
-        <img class="" src="/images/ig-logo.png" alt="INSTAGRAM" onclick=""/>
-        <img class="" src="/images/fb-logo.png" alt="FACEBOOK" onclick=""/>
-        <img class="" src="/images/tt-logo.png" alt="TWITTER" onclick=""/>
-      </div>
-
-      <div class="footer-text">
-        <div class="footer-container">
-          <div class="row">
-            <div class="col-item">
-              <h3>Title1</h3>
-              <ul>
-                  <li><a href="">Section1</a></li>
-                  <li><a href="">Section2</a></li>
-                  <li><a href="">Section3</a></li>
-                  <li><a href="">Section4</a></li>
-              </ul>
-            </div>
-
-            <div class="col-item">
-              <h3>Title1</h3>
-              <ul>
-                  <li><a href="">Section1</a></li>
-                  <li><a href="">Section2</a></li>
-                  <li><a href="">Section3</a></li>
-                  <li><a href="">Section4</a></li>
-              </ul>
-            </div>
-
-            <div class="col-item">
-              <h3>Title1</h3>
-              <ul>
-                  <li><a href="">Section1</a></li>
-                  <li><a href="">Section2</a></li>
-                  <li><a href="">Section3</a></li>
-                  <li><a href="">Section4</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bar">
-        <div class="foot">
-          <ul>
+    <footer>  
+	    <div class="container">
+	      <div class="footer-row">
+	          <div class="col-md-6">
+	            <div class="footer-row">
+	              <div class="col-md-6 ">
+	                <div>
+		                <img src="/images/logo.png" class="logo-footer" >
+		                <p>Jalan Tunku Abdul Rahman, 93100 Kuching, Sarawak</p>
+	                </div>
+	              </div>
+	                	
+						    <div class="col-md-6 px-4">
+		              <h6> About Company</h6>
+		              <p>Pinocone Catering Company of Sarawak is one of the few catering companies that offers catering services especially to schools and other companies in the state.</p>
+		              <a href="#" class="btn-footer"> More Info </a><br>
+		              <a href="#" class="btn-footer"> Contact Us</a>
+	              </div>
+	            </div>
+	          </div>
+				
+	          <div class="col-md-6">
+	            <div class="footer-row">
+	              <div class="col-md-6 px-4">
+	                <h6> Help us</h6>
+	                <div class="footer-row ">
+	                  <div class="col-md-6">
+		                  <ul>
+                        <li> <a href="#"> Home</a> </li>
+                        <li> <a href="#"> About</a> </li>
+                        <li> <a href="#"> Service</a> </li>
+                        <li> <a href="#"> Team</a> </li>
+                        <li> <a href="#"> Help</a> </li>
+                        <li> <a href="#"> Contact</a> </li>
+		                  </ul>
+	                  </div>
+	                </div>
+	              </div>
+	                	
+						  <div class="col-md-6 ">
+	              <h6> Follow Us</h6>
+                <div class="social">
+                  <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+		  <div class="footer-bar">
+			  <div class="foot">
+				  <ul>
             <li><a href="">©Copyright </a> | </li>
             <li><a href="">Privacy Policy </a> | </li>
-            <li><a href="">Terms & Conditions</a></li>	
-          </ul>
-        </div>  
-      </div>
-    </footer>
+            <li><a href="">Terms & Conditions</a></li>
+		  		</ul>
+			  </div>  
+		  </div>  
+	  </footer>
 
     <script src="{{  mix('js/app.js') }}"></script>
 

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\TestUser;
+use App\Models\UserPaymentMethod;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TestUserSeeder extends Seeder
+class UserPaymentMethodSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class TestUserSeeder extends Seeder
      */
     public function run()
     {
-        TestUser::factory()->count(20)->create();
+        UserPaymentMethod::factory()->count(20)->create();
     }
 }

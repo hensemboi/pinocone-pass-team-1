@@ -15,11 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->integer('PK_userID')->primary();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('firstName', 50);
             $table->string('lastName', 50);
             $table->date('dateOfBirth');
-            $table->string('email', 50);
+            $table->string('email', 50)->unique();
             $table->string('password', 50);
             $table->float('incentives')->default(0);
         });

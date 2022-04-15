@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestUser extends Model
+class UserVoucher extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'PK_FK_userID', 'PK_FK_voucherID'
+    ];
     
-    protected $guarded = ['id'];
+    public $timestamps = false;
 }

@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestUser extends Model
+class Pinopay extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'FK_userID', 'balance', 'PIN'
+    ];
     
-    protected $guarded = ['id'];
+    public $timestamps = false;
 }

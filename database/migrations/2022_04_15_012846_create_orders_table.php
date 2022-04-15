@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -23,8 +23,8 @@ class CreateOrdersTable extends Migration
             $table->integer('FK_voucherID')->nullable();
             $table->smallInteger('FK_deliveryCode')->nullable();
             
-            $table->foreign('FK_deliveryCode', 'FK_orders_meansOfDelivery')->references('pk_deliverycode')->on('meansOfDelivery')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('FK_paymentCode', 'FK_orders_paymentMethod')->references('pk_paymentcode')->on('paymentMethod')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('FK_deliveryCode', 'FK_orders_meansOfDelivery')->references('pk_deliverycode')->on('means_of_deliveries')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('FK_paymentCode', 'FK_orders_paymentMethod')->references('pk_paymentcode')->on('payment_methods')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('FK_userID', 'FK_orders_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('FK_voucherID', 'FK_orders_vouchers')->references('pk_voucherid')->on('vouchers')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -39,4 +39,4 @@ class CreateOrdersTable extends Migration
     {
         Schema::dropIfExists('orders');
     }
-}
+};

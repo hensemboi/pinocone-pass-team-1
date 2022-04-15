@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\TestUser;
+use App\Models\CuisineType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TestUserSeeder extends Seeder
+class CuisineTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class TestUserSeeder extends Seeder
      */
     public function run()
     {
-        TestUser::factory()->count(20)->create();
+        CuisineType::factory()->count(20)->create();
     }
 }

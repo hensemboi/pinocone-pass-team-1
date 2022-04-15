@@ -1,5 +1,5 @@
 <template>
-        <div id="Hero-Image-1">
+    <div id="Hero-Image-1">
         <img src="/images/hero-1.jpeg" alt="hero-1.jpeg" style="width: 100%" />
         <div id="Hero-Text">
             <h1>We are here to help</h1>
@@ -92,103 +92,28 @@
 
     <h1 id="Recommended-Menus">Recommendation Menus</h1>
     <div class="row">
-        <recommended-menu menu="1"></recommended-menu>
-        <recommended-menu menu="2"></recommended-menu>
-        <recommended-menu menu="3"></recommended-menu>
+        <recommended-menu :menu="1"></recommended-menu>
+        <recommended-menu :menu="2"></recommended-menu>
+        <recommended-menu :menu="3"></recommended-menu>
     </div>
 
     <div class="row">
-        <recommended-menu menu="4"></recommended-menu>
-        <recommended-menu menu="5"></recommended-menu>
-        <recommended-menu menu="6"></recommended-menu>
+        <recommended-menu :menu="4"></recommended-menu>
+        <recommended-menu :menu="5"></recommended-menu>
+        <recommended-menu :menu="6"></recommended-menu>
     </div>
-
-    <footer>
-        <div class="container">
-            <div class="footer-row">
-                <div class="col-md-6">
-                    <div class="footer-row">
-                        <div class="col-md-6">
-                            <div>
-                                <img
-                                    src="/images/logo.png"
-                                    class="logo-footer"
-                                />
-                                <p>
-                                    Jalan Tunku Abdul Rahman, 93100 Kuching,
-                                    Sarawak
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 px-4">
-                            <h6>About Company</h6>
-                            <p>
-                                Pinocone Catering Company of Sarawak is one of
-                                the few catering companies that offers catering
-                                services especially to schools and other
-                                companies in the state.
-                            </p>
-                            <a href="#" class="btn-footer"> More Info </a><br />
-                            <a href="#" class="btn-footer"> Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="footer-row">
-                        <div class="col-md-6 px-4">
-                            <h6>Help Us</h6>
-                            <div class="footer-row">
-                                <div class="col-md-6">
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Service</a></li>
-                                        <li><a href="#">Team</a></li>
-                                        <li><a href="#">Help</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <h6>Follow Us</h6>
-                            <div class="social">
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-facebook"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-instagram"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-twitter"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bar">
-            <div class="foot">
-                <ul>
-                    <li><a href="">©Copyright </a> |</li>
-                    <li><a href="">Privacy Policy </a> |</li>
-                    <li><a href="">Terms & Conditions</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
 </template>
+
+<script>
+import RecommendedMenu from "./RecommendedMenu.vue";
+export default {
+    components: {
+        "recommended-menu": RecommendedMenu,
+    },
+    data() {
+        return {
+            randomData: null,
+        };
+    },
+};
+</script>

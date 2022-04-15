@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-4">
-          <img class="recommended-menu" :src="recommendedImageURL()" alt="food.png" />
+          <img class="recommended-menu" :src="recommendedImageURL()" alt="food.png"/>
           <button class="btn-menu">ORDER</button>
     </div>
 </template>

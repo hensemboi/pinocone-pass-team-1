@@ -12,6 +12,34 @@ body p,a {
     font-family: 'Roboto', sans-serif;
 }
 
+#Hero-Image-1 {
+	color: white;
+	text-align: center;
+	position: relative;
+}
+
+#Hero-Text {
+    color: white;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -60%);
+    position: absolute;
+}
+
+#Hero-Image-2 {
+	color: white;
+	text-align: center;
+	position: relative;
+}
+
+#Hero-Text-2 {
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
 .btn-body {
 	color: #2d2e2c;
 	background-color:  #fed531;
@@ -46,30 +74,6 @@ body p,a {
 	transition-duration: 0.1s;
 }
 
-#Hero-Image {
-    /* Use "linear-gradient" to add a darken background effect to the image (hero-1.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/hero-1.jpeg");
-
-    /* Set a specific height */
-    height: 50%;
-
-    /* Position and center the image to scale nicely on all screens */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    margin-bottom: 50px;
-}
-
-/* Place text in the middle of the image */
-#Hero-Text {
-    color: white;
-    top: 50%;
-    left: 20%;
-    transform: translate(-50%, -80%);
-    position: absolute;
-}
-
 #About-Us {
 	height: 60%;
 	margin-bottom: 50px;
@@ -87,30 +91,6 @@ body p,a {
 	height: 20vh;
 	text-align: center;
 	margin-bottom: 50px;
-}
-
-#Hero-Image-2 {
-    /* Use "linear-gradient" to add a darken background effect to the image (hero-2.jpeg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/hero-2.jpeg");
-
-    /* Set a specific height */
-    height: 50%;
-
-    /* Position and center the image to scale nicely on all screens */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    margin-bottom: 100px;
-}
-
-/* Place text in the middle of the image */
-#Hero-Text-2 {
-    color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
 }
 
 .responsive {

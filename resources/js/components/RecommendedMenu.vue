@@ -9,7 +9,6 @@
     export default {
         props: {
             menu: String,
-            required: true,
         },
         methods: {
             recommendedImageURL() {

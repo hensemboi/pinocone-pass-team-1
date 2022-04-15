@@ -17599,8 +17599,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    menu: String,
-    required: true
+    menu: String
   },
   methods: {
     recommendedImageURL: function recommendedImageURL() {
@@ -17677,17 +17676,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_recommended_menu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("recommended-menu");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 1
+    menu: "1"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 2
+    menu: "2"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 3
+    menu: "3"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 4
+    menu: "4"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 5
+    menu: "5"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_recommended_menu, {
-    menu: 6
+    menu: "6"
   })])], 64
   /* STABLE_FRAGMENT */
   );

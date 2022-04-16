@@ -20,7 +20,7 @@ class PaymentMethodFactory extends Factory
     public function definition()
     {
         return [
-            'PK_paymentCode' => $this->faker->unique()->randomNumber(2),
+            'PK_paymentCode' => $this->faker->unique()->numberBetween(0,255),
             'name' => $this->faker->name,
             'description' => $this->faker->sentence
         ];

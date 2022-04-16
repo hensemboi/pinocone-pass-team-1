@@ -19,7 +19,7 @@ class VoucherFactory extends Factory
     public function definition()
     {
         return [
-            'PK_voucherID' => $this->faker->unique()->randomNumber(2),
+            'PK_voucherID' => $this->faker->unique()->randomNumber(6),
             'name' => $this->faker->name,
             'startDate' =>  $this->faker->date,
             'expiryDate' =>  $this->faker->date,

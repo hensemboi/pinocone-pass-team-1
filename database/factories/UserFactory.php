@@ -19,7 +19,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'PK_userID' => $this->faker->unique()->randomNumber(2),
+            'PK_userID' => $this->faker->unique()->randomNumber(6),
             'username' => $this->faker->unique()->word,
             'firstName' => $this->faker->firstName,
             'lastName' => $this->faker->lastName,

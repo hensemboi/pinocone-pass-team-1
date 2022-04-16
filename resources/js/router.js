@@ -3,6 +3,8 @@ import TestComponent from "./components/TestComponent.vue";
 import Homepage from "./views/Homepage.vue";
 import Footer from "./components/TheFooter.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/Registration.vue";
+import Dashboard from './views/Dashboard.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,6 +24,18 @@ const router = createRouter({
             path: "/login",
             components: {
                 default: Login,
+            },
+        },
+        {
+            path: "/register",
+            components: {
+                default: Register,
+            },
+        },
+        {
+            path: "/dashboard",
+            components: {
+                default: Dashboard,
             },
         },
     ],

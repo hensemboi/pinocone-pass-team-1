@@ -248,6 +248,10 @@ a:hover {
 	padding-left: 1.5rem !important;
 }
 
+.logo-navbar{
+	width:10%;
+}
+
 .logo-footer {
     margin-bottom: 40px;
     width:70%;

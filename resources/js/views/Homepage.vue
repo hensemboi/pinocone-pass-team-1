@@ -110,17 +110,10 @@
 </template>
 
 <script>
-    import Navbar from "../components/navbar/Navbar.vue";
     import RecommendedMenu from "../components/RecommendedMenu.vue";
     export default {
         components: {
             "recommended-menu": RecommendedMenu,
-            "navbar-component": Navbar,
-        },
-        data() {
-            return {
-                randomData: null,
-            };
         },
     };
 </script>

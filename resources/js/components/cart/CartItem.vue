@@ -16,7 +16,8 @@
         </div>
       </div>
       <div class="item__total">Total: ${{ itemTotal }}</div>
-      <button @click="remove">Remove</button>
+      <button @click="remove">Remove All</button>
+      <button @click="removeOne">Remove One</button>
     </div>
   </li>
 </template>
@@ -30,9 +31,12 @@ export default {
     },
   },
   methods: {
-    remove() {
+    removeAll() {
       this.$store.dispatch('cart/removeFromCart', { Id: this.prodId });
     },
+    removeOne () {
+      this.$store.dispatch('cart/removeOneFromCart', { Id: this.prodId });
+    }
   },
 };
 </script>

@@ -29,6 +29,7 @@ const router = createRouter({
             },
         },
         {
+            name: "marketplace",
             path: "/marketplace",
             components: {
                 default: ProductsList,

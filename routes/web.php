@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// Route::get('/', [TestRegisterController::class, 'index']);
+// Route::post('/', [TestRegisterController::class, 'store']);
+
+// Auth::routes(['verify' => true]);
+
+
 Route::get('/{slug}', function(){
     return view('layouts.base_layout',[
 
     ]);
 });
+
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

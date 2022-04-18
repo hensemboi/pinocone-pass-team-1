@@ -8,6 +8,8 @@ import Dashboard from './views/Dashboard.vue';
 import ProductsList from "./components/pages/ProductsList.vue";
 import UserCart from "./components/pages/UserCart.vue";
 import NotFound from "./components/NotFound.vue";
+import Register from "./views/Register.vue";
+import Store from "./store";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -68,4 +70,15 @@ const router = createRouter({
     ],
 });
 
-export default router;
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (Store.getters["auth/getAuthenticated"]) {
+        next();
+        return;
+      }
+      next("/");
+    } else {
+      next();
+    }
+  });
+  export default router;

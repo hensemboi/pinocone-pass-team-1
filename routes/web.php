@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +17,7 @@ use App\Http\Controllers\TestRegisterController;
 //     return view('welcome');
 // });
 
-Route::get('/', [TestRegisterController::class, 'index']);
-Route::post('/', [TestRegisterController::class, 'store']);
-
-Route::get('/home', function(){
+Route::get('/{slug}', function(){
     return view('layouts.base_layout',[
 
     ]);

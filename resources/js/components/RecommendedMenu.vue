@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-4">
-          <img class="recommended-menu" :src="recommendedImageURL()" alt="recommended-menu.jpg" />
-          <button>Button</button>
+          <img class="recommended-menu" :src="recommendedImageURL()" alt="food.png"/>
+          <button class="btn-menu">ORDER</button>
     </div>
 </template>
 
@@ -12,7 +12,7 @@
         },
         methods: {
             recommendedImageURL() {
-                return "/images/recommended-menu-" + this.menu + ".jpg"; 
+                return "/images/food" + this.menu + ".png"; 
             }
         },
         mounted() {

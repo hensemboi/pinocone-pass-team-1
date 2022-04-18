@@ -1,23 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
-import TestComponent from "./components/TestComponent.vue";
 import Homepage from "./views/Homepage.vue";
-import Footer from "./components/TheFooter.vue";
+import Navbar from "./components/navbar/Navbar.vue";
+import Footer from "./components/UI/TheFooter.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Registration.vue";
 import Dashboard from './views/Dashboard.vue';
+import ProductsList from "./components/pages/ProductsList.vue";
+import UserCart from "./components/pages/UserCart.vue";
+import NotFound from "./components/NotFound.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { 
-            path: "/test",
-            component: TestComponent 
+        {
+            path: "/",
+            redirect: "/home",
         },
         {
             path: "/home",
             components: {
                 default: Homepage,
                 footer: Footer,
+                navbar: Navbar,
             },
         },
         {
@@ -36,6 +40,29 @@ const router = createRouter({
             path: "/dashboard",
             components: {
                 default: Dashboard,
+            }
+        },
+        {
+            name: "marketplace",
+            path: "/marketplace",
+            components: {
+                default: ProductsList,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/cart",
+            components: {
+                default: UserCart,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/:notFound(.*)",
+            components: {
+                default: NotFound,
             },
         },
     ],

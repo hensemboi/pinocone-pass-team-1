@@ -3,6 +3,8 @@ import TestComponent from "./components/TestComponent.vue";
 import Homepage from "./views/Homepage.vue";
 import Footer from "./components/TheFooter.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/Register.vue";
+import Store from "./store";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,7 +26,24 @@ const router = createRouter({
                 default: Login,
             },
         },
+        {
+            path: "/register",
+            components: {
+                default: Register,
+            },
+        },
     ],
 });
 
-export default router;
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (Store.getters["auth/getAuthenticated"]) {
+        next();
+        return;
+      }
+      next("/");
+    } else {
+      next();
+    }
+  });
+  export default router;

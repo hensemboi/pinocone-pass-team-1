@@ -19,12 +19,12 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'PK_FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
             'addressNo' => $this->faker->randomNumber(2),
             'customAddress' => $this->faker->address,
             'street' => $this->faker->streetAddress,
             'city' => $this->faker->city,
-            'stater' => $this->faker->state
+            'state' => $this->faker->state
         ];
     }
 }

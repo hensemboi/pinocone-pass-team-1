@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestUserController;
@@ -15,6 +16,8 @@ use App\Http\Controllers\TestUserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('productslisting', [MenuController::class, 'fetchAll']);
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);

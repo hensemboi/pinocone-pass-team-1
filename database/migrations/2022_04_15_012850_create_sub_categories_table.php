@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
-            $table->increments('PK_subCategoryCode');
-            $table->string('name', 50)->default('No category');
-            $table->text('description')->nullable();
-        });
+        // Schema::create('sub_categories', function (Blueprint $table) {
+        //     $table->increments('PK_subCategoryCode');
+        //     $table->string('name', 50)->default('No category');
+        //     $table->text('description')->nullable();
+        // });
     }
 
     /**

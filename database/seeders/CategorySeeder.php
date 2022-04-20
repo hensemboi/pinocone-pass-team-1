@@ -15,6 +15,22 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->count(20)->create();
+       Category::create([
+            'PK_categoryCode' => 1,
+            'name' => "Main Course",
+            'description' => "Main Course Type is delicious"
+        ]);
+
+       Category::create([
+            'PK_categoryCode' => 2,
+            'name' => "Dessert",
+            'description' => "Dessert Type is delicious"
+        ]);
+
+       Category::create([
+            'PK_categoryCode' => 3,
+            'name' => "Drinks",
+            'description' => "Drinks Type is delicious"
+        ]);
     }
 }

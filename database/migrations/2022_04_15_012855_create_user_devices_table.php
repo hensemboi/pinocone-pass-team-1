@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_devices', function (Blueprint $table) {
-            $table->integer('PK_FK_userID')->primary();
+            $table->integer('PK_FK_userID');
             $table->string('deviceNo', 50);
             $table->string('deviceOS', 50);
             $table->string('deviceName', 50);
             $table->string('webBrowser', 50);
             
+            $table->primary(['deviceNo', 'PK_FK_userID']);
             $table->foreign('PK_FK_userID', 'FK_userDevices_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

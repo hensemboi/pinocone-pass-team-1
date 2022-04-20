@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MeansOfDelivery extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'PK_deliveryCode', 'deliveryName', 'description'
-    ];
+    protected $guarded =[];
 
     public $timestamps = false;
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }

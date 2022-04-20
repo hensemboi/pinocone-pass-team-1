@@ -19,7 +19,8 @@ return new class extends Migration
             $table->tinyInteger('menuRating')->nullable();
             $table->tinyInteger('deliveryRating')->nullable();
             $table->tinyInteger('serviceRating')->nullable();
-            
+            $table->timestamps();
+
             $table->foreign('PK_FK_transactionID', 'FK_feedbacks_orders')->references('pk_transactionid')->on('orders')->onDelete('cascade')->onUpdate('cascade');
         });
     }

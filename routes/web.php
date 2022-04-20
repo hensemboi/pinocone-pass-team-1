@@ -26,10 +26,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/{slug}', function(){
     return view('layouts.base_layout',[
-
     ]);
 });
 
-Route::post('/register', [RegisterController::class, 'store']);
+// Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

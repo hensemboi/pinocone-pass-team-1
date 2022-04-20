@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->increments('PK_menuID')->primary();
+            $table->unsignedMediumInteger('PK_menuID')->primary();
             $table->string('menuName', 50)->default('Default menu');
             $table->string('description', 50)->default('No description');
             $table->float('price')->default(0);

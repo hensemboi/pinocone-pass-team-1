@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('state', 30);
             
             $table->primary(['addressNo', 'PK_FK_userID']);
-            $table->foreign('FK_userID', 'FK_address_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('PK_FK_userID', 'FK_address_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

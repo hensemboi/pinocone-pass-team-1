@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menu_subcategories', function (Blueprint $table) {
-            $table->unsignedInteger('PK_FK_subCategoryCode');
-            $table->unsignedInteger('PK_FK_menuID');
+        // Schema::create('menu_subcategories', function (Blueprint $table) {
+        //     // $table->unsignedInteger('PK_FK_subCategoryCode');
+        //     // $table->unsignedInteger('PK_FK_menuID');
             
-            $table->primary(['PK_FK_subCategoryCode', 'PK_FK_menuID']);
-            $table->foreign('PK_FK_menuID', 'PK_FK_menuIDMenuSubcategories')->references('pk_menuid')->on('menus')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('PK_FK_subCategoryCode', 'PK_FK_subCategoryCodeMenuSubcategories')->references('pk_subcategorycode')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
-        });
+        //     // $table->primary(['PK_FK_subCategoryCode', 'PK_FK_menuID']);
+        //     // $table->foreign('PK_FK_menuID', 'PK_FK_menuIDMenuSubcategories')->references('pk_menuid')->on('menus')->onDelete('cascade')->onUpdate('cascade');
+        //     // $table->foreign('PK_FK_subCategoryCode', 'PK_FK_subCategoryCodeMenuSubcategories')->references('pk_subcategorycode')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
+        // });
     }
 
     /**

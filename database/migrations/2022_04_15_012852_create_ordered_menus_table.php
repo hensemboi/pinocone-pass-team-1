@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('ordered_menus', function (Blueprint $table) {
             $table->string('PK_FK_transactionID', 20);
-            $table->unsignedInteger('PK_FK_menuID');
-            $table->unsignedSmallInteger('quantity')->default(0);
+            $table->unsignedMediumInteger('PK_FK_menuID');
+            $table->unsignedSmallInteger('quantity')->default(1);
             $table->string('extraNote')->nullable();
             $table->float('itemsPrice');
 
             $table->primary(['PK_FK_transactionID', 'PK_FK_menuID']);
-            $table->foreign('PK_FK_menuID', 'PK_FK_menuIDOrderedMenu')->references('pk_menuid')->on('menus')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('PK_FK_transactionID', 'PK_FK_transactionIDOrderedMenu')->references('pk_transactionid')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('PK_FK_menuID', 'FK_menus_OrderedMenus')->references('pk_menuid')->on('menus')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('PK_FK_transactionID', 'FK_orders_OrderedMenus')->references('pk_transactionid')->on('orders')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

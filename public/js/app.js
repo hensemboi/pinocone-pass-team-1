@@ -37841,7 +37841,27 @@ __webpack_require__.r(__webpack_exports__);
     MenuCard: _components_cards_MenuCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   setup: function setup() {
+    var menu = [];
+
+    function fetch() {
+      var _this = this;
+
+      var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
+          axios = _require["default"];
+
+      axios.get("http://localhost:8000/sanctum/csrf-cookie").then(function () {
+        axios.get("/productslisting", {
+          action: 'fetchAll'
+        }).then(function (response) {
+          console.log(response);
+        })["catch"](function (err) {
+          _this.errors = err.response.data.errors;
+        });
+      });
+    }
+
     return {
+      fetch: fetch,
       MenuCard: _components_cards_MenuCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
     };
   }
@@ -39310,7 +39330,13 @@ var _hoisted_1 = {
   "class": "container d-flex"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.MenuCard)))]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.fetch();
+    })
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.MenuCard)))])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),

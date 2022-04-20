@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Division extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'PK_divisionCode'
-    ];
+    protected $guarded =[];
 
     public $timestamps = false;
+
+    public function position(){
+        return $this->hasMany(Position::class);
+    }
 }

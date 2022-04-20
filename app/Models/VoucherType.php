@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Voucher;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class VoucherType extends Model
-{
-    use HasFactory;
+{    use HasFactory;
 
-    protected $fillable = [
-        'PK_voucherTypeCode', 'name', 'description'
-    ];
+    protected $guarded=[];
 
-    public $timestamps = false;
+    public $timestamps=false;
+
+    public function voucher(){
+        return $this->hasMany(Voucher::class);
+    }
 }

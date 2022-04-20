@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->integer('FK_userID')->primary();
+            $table->integer('PK_FK_userID');
             $table->tinyInteger('addressNo');
             $table->text('customAddress');
             $table->string('street', 50);
             $table->string('city', 30);
-            $table->string('stater', 30);
+            $table->string('state', 30);
             
+            $table->primary(['addressNo', 'PK_FK_userID']);
             $table->foreign('FK_userID', 'FK_address_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

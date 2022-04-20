@@ -3,13 +3,16 @@ import Homepage from "./views/Homepage.vue";
 import Navbar from "./components/navbar/Navbar.vue";
 import Footer from "./components/UI/TheFooter.vue";
 import Login from "./views/Login.vue";
-import Register from "./views/Registration.vue";
+// import Register from "./views/Registration.vue";
 import Dashboard from './views/Dashboard.vue';
 import ProductsList from "./components/pages/ProductsList.vue";
 import UserCart from "./components/pages/UserCart.vue";
 import NotFound from "./components/NotFound.vue";
 import Register from "./views/Register.vue";
-import Store from "./store";
+import Store from "./components/store";
+import AdminSideBar from "./components/admin/AdminSideBar.vue"
+import AdminTopBar from "./components/admin/AdminTopBar.vue"
+import ProductsListing from "./views/admin/ProductsListing.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -39,12 +42,6 @@ const router = createRouter({
             },
         },
         {
-            path: "/dashboard",
-            components: {
-                default: Dashboard,
-            }
-        },
-        {
             name: "marketplace",
             path: "/marketplace",
             components: {
@@ -60,6 +57,21 @@ const router = createRouter({
                 footer: Footer,
                 navbar: Navbar,
             },
+        },
+        {
+            path: "/dashboard",
+            components: {
+                default: Dashboard,
+                topbar: AdminTopBar,
+                sidebar: AdminSideBar,
+                
+            }
+        },
+        {
+            path:"/productslisting",
+            components:{
+                default: ProductsListing,
+            }
         },
         {
             path: "/:notFound(.*)",
@@ -81,4 +93,35 @@ router.beforeEach((to, from, next) => {
       next();
     }
   });
+
+
+  // Sample of admin authentication
+//   const routes = [{
+//     path: '/',
+//     name: 'Login',
+//     component: () => {
+//       return import('@/views/auth/vLoginLandingPage')
+//     }
+//   },
+//   {
+//     path: '/announcements',
+//     name: 'Announcements',
+//     beforeEnter: checkAdminRights
+//     component: () => {
+//       return import('@/views/drawer/announcement/vAnnouncementLandingPage')
+//     },
+
+//   }
+// ]
+
+
+// function checkAdminRights(to, from, next) {
+//     // check if the user is admin
+//     if(userIsAdmin) {
+//         next({ path: '/adminroute'});       
+//     } else {
+//         next({ path: '/nonadminroute'});
+//     }
+// }
+
   export default router;

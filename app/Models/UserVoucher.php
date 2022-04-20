@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\VoucherType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserVoucher extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'PK_FK_userID', 'PK_FK_voucherID'
-    ];
+    protected $guarded=[];
+
+    public $timestamps=false;
+
+    public function user(){
+        return $this->belongsto(User::class);
+    }
     
-    public $timestamps = false;
 }

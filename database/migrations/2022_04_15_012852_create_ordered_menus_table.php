@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('PK_FK_menuID');
             $table->unsignedSmallInteger('quantity')->default(0);
             $table->string('extraNote')->nullable();
-            
+            $table->float('itemsPrice');
+
             $table->primary(['PK_FK_transactionID', 'PK_FK_menuID']);
             $table->foreign('PK_FK_menuID', 'PK_FK_menuIDOrderedMenu')->references('pk_menuid')->on('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('PK_FK_transactionID', 'PK_FK_transactionIDOrderedMenu')->references('pk_transactionid')->on('orders')->onDelete('cascade')->onUpdate('cascade');

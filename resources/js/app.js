@@ -8,7 +8,6 @@ window.axios = require('axios');
 require('./bootstrap');
 window.Vue = require('vue');
 //resources/js/app.js
-import Store from "./store";
 
 const app = createApp(App);
 

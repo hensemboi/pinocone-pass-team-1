@@ -8,8 +8,8 @@ import Dashboard from './views/Dashboard.vue';
 import ProductsList from "./components/pages/ProductsList.vue";
 import UserCart from "./components/pages/UserCart.vue";
 import NotFound from "./components/NotFound.vue";
-import Register from "./views/Register.vue";
-import Store from "./store";
+// import Register from "./views/Register.vue";
+import Store from "./components/store/index.js";
 
 const router = createRouter({
     history: createWebHistory(),

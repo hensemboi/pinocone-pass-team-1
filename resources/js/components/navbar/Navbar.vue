@@ -40,15 +40,6 @@
             </ul>
             <router-link to="/login" class="btn btn-outline-success my-2 my-sm-0 mx-3">Login</router-link>
             <router-link to="/register" class="btn btn-outline-success my-2 my-sm-0">Sign Up</router-link>
-            <button
-                class="btn btn-outline-success my-2 my-sm-0 mx-3"
-                type="submit"
-            >
-                Login
-            </button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                Sign Up
-            </button>
         </div>
     </nav>
 </template>

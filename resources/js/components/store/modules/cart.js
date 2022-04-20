@@ -25,6 +25,7 @@ export default {
                     image: productData.image,
                     price: productData.price,
                     qty: 1,
+                    note: "No note",
                 };
                 state.items.push(newItem);
             }

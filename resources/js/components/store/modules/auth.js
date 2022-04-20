@@ -1,4 +1,3 @@
-//resources/js/store/modules/auth.js
 export default {
     namespaced: true,
     state: () => ({

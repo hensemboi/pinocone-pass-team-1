@@ -14,6 +14,7 @@
                 </base-badge>
                 <p>{{ description }}</p>
                 <p>Category: {{ category }}</p>
+                <p>Cuisine Type: {{ cuisineType }}</p>
             </div>
         </div>
         <div class="product__actions">
@@ -32,6 +33,7 @@
                 </base-badge>
                 <p>{{ description }}</p>
                 <p>Category: {{ category }}</p>
+                <p>Cuisine Type: {{ cuisineType }}</p>
             </div>
         </div>
         <div class="product__actions">
@@ -42,7 +44,7 @@
 
 <script>
 export default {
-    props: ["id", "image", "title", "price", "description", "category"],
+    props: ["id", "image", "title", "price", "description", "category", "cuisineType"],
     methods: {
         addToCart() {
             this.$store.dispatch("cart/addToCart", {

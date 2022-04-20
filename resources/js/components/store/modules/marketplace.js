@@ -11,6 +11,7 @@ export default {
                         "A collection of must-read books. All-time classics included!",
                     price: 99.99,
                     category: "cold",
+                    cuisineType: "",
                 },
                 {
                     id: "p2",
@@ -19,6 +20,7 @@ export default {
                     description: "A tent for the ambitious outdoor tourist.",
                     price: 129.99,
                     category: "warm",
+                    cuisineType: "",
                 },
                 {
                     id: "p3",
@@ -28,6 +30,7 @@ export default {
                         "May be partially expired when it arrives but at least it is cheap!",
                     price: 6.99,
                     category: "warm",
+                    cuisineType: "",
                 },
                 {
                     id: "p4",
@@ -37,6 +40,7 @@ export default {
                         "May be partially expired when it arrives but at least it is cheap!",
                     price: 6.99,
                     category: "warm",
+                    cuisineType: "",
                 },
                 {
                     id: "p5",
@@ -46,9 +50,20 @@ export default {
                         "May be partially expired when it arrives but at least it is cheap!",
                     price: 6.99,
                     category: "cold",
+                    cuisineType: "",
                 },
             ],
         };
+    },
+    mutations: {
+        addProducts(state, payload) {
+            console.log(state, payload);
+        },
+    },
+    action: {
+        addProducts(context, payload) {
+            this.context.commit("addProducts");
+        },
     },
     getters: {
         getProducts(state) {

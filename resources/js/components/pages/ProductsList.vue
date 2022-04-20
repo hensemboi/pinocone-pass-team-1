@@ -28,18 +28,23 @@
                 :description="prod.description"
                 :price="prod.price"
                 :category="prod.category"
+                :cuisineType="prod.cuisineType"
             ></product-item>
         </ul>
     </section>
+    <product-list-cards :title='"Recommended food for you"'></product-list-cards>
+    <product-list-cards :title='"Previous purchases"' :type="'pastPurchases'"></product-list-cards>
 </template>
 
 <script>
+import ProductListCards from "./ProductListCards.vue";
 import ProductItem from "../marketplace/ProductItem.vue";
 // import { mapGetters } from 'vuex';
 
 export default {
     components: {
         ProductItem,
+        ProductListCards,
     },
     data() {
         return {

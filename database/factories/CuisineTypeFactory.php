@@ -18,7 +18,8 @@ class CuisineTypeFactory extends Factory
     public function definition()
     {
         return [
-            'PK_cuisineCode' => $this->faker->unique()->randomNumber(2)
-        ];
+            'PK_cuisineCode'=>$this->faker->unique()->numerify('CT##'),
+            'name'=>$this->faker->unique()->word(),
+            'description'=>$this->faker->sentence()        ];
     }
 }

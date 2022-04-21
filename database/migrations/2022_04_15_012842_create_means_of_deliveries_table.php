@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('means_of_deliveries', function (Blueprint $table) {
-            $table->smallInteger('PK_deliveryCode')->primary();
+            $table->string('PK_deliveryCode', 4)->primary();
             $table->string('deliveryName', 50);
             $table->text('description');
         });

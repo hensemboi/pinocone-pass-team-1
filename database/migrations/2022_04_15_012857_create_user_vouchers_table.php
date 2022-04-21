@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_vouchers', function (Blueprint $table) {
             $table->integer('PK_FK_userID');
-            $table->integer('PK_FK_voucherID');
+            $table->string('PK_FK_voucherID');
             
             $table->primary(['PK_FK_userID', 'PK_FK_voucherID']);
             $table->foreign('PK_FK_userID', 'FK_userVouchers_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');

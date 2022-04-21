@@ -11,15 +11,18 @@ class Staff extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'staffs';
+
     protected $guarded=[];
 
-    public $timestamps=false;
+    public $timestamps=true;
 
-    public function posix_getlogin(){
+    public function positioon(){
         return $this->belongsTo(Position::class);
     }
 
-    public function staff(){
+    public function admin(){
         return $this->belongsTo(Admin::class);
     }
 }

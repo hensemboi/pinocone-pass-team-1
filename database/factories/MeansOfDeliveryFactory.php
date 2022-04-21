@@ -18,9 +18,9 @@ class MeansOfDeliveryFactory extends Factory
     public function definition()
     {
         return [
-            'PK_deliveryCode' => $this->faker->unique()->numberBetween(0,255),
-            'deliveryName' => $this->faker->name,
-            'description' => $this->faker->sentence
+            'PK_deliveryCode' => $this->faker->unique()->numerify('DE##'),
+            'deliveryName' => $this->faker->word(),
+            'description' => $this->faker->sentence()
         ];
     }
 }

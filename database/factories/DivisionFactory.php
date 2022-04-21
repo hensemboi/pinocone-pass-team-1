@@ -18,7 +18,9 @@ class DivisionFactory extends Factory
     public function definition()
     {
         return [
-            'PK_divisionCode' => $this->faker->unique()->randomNumber(2)
+            'PK_divisionCode'=>$this->faker->unique()->numerify('DI##'),
+            'name'=>$this->faker->unique()->word(),
+            'description'=>$this->faker->sentence()
         ];
     }
 }

@@ -19,14 +19,14 @@ class VoucherFactory extends Factory
     public function definition()
     {
         return [
-            'PK_voucherID' => $this->faker->unique()->randomNumber(6),
-            'name' => $this->faker->name,
-            'startDate' =>  $this->faker->date,
-            'expiryDate' =>  $this->faker->date,
-            'duration' => $this->faker->time,
-            'availability' => $this->faker->randomNumber(2),
-            'membership' => $this->faker->randomNumber(2),
-            'FK_voucherTypeCode' => $this->faker->randomElement(VoucherType::all()->pluck('PK_voucherTypeCode')->toArray())
+            'PK_voucherID'=>$this->faker->numerify('VC########'),
+            'name'=>$this->faker->word(),
+            'startDate'=>$this->faker->date(),
+            'expiryDate'=>$this->faker->date(),
+            'duration'=>$this->faker->time(),
+            'availability'=>$this->faker->numberBetween(0,1),
+            'membership'=>1,
+            'FK_voucherTypeCode' => $this->faker->randomElement(VoucherType::all()->pluck('PK_voucherTypeID')->toArray()),
         ];
     }
 }

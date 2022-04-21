@@ -20,7 +20,10 @@ class UserPaymentMethodFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'PK_FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'PK_FK_paymentCode' => $this->faker->randomElement(PaymentMethod::all()->pluck('PK_paymentCode')->toArray()),
+            'cardNo'=>$this->faker->unique()->bankAccountNumber(),
+            'balance'=>$this->faker->randomFloat(2,10,1000),
         ];
     }
 }

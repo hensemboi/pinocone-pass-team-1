@@ -11,6 +11,8 @@ class Menu extends Model
 
     protected $guarded = [];
 
+    public $timestamps=true;
+
     public function category(){
         return $this->belongsTo(category::class);
     }

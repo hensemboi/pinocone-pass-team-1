@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Models\UserVoucher;
+use App\Models\VoucherType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,8 @@ class UserVoucherFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'PK_FK_userID'=>$this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'PK_FK_voucherID'=>$this->faker->randomElement(Voucher::all()->pluck('PK_voucherID')->toArray()),
         ];
     }
 }

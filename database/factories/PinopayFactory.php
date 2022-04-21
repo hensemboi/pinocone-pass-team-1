@@ -21,7 +21,7 @@ class PinopayFactory extends Factory
         return [
             'FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
             'balance' => $this->faker->randomFloat(2, 10, 50),
-            'PIN' =>  $this->faker->numerify('####')
+            'PIN' =>  $this->faker->numerify('######')
         ];
     }
 }

@@ -18,13 +18,15 @@ class AddressFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
+
         return [
-            'PK_FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
-            'addressNo' => $this->faker->randomNumber(2),
-            'customAddress' => $this->faker->address,
-            'street' => $this->faker->streetAddress,
-            'city' => $this->faker->city,
-            'state' => $this->faker->state
+            'PK_FK_userID' => $this->faker->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'addressNo' => $number++,
+            'customAddress' => $this->faker->unique()->townState(),
+            'street' => $this->faker->streetName(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state()
         ];
     }
 }

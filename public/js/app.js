@@ -37835,14 +37835,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_cards_MenuCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/cards/MenuCard.vue */ "./resources/js/components/cards/MenuCard.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     MenuCard: _components_cards_MenuCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   setup: function setup() {
-    var menu = [];
-
     function fetch() {
       var _this = this;
 
@@ -37853,7 +37853,9 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/productslisting", {
           action: 'fetchAll'
         }).then(function (response) {
-          console.log(response);
+          var menu = response.data;
+          console.log(_typeof(menu));
+          console.log(menu);
         })["catch"](function (err) {
           _this.errors = err.response.data.errors;
         });

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_payment_methods', function (Blueprint $table) {
             $table->integer('PK_FK_userID');
             $table->tinyInteger('PK_FK_paymentCode');
-            $table->integer('cardNo');
+            $table->bigInteger('cardNo');
             $table->float('balance');
             
             $table->primary(['PK_FK_paymentCode', 'PK_FK_userID']);

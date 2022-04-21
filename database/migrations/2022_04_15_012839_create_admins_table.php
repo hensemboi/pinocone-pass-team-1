@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->unsignedInteger('PK_FK_staffID')->primary();
+            $table->string('PK_FK_staffID')->primary();
             $table->string('username', 50);
             $table->string('passwordHash', 50);
             

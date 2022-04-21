@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('divisions', function (Blueprint $table) {
-            $table->increments('PK_divisionCode');
+            $table->string('PK_divisionCode', 4)->primary();
             $table->string('name', 50)->default('John Doe');
             $table->string('description')->default('No description');
         });

@@ -1,6 +1,9 @@
 <template>
     <li>
         <div>
+            <h2 class="text-center">{{ title }}</h2>
+        </div>
+        <div>
             <img :src="image" :alt="title" />
         </div>
         <div>
@@ -19,8 +22,6 @@
             <div class="item__total">Total: ${{ itemTotal }}</div>
             <button @click="removeAll">Remove All</button>
             <button @click="removeOne">Remove One</button>
-            <button @click="addNote">Add note</button>
-            <input v-if="showInputText === true" type="text" v-model.trim="newNote">
         </div>
     </li>
 </template>
@@ -31,7 +32,8 @@ export default {
     data() {
         return {
           toggleDOM: false,
-          newNote: ''
+          newNote: '',
+          showInputText: false,
         };
     },
     computed: {
@@ -39,7 +41,6 @@ export default {
             return (this.price * this.qty).toFixed(2);
         },
     },
-    data() {},
     methods: {
         removeAll() {
             this.$store.dispatch("cart/removeFromCart", { Id: this.prodId });

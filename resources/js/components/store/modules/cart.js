@@ -11,18 +11,19 @@ export default {
         addProductToCart(state, payload) {
             // The payload here is the products object
             const productData = payload;
+            console.log(productData.PK_menuID);
             const productInCartIndex = state.items.findIndex(
-                (ci) => ci.productId === productData.id
+                (ci) => ci.productId == productData.PK_menuID
             );
-
+            console.log(productData.menuName);
             if (productInCartIndex >= 0) {
                 // Find the specific product and adds its total quantity
                 state.items[productInCartIndex].qty++;
             } else {
                 const newItem = {
-                    productId: productData.id,
-                    title: productData.title,
-                    image: productData.image,
+                    productId: productData.PK_menuID,
+                    title: productData.menuName,
+                    image: productData.menuName,
                     price: productData.price,
                     qty: 1,
                     note: "No note",
@@ -36,7 +37,7 @@ export default {
         removeProductFromCart(state, payload) {
             const prodId = payload.Id;
             const productInCartIndex = state.items.findIndex(
-                (cartItem) => cartItem.productId === prodId
+                (cartItem) => cartItem.PK_menuID === prodId
             );
             console.log(productInCartIndex);
             const prodData = state.items[productInCartIndex];
@@ -47,7 +48,7 @@ export default {
         removeOneFromCart(state, payload) {
             const prodId = payload.Id;
             const productInCartIndex = state.items.findIndex(
-                (cartItem) => cartItem.productId === prodId
+                (cartItem) => cartItem.PK_menuID === prodId
             );
             const prodData = state.items[productInCartIndex];
             prodData.qty -= 1;
@@ -66,7 +67,7 @@ export default {
             const productId = payload.id;
             // use context to access the root item
             const products = context.rootGetters["marketplace/getProducts"];
-            const product = products.find((prod) => prod.id === productId);
+            const product = products.find((prod) => prod.PK_menuID === productId);
             context.commit("addProductToCart", product);
         },
         removeFromCart(context, payload) {

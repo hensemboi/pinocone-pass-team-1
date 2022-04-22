@@ -1,6 +1,6 @@
 <template>
     <li
-        class="product"
+        class="product bg-white"
         v-if="$route.query.sort === category || $route.query.sort === title"
     >
         <div class="product__data">
@@ -21,7 +21,7 @@
             <button @click="addToCart">Add to Cart</button>
         </div>
     </li>
-    <li class="product" v-else-if="!$route.query.sort">
+    <li class="product bg-white" v-else-if="!$route.query.sort">
         <div class="product__data">
             <div class="product__image">
                 <img :src="image" :alt="title" />
@@ -47,6 +47,7 @@ export default {
     props: ["id", "image", "title", "price", "description", "category", "cuisineType"],
     methods: {
         addToCart() {
+            console.log(this.id);
             this.$store.dispatch("cart/addToCart", {
                 id: this.id,
             });

@@ -23,3 +23,4 @@ class Menu extends Model
         return $this->hasMany(OrderedMenu::class);
     }
 }
+

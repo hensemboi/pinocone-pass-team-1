@@ -16,7 +16,7 @@ export default ({
         const menu = [];
         function fetch(){
              const { default: axios } = require('axios');
-            axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+            axios.get("http://localhost:8000/api/csrf-cookie%22").then(() => {
                 axios
                 .get("/productslisting", {
                     action:'fetchAll',

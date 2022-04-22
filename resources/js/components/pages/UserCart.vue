@@ -8,16 +8,15 @@
         <ul>
             <cart-item
                 v-for="item in cartItems"
-                :key="item.productId"
-                :prod-id="item.productId"
-                :title="item.title"
-                :image="item.image"
+                :key="item.menuID"
+                :prod-id="item.menuID"
+                :title="item.menuName"
+                :image="'https://picsum.photos/200/300'"
                 :price="item.price"
                 :qty="item.qty"
                 :note="item.note"
             ></cart-item>
         </ul>
-        <button class="button-center">Proceed to check out</button>
     </section>
     <section v-else>
         <h2>Your cart is empty. Please add an item from the marketplace.</h2>
@@ -31,11 +30,6 @@ export default {
     components: {
         CartItem,
     },
-    data() {
-        return {
-            myCartItems: [],
-        };
-    },
     computed: {
         cartTotal() {
             return this.$store.getters["cart/totalSum"].toFixed(2);
@@ -47,6 +41,9 @@ export default {
             return this.$store.getters["cart/items"].length === 0;
         },
     },
+    mounted () {
+        this.$store.getters["cart/items"];
+    }
 };
 </script>
 

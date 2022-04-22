@@ -1,4 +1,5 @@
 <template>
+        <router-view name="navbar"></router-view>
     <router-view name="topbar" v-slot="{Component}">
         <transition name="slideBody">
             <component :class="{slide: sideSlided}" :is="Component">

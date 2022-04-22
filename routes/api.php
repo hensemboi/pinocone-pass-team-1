@@ -18,6 +18,7 @@ use App\Http\Controllers\TestUserController;
 */
 
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
+Route::get('marketplace', [MenuController::class, 'fetchAll']);
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);

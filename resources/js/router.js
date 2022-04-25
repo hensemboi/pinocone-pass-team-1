@@ -8,7 +8,7 @@ import Dashboard from './views/Dashboard.vue';
 import ProductsList from "./components/pages/ProductsList.vue";
 import UserCart from "./components/pages/UserCart.vue";
 import NotFound from "./components/NotFound.vue";
-import Register from "./views/Register.vue";
+
 import Store from "./store";
 
 const router = createRouter({
@@ -47,6 +47,15 @@ const router = createRouter({
         {
             name: "marketplace",
             path: "/marketplace",
+            components: {
+                default: ProductsList,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            name: "Membership",
+            path: "/",
             components: {
                 default: ProductsList,
                 footer: Footer,

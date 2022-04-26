@@ -12,7 +12,11 @@
         <div class="container">
             <div class="row justify-content-between align-items-center">
 
+<<<<<<< Updated upstream
                 s
+=======
+                
+>>>>>>> Stashed changes
                 <div class="col-lg-7 text-center text-lg-left">
                     <h1 class="mb-4">Update Your Account</h1>
                     <div style="text-align: center; margin-bottom: 40px; ">

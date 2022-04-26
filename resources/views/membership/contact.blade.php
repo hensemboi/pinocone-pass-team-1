@@ -43,9 +43,15 @@
                 <label for="reason">Reason of Contact</label>
                 <select id="reason" class="form-control custom-select" name="reason" >
                   <option selected disabled>Choose Your Reason</option>
+<<<<<<< Updated upstream
                   <option value="business">Business</option>
                   <option value="ticket">Ticket</option>
                   <option value="project">Project</option>
+=======
+                  <option value="menu">Menu</option>
+                  <option value="membership">Membership Packages</option>
+                  <option value="Promotions">Project</option>
+>>>>>>> Stashed changes
                 </select>
                 @if ($errors->has('reason'))
                 <span class="text-danger">{{ $errors->first('reason') }}</span>

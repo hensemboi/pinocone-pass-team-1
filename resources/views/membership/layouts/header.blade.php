@@ -1,9 +1,18 @@
 <header class="sticky-top navigation">
     <div class=container>
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+<<<<<<< Updated upstream
             <a class=navbar-brand href="{{ route('index') }}">
                 <h1 class="mb-4">Pinocone</h1>
             </a>
+=======
+        <a class=navbar-brand href="{{ route('index') }}">
+        <div class="col-lg-4 d-lg-block d-none">
+                    <img src="{{ asset('assets') }}/images/logo.jpg" alt="Logo" class="img-fluid" width="50" height="50">
+        </a>
+                </div>
+            
+>>>>>>> Stashed changes
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
                 <i class="ti-align-right h4 text-dark"></i></button>
             <div class="collapse navbar-collapse text-center" id=navigation>

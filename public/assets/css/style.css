@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /*!------------------------------------------------------------------
 [MAIN STYLESHEET]
 
@@ -10,6 +11,9 @@ VERSION:	Versoin Number
 /*  typography */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800&amp;display=swap");
 body {
+=======
+sbody {
+>>>>>>> Stashed changes
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
@@ -33,8 +37,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, .h1 {
+<<<<<<< Updated upstream
   font-size: 50px;
   font-weight: 800;
+=======
+  font-size: 25px;
+  font-weight: 500;
+>>>>>>> Stashed changes
 }
 
 @media (max-width: 575px) {
@@ -45,8 +54,13 @@ h1, .h1 {
 }
 
 h2, .h2 {
+<<<<<<< Updated upstream
   font-size: 40px;
   font-weight: 800;
+=======
+  font-size: 25px;
+  font-weight: 500;
+>>>>>>> Stashed changes
 }
 
 @media (max-width: 575px) {
@@ -57,12 +71,20 @@ h2, .h2 {
 }
 
 h3, .h3 {
+<<<<<<< Updated upstream
   font-size: 32px;
+=======
+  font-size: 25px;
+>>>>>>> Stashed changes
 }
 
 @media (max-width: 575px) {
   h3, .h3 {
+<<<<<<< Updated upstream
     font-size: 28px;
+=======
+    font-size: 25px;
+>>>>>>> Stashed changes
   }
 }
 
@@ -103,6 +125,7 @@ h6, .h6 {
 }
 
 .btn-primary {
+<<<<<<< Updated upstream
   background: #FF0043;
   color: #fff;
   border-color: #FF0043;
@@ -123,6 +146,28 @@ h6, .h6 {
   background: #cc0036 !important;
   border-color: #cc0036 !important;
   color: #fff;
+=======
+  background: #fed531;
+  color: #fff;
+  border-color: #fed531;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary.active {
+  background: #866c35 !important;
+  border-color: #866c35 !important;
+}
+
+.btn-outline-primary {
+    background: #fed531;
+  color: #fff;
+  border-color: #fed531;
+}
+
+.btn-outline-primary:active, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus, .btn-outline-primary.active {
+  background: #866c35 !important;
+  border-color: #866c35 !important;
+  
+>>>>>>> Stashed changes
 }
 
 body {
@@ -131,12 +176,20 @@ body {
 }
 
 ::-moz-selection {
+<<<<<<< Updated upstream
   background: #ff3369;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
   color: #fff;
 }
 
 ::selection {
+<<<<<<< Updated upstream
   background: #ff3369;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
   color: #fff;
 }
 
@@ -189,7 +242,11 @@ select:focus {
 }
 
 a:hover {
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 .slick-slide {
@@ -346,7 +403,11 @@ a:hover {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -401,7 +462,11 @@ a:hover {
 }
 
 .search-wrapper button i {
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 .card {
@@ -414,7 +479,11 @@ a:hover {
 }
 
 .card-icon {
+<<<<<<< Updated upstream
   background: #FF0043;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
   color: #fff;
   height: 60px;
   width: 60px;
@@ -452,7 +521,11 @@ a:hover {
   line-height: 42px;
   text-align: center;
   color: #fff;
+<<<<<<< Updated upstream
   background: #FF0043;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
   border-radius: 6px;
 }
 
@@ -468,7 +541,11 @@ a:hover {
 }
 
 .footer-menu a:hover {
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 /* sidenav */
@@ -614,7 +691,11 @@ pre {
 }
 
 pre .copy-to-clipboard {
+<<<<<<< Updated upstream
   background: #FF0043;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
   color: #fff;
   cursor: pointer;
   padding: 4px 5px;
@@ -645,7 +726,11 @@ pre .copy-to-clipboard {
 }
 
 .autocomplete-suggestions .autocomplete-suggestion.selected {
+<<<<<<< Updated upstream
   background: #FF0043;
+=======
+  background: #fed531;
+>>>>>>> Stashed changes
 }
 
 .search-item a {
@@ -654,7 +739,11 @@ pre .copy-to-clipboard {
 }
 
 .search-item a:hover {
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 .search-item:not(:last-child) {
@@ -697,7 +786,11 @@ pre .copy-to-clipboard {
 
 .form-group .form-control:focus {
   outline: 0;
+<<<<<<< Updated upstream
   border-color: #FF0043;
+=======
+  border-color: #fed531;
+>>>>>>> Stashed changes
   box-shadow: none;
 }
 
@@ -783,7 +876,11 @@ pre .copy-to-clipboard {
 
 .content a {
   text-decoration: underline;
+<<<<<<< Updated upstream
   color: #FF0043;
+=======
+  color: #fed531;
+>>>>>>> Stashed changes
 }
 
 .content ol,
@@ -928,9 +1025,15 @@ pre .copy-to-clipboard {
 
 .content blockquote {
   font-size: 20px !important;
+<<<<<<< Updated upstream
   color: #222;
   padding: 20px 40px;
   border-left: 2px solid #FF0043;
+=======
+  color: #fff;
+  padding: 20px 40px;
+  border-left: 2px solid #fed531;
+>>>>>>> Stashed changes
   margin: 40px 0;
   font-weight: bold;
   background: #FBFBFB;
@@ -951,4 +1054,8 @@ pre .copy-to-clipboard {
   font-size: 100%;
 }
 
+<<<<<<< Updated upstream
 /*# sourceMappingURL=maps/style.css.map */
+=======
+
+>>>>>>> Stashed changes

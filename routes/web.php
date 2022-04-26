@@ -37,10 +37,13 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+<<<<<<< Updated upstream
 
 
 
 
+=======
+>>>>>>> Stashed changes
 Route::get('/pinocone/index', [FrontController::class, 'index'])->name('index');
 
 Route::get('/pinocone/contact-us', [FrontController::class, 'contact'])->name('contact');
@@ -61,9 +64,15 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/pinocone/premium', [PackageController::class, 'premiumm'])->name('premiumm');
 
     Route::get('/pinocone/logout', [FrontController::class, 'logout'])->name('logout');
+<<<<<<< Updated upstream
 
 
 
     Route::get('/pinocone/profile', [FrontController::class, 'profile'])->name('profile');
 });
+=======
+    Route::get('/pinocone/profile', [FrontController::class, 'profile'])->name('profile');
+});
+
+>>>>>>> Stashed changes
 Route::get('/pinocone/email', [FrontController::class, 'email'])->name('email');

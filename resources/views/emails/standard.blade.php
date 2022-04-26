@@ -29,6 +29,7 @@
             </div>
         </div>
     </section>
+<<<<<<< Updated upstream
     <footer>
         <div class="container" style="text-align: center">
             <div class="py-4 text-center" style="text-align: center">
@@ -36,6 +37,9 @@
             </div>
         </div>
     </footer>
+=======
+    
+>>>>>>> Stashed changes
     <script src="{{ asset('assets') }}/plugins/jQuery/jquery.min.js"></script>
     <script src="{{ asset('assets') }}/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="{{ asset('assets') }}/plugins/masonry/masonry.min.js"></script>

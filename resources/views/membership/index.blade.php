@@ -13,9 +13,15 @@
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-7 text-center text-lg-left">
+<<<<<<< Updated upstream
                     <h1 class="mb-4">Buy Membership From Pinocone.</h1>
                 </div>
                
+=======
+                    <h1 class="mb-4">Buy Membership From Us.</h1>
+                </div>
+                
+>>>>>>> Stashed changes
             </div>
         </div>
     </section>
@@ -103,10 +109,17 @@
     <section class="section">
         <div class="container">
             <div class="row align-items-center">
+<<<<<<< Updated upstream
                 
                 <div class="col-lg-8 text-lg-left text-center">
                     <h2 class="mb-3">Still Didn&rsquo;t get Your Membership?</h2>
                     <a href="/pinocone/contact-us" class="btn btn-primary">Submit a ticket</a>
+=======
+               
+                <div class="col-lg-8 text-lg-left text-center">
+                    <h2 class="mb-3">Do you need some help?</h2>
+                    <a href="/pinocone/contact-us" class="btn btn-primary">Submit a Question?</a>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>

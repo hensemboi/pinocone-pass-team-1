@@ -24,7 +24,11 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< Updated upstream
                
+=======
+                
+>>>>>>> Stashed changes
             </div>
         </div>
     </section>

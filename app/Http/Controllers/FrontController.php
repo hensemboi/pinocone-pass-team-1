@@ -75,7 +75,11 @@ class FrontController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('web')->attempt($credentials)) {
+<<<<<<< Updated upstream
             return redirect('/')->with('message','Welcome Back!');
+=======
+            return redirect('/pinocone/index')->with('message','Welcome Back!');
+>>>>>>> Stashed changes
         }
         return redirect()->back()->with('error', 'Email or Password is Invalid!');
     }
@@ -83,7 +87,11 @@ class FrontController extends Controller
     {
         Auth::logout();
         Session::flush();
+<<<<<<< Updated upstream
         return redirect('/');
+=======
+        return redirect('/pinocone/index');
+>>>>>>> Stashed changes
     }
     /**
      * Show the form for creating a new resource.

@@ -1,10 +1,14 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestUserController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\UserPaymentMethodController;
+use App\Http\Controllers\PinopayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +21,40 @@ use App\Http\Controllers\TestUserController;
 |
 */
 
+Route::controller(OrderController::class)->group(function () {
+    Route::get('order', 'fetchAll');
+    Route::get('order/{id}', 'fetchSpecificUser');
+    Route::post('order', 'store');
+    Route::put('order/{id}', 'update');
+});
+
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('marketplace', [MenuController::class, 'fetchAll']);
+Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
-Route::post('login', [TestUserController::class, 'login']);
-Route::post('register', [TestUserController::class, 'register']);
-Route::post('logout', [TestUserController::class, 'logout'])->middleware('auth:sanctum');
+Route::controller(UserPaymentMethodController::class)->group(function () {
+    Route::get('userpaymentmethod', 'fetchAll');
+    Route::get('userpaymentmethod/{id}', 'fetchSpecificUser');
+    Route::post('userpaymentmethod', 'store');
+    Route::put('userpaymentmethod/{id}', 'update');
+});
+
+Route::controller(PinopayController::class)->group(function () {
+    Route::get('pinopay', 'fetchAll');
+    Route::get('pinopay/{id}', 'fetchSpecificUser');
+    Route::post('pinopay', 'store');
+    Route::put('pinopay/{id}', 'update');
+});
+
+Route::controller(TestUserController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout')->middleware('auth:sanctum');
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 // Route::post('login', [UserController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);

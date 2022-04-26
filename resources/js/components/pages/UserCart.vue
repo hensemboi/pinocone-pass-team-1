@@ -17,6 +17,9 @@
                 :note="item.note"
             ></cart-item>
         </ul>
+        <router-link to="/checkout" tag="button">
+            <button class="button-center">Proceed to check out</button>
+        </router-link>
     </section>
     <section v-else>
         <h2>Your cart is empty. Please add an item from the marketplace.</h2>
@@ -54,9 +57,12 @@ section {
 }
 
 h2 {
-    color: #292929;
+    --gray-black: #292929;
+    --quick-gray: #ccc;
+
+    color: var(--gray-black);
     text-align: center;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid var(--quick-gray);
     padding-bottom: 1rem;
 }
 
@@ -71,9 +77,11 @@ ul {
 }
 
 button {
+    --button-dark-red: #8f0030;
+
     font: inherit;
-    border: 1px solid #8f0030;
-    background-color: #8f0030;
+    border: 1px solid var(--button-dark-red);
+    background-color: var(--button-dark-red);
     color: white;
     border-radius: 30px;
     cursor: pointer;
@@ -82,7 +90,9 @@ button {
 
 button:hover,
 button:active {
-    background-color: #53001c;
-    border-color: #53001c;
+    --button-dark-red-hover: #53001c;
+
+    background-color: var(--button-dark-red-hover);
+    border-color: var(--button-dark-red-hover);
 }
 </style>

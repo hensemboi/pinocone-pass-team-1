@@ -3,16 +3,22 @@ import Homepage from "./views/Homepage.vue";
 import Navbar from "./components/navbar/Navbar.vue";
 import Footer from "./components/UI/TheFooter.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/Register.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ProductsList from "./components/pages/ProductsList.vue";
+import ProductsListing from "./views/admin/ProductsListing.vue";
 import UserCart from "./components/pages/UserCart.vue";
-import NotFound from "./components/NotFound.vue";
-import Register from "./views/Register.vue";
+import UserProfile from "./components/pages/UserProfilePage.vue";
 import AdminSideBar from "./components/admin/AdminSideBar.vue";
 import AdminTopBar from "./components/admin/AdminTopBar.vue";
-import ProductsListing from "./views/admin/ProductsListing.vue";
+import Checkout from "./components/cart/Checkout.vue";
+import Pending from "./views/Pending.vue";
+import PIN from "./components/payment/PIN.vue";
+import Pinopay from "./components/payment/Pinopay.vue";
+import Success from "./components/payment/Success.vue";
+import Error from "./components/payment/Error.vue";
+import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
-import UserProfile from "./components/pages/UserProfilePage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -78,6 +84,52 @@ const router = createRouter({
             path: "/productslisting",
             components: {
                 default: ProductsListing,
+            },
+        },
+        {
+            path: "/checkout",
+            components: {
+                default: Checkout,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/pin",
+            components: {
+                default: PIN,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/pending",
+            components: {
+                default: Pending,
+            },
+        },
+        {
+            path: "/pinopay",
+            components: {
+                default: Pinopay,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/success",
+            components: {
+                default: Success,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/error",
+            components: {
+                default: Error,
+                footer: Footer,
+                navbar: Navbar,
             },
         },
         {

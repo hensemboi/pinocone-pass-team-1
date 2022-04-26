@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('PK_categoryCode');
             $table->string('name', 50)->default('No category');
-            $table->string('decription')->default('No description');
+            $table->string('description')->default('No description');
         });
     }
 

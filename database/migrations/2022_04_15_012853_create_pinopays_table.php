@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pinopays', function (Blueprint $table) {
             $table->integer('FK_userID')->primary();
             $table->float('balance');
-            $table->mediumInteger('PIN');
+            $table->string('PIN');
             
             $table->foreign('FK_userID', 'FK_pinopay_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

@@ -39,3 +39,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 //     Route::post('update/{id}', [BookController::class, 'update']);
 //     Route::delete('delete/{id}', [BookController::class, 'delete']);
 // });
+
+Route::resource('menu', 'App\Http\Controllers\MenuController');

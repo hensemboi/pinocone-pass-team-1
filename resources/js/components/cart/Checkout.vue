@@ -6,21 +6,32 @@
                     <div class="card-header lead">Checkout</div>
                     <div class="card-body">
                         <div>
-                            <div class="">
+                            <div>
+                                <h2>Menus to order:</h2>
+
+                                <div v-for="item in cartItems" :key="item.productID">
+                                    <p>{{ item.title }}</p>
+                                    <p>-Price of {{ item.qty }}: ${{ item.price * item.qty }}</p>
+                                </div>
+                                <br/>
+                                <em>Total price: ${{ cartTotal }}</em>
+                            </div>
+                            <br/>
+                            <div>
                                 <h2>Pay with:</h2>
 
                                 <select @change="selectPaymentMethod($event)">
-                                    <option v-for="paymentMethod in paymentMethods">{{ paymentMethod.name }}</option>
+                                    <option v-for="paymentMethod in paymentMethods" :value="paymentMethod.PK_paymentCode">{{ paymentMethod.name }}</option>
                                 </select>
                             </div>
                             <br/>
 
-                            <div v-if="currentPaymentMethod === 'Debit Card'">
+                            <div v-if="currentPaymentMethod === 1">
                                 <div v-for="userPaymentMethod in userPaymentMethods">
-                                    <h3>Using card: {{ userPaymentMethod.cardNo }}</h3>
-
+                                    <em>Using card: {{ userPaymentMethod.cardNo }}</em>
+                                    <br/>
                                     <router-link to="/PIN" tag="button">
-                                        <button>Next</button>
+                                        <button @click="lockInPaymentMethod">Next</button>
                                     </router-link>
                                 </div>
                             
@@ -44,13 +55,13 @@
                                 </div>
                             </div>
 
-                            <div v-else-if="currentPaymentMethod === 'Pinopay'">
+                            <div v-else-if="currentPaymentMethod === 2">
                                 <div>
                                     <div v-if="pinopayWallet.length === 1">
-                                        <h3>Balance: ${{ pinopayWallet[0].balance }}</h3>
-
+                                        <em>Balance: ${{ pinopayWallet[0].balance }}</em>
+                                        <br/>
                                         <router-link to="/PIN" tag="button">
-                                            <button>Next</button>
+                                            <button @click="lockInPaymentMethod">Next</button>
                                         </router-link>                          
                                     </div>
 
@@ -72,12 +83,12 @@
         data() {
             return {
                 userID: 47,
-                currentPaymentMethod: "",
+                currentPaymentMethod: 0,
                 paymentMethods: [],
                 userPaymentMethods: [],
                 pinopayWallet: [],
                 form: {
-                    "userID": 47,
+                    "userID": 0,
                     "paymentCode": 1,
                     "cardNo": "",
                     "balance": ""
@@ -85,14 +96,17 @@
             }
         },
         computed: {
-            cartItems() {
-                return this.$store.getters["cart/items"];
+            cartTotal() {
+                return this.$store.getters["cart/totalSum"].toFixed(2)
             },
+            cartItems() {
+                return this.$store.getters["cart/items"]
+            }
         },
         created() {
             axios.get("./paymentmethod")
             .then(response => { this.paymentMethods = response.data
-            this.currentPaymentMethod = this.paymentMethods[0].name })
+            this.currentPaymentMethod = this.paymentMethods[0].PK_paymentCode })
             axios.get("./userpaymentmethod/" + this.userID)
             .then(response => this.userPaymentMethods = response.data)
             axios.get("./pinopay/" + this.userID)
@@ -100,9 +114,16 @@
         },
         methods: {
             selectPaymentMethod(event) {
-                this.currentPaymentMethod = event.target.value
+                this.currentPaymentMethod = parseInt(event.target.value)
+            },
+            lockInPaymentMethod() {
+                this.$store.commit("checkout/storePaymentMethod", {
+                    data: this.currentPaymentMethod
+                })
             },
             addUserDebitCard() {
+                this.form.userID = this.userID
+
                 axios.post("./userpaymentmethod", this.form)
 
                 this.$router.push("/success")
@@ -116,7 +137,7 @@
         text-align: center;
     }
 
-    a {
+    a, em {
         font-size: large;
     }
 
@@ -130,6 +151,7 @@
         border-radius: 30px;
         cursor: pointer;
         padding: 0.5rem 1.5rem;
+        margin-left: 12px;
     }
 
     button:hover,

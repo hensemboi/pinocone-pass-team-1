@@ -37534,12 +37534,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userID: 47,
-      currentPaymentMethod: "",
+      currentPaymentMethod: 0,
       paymentMethods: [],
       userPaymentMethods: [],
       pinopayWallet: [],
       form: {
-        "userID": 47,
+        "userID": 0,
         "paymentCode": 1,
         "cardNo": "",
         "balance": ""
@@ -37547,6 +37547,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    cartTotal: function cartTotal() {
+      return this.$store.getters["cart/totalSum"].toFixed(2);
+    },
     cartItems: function cartItems() {
       return this.$store.getters["cart/items"];
     }
@@ -37556,7 +37559,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("./paymentmethod").then(function (response) {
       _this.paymentMethods = response.data;
-      _this.currentPaymentMethod = _this.paymentMethods[0].name;
+      _this.currentPaymentMethod = _this.paymentMethods[0].PK_paymentCode;
     });
     axios.get("./userpaymentmethod/" + this.userID).then(function (response) {
       return _this.userPaymentMethods = response.data;
@@ -37567,9 +37570,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectPaymentMethod: function selectPaymentMethod(event) {
-      this.currentPaymentMethod = event.target.value;
+      this.currentPaymentMethod = parseInt(event.target.value);
+    },
+    lockInPaymentMethod: function lockInPaymentMethod() {
+      this.$store.commit("checkout/storePaymentMethod", {
+        data: this.currentPaymentMethod
+      });
     },
     addUserDebitCard: function addUserDebitCard() {
+      this.form.userID = this.userID;
       axios.post("./userpaymentmethod", this.form);
       this.$router.push("/success");
     }
@@ -37930,7 +37939,7 @@ __webpack_require__.r(__webpack_exports__);
       transactionHistory: [],
       topup: 0,
       form: {
-        "userID": 47,
+        "userID": 0,
         "balance": 0,
         "PIN": ""
       }
@@ -37951,10 +37960,12 @@ __webpack_require__.r(__webpack_exports__);
       var CryptoJS = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
 
       this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString();
+      this.form.userID = this.userID;
       axios.post("./pinopay", this.form);
       this.$router.push("/success");
     },
     topUp: function topUp() {
+      this.form.userID = this.userID;
       this.form.balance = this.pinopayWallet[0].balance + this.topup;
       this.form.PIN = this.pinopayWallet[0].PIN;
       axios.put("./pinopay/" + this.userID, this.form);
@@ -38159,17 +38170,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userID: 47,
-      paymentMethod: 1,
       userPaymentMethods: [],
       pinopayWallet: [],
       formOne: {
-        "userID": 47,
+        "userID": 0,
         "paymentCode": 1,
         "cardNo": "",
         "balance": ""
       },
       formTwo: {
-        "userID": 47,
+        "userID": 0,
         "balance": "",
         "PIN": ""
       }
@@ -38179,11 +38189,14 @@ __webpack_require__.r(__webpack_exports__);
     price: function price() {
       return this.$store.getters["cart/totalSum"].toFixed(2);
     },
+    paymentMethod: function paymentMethod() {
+      return this.$store.getters["checkout/getPaymentMethod"];
+    },
     newCardBalance: function newCardBalance() {
       return this.userPaymentMethods[0].balance - this.price;
     },
     newWalletBalance: function newWalletBalance() {
-      return this.pinopayWallets[0].balance - this.price;
+      return this.pinopayWallet[0].balance - this.price;
     }
   },
   created: function created() {
@@ -38198,12 +38211,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateCard: function updateCard() {
+      this.formOne.userID = this.userID;
       this.formOne.balance = this.newCardBalance;
       this.formOne.cardNo = this.userPaymentMethods[0].cardNo;
       axios.put('./userpaymentmethod/' + this.formOne.userID, this.formOne);
       this.$router.push("/success");
     },
     updateWallet: function updateWallet() {
+      this.formTwo.userID = this.userID;
       this.formTwo.balance = this.newWalletBalance;
       this.formTwo.PIN = this.pinopayWallet[0].PIN;
       axios.put('./pinopay/' + this.formTwo.userID, this.formTwo);
@@ -38975,12 +38990,15 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_6 = {
   "class": "card-body"
 };
-var _hoisted_7 = {
-  "class": ""
-};
+
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Menus to order:", -1
+  /* HOISTED */
+  );
+});
 
 var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Pay with:", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
   /* HOISTED */
   );
 });
@@ -38991,25 +39009,23 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_10 = {
-  key: 0
-};
-
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", null, "Next", -1
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Pay with:", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_12 = {
-  key: 0
-};
+var _hoisted_11 = ["value"];
 
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "No debit cards available.", -1
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
   /* HOISTED */
   );
 });
+
+var _hoisted_13 = {
+  key: 0
+};
 
 var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
@@ -39017,13 +39033,15 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Add New Debit Card", -1
+var _hoisted_15 = {
+  key: 0
+};
+
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "No debit cards available.", -1
   /* HOISTED */
   );
 });
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Card Number: ");
 
 var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
@@ -39031,22 +39049,36 @@ var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Balance: ");
-
-var _hoisted_19 = {
-  key: 1
-};
-var _hoisted_20 = {
-  key: 0
-};
-
-var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", null, "Next", -1
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Add New Debit Card", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Card Number: ");
+
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Balance: ");
+
+var _hoisted_22 = {
+  key: 1
+};
+var _hoisted_23 = {
+  key: 0
+};
+
+var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, "Please open up a virtual wallet first.", -1
   /* HOISTED */
   );
@@ -39055,27 +39087,45 @@ var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.cartItems, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: item.productID
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.title), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "-Price of " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.qty) + ": $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price * item.qty), 1
+    /* TEXT */
+    )]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Total price: $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.cartTotal), 1
+  /* TEXT */
+  )]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     onChange: _cache[0] || (_cache[0] = function ($event) {
       return $options.selectPaymentMethod($event);
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.paymentMethods, function (paymentMethod) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(paymentMethod.name), 1
-    /* TEXT */
-    );
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      value: paymentMethod.PK_paymentCode
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(paymentMethod.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_11);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))], 32
   /* HYDRATE_EVENTS */
-  )]), _hoisted_9, $data.currentPaymentMethod === 'Debit Card' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userPaymentMethods, function (userPaymentMethod) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Using card: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(userPaymentMethod.cardNo), 1
+  )]), _hoisted_12, $data.currentPaymentMethod === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userPaymentMethods, function (userPaymentMethod) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Using card: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(userPaymentMethod.cardNo), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    ), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: "/PIN",
       tag: "button"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_11];
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          onClick: _cache[1] || (_cache[1] = function () {
+            return $options.lockInPaymentMethod && $options.lockInPaymentMethod.apply($options, arguments);
+          })
+        }, "Next")];
       }),
       _: 1
       /* STABLE */
@@ -39083,35 +39133,39 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  )), $data.userPaymentMethods.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [_hoisted_13, _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )), $data.userPaymentMethods.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [_hoisted_16, _hoisted_17, _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     min: "0",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.form.cardNo = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.cardNo]])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.cardNo]])]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     step: "0.01",
     min: "0",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.form.balance = $event;
     })
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.balance]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[3] || (_cache[3] = function () {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.addUserDebitCard && $options.addUserDebitCard.apply($options, arguments);
     })
-  }, "Add")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.currentPaymentMethod === 'Pinopay' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [$data.pinopayWallet.length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Balance: $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pinopayWallet[0].balance), 1
+  }, "Add")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.currentPaymentMethod === 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [$data.pinopayWallet.length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Balance: $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pinopayWallet[0].balance), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  ), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/PIN",
     tag: "button"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_21];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[5] || (_cache[5] = function () {
+          return $options.lockInPaymentMethod && $options.lockInPaymentMethod.apply($options, arguments);
+        })
+      }, "Next")];
     }),
     _: 1
     /* STABLE */
@@ -39121,7 +39175,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: "/pinopay"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_22];
+      return [_hoisted_25];
     }),
     _: 1
     /* STABLE */
@@ -40013,15 +40067,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.topUp && $options.topUp.apply($options, arguments);
     })
   }, "Topup")]))]), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_17, [$data.transactionHistory.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_18, _hoisted_22)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_23, _hoisted_25)), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.transactionHistory, function (transaction) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.PK_transactionID), 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+      key: transaction.PK_transactionID
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.PK_transactionID), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.totalPrice), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.dateTime), 1
     /* TEXT */
     )]);
-  }), 256
-  /* UNKEYED_FRAGMENT */
+  }), 128
+  /* KEYED_FRAGMENT */
   ))])])])])])])]);
 }
 
@@ -40618,12 +40674,12 @@ var _hoisted_2 = {
   "class": "proceed"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.paymentMethod === 1 && $options.newCardBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$options.paymentMethod === 1 && $options.newCardBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.updateCard && $options.updateCard.apply($options, arguments);
     })
-  }, "Proceed")) : $data.paymentMethod === 2 && $options.newWalletBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, "Proceed")) : $options.paymentMethod === 2 && $options.newWalletBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.updateWallet && $options.updateWallet.apply($options, arguments);
@@ -41018,22 +41074,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _modules_cart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/cart.js */ "./resources/js/components/store/modules/cart.js");
-/* harmony import */ var _modules_marketplace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/marketplace.js */ "./resources/js/components/store/modules/marketplace.js");
-/* harmony import */ var _modules_auth_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/auth.js */ "./resources/js/components/store/modules/auth.js");
-/* harmony import */ var _modules_users_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/users.js */ "./resources/js/components/store/modules/users.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _modules_marketplace_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/marketplace.js */ "./resources/js/components/store/modules/marketplace.js");
+/* harmony import */ var _modules_cart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/cart.js */ "./resources/js/components/store/modules/cart.js");
+/* harmony import */ var _modules_checkout_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/checkout.js */ "./resources/js/components/store/modules/checkout.js");
+/* harmony import */ var _modules_auth_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/auth.js */ "./resources/js/components/store/modules/auth.js");
+/* harmony import */ var _modules_users_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/users.js */ "./resources/js/components/store/modules/users.js");
 
 
 
 
 
-var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.createStore)({
+
+var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
   modules: {
-    marketplace: _modules_marketplace_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-    cart: _modules_cart_js__WEBPACK_IMPORTED_MODULE_0__["default"],
-    auth: _modules_auth_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-    user: _modules_users_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+    marketplace: _modules_marketplace_js__WEBPACK_IMPORTED_MODULE_0__["default"],
+    cart: _modules_cart_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+    checkout: _modules_checkout_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+    auth: _modules_auth_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+    user: _modules_users_js__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -41206,6 +41265,43 @@ __webpack_require__.r(__webpack_exports__);
     },
     quantity: function quantity(state) {
       return state.qty;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/store/modules/checkout.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/store/modules/checkout.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: function state() {
+    return {
+      paymentMethod: 0
+    };
+  },
+  mutations: {
+    storePaymentMethod: function storePaymentMethod(state, payload) {
+      state.paymentMethod = payload.data;
+    }
+  },
+  actions: {
+    storePaymentMethod: function storePaymentMethod(context, payload) {
+      context.commit("storePaymentMethod", payload.data);
+    }
+  },
+  getters: {
+    getPaymentMethod: function getPaymentMethod(state) {
+      return state.paymentMethod;
     }
   }
 });
@@ -53631,7 +53727,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba] {\r\n        font-size: large;\n}\nbutton[data-v-371934ba] {\r\n        --button-dark-red: #8f0030;\r\n        \r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        --button-dark-red-hover: #53001c;\r\n\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba], em[data-v-371934ba] {\r\n        font-size: large;\n}\nbutton[data-v-371934ba] {\r\n        --button-dark-red: #8f0030;\r\n        \r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-left: 12px;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        --button-dark-red-hover: #53001c;\r\n\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53703,7 +53799,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-c93178be] {\r\n    margin: 2rem auto;\r\n    max-width: 40rem;\n}\nh2[data-v-c93178be] {\r\n    --gray-black: #292929;\r\n    --quick-gray: #ccc;\r\n\r\n    color: var(--gray-black);\r\n    text-align: center;\r\n    border-bottom: 2px solid var(--quick-gray);\r\n    padding-bottom: 1rem;\n}\nh3[data-v-c93178be] {\r\n    text-align: center;\n}\nul[data-v-c93178be] {\r\n    list-style: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nbutton[data-v-c93178be] {\r\n    --button-dark-red: #8f0030;\r\n\r\n    font: inherit;\r\n    border: 1px solid var(--button-dark-red);\r\n    background-color: var(--button-dark-red);\r\n    color: white;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\n}\nbutton[data-v-c93178be]:hover,\r\nbutton[data-v-c93178be]:active {\r\n    --button-dark-red-hover: #53001c;\r\n\r\n    background-color: var(--button-dark-red-hover);\r\n    border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-c93178be] {\r\n    margin: 2rem auto;\r\n    max-width: 40rem;\n}\nh2[data-v-c93178be] {\r\n    --gray-black: #292929;\r\n    --quick-gray: #ccc;\r\n\r\n    color: var(--gray-black);\r\n    text-align: center;\r\n    border-bottom: 2px solid var(--quick-gray);\r\n    padding-bottom: 1rem;\n}\nh3[data-v-c93178be] {\r\n    text-align: center;\n}\nul[data-v-c93178be] {\r\n    list-style: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nbutton[data-v-c93178be] {\r\n    --button-dark-red: #8f0030;\r\n\r\n    font: inherit;\r\n    border: 1px solid var(--button-dark-red);\r\n    background-color: var(--button-dark-red);\r\n    color: white;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\r\n    margin-left: 240px;\n}\nbutton[data-v-c93178be]:hover,\r\nbutton[data-v-c93178be]:active {\r\n    --button-dark-red-hover: #53001c;\r\n\r\n    background-color: var(--button-dark-red-hover);\r\n    border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53874,7 +53970,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-5d7d7a48] {\r\n        margin: 0;\r\n        padding: 0;\r\n        box-sizing: border-box;\n}\n.center[data-v-5d7d7a48] {\r\n        height: 100vh;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n        background: #fff;\n}\n.wave[data-v-5d7d7a48] {\r\n        width: 5px;\r\n        height: 100px;\r\n        background: linear-gradient(45deg, #fed531, #fff);\r\n        margin: 10px;\r\n        -webkit-animation: wave-5d7d7a48 1s linear infinite;\r\n                animation: wave-5d7d7a48 1s linear infinite;\r\n        border-radius: 20px;\n}\n.wave[data-v-5d7d7a48]:nth-child(2) {\r\n        -webkit-animation-delay: 0.1s;\r\n                animation-delay: 0.1s;\n}\n.wave[data-v-5d7d7a48]:nth-child(3) {\r\n        -webkit-animation-delay: 0.2s;\r\n                animation-delay: 0.2s;\n}\n.wave[data-v-5d7d7a48]:nth-child(4) {\r\n        -webkit-animation-delay: 0.3s;\r\n                animation-delay: 0.3s;\n}\n.wave[data-v-5d7d7a48]:nth-child(5) {\r\n        -webkit-animation-delay: 0.4s;\r\n                animation-delay: 0.4s;\n}\n.wave[data-v-5d7d7a48]:nth-child(6) {\r\n        -webkit-animation-delay: 0.5s;\r\n                animation-delay: 0.5s;\n}\n.wave[data-v-5d7d7a48]:nth-child(7) {\r\n        -webkit-animation-delay: 0.6s;\r\n                animation-delay: 0.6s;\n}\n.wave[data-v-5d7d7a48]:nth-child(8) {\r\n        -webkit-animation-delay: 0.7s;\r\n                animation-delay: 0.7s;\n}\n.wave[data-v-5d7d7a48]:nth-child(9) {\r\n        -webkit-animation-delay: 0.8s;\r\n                animation-delay: 0.8s;\n}\n.wave[data-v-5d7d7a48]:nth-child(10) {\r\n        -webkit-animation-delay: 0.9s;\r\n                animation-delay: 0.9s;\n}\n@-webkit-keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n@keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n.proceed[data-v-5d7d7a48] {\r\n        background-color: #fff;\r\n        text-align: center;\r\n        height: 50px;\n}\nbutton[data-v-5d7d7a48] {\r\n        font: inherit;\r\n        border: 1px solid #8f0030;\r\n        background-color: #8f0030;\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-5d7d7a48]:hover,\r\n    button[data-v-5d7d7a48]:active {\r\n        background-color: #53001c;\r\n        border-color: #53001c;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-5d7d7a48] {\r\n        margin: 0;\r\n        padding: 0;\r\n        box-sizing: border-box;\n}\n.center[data-v-5d7d7a48] {\r\n        height: 100vh;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n        background: white;\n}\n.wave[data-v-5d7d7a48] {\r\n        --pinocone-yellow: #fed531;\r\n\r\n        width: 5px;\r\n        height: 100px;\r\n        background: linear-gradient(45deg, var(--pinocone-yellow), white);\r\n        margin: 10px;\r\n        -webkit-animation: wave-5d7d7a48 1s linear infinite;\r\n                animation: wave-5d7d7a48 1s linear infinite;\r\n        border-radius: 20px;\n}\n.wave[data-v-5d7d7a48]:nth-child(2) {\r\n        -webkit-animation-delay: 0.1s;\r\n                animation-delay: 0.1s;\n}\n.wave[data-v-5d7d7a48]:nth-child(3) {\r\n        -webkit-animation-delay: 0.2s;\r\n                animation-delay: 0.2s;\n}\n.wave[data-v-5d7d7a48]:nth-child(4) {\r\n        -webkit-animation-delay: 0.3s;\r\n                animation-delay: 0.3s;\n}\n.wave[data-v-5d7d7a48]:nth-child(5) {\r\n        -webkit-animation-delay: 0.4s;\r\n                animation-delay: 0.4s;\n}\n.wave[data-v-5d7d7a48]:nth-child(6) {\r\n        -webkit-animation-delay: 0.5s;\r\n                animation-delay: 0.5s;\n}\n.wave[data-v-5d7d7a48]:nth-child(7) {\r\n        -webkit-animation-delay: 0.6s;\r\n                animation-delay: 0.6s;\n}\n.wave[data-v-5d7d7a48]:nth-child(8) {\r\n        -webkit-animation-delay: 0.7s;\r\n                animation-delay: 0.7s;\n}\n.wave[data-v-5d7d7a48]:nth-child(9) {\r\n        -webkit-animation-delay: 0.8s;\r\n                animation-delay: 0.8s;\n}\n.wave[data-v-5d7d7a48]:nth-child(10) {\r\n        -webkit-animation-delay: 0.9s;\r\n                animation-delay: 0.9s;\n}\n@-webkit-keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n@keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n.proceed[data-v-5d7d7a48] {\r\n        background-color: white;\r\n        text-align: center;\r\n        height: 50px;\n}\nbutton[data-v-5d7d7a48] {\r\n        --button-dark-red: #8f0030;\r\n\r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-5d7d7a48]:hover,\r\n    button[data-v-5d7d7a48]:active {\r\n        --button-dark-red-hover: #53001c;\r\n\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

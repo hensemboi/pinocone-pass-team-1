@@ -26,17 +26,16 @@
         data() {
             return {
                 userID: 47,
-                paymentMethod: 1,
                 userPaymentMethods: [],
                 pinopayWallet: [],
                 formOne: {
-                    "userID": 47,
+                    "userID": 0,
                     "paymentCode": 1,
                     "cardNo": "",
                     "balance": ""
                 },
                 formTwo: {
-                    "userID": 47,
+                    "userID": 0,
                     "balance": "",
                     "PIN": ""
                 }
@@ -44,13 +43,16 @@
         },
         computed: {
             price() {
-                return this.$store.getters["cart/totalSum"].toFixed(2);
+                return this.$store.getters["cart/totalSum"].toFixed(2)
+            },
+            paymentMethod() {
+                return this.$store.getters["checkout/getPaymentMethod"]
             },
             newCardBalance() {
                 return this.userPaymentMethods[0].balance - this.price
             },
             newWalletBalance() {
-                return this.pinopayWallets[0].balance - this.price
+                return this.pinopayWallet[0].balance - this.price
             }
         },
         created() {
@@ -61,6 +63,7 @@
         },
         methods: {
             updateCard() {
+                this.formOne.userID = this.userID
                 this.formOne.balance = this.newCardBalance
                 this.formOne.cardNo = this.userPaymentMethods[0].cardNo
 
@@ -69,6 +72,7 @@
                 this.$router.push("/success")
             },
             updateWallet() {
+                this.formTwo.userID = this.userID
                 this.formTwo.balance = this.newWalletBalance
                 this.formTwo.PIN = this.pinopayWallet[0].PIN
 
@@ -95,13 +99,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #fff;
+        background: white;
     }
 
     .wave {
+        --pinocone-yellow: #fed531;
+
         width: 5px;
         height: 100px;
-        background: linear-gradient(45deg, #fed531, #fff);
+        background: linear-gradient(45deg, var(--pinocone-yellow), white);
         margin: 10px;
         animation: wave 1s linear infinite;
         border-radius: 20px;
@@ -156,15 +162,17 @@
     }
 
     .proceed {
-        background-color: #fff;
+        background-color: white;
         text-align: center;
         height: 50px;
     }
 
     button {
+        --button-dark-red: #8f0030;
+
         font: inherit;
-        border: 1px solid #8f0030;
-        background-color: #8f0030;
+        border: 1px solid var(--button-dark-red);
+        background-color: var(--button-dark-red);
         color: white;
         border-radius: 30px;
         cursor: pointer;
@@ -173,7 +181,9 @@
 
     button:hover,
     button:active {
-        background-color: #53001c;
-        border-color: #53001c;
+        --button-dark-red-hover: #53001c;
+
+        background-color: var(--button-dark-red-hover);
+        border-color: var(--button-dark-red-hover);
     }
 </style>

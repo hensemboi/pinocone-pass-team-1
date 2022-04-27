@@ -43,7 +43,7 @@
                                     <p>None available.</p>
                                 </tr>
 
-                                <tr v-for="transaction in transactionHistory">
+                                <tr v-for="transaction in transactionHistory" :key="transaction.PK_transactionID">
                                     <td>{{ transaction.PK_transactionID }}</td>
                                     <td>${{ transaction.totalPrice }}</td>
                                     <td>{{ transaction.dateTime }}</td>
@@ -67,7 +67,7 @@
                 transactionHistory: [],
                 topup: 0,
                 form: {
-                    "userID": 47,
+                    "userID": 0,
                     "balance": 0,
                     "PIN": ""
                 }
@@ -83,12 +83,14 @@
             openPinopayWallet() {
                 const CryptoJS = require("crypto-js");
                 this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
+                this.form.userID = this.userID
 
                 axios.post("./pinopay", this.form)
 
                 this.$router.push("/success")
             },
             topUp() {
+                this.form.userID = this.userID
                 this.form.balance = this.pinopayWallet[0].balance + this.topup
                 this.form.PIN = this.pinopayWallet[0].PIN
 

@@ -4,22 +4,49 @@
             <img class="card-img" src="/images/food1.png" alt="Card image cap">
         </div>
         <div class="card-body">
-            <h5 class="card-title">Menu Name</h5>
+            <h5 class="card-title">{{menu.menuName}}</h5>
             <div class="card-menu-desc">
                 <div class="price">
-                    RM 123
+                    RM {{ menu.price }}
                 </div>
                 <div class="noOrders">
-                    1234
+                    {{ menu.totalOrders }}
                 </div>
             </div>
             <div class="card-categories">
-                <a href="#" class="card-link">Category</a>
+                <a href="#" class="card-link">{{ cat.name
+                    }}</a>
                 <a href="#" class="card-link">Category 2</a>
             </div>
         </div>
     </div>    
 </template>
+
+<script>
+
+export default ({
+    props:{
+        categories: Array,
+        cuisines: Array,
+        menu: Object
+    },
+    setup(props) {
+        const menu = props.menu
+        const cats = props.categories
+        console.log(menu.FK_categoryCode)
+
+        let cat = Object.values(cats).find((obj) => {
+            return obj.PK_categoryCode == menu.FK_categoryCode
+        });        
+                
+        return {
+            cat,
+            menu
+        }
+    },
+})
+</script>
+
 
 <style scoped>
     .card{  

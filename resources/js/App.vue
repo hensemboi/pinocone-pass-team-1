@@ -1,4 +1,5 @@
 <template>
+    <router-view name="sidebar"></router-view>
     <router-view name="topbar" v-slot="{Component}">
         <transition name="slideBody">
             <component :class="{slide: sideSlided}" :is="Component">
@@ -7,7 +8,6 @@
             </component>
         </transition>
     </router-view>
-    <router-view name="sidebar"></router-view>
     <router-view v-slot="{Component}">
         <transition name="slideBody">
             <component :class="{slide: sideSlided}" :is="Component" >
@@ -49,7 +49,7 @@
 
 <style scoped>
     .slide{
-        width:inherit;
+        width:100%;
         animation: slideright 0.5s ease-in-out;
         margin-left:280px;
     }

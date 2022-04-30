@@ -1,13 +1,17 @@
 import { createStore } from 'vuex';
 import cartModule from './modules/cart.js';
 import marketplaceModule from './modules/marketplace.js';
-import animationsModule from './modules/animations.js'
+import animationsModule from './modules/animations.js';
+import fetchModule from './modules/fetch.js';
+import menuModule from './modules/menu.js';
 
 const store = createStore({
   modules: {
     marketplace: marketplaceModule,
     cart: cartModule,
-    animations: animationsModule
+    animations: animationsModule,
+    fetch: fetchModule,
+    menu: menuModule
   },
   state() {
     return {

@@ -1,13 +1,12 @@
 <template>
-    <span id="SideBarBtn" @click="showSideBar()"><i class="fa fa-bars"></i></span>
     <transition name="slide" >
         <div v-if="sideSlide" class="sidenav d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; margin: 0;">
             <div class="d-flex d-flex justify-content-between">
                 <div>
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <router-link to="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
                         <span class="fs-4">Sidebar</span>
-                    </a>
+                    </router-link>
                 </div>
                 <div>
                     <i @click="hideSideBar()" class="text-white fa fa-xmark fa-2xl"></i>
@@ -17,48 +16,48 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="#" class="nav-link text-white">
+                <router-link to="dashboard" class="nav-link text-white">
                     <i class="fa fa-2xl fa-chart-line"></i>
                     Dashboard
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <router-link to="/12" class="nav-link text-white">
                     <i class="fa fa-2xl fa-file-invoice-dollar"></i>
                     Orders
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <router-link to="productslisting" class="nav-link text-white">
                     <i class="fa fa-2xl fa-bowl-food"></i>
                     Products
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <router-link to="/12" class="nav-link text-white">
                     <i class="fa fa-2xl fa-user-group"></i>
                     Customers
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <router-link to="/12" class="nav-link text-white">
                     <i class="fa fa-2xl fa-bullhorn"></i>
                     Reports
-                </a>
+                </router-link>
             </li>
             </ul>
             <hr>
             <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <router-link to="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>mdo</strong>
-            </a>
+            </router-link>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><router-link to="/12" class="dropdown-item" >New project...</router-link></li>
+                <li><router-link to="/12" class="dropdown-item" >Settings</router-link></li>
+                <li><router-link to="/12" class="dropdown-item" >Profile</router-link></li>
+                <li><hr to="/12" class="dropdown-divider"></li>
+                <li><router-link to="/12" class="dropdown-item" >Sign out</router-link></li>
             </ul>
             </div>
         </div>
@@ -74,8 +73,6 @@ import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 
 export default ({
     setup() {
-            library.add(faHatWizard);
-
         const store = useStore();
         const sideSlide = computed(() => store.getters['animations/getAdminSideSlide']);
         
@@ -142,5 +139,12 @@ export default ({
 
     .fa:hover{
         color:darkgreen;
+    }
+
+    #SideBarBtn{
+        position:absolute;
+        top:3px;
+        left:3px;
+        width:3%;
     }
 </style>

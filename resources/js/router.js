@@ -71,6 +71,8 @@ const router = createRouter({
             path:"/productslisting",
             components:{
                 default: ProductsListing,
+                topbar: AdminTopBar,
+                sidebar: AdminSideBar,
             }
         },
         {

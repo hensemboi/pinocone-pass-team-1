@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CuisineController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestUserController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,8 @@ use App\Http\Controllers\TestUserController;
 */
 
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
+Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
+Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);

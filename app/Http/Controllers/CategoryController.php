@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class CategoryController extends Controller
 {
     public function fetchAll(){
-        return Menu::with(['category', 'category.menu'])->get();
+        return Category::All();
     }
 }

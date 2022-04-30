@@ -34,12 +34,23 @@
                     <router-link to="/marketplace">Marketplace</router-link>
                 </li>
                 <li>
+                    <router-link to="/userprofile">Profile</router-link>
+                </li>
+                <li>
                     <router-link to="/cart">Cart</router-link>
                     <base-badge mode="elegant">{{ cartQuantity }}</base-badge>
                 </li>
             </ul>
-            <router-link to="/login" class="btn btn-outline-success my-2 my-sm-0 mx-3">Login</router-link>
-            <router-link to="/register" class="btn btn-outline-success my-2 my-sm-0">Sign Up</router-link>
+            <router-link
+                to="/login"
+                class="btn btn-outline-success my-2 my-sm-0 mx-3"
+                >Login</router-link
+            >
+            <router-link
+                to="/register"
+                class="btn btn-outline-success my-2 my-sm-0"
+                >Sign Up</router-link
+            >
         </div>
     </nav>
 </template>

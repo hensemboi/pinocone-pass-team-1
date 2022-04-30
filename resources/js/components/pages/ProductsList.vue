@@ -38,7 +38,45 @@
                     <div class="card-group">
                         <div
                             class="col col-md-6 col-lg-3 col-sm-12"
-                            v-for="index in maxDisplay"
+                            v-for="index in maxDisplayCards"
+                            :key="cacheProducts[index].menuID"
+                        >
+                            <div class="card w-75">
+                                <img
+                                    :src="'https://picsum.photos/200/200'"
+                                    class="card-img-top"
+                                    alt="..."
+                                />
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ cacheProducts[index].menuName }}
+                                    </h5>
+                                    <p class="card-text">
+                                        {{ cacheProducts[index].description }}
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted"
+                                            >Last updated 3 mins ago</small
+                                        >
+                                    </p>
+                                    <router-link class="btn btn-primary" to="/"
+                                        >Check it out</router-link
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="text-center">Past Orders</h3>
+        <div>
+            <div class="container-fluid my-6">
+                <div class="row my-2 d-flex flex-row flex-nowrap overflow-auto">
+                    <div class="card-group">
+                        <div
+                            class="col col-md-6 col-lg-3 col-sm-12"
+                            v-for="index in maxDisplayCards"
                             :key="cacheProducts[index].menuID"
                         >
                             <div class="card w-75">
@@ -90,6 +128,7 @@ export default {
             isLoading: false,
             myProducts: [],
             maxDisplay: 10,
+            maxDisplayCards: 3,
         };
     },
     computed: {
@@ -121,24 +160,6 @@ export default {
         getProducts() {
             this.isLoading = true;
             const { default: axios } = require("axios");
-            axios.get("http://localhost:8000/api/marketplace").then(() => {
-                axios
-                    .get("/marketplace", {
-                        action: "fetchAll",
-                    })
-                    .then((response) => {
-                        this.myProducts = response.data;
-                        this.isLoading = false;
-                        this.$store.commit("marketplace/populateProductList", {
-                            data: this.myProducts,
-                        });
-                    })
-                    .catch((err) => {
-                        this.errors = err.response.data.errors;
-                    });
-            });
-        },
-        async getCuisineTpye() {
             axios.get("http://localhost:8000/api/marketplace").then(() => {
                 axios
                     .get("/marketplace", {

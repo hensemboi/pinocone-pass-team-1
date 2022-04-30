@@ -15,7 +15,6 @@ export default {
             const productInCartIndex = state.items.findIndex(
                 (ci) => ci.productId == productData.PK_menuID
             );
-            console.log(productData.menuName);
             if (productInCartIndex >= 0) {
                 // Find the specific product and adds its total quantity
                 state.items[productInCartIndex].qty++;

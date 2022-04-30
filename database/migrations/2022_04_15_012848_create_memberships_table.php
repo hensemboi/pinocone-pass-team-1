@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('startDate');
             $table->dateTime('expiryDate');
             $table->tinyInteger('active');
+            $table->dateTime('next_reward_time')->nullable();
             
             $table->foreign('FK_userID', 'FK_membership_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

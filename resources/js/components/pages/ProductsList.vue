@@ -27,6 +27,8 @@
                 :image="'https://picsum.photos/200/300'"
                 :description="cacheProducts[index].description"
                 :price="cacheProducts[index].price"
+                :discountedPrice="cacheProducts[index].discount_price"
+                :promotionType="cacheProducts[index].is_promoted"
                 :category="cacheProducts[index].FK_categoryCode"
                 :cuisineType="cacheProducts[index].FK_cuisineCode"
             ></product-item>

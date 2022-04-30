@@ -33,16 +33,14 @@ class UserPaymentMethodController extends Controller
         return;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         UserPaymentMethod::where(
             [
-                'PK_FK_userID' => $request->userID
+                'PK_FK_userID' => $id
             ]
         )->update(
             [   
-                'PK_FK_paymentCode' => $request->paymentCode,
-                'cardNo' => $request->cardNo,
                 'balance' => $request->balance
             ]
         );

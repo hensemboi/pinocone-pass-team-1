@@ -37599,7 +37599,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["id", "image", "title", "price", "description", "category", "cuisineType"],
+  props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
   methods: {
     addToCart: function addToCart() {
       console.log(this.id);
@@ -38172,16 +38172,12 @@ __webpack_require__.r(__webpack_exports__);
       userID: 47,
       userPaymentMethods: [],
       pinopayWallet: [],
-      formOne: {
-        "userID": 0,
-        "paymentCode": 1,
-        "cardNo": "",
-        "balance": ""
+      currentIncentives: 0,
+      incentivesForm: {
+        "incentives": 0
       },
-      formTwo: {
-        "userID": 0,
-        "balance": "",
-        "PIN": ""
+      balanceForm: {
+        "balance": 0
       }
     };
   },
@@ -38197,11 +38193,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     newWalletBalance: function newWalletBalance() {
       return this.pinopayWallet[0].balance - this.price;
+    },
+    newIncentives: function newIncentives() {
+      return this.currentIncentives + Math.pow(this.price, 1.5) / 2177;
     }
   },
   created: function created() {
     var _this = this;
 
+    axios.get("./user/" + this.userID).then(function (response) {
+      return _this.currentIncentives = response.data[0].incentives;
+    });
     axios.get("./userpaymentmethod/" + this.userID).then(function (response) {
       return _this.userPaymentMethods = response.data;
     });
@@ -38211,17 +38213,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateCard: function updateCard() {
-      this.formOne.userID = this.userID;
-      this.formOne.balance = this.newCardBalance;
-      this.formOne.cardNo = this.userPaymentMethods[0].cardNo;
-      axios.put('./userpaymentmethod/' + this.formOne.userID, this.formOne);
+      this.balanceForm.balance = this.newCardBalance;
+      axios.put('./userpaymentmethod/' + this.userID, this.balanceForm);
+      this.incentivesForm.incentives = this.newIncentives;
+      axios.put('./user/' + this.userID, this.incentivesForm);
       this.$router.push("/success");
     },
     updateWallet: function updateWallet() {
-      this.formTwo.userID = this.userID;
-      this.formTwo.balance = this.newWalletBalance;
-      this.formTwo.PIN = this.pinopayWallet[0].PIN;
-      axios.put('./pinopay/' + this.formTwo.userID, this.formTwo);
+      this.balanceForm.balance = this.newWalletBalance;
+      axios.put('./pinopay/' + this.userID, this.balanceForm);
+      this.incentivesForm.incentives = this.newIncentives;
+      axios.put('./user/' + this.userID, this.incentivesForm);
       this.$router.push("/success");
     },
     transactionFailed: function transactionFailed() {
@@ -39218,23 +39220,32 @@ var _hoisted_5 = {
   "class": "product__text"
 };
 var _hoisted_6 = {
-  "class": "product__actions"
+  key: 0
 };
 var _hoisted_7 = {
+  key: 1
+};
+var _hoisted_8 = {
+  key: 2
+};
+var _hoisted_9 = {
+  "class": "product__actions"
+};
+var _hoisted_10 = {
   key: 1,
   "class": "product bg-white"
 };
-var _hoisted_8 = {
+var _hoisted_11 = {
   "class": "product__data"
 };
-var _hoisted_9 = {
+var _hoisted_12 = {
   "class": "product__image"
 };
-var _hoisted_10 = ["src", "alt"];
-var _hoisted_11 = {
+var _hoisted_13 = ["src", "alt"];
+var _hoisted_14 = {
   "class": "product__text"
 };
-var _hoisted_12 = {
+var _hoisted_15 = {
   "class": "product__actions"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -39252,9 +39263,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "no-margin-left": true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.price), 1
+      return [$props.promotionType === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("s", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.price), 1
       /* TEXT */
-      )];
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.discountedPrice), 1
+      /* TEXT */
+      )])) : $props.promotionType === 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.price) + " Buy 1 Free 1 ", 1
+      /* TEXT */
+      )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h4", _hoisted_8, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.price), 1
+      /* TEXT */
+      ))];
     }),
     _: 1
     /* STABLE */
@@ -39265,16 +39282,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Cuisine Type: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cuisineType), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.addToCart && $options.addToCart.apply($options, arguments);
     })
-  }, "Add to Cart")])])) : !_ctx.$route.query.sort ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  }, "Add to Cart")])])) : !_ctx.$route.query.sort ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $props.image,
     alt: $props.title
   }, null, 8
   /* PROPS */
-  , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
+  , _hoisted_13)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_badge, {
     mode: "highlight",
@@ -39294,7 +39311,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Cuisine Type: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cuisineType), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.addToCart && $options.addToCart.apply($options, arguments);
     })
@@ -39666,11 +39683,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       image: 'https://picsum.photos/200/300',
       description: $options.cacheProducts[index].description,
       price: $options.cacheProducts[index].price,
+      discountedPrice: $options.cacheProducts[index].discount_price,
+      promotionType: $options.cacheProducts[index].is_promoted,
       category: $options.cacheProducts[index].FK_categoryCode,
       cuisineType: $options.cacheProducts[index].FK_cuisineCode
     }, null, 8
     /* PROPS */
-    , ["id", "title", "image", "description", "price", "category", "cuisineType"]);
+    , ["id", "title", "image", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))]), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.maxDisplay, function (index) {
@@ -41200,6 +41219,8 @@ __webpack_require__.r(__webpack_exports__);
           title: productData.menuName,
           image: productData.menuName,
           price: productData.price,
+          discountedPrice: productData.discount_price,
+          promotionType: productData.is_promoted,
           qty: 1,
           note: "No note"
         };

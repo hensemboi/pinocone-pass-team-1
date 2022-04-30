@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('totalPrice');
             $table->integer('FK_voucherID')->nullable();
             $table->smallInteger('FK_deliveryCode')->nullable();
+            $table->unsignedInteger('is_express')->default(0);
             
             $table->foreign('FK_deliveryCode', 'FK_orders_meansOfDelivery')->references('pk_deliverycode')->on('means_of_deliveries')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('FK_paymentCode', 'FK_orders_paymentMethod')->references('pk_paymentcode')->on('payment_methods')->onDelete('cascade')->onUpdate('cascade');

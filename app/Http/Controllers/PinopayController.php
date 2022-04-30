@@ -32,16 +32,15 @@ class PinopayController extends Controller
         return;
     }
     
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         Pinopay::where(
             [
-                'FK_userID' => $request->userID
+                'FK_userID' => $id
             ]
         )->update(
             [
                 'balance' => $request->balance,
-                'PIN' => $request->PIN
             ]
         );
 

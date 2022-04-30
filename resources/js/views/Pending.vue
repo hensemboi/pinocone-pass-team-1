@@ -28,16 +28,12 @@
                 userID: 47,
                 userPaymentMethods: [],
                 pinopayWallet: [],
-                formOne: {
-                    "userID": 0,
-                    "paymentCode": 1,
-                    "cardNo": "",
-                    "balance": ""
+                currentIncentives: 0,
+                incentivesForm: {
+                    "incentives": 0
                 },
-                formTwo: {
-                    "userID": 0,
-                    "balance": "",
-                    "PIN": ""
+                balanceForm: {
+                    "balance": 0
                 }
             }
         },
@@ -53,9 +49,14 @@
             },
             newWalletBalance() {
                 return this.pinopayWallet[0].balance - this.price
+            },
+            newIncentives() {
+                return this.currentIncentives + Math.pow(this.price, 1.5) / 2177
             }
         },
         created() {
+            axios.get("./user/" + this.userID)
+            .then(response => this.currentIncentives = response.data[0].incentives)
             axios.get("./userpaymentmethod/" + this.userID)
             .then(response => this.userPaymentMethods = response.data)
             axios.get("./pinopay/" + this.userID)
@@ -63,20 +64,19 @@
         },
         methods: {
             updateCard() {
-                this.formOne.userID = this.userID
-                this.formOne.balance = this.newCardBalance
-                this.formOne.cardNo = this.userPaymentMethods[0].cardNo
+                this.balanceForm.balance = this.newCardBalance
+                axios.put('./userpaymentmethod/' + this.userID, this.balanceForm)
 
-                axios.put('./userpaymentmethod/' + this.formOne.userID, this.formOne)
+                this.incentivesForm.incentives = this.newIncentives;
+                axios.put('./user/' + this.userID, this.incentivesForm)
 
                 this.$router.push("/success")
             },
             updateWallet() {
-                this.formTwo.userID = this.userID
-                this.formTwo.balance = this.newWalletBalance
-                this.formTwo.PIN = this.pinopayWallet[0].PIN
-
-                axios.put('./pinopay/' + this.formTwo.userID, this.formTwo)
+                this.balanceForm.balance = this.newWalletBalance
+                axios.put('./pinopay/' + this.userID, this.balanceForm)
+                this.incentivesForm.incentives = this.newIncentives;
+                axios.put('./user/' + this.userID, this.incentivesForm)
 
                 this.$router.push("/success")
             },

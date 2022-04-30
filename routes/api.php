@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TestUserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderController;
@@ -44,6 +45,11 @@ Route::controller(PinopayController::class)->group(function () {
     Route::get('pinopay/{id}', 'fetchSpecificUser');
     Route::post('pinopay', 'store');
     Route::put('pinopay/{id}', 'update');
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('user/{id}', 'fetchSpecificUser');
+    Route::put('user/{id}', 'addIncentives');
 });
 
 Route::controller(TestUserController::class)->group(function () {

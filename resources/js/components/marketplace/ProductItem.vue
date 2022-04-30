@@ -10,7 +10,13 @@
             <div class="product__text">
                 <h3>{{ title }}</h3>
                 <base-badge mode="highlight" :no-margin-left="true">
-                    <h4>${{ price }}</h4>
+                    <div v-if="promotionType === 1">
+                        <s>{{ price }}</s><p>{{ discountedPrice }}</p>
+                    </div>
+                    <div v-else-if="promotionType === 2">
+                        {{ price }} Buy 1 Free 1
+                    </div>
+                    <h4 v-else>${{ price }}</h4>
                 </base-badge>
                 <p>{{ description }}</p>
                 <p>Category: {{ category }}</p>
@@ -44,7 +50,7 @@
 
 <script>
 export default {
-    props: ["id", "image", "title", "price", "description", "category", "cuisineType"],
+    props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
     methods: {
         addToCart() {
             console.log(this.id);

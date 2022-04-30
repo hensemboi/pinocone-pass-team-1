@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('menuName', 50)->default('Default menu');
             $table->string('description', 50)->default('No description');
             $table->float('price')->default(0);
+            $table->float('discount_price')->nullable();
+            $table->unsignedInteger('is_promoted')->default(0);
             $table->unsignedInteger('totalOrders')->default(0);
             $table->unsignedInteger('FK_categoryCode');
             $table->unsignedInteger('FK_cuisineCode');

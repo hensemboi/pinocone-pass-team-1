@@ -25,6 +25,8 @@ export default {
                     title: productData.menuName,
                     image: productData.menuName,
                     price: productData.price,
+                    discountedPrice: productData.discount_price,
+                    promotionType: productData.is_promoted,
                     qty: 1,
                     note: "No note",
                 };

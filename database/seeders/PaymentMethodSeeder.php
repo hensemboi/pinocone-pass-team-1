@@ -15,6 +15,16 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run()
     {
-        PaymentMethod::factory()->count(20)->create();
+        PaymentMethod::create([
+            'PK_paymentCode' => 1,
+            'name' => 'Debit Card',
+            'description' => 'Bank'
+        ]);
+
+        PaymentMethod::create([
+            'PK_paymentCode' => 2,
+            'name' => 'Pinopay',
+            'description' => 'Pinocone'
+        ]);
     }
 }

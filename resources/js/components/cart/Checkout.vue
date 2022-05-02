@@ -11,10 +11,10 @@
 
                                 <div v-for="item in cartItems" :key="item.productID">
                                     <p>{{ item.title }}</p>
-                                    <p>-Price of {{ item.qty }}: ${{ item.price * item.qty }}</p>
+                                    <p>-Price of {{ item.qty }}: RM{{ item.price * item.qty }}</p>
                                 </div>
                                 <br/>
-                                <em>Total price: ${{ cartTotal }}</em>
+                                <em>Total price: RM{{ cartTotal }}</em>
                             </div>
                             <br/>
                             <div>
@@ -58,7 +58,7 @@
                             <div v-else-if="currentPaymentMethod === 2">
                                 <div>
                                     <div v-if="pinopayWallet.length === 1">
-                                        <em>Balance: ${{ pinopayWallet[0].balance }}</em>
+                                        <em>Balance: RM{{ pinopayWallet[0].balance }}</em>
                                         <br/>
                                         <router-link to="/PIN" tag="button">
                                             <button @click="lockInPaymentMethod">Next</button>
@@ -123,7 +123,6 @@
             },
             addUserDebitCard() {
                 this.form.userID = this.userID
-
                 axios.post("./userpaymentmethod", this.form)
 
                 this.$router.push("/success")

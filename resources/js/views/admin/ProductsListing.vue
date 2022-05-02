@@ -1,12 +1,12 @@
 <template>
     <button @click=fetch()></button>
     <div class="container d-flex">
-        <component :is="MenuCard" ></component>
+        <component :is="MenuCard"></component>
     </div>
 </template>
 
 <script>
-import  MenuCard  from '../../components/cards/MenuCard.vue'
+import MenuCard from '../../components/cards/MenuCard.vue'
 
 export default ({
     components:{

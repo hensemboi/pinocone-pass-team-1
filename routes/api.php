@@ -10,6 +10,8 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\PinopayController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\UserVoucherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,13 @@ Route::controller(PinopayController::class)->group(function () {
     Route::post('pinopay', 'store');
     Route::put('pinopay/{id}', 'update');
 });
+
+Route::controller(VoucherController::class)->group(function () {
+    Route::get('voucher', 'fetchAll');
+    Route::put('voucher/{id}', 'update');
+});
+
+Route::post('uservoucher', [UserVoucherController::class, 'store']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('user/{id}', 'fetchSpecificUser');

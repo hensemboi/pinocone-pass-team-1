@@ -11,6 +11,7 @@ import UserCart from "./components/pages/UserCart.vue";
 import UserProfile from "./components/pages/UserProfilePage.vue";
 import AdminSideBar from "./components/admin/AdminSideBar.vue";
 import AdminTopBar from "./components/admin/AdminTopBar.vue";
+import Exchange from "./components/payment/Exchange.vue";
 import Checkout from "./components/cart/Checkout.vue";
 import Pending from "./views/Pending.vue";
 import PIN from "./components/payment/PIN.vue";
@@ -84,6 +85,14 @@ const router = createRouter({
             path: "/productslisting",
             components: {
                 default: ProductsListing,
+            },
+        },
+        {
+            path: "/exchange",
+            components: {
+                default: Exchange,
+                footer: Footer,
+                navbar: Navbar,
             },
         },
         {

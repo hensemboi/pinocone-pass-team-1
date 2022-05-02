@@ -15,6 +15,16 @@ class VoucherTypeSeeder extends Seeder
      */
     public function run()
     {
-        VoucherType::factory()->count(20)->create();
+        VoucherType::create([
+            'PK_voucherTypeCode' => 1,
+            'name' => 'Flat Reduction',
+            'description' => 'Reduces RM X from overall purchase'
+        ]);
+
+        VoucherType::create([
+            'PK_voucherTypeCode' => 2,
+            'name' => 'Percentage Reduction',
+            'description' => 'X% off to overall purchase'
+        ]);
     }
 }

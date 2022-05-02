@@ -18,7 +18,7 @@
                             </div>
 
                             <div v-else>
-                                <h3>Balance: ${{ pinopayWallet[0].balance }}</h3>
+                                <h3>Balance: RM{{ pinopayWallet[0].balance }}</h3>
                                 <br/>
                                 <label>
                                     Topup amount:
@@ -84,16 +84,12 @@
                 const CryptoJS = require("crypto-js");
                 this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
                 this.form.userID = this.userID
-
                 axios.post("./pinopay", this.form)
 
                 this.$router.push("/success")
             },
             topUp() {
-                this.form.userID = this.userID
                 this.form.balance = this.pinopayWallet[0].balance + this.topup
-                this.form.PIN = this.pinopayWallet[0].PIN
-
                 axios.put("./pinopay/" + this.userID, this.form)
 
                 this.$router.push("/success")

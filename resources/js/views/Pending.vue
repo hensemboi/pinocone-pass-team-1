@@ -51,7 +51,7 @@
                 return this.pinopayWallet[0].balance - this.price
             },
             newIncentives() {
-                return this.currentIncentives + Math.pow(this.price, 1.5) / 2177
+                return this.currentIncentives + Math.floor(Math.pow(this.price, 1.35) / 300)
             }
         },
         created() {
@@ -65,18 +65,19 @@
         methods: {
             updateCard() {
                 this.balanceForm.balance = this.newCardBalance
-                axios.put('./userpaymentmethod/' + this.userID, this.balanceForm)
+                axios.put("./userpaymentmethod/" + this.userID, this.balanceForm)
 
                 this.incentivesForm.incentives = this.newIncentives;
-                axios.put('./user/' + this.userID, this.incentivesForm)
+                axios.put("./user/" + this.userID, this.incentivesForm)
 
                 this.$router.push("/success")
             },
             updateWallet() {
                 this.balanceForm.balance = this.newWalletBalance
-                axios.put('./pinopay/' + this.userID, this.balanceForm)
+                axios.put("./pinopay/" + this.userID, this.balanceForm)
+                
                 this.incentivesForm.incentives = this.newIncentives;
-                axios.put('./user/' + this.userID, this.incentivesForm)
+                axios.put("./user/" + this.userID, this.incentivesForm)
 
                 this.$router.push("/success")
             },

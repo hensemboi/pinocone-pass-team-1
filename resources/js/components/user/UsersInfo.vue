@@ -166,9 +166,24 @@
                     <div
                         class="d-flex justify-content-between align-items-center experience"
                     >
-                        <span>Past Orders</span>
+                        <span>Vouchers Owned</span>
                     </div>
                     <br />
+                    <table class="table">
+                        <tr v-if="userVouchers.length === 0">
+                            <p>You do not have any vouchers.</p>
+                        </tr>
+                        <tr v-else>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Use Before</th>
+                        </tr>  
+                        <tr v-for="userVoucher in userVouchers" :key="userVoucher.PK_FK_voucherID">
+                            <td>{{ userVoucher.PK_FK_voucherID }}</td>
+                            <td>{{ userVoucher.name }}</td>
+                            <td>{{ userVoucher.expiryDate }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -200,11 +215,17 @@ export default {
             return !this.changeCredentials;
         },
     },
+    created() {
+        axios.get("./uservoucher/" + this.userID)
+        .then(response => this.userVouchers = response.data)
+    },
     data() {
         return {
             isLoggedIn: true,
             changeCredentials: false,
             inputIsInvalid: false,
+            userID: 47,
+            userVouchers: []
         };
     },
     methods: {
@@ -212,7 +233,7 @@ export default {
             this.changeCredentials = !this.changeCredentials;
         },
         confirmAction () {
-            this.inputIsInvalid =false;
+            this.inputIsInvalid = false;
         }
     },
 };

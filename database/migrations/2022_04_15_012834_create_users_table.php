@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->date('dateOfBirth');
             $table->string('email', 50)->unique();
             $table->string('password');
-            $table->float('incentives')->default(0);
+            $table->unsignedInteger('incentives')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();

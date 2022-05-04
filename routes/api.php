@@ -54,11 +54,14 @@ Route::controller(VoucherController::class)->group(function () {
     Route::put('voucher/{id}', 'update');
 });
 
-Route::post('uservoucher', [UserVoucherController::class, 'store']);
+Route::controller(UserVoucherController::class)->group(function () {
+    Route::get('uservoucher/{id}', 'fetchVoucherInformation');
+    Route::post('uservoucher', 'store');
+});
 
 Route::controller(UserController::class)->group(function () {
     Route::get('user/{id}', 'fetchSpecificUser');
-    Route::put('user/{id}', 'addIncentives');
+    Route::put('user/{id}', 'updateIncentives');
 });
 
 Route::controller(TestUserController::class)->group(function () {

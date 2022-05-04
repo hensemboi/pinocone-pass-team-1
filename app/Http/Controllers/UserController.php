@@ -92,7 +92,7 @@ class UserController extends Controller
         //
     }
 
-    public function addIncentives(Request $request, $id)
+    public function updateIncentives(Request $request, $id)
     {
         User::where(
             [

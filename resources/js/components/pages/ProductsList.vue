@@ -1,80 +1,82 @@
 <template>
-    <div class="input-group">
-        <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search for food ..."
-            aria-label="Search"
-            aria-describedby="search-addon"
-            v-model.trim="productName"
-            @blur="validateInput"
-        />
-        <button
-            type="button"
-            class="btn btn-outline-primary"
-            @click="searchProduct"
-        >
-            Search
-        </button>
-    </div>
-    <section v-if="isProductsPopulated">
-        <ul>
-            <product-item
-                v-for="index in maxDisplay"
-                :key="cacheProducts[index].PK_menuID"
-                :id="cacheProducts[index].PK_menuID"
-                :title="cacheProducts[index].menuName"
-                :image="'https://picsum.photos/200/300'"
-                :description="cacheProducts[index].description"
-                :price="cacheProducts[index].price"
-                :discountedPrice="cacheProducts[index].discount_price"
-                :promotionType="cacheProducts[index].is_promoted"
-                :category="cacheProducts[index].FK_categoryCode"
-                :cuisineType="cacheProducts[index].FK_cuisineCode"
-            ></product-item>
-        </ul>
-        <h3 class="text-center">Things that you may like</h3>
-        <div>
-            <div class="container-fluid my-6">
-                <div class="row my-2 d-flex flex-row flex-nowrap overflow-auto">
-                    <div class="card-group">
-                        <div
-                            class="col col-md-6 col-lg-3 col-sm-12"
-                            v-for="index in maxDisplay"
-                            :key="cacheProducts[index].menuID"
-                        >
-                            <div class="card w-75">
-                                <img
-                                    :src="'https://picsum.photos/200/200'"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ cacheProducts[index].menuName }}
-                                    </h5>
-                                    <p class="card-text">
-                                        {{ cacheProducts[index].description }}
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"
-                                            >Last updated 3 mins ago</small
+    <div>
+        <div class="input-group">
+            <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search for food ..."
+                aria-label="Search"
+                aria-describedby="search-addon"
+                v-model.trim="productName"
+                @blur="validateInput"
+            />
+            <button
+                type="button"
+                class="btn btn-outline-primary"
+                @click="searchProduct"
+            >
+                Search
+            </button>
+        </div>
+        <section v-if="isProductsPopulated">
+            <ul>
+                <product-item
+                    v-for="index in maxDisplay"
+                    :key="cacheProducts[index].PK_menuID"
+                    :id="cacheProducts[index].PK_menuID"
+                    :title="cacheProducts[index].menuName"
+                    :image="'https://picsum.photos/200/300'"
+                    :description="cacheProducts[index].description"
+                    :price="cacheProducts[index].price"
+                    :discountedPrice="cacheProducts[index].discount_price"
+                    :promotionType="cacheProducts[index].is_promoted"
+                    :category="cacheProducts[index].FK_categoryCode"
+                    :cuisineType="cacheProducts[index].FK_cuisineCode"
+                ></product-item>
+            </ul>
+            <h3 class="text-center">Things that you may like</h3>
+            <div>
+                <div class="container-fluid my-6">
+                    <div class="row my-2 d-flex flex-row flex-nowrap overflow-auto">
+                        <div class="card-group">
+                            <div
+                                class="col col-md-6 col-lg-3 col-sm-12"
+                                v-for="index in maxDisplay"
+                                :key="cacheProducts[index].menuID"
+                            >
+                                <div class="card w-75">
+                                    <img
+                                        :src="'https://picsum.photos/200/200'"
+                                        class="card-img-top"
+                                        alt="..."
+                                    />
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{ cacheProducts[index].menuName }}
+                                        </h5>
+                                        <p class="card-text">
+                                            {{ cacheProducts[index].description }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted"
+                                                >Last updated 3 mins ago</small
+                                            >
+                                        </p>
+                                        <router-link class="btn btn-primary" to="/"
+                                            >Check it out</router-link
                                         >
-                                    </p>
-                                    <router-link class="btn btn-primary" to="/"
-                                        >Check it out</router-link
-                                    >
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section v-else>
-        <h2 class="text-center">Loading ...</h2>
-    </section>
+        </section>
+        <section v-else>
+            <h2 class="text-center">Loading ...</h2>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -89,7 +91,6 @@ export default {
         return {
             productName: "",
             productNameValidity: "pending",
-            isLoading: false,
             myProducts: [],
             maxDisplay: 10,
         };
@@ -99,7 +100,6 @@ export default {
             return this.$store.getters["marketplace/getProducts"];
         },
         isProductsPopulated() {
-            console.log(this.$store.getters["marketplace/getProducts"]);
             if (this.$store.getters["marketplace/getProducts"].length > 0) {
                 return true;
             }
@@ -121,16 +121,13 @@ export default {
             });
         },
         getProducts() {
-            this.isLoading = true;
-            const { default: axios } = require("axios");
-            axios.get("http://localhost:8000/api/marketplace").then(() => {
+            axios.get("marketplace").then(() => {
                 axios
-                    .get("/marketplace", {
+                    .get("marketplace", {
                         action: "fetchAll",
                     })
                     .then((response) => {
                         this.myProducts = response.data;
-                        this.isLoading = false;
                         this.$store.commit("marketplace/populateProductList", {
                             data: this.myProducts,
                         });
@@ -141,14 +138,13 @@ export default {
             });
         },
         async getCuisineTpye() {
-            axios.get("http://localhost:8000/api/marketplace").then(() => {
+            axios.get("marketplace").then(() => {
                 axios
-                    .get("/marketplace", {
+                    .get("marketplace", {
                         action: "fetchAll",
                     })
                     .then((response) => {
                         this.myProducts = response.data;
-                        this.isLoading = false;
                         this.$store.commit("marketplace/populateProductList", {
                             data: this.myProducts,
                         });

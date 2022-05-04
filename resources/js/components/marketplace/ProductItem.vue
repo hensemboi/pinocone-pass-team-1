@@ -1,51 +1,53 @@
 <template>
-    <li
-        class="product bg-white"
-        v-if="$route.query.sort === category || $route.query.sort === title"
-    >
-        <div class="product__data">
-            <div class="product__image">
-                <img :src="image" :alt="title" />
+    <div>
+        <li
+            class="product bg-white"
+            v-if="$route.query.sort === category || $route.query.sort === title"
+        >
+            <div class="product__data">
+                <div class="product__image">
+                    <img :src="image" :alt="title" />
+                </div>
+                <div class="product__text">
+                    <h3>{{ title }}</h3>
+                    <base-badge mode="highlight" :no-margin-left="true">
+                        <div v-if="promotionType === 1">
+                            <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
+                        </div>
+                        <div v-else-if="promotionType === 2">
+                            RM{{ price }} (Buy 1 Free 1)
+                        </div>
+                        <h4 v-else>RM{{ price }}</h4>
+                    </base-badge>
+                    <p>{{ description }}</p>
+                    <p>Category: {{ category }}</p>
+                    <p>Cuisine Type: {{ cuisineType }}</p>
+                </div>
             </div>
-            <div class="product__text">
-                <h3>{{ title }}</h3>
-                <base-badge mode="highlight" :no-margin-left="true">
-                    <div v-if="promotionType === 1">
-                        <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
-                    </div>
-                    <div v-else-if="promotionType === 2">
-                        RM{{ price }} Buy 1 Free 1
-                    </div>
-                    <h4 v-else>RM{{ price }}</h4>
-                </base-badge>
-                <p>{{ description }}</p>
-                <p>Category: {{ category }}</p>
-                <p>Cuisine Type: {{ cuisineType }}</p>
+            <div class="product__actions">
+                <button @click="addToCart">Add to Cart</button>
             </div>
-        </div>
-        <div class="product__actions">
-            <button @click="addToCart">Add to Cart</button>
-        </div>
-    </li>
-    <li class="product bg-white" v-else-if="!$route.query.sort">
-        <div class="product__data">
-            <div class="product__image">
-                <img :src="image" :alt="title" />
+        </li>
+        <li class="product bg-white" v-else-if="!$route.query.sort">
+            <div class="product__data">
+                <div class="product__image">
+                    <img :src="image" :alt="title" />
+                </div>
+                <div class="product__text">
+                    <h3>{{ title }}</h3>
+                    <base-badge mode="highlight" :no-margin-left="true">
+                        <h4>RM{{ price }}</h4>
+                    </base-badge>
+                    <p>{{ description }}</p>
+                    <p>Category: {{ category }}</p>
+                    <p>Cuisine Type: {{ cuisineType }}</p>
+                </div>
             </div>
-            <div class="product__text">
-                <h3>{{ title }}</h3>
-                <base-badge mode="highlight" :no-margin-left="true">
-                    <h4>RM{{ price }}</h4>
-                </base-badge>
-                <p>{{ description }}</p>
-                <p>Category: {{ category }}</p>
-                <p>Cuisine Type: {{ cuisineType }}</p>
+            <div class="product__actions">
+                <button @click="addToCart">Add to Cart</button>
             </div>
-        </div>
-        <div class="product__actions">
-            <button @click="addToCart">Add to Cart</button>
-        </div>
-    </li>
+        </li>
+    </div>
 </template>
 
 <script>
@@ -53,7 +55,6 @@ export default {
     props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
     methods: {
         addToCart() {
-            console.log(this.id);
             this.$store.dispatch("cart/addToCart", {
                 id: this.id,
             });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserVoucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserVoucherController extends Controller
 {
@@ -15,6 +16,17 @@ class UserVoucherController extends Controller
     public function index()
     {
         //
+    }
+
+    public function fetchVoucherInformation($id)
+    {
+        $vouchersOwned = DB::table('user_vouchers')
+                            ->join('vouchers', 'user_vouchers.PK_FK_voucherID', '=', 'vouchers.PK_voucherID')
+                            ->select('user_vouchers.*', 'vouchers.name', 'vouchers.expiryDate')
+                            ->where(['PK_FK_userID' => $id])
+                            ->get();
+
+        return $vouchersOwned;
     }
 
     /**

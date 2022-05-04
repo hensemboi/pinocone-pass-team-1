@@ -9,14 +9,12 @@ export default {
     },
     mutations: {
         addProductToCart(state, payload) {
-            // The payload here is the products object
             const productData = payload;
             console.log(productData.PK_menuID);
             const productInCartIndex = state.items.findIndex(
                 (ci) => ci.productId == productData.PK_menuID
             );
             if (productInCartIndex >= 0) {
-                // Find the specific product and adds its total quantity
                 state.items[productInCartIndex].qty++;
             } else {
                 const newItem = {
@@ -64,9 +62,10 @@ export default {
     actions: {
         addToCart(context, payload) {
             const productId = payload.id;
-            // use context to access the root item
             const products = context.rootGetters["marketplace/getProducts"];
-            const product = products.find((prod) => prod.PK_menuID === productId);
+            const product = products.find(
+                (prod) => prod.PK_menuID === productId
+            );
             context.commit("addProductToCart", product);
         },
         removeFromCart(context, payload) {

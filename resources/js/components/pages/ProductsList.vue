@@ -31,82 +31,11 @@
                 :cuisineType="cacheProducts[index].FK_cuisineCode"
             ></product-item>
         </ul>
-        <h3 class="text-center">Things that you may like</h3>
-        <div>
-            <div class="container-fluid my-6">
-                <div class="row my-2 d-flex flex-row flex-nowrap overflow-auto">
-                    <div class="card-group">
-                        <div
-                            class="col col-md-6 col-lg-3 col-sm-12"
-                            v-for="index in maxDisplayCards"
-                            :key="cacheProducts[index].menuID"
-                        >
-                            <div class="card w-75">
-                                <img
-                                    :src="'https://picsum.photos/200/200'"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ cacheProducts[index].menuName }}
-                                    </h5>
-                                    <p class="card-text">
-                                        {{ cacheProducts[index].description }}
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"
-                                            >Last updated 3 mins ago</small
-                                        >
-                                    </p>
-                                    <router-link class="btn btn-primary" to="/"
-                                        >Check it out</router-link
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <h3 class="text-center">Past Orders</h3>
-        <div>
-            <div class="container-fluid my-6">
-                <div class="row my-2 d-flex flex-row flex-nowrap overflow-auto">
-                    <div class="card-group">
-                        <div
-                            class="col col-md-6 col-lg-3 col-sm-12"
-                            v-for="index in maxDisplayCards"
-                            :key="cacheProducts[index].menuID"
-                        >
-                            <div class="card w-75">
-                                <img
-                                    :src="'https://picsum.photos/200/200'"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ cacheProducts[index].menuName }}
-                                    </h5>
-                                    <p class="card-text">
-                                        {{ cacheProducts[index].description }}
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"
-                                            >Last updated 3 mins ago</small
-                                        >
-                                    </p>
-                                    <router-link class="btn btn-primary" to="/"
-                                        >Check it out</router-link
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <product-cards
+            class="card"
+            title="Things you may like"
+            :products="cacheProducts"
+        ></product-cards>
     </section>
     <section v-else>
         <h2 class="text-center">Loading ...</h2>
@@ -114,75 +43,76 @@
 </template>
 
 <script>
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 import ProductItem from "../marketplace/ProductItem.vue";
-// import { mapGetters } from 'vuex';
+import ProductCards from "../marketplace/ProductCards.vue";
 
 export default {
     components: {
         ProductItem,
+        ProductCards,
     },
-    data() {
-        return {
-            productName: "",
-            productNameValidity: "pending",
-            isLoading: false,
-            myProducts: [],
-            maxDisplay: 10,
-            maxDisplayCards: 3,
-        };
-    },
-    computed: {
-        cacheProducts() {
-            return this.$store.getters["marketplace/getProducts"];
-        },
-        isProductsPopulated() {
-            console.log(this.$store.getters["marketplace/getProducts"]);
-            if (this.$store.getters["marketplace/getProducts"].length > 0) {
-                return true;
-            }
-            return false;
-        },
-    },
-    methods: {
-        validateInput() {
-            if (this.productName === "") {
-                this.productNameValidity = "invalid";
+    setup() {
+        const productName = ref("");
+        const productNameValidity = ref("");
+        const maxDisplay = ref(5);
+
+        const store = useStore();
+        const router = useRouter();
+
+        const cacheProducts = computed(function () {
+            return store.getters["marketplace/getProducts"];
+        });
+
+        const isProductsPopulated = computed(function () {
+            return store.getters["marketplace/getIsProductsPopulated"];
+        });
+
+        function validateInput() {
+            if (productName.value === "") {
+                productNameValidity.value = "invalid";
                 return;
             }
-            this.productNameValidity = "valid";
-        },
-        searchProduct() {
-            this.$router.push({
-                path: "/marketplace",
-                query: { sort: this.productName },
-            });
-        },
-        getProducts() {
-            this.isLoading = true;
-            const { default: axios } = require("axios");
-            axios.get("http://localhost:8000/api/marketplace").then(() => {
-                axios
-                    .get("/marketplace", {
-                        action: "fetchAll",
-                    })
-                    .then((response) => {
-                        this.myProducts = response.data;
-                        this.isLoading = false;
-                        this.$store.commit("marketplace/populateProductList", {
-                            data: this.myProducts,
-                        });
-                    })
-                    .catch((err) => {
-                        this.errors = err.response.data.errors;
-                    });
-            });
-        },
-    },
-    mounted() {
-        if (this.$store.getters["marketplace/getProducts"].length === 0) {
-            this.getProducts();
-            this.getCuisineTpye();
+            productNameValidity.value = "valid";
         }
+
+        function searchProduct() {
+            router.push({
+                path: "/marketplace",
+                query: { sort: productName.value },
+            });
+        }
+
+        async function getProducts() {
+            console.log("I am doing fetching in the component!");
+            if (!store.getters["marketplace/getIsProductsPopulated"]) {
+                try {
+                    await store.dispatch("marketplace/fetchProducts");
+                } catch (error) {
+                    console.log(
+                        error.errorMessage || "Failed to fetch prodcucts"
+                    );
+                }
+            } else {
+                console.log("The fetching is not executing!");
+            }
+        }
+        return {
+            productName,
+            productNameValidity,
+            cacheProducts,
+            isProductsPopulated,
+            maxDisplay,
+            validateInput,
+            searchProduct,
+            getProducts,
+        };
+    },
+    created() {
+        this.getProducts();
     },
 };
 </script>

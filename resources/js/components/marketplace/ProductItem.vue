@@ -15,7 +15,7 @@
                             <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
                         </div>
                         <div v-else-if="promotionType === 2">
-                            RM{{ price }} (Buy 1 Free 1)
+                            RM{{ price }} Buy 1 Free 1
                         </div>
                         <h4 v-else>RM{{ price }}</h4>
                     </base-badge>
@@ -36,7 +36,13 @@
                 <div class="product__text">
                     <h3>{{ title }}</h3>
                     <base-badge mode="highlight" :no-margin-left="true">
-                        <h4>RM{{ price }}</h4>
+                        <div v-if="promotionType === 1">
+                            <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
+                        </div>
+                        <div v-else-if="promotionType === 2">
+                            RM{{ price }} Buy 1 Free 1
+                        </div>
+                        <h4 v-else>RM{{ price }}</h4>
                     </base-badge>
                     <p>{{ description }}</p>
                     <p>Category: {{ category }}</p>

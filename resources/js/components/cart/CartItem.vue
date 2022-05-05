@@ -7,11 +7,10 @@
             <img :src="image" :alt="title" />
         </div>
         <div>
-            <h3>{{ title }}</h3>
             <div class="item__data">
                 <div>
                     Price per Item:
-                    <strong>${{ price }}</strong>
+                    <strong>RM{{ price }}</strong>
                 </div>
                 <div>
                     Quantity:
@@ -19,7 +18,7 @@
                 </div>
                 <div>Note: {{ note }}</div>
             </div>
-            <div class="item__total">Total: ${{ itemTotal }}</div>
+            <div class="item__total">Total: RM{{ itemTotal }}</div>
             <button @click="removeAll">Remove All</button>
             <button @click="removeOne">Remove One</button>
         </div>

@@ -8,9 +8,9 @@
         <ul>
             <cart-item
                 v-for="item in cartItems"
-                :key="item.menuID"
-                :prod-id="item.menuID"
-                :title="item.menuName"
+                :key="item.productId"
+                :prodId="item.productId"
+                :title="item.title"
                 :image="'https://picsum.photos/200/300'"
                 :price="item.price"
                 :qty="item.qty"

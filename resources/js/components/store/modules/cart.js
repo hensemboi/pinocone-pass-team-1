@@ -7,20 +7,18 @@ export default {
             qty: 0,
             effectivePrice: 0,
             effectiveQuantity: 0,
+            productData: [],
         };
     },
     mutations: {
         addProductToCart(state, payload) {
-            // The payload here is the products object
-            const productData = payload;
-            console.log(productData.PK_menuID);
+            state.productData = payload;
             const productInCartIndex = state.items.findIndex(
-                (ci) => ci.productId == productData.PK_menuID
+                (ci) => ci.productId == state.productData.PK_menuID
             );
-            console.log(productData.menuName);
+            
             if (productInCartIndex >= 0) {
-                // Find the specific product and adds its total quantity
-                if (productData.is_promoted == 2) {
+                if (state.productData.is_promoted == 2) {
                     state.items[productInCartIndex].qty += 2;
                 }
     
@@ -29,45 +27,46 @@ export default {
                 }
 
             } else {
-                if (productData.is_promoted == 1) {
-                    state.effectivePrice = productData.discountedPrice;
+                
+                if (state.productData.is_promoted == 1) {
+                    state.effectivePrice = state.productData.discount_price;
                     state.effectiveQuantity = 1;
                 }
 
-                else if (productData.is_promoted == 2) {
-                    state.effectivePrice = productData.price;
+                else if (state.productData.is_promoted == 2) {
+                    state.effectivePrice = state.productData.price;
                     state.effectiveQuantity = 2;
                 }
 
                 else {
-                    state.effectivePrice = productData.price;
+                    state.effectivePrice = state.productData.price;
                     state.effectiveQuantity = 1;
                 }
 
                 const newItem = {
-                    productId: productData.PK_menuID,
-                    title: productData.menuName,
-                    image: productData.menuName,
+                    productId: state.productData.PK_menuID,
+                    title: state.productData.menuName,
+                    image: state.productData.menuName,
                     price: state.effectivePrice,
                     qty: state.effectiveQuantity,
-                    promotionType: productData.is_promoted,
+                    promotionType: state.productData.is_promoted,
                     note: "No note",
                 };
                 state.items.push(newItem);
             }
             
-            if (productData.is_promoted == 1) {
-                state.total += productData.discountedPrice;
+            if (state.productData.is_promoted == 1) {
+                state.total += state.productData.discount_price;
                 state.qty += 1;
             }
 
-            else if (productData.is_promoted == 2) {
-                state.total += productData.price;
+            else if (state.productData.is_promoted == 2) {
+                state.total += state.productData.price;
                 state.qty += 2;
             }
 
             else {
-                state.total += productData.price;
+                state.total += state.productData.price;
                 state.qty += 1;
             }
         },
@@ -75,33 +74,30 @@ export default {
         removeProductFromCart(state, payload) {
             const prodId = payload.Id;
             const productInCartIndex = state.items.findIndex(
-                (cartItem) => cartItem.PK_menuID === prodId
+                (cartItem) => cartItem.productId === prodId
             );
-            console.log(productInCartIndex);
             const prodData = state.items[productInCartIndex];
             state.items.splice(productInCartIndex, 1);
-
             state.qty -= prodData.qty;
             state.total -= prodData.price * prodData.qty;
         },
         removeOneFromCart(state, payload) {
             const prodId = payload.Id;
             const productInCartIndex = state.items.findIndex(
-                (cartItem) => cartItem.PK_menuID === prodId
+                (cartItem) => cartItem.productId === prodId
             );
-            const prodData = state.items[productInCartIndex];
+            state.productData = state.items[productInCartIndex];
 
-            if (productData.is_promoted == 2) {
-                prodData.qty -= 2;
+            if (state.productData.promotionType == 2) {
+                state.productData.qty -= 2;
             }
 
             else {
-                prodData.qty -= 1;
+                state.productData.qty -= 1;
             }
 
-            prodData.qty -= 1;
-            if (prodData.qty > 0) {
-                if (prodData.promotionType == 2) {
+            if (state.productData.qty > 0) {
+                if (state.productData.promotionType == 2) {
                     state.qty -= 2;
                 }
     
@@ -109,21 +105,29 @@ export default {
                     state.qty -= 1;
                 }
 
-                state.qty--;
-                state.total -= prodData.price;
+                state.total -= state.productData.price;
                 return;
             }
-            state.qty--;
-            state.total -= prodData.price;
+            
+            if (state.productData.promotionType == 2) {
+                state.qty -= 2;
+            }
+
+            else {
+                state.qty -= 1;
+            }
+
+            state.total -= state.productData.price;
             state.items.splice(productInCartIndex, 1);
         },
     },
     actions: {
         addToCart(context, payload) {
             const productId = payload.id;
-            // use context to access the root item
             const products = context.rootGetters["marketplace/getProducts"];
-            const product = products.find((prod) => prod.PK_menuID === productId);
+            const product = products.find(
+                (prod) => prod.PK_menuID === productId
+            );
             context.commit("addProductToCart", product);
         },
         removeFromCart(context, payload) {

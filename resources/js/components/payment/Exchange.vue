@@ -2,20 +2,29 @@
     <div class="box">
         <h2>Exchangeable Vouchers:</h2>
         <div v-for="voucher in vouchers" :key="voucher.PK_voucherID">
-            <strong>{{ voucher.name }}</strong>
-            <div v-if="voucher.name === 'Fun 40'">
-                <p>Description: Reduce price by RM40</p>
-            </div>
-            <div v-else-if="voucher.name === 'Happy 20'">
-                <p>Description: Reduce price by 20%</p>
-            </div>
+            <div class="voucher spin">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <strong>{{ voucher.name }}</strong>
+                        <div v-if="voucher.name === 'Fun 40'">
+                            <p>Description: Reduce price by RM40</p>
+                        </div>
+                        <div v-else-if="voucher.name === 'Happy 20'">
+                            <p>Description: Reduce price by 20%</p>
+                        </div>
+                    </div>
 
-            <div v-if="voucher.availability > 0">
-                <p>Cost: <em>{{ voucher.membership }}</em> incentive points</p>
-                <button @click="exchangeVoucher(voucher)">Exchange</button>
-            </div>
-            <div v-else>
-                <p>This voucher is unavailable. Check back later!</p>
+                    <div class="col-sm-5" :disabled="!voucher.availability">
+                        <button @click="exchangeVoucher(voucher)">Exchange</button>
+                    </div>
+                </div>
+                
+                <div class="spin" v-if="voucher.availability > 0">
+                    <span>Cost: <em>{{ voucher.membership }}</em> incentive points</span>
+                </div>
+                <div v-else>
+                    <span>This voucher is unavailable. Check back later!</span>
+                </div>
             </div>
             <br/>
         </div>
@@ -78,15 +87,7 @@
 
 <style scoped>
     .box {
-        --pinocone-yellow: #fed531;
-
-        background-color: white;
-        padding: 4px;
         margin: 0% 30% 10% 30%;
-        border-width: 2px;
-        border-radius: 8px;
-        border-style: solid;
-        border-color: var(--pinocone-yellow);
     }
 
     h2 {
@@ -94,12 +95,23 @@
         font-family: "Raleway", sans-serif;
     }
 
+    .voucher {
+        --voucher-pink: #fe7b99;
+
+        background-color: var(--voucher-pink);
+        padding: 4px;
+    }
+
+    .spin {
+        border-radius: 25px;
+    }
+
     strong {
         font-size: x-large;
         font-family: Arial, sans-serif;
     }
 
-    p {
+    span, p {
         font-size: large;
     }
 
@@ -114,6 +126,7 @@
         cursor: pointer;
         padding: 0.5rem 1.5rem;
         margin-left: 12px;
+        margin-top: 12px;
     }
 
     button:hover,

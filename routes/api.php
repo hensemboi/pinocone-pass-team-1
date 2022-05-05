@@ -19,6 +19,9 @@ use App\Http\Controllers\TestUserController;
 
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 
+Route::get('menu', [MenuController::class, 'create']);
+Route::post('menu', [MenuController::class, 'store']);
+
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);
 Route::post('logout', [TestUserController::class, 'logout'])->middleware('auth:sanctum');

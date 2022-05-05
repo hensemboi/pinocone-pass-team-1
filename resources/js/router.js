@@ -10,6 +10,9 @@ import UserCart from "./components/pages/UserCart.vue";
 import NotFound from "./components/NotFound.vue";
 import Register from "./views/Register.vue";
 import Store from "./components/store";
+import AdminSideBar from "./components/admin/AdminSideBar.vue"
+import AdminTopBar from "./components/admin/AdminTopBar.vue"
+import ProductsListing from "./views/admin/ProductsListing.vue"
 import Menu from "./components/menu/Menu.vue"
 
 const router = createRouter({

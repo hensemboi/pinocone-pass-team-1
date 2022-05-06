@@ -3,7 +3,7 @@
         <div class="col-md-8 col-sm-10">
             <div class="form-background">
                 <div class="login-logo text-center">
-                    <img src="/images/logo.png" height="80px" width="80px" alt="logo">
+                    <img src="/images/pay-for-meds.png" height="80px" width="80px" alt="logo">
                 </div>
 
                 <p class="login-box-msg text-center lead">

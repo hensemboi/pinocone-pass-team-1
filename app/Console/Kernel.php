@@ -2,10 +2,8 @@
 
 namespace App\Console;
 
-use App\Models\TestUser;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,10 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            TestUser::whereDate('expires_at', now()->toDateString())
-                ->update(['package' => '0']);
-        })->everyMinute();
+        // $schedule->command('inspire')->hourly();
     }
 
     /**

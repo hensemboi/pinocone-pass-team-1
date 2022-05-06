@@ -69,15 +69,6 @@ const router = createRouter({
             },
         },
         {
-            name: "Membership",
-            path: "/",
-            components: {
-                default: ProductsList,
-                footer: Footer,
-                navbar: Navbar,
-            },
-        },
-        {
             path: "/cart",
             components: {
                 default: UserCart,

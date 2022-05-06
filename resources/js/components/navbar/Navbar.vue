@@ -27,8 +27,8 @@
                         >Promotions</router-link
                     >
                 </li>
-                <li class="nav-item" id="app">
-                    <button class="nav-link" @click="gotoGoogle()" to="/pinocone/index">Membership</button>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="#">Contact</router-link>
                 </li>
                 <li>
                     <router-link to="/marketplace">Marketplace</router-link>
@@ -66,15 +66,5 @@ export default {
             return this.$store.getters["cart/quantity"];
         },
     },
-};
-</script>
-<script>
-export default {
-  name: "app",
-  methods: {
-    gotoGoogle() {
-      window.open("/pinocone/index");
-    },
-  },
 };
 </script>

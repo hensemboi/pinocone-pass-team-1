@@ -21,7 +21,7 @@ export default {
             
             if (productInCartIndex >= 0) {
                 if (state.productData.is_promoted == 2) {
-                    state.items[productInCartIndex].qty += 2;
+                      state.items[productInCartIndex].qty += 2;
                 }
     
                 else {

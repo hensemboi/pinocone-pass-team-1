@@ -7,7 +7,7 @@
                     <div
                         class="col col-md-6 col-lg-3 col-sm-12"
                         v-for="index in maxDisplay"
-                        :key="products[index-1].menuID"
+                        :key="products[index].menuID"
                     >
                         <div class="card w-75">
                             <img
@@ -17,10 +17,10 @@
                             />
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    {{ products[index-1].menuName }}
+                                    {{ products[index].menuName }}
                                 </h5>
                                 <p class="card-text">
-                                    {{ products[index-1].description }}
+                                    {{ products[index].description }}
                                 </p>
                                 <p class="card-text">
                                     <small class="text-muted"

@@ -12,6 +12,7 @@ export default {
     },
     actions: {
         async fetchProducts(context) {
+            const { default: axios } = require("axios");
             await axios
                 .get("http://localhost:8000/api/marketplace")
                 .then(() => {

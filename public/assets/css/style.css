@@ -1,3 +1,15 @@
+
+/*!------------------------------------------------------------------
+[MAIN STYLESHEET]
+
+PROJECT:	Project Name
+VERSION:	Versoin Number
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+[TABLE OF CONTENTS]
+-------------------------------------------------------------------*/
+/*  typography */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800&amp;display=swap");
 body {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -92,6 +104,23 @@ h6, .h6 {
 }
 
 .btn-primary {
+  background: #FF0043;
+  color: #fff;
+  border-color: #FF0043;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary.active {
+  background: #cc0036 !important;
+  border-color: #cc0036 !important;
+}
+
+.btn-outline-primary {
+  background: transparent;
+  color: #FF0043;
+  border-color: #FF0043;
+}
+
+.btn-outline-primary:active, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus, .btn-outline-primary.active {
   background: #fed531;
   color: #fff;
   border-color: #fed531;
@@ -111,8 +140,7 @@ h6, .h6 {
 .btn-outline-primary:active, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus, .btn-outline-primary.active {
   background: #866c35 !important;
   border-color: #866c35 !important;
-  
-}
+  }
 
 body {
   background-color: #fff;
@@ -335,6 +363,7 @@ a:hover {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
+
   color: #fed531;
 }
 
@@ -940,3 +969,4 @@ pre .copy-to-clipboard {
   font-size: 100%;
 }
 
+/*# sourceMappingURL=maps/style.css.map */

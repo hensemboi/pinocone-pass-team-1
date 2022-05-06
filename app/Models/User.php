@@ -25,7 +25,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded = [];
+    protected $guarded=[];
+
+    public $timestamps=true;
 
     public function order(){
         return $this->HasMany(Order::class);

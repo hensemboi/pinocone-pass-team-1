@@ -4,7 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Models\CuisineType;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Menu>
@@ -21,16 +24,16 @@ class MenuFactory extends Factory
     public function definition()
     {
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 5, 'prefix' => date('02')]);
-        $cat = Category::orderByRaw("RAND");
-        
+
+        $this->faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($this->faker));
         return [
-            'PK_menuID'=> $id,
-            'menuName' => $this->faker->word(),
-            'description' => $this->faker->word(),
-            'price' => $this -> faker->randomFloat(2,1,100),
-            'totalOrders' => $this -> faker ->numberBetween(0,2000),
-            'FK_categoryCode' => $this->faker->numberBetween(1,3),
-            'FK_cuisineCode' => $this->faker->numberBetween(1,3)
+            'PK_menuID'=> $this->faker->unique()->numerify('ME########'),
+            'menuName' => $this->faker->foodName(),
+            'description' => $this->faker->sentence(mt_rand(3,10)),
+            'price' => $this -> faker->randomFloat(2, 1,100),
+            'totalOrders' => $this -> faker ->numberBetween(0,1500),
+            'FK_categoryCode' => $this->faker->randomElement(Category::all()->pluck('PK_categoryCode')->toArray()),
+            'FK_cuisineCode' =>$this->faker->randomElement(CuisineType::all()->pluck('PK_cuisineCode')->toArray()),
         ];
     }
 }

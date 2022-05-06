@@ -19,10 +19,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'PK_userID' => $this->faker->unique()->randomNumber(6),
-            'username' => $this->faker->unique()->word,
-            'firstName' => $this->faker->firstName,
-            'lastName' => $this->faker->lastName,
+            'PK_userID' => $this->faker->unique()->randomNumber(6, true),
+            'username' => $this->faker->unique()->userName(),
+            'firstName' => $this->faker->firstName(),
+            'lastName' => $this->faker->lastName(),
             'dateOfBirth' => $this->faker->date,
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoE', // password

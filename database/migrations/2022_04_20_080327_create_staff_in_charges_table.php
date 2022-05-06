@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('staff_in_charges', function (Blueprint $table) {
             $table->string('PK_FK_transactionID', 20);
-            $table->unsignedInteger('PK_FK_staffID');
+            $table->string('PK_FK_staffID', 20);
 
             $table->primary(['PK_FK_transactionID', 'PK_FK_staffID']);
             $table->foreign('PK_FK_transactionID', 'FK_orders_staffInCharge')->references('pk_transactionid')->on('orders')->onDelete('cascade')->onUpdate('cascade');

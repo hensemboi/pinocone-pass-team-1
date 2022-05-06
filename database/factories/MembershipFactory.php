@@ -19,10 +19,10 @@ class MembershipFactory extends Factory
     public function definition()
     {
         return [
-            // 'FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
-            // 'startDate' =>  $this->faker->dateTime,
-            // 'expiryDate' =>  $this->faker->dateTime,
-            // 'active' => $this->faker->numberBetween(0, 1)
+            'PK_FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'startDate' =>  $this->faker->dateTime(),
+            'expiryDate' =>  $this->faker->dateTime(),
+            'active' => $this->faker->numberBetween(0, 1)
         ];
     }
 }

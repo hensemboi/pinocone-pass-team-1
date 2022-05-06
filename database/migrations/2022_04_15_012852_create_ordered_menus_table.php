@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ordered_menus', function (Blueprint $table) {
             $table->string('PK_FK_transactionID', 20);
-            $table->unsignedMediumInteger('PK_FK_menuID');
+            $table->string('PK_FK_menuID', 10);
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->string('extraNote')->nullable();
             $table->float('itemsPrice');

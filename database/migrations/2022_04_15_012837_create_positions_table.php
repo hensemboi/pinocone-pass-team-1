@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('positions', function (Blueprint $table) {
-            $table->increments('PK_positionCode');
+            $table->string('PK_positionCode', 4)->primary();
             $table->string('name', 50)->nullable();
             $table->string('description')->nullable();
-            $table->unsignedInteger('FK_divisionCode');
+            $table->string('FK_divisionCode', 4)->nullable();
             
-            $table->foreign('FK_divisionCode', 'FK_divisionCodePosition')->references('pk_divisioncode')->on('divisions')->onDelete('cascade')->onUpdate('cascade');
-        });
+            $table->foreign('FK_divisionCode', 'FK_division_Position')->references('pk_divisioncode')->on('divisions')->onDelete('cascade')->onUpdate('cascade');
+        }); 
     }
 
     /**

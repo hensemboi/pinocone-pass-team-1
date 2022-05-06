@@ -70,6 +70,9 @@ Route::controller(TestUserController::class)->group(function () {
     Route::post('logout', 'logout')->middleware('auth:sanctum');
 });
 
+Route::get('menu', [MenuController::class, 'create']);
+Route::post('menu', [MenuController::class, 'store']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -85,3 +88,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 //     Route::post('update/{id}', [BookController::class, 'update']);
 //     Route::delete('delete/{id}', [BookController::class, 'delete']);
 // });
+
+Route::resource('menu', 'App\Http\Controllers\MenuController');

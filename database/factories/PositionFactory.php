@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Division;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class PositionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'PK_positionCode'=>$this->faker->unique()->numerify('PO##'),
+            'name'=>$this->faker->unique()->word(),
+            'description'=>$this->faker->sentence(),
+            'FK_divisionCode'=>$this->faker->randomElement(Division::all()->random()->PK_divisionID)
         ];
     }
 }

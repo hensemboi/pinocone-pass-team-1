@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('memberships', function (Blueprint $table) {
-            $table->integer('FK_userID')->primary();
+            $table->integer('PK_FK_userID')->primary();
             $table->dateTime('startDate');
             $table->dateTime('expiryDate');
             $table->tinyInteger('active');
             $table->dateTime('next_reward_time')->nullable();
             
-            $table->foreign('FK_userID', 'FK_membership_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('PK_FK_userID', 'FK_membership_users')->references('pk_userid')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

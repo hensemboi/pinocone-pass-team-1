@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cuisine_types', function (Blueprint $table) {
-            $table->increments('PK_cuisineCode');
+            $table->string('PK_cuisineCode', 4)->primary();
             $table->string('name', 50)->default('Default name');
-            $table->string('description')->default('No description');
+            $table->text('description');
         });
     }
 

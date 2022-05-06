@@ -20,6 +20,7 @@ import Success from "./components/payment/Success.vue";
 import Error from "./components/payment/Error.vue";
 import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
+import Menu from "./components/menu/Menu.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -82,8 +83,16 @@ const router = createRouter({
             },
         },
         {
-            path: "/productslisting",
+            path: "/menu",
             components: {
+                default: Menu,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path:"/productslisting",
+            components:{
                 default: ProductsListing,
             },
         },

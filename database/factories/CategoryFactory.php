@@ -18,7 +18,9 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'PK_categoryCode' => $this->faker->unique()->randomNumber(2)
+            'PK_categoryCode'=>$this->faker->unique()->numerify('CA##'),
+            'name'=>$this->faker->unique()->word(),
+            'decription'=>$this->faker->sentence()
         ];
     }
 }

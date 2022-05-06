@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Order;
+use App\Models\Staff;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class StaffInChargeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'PK_FK_transactionID'=>$this->faker->unique()->randomElement(Order::all()->pluck('PK_transactionID')->toArray()),
+            'PK_FK_staffID'=>$this->faker->unique()->randomElement(Staff::all()->pluck('PK_staffID')->toArray()),
         ];
     }
 }

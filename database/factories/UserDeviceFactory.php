@@ -19,7 +19,7 @@ class UserDeviceFactory extends Factory
     public function definition()
     {
         return [
-            'PK_FK_userID' => $this->faker->unique()->randomElement(User::all()->pluck('PK_userID')->toArray()),
+            'PK_FK_userID' => $this->faker->randomElement(User::all()->pluck('PK_userID')->toArray()),
             'deviceNo' => $this->faker->numerify('device-######'),
             'deviceOS' =>  $this->faker->word,
             'deviceName' =>  $this->faker->word,

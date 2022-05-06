@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->tinyInteger('PK_paymentCode')->primary();
             $table->string('name', 50);
-            $table->string('description', 30);
+            $table->text('description');
         });
     }
 

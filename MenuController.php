@@ -16,26 +16,20 @@ class MenuController extends Controller
         return Menu::all();
     }
 
-    public function store(){
+    public function store(Request $request){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);
-        
-        $this ->validate(request(),[
-            
-            'menuName'=>'required',
-            'description'=>'required',
-            'price'=>'required',
-            'categoryCode'=>'required',
-            'cuisineCode'=>'required',
-        ]);
-            Menu::forceCreate([
-            'menuName' => request('menuName'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'categoryCode' => request('categoryCode'),
-            'cuisineCode' => request('cuisineCode'),
-        ]);
 
-        return ['success'=> 'Menu created successfully!'];
+        $menu = new Menu;
+        $menu->PK_menuID = $id;
+        $menu->menuName = $request->menuName;
+        $menu->description = $request->description;
+        $menu->price = $request->price;
+        $menu->totalOrders = $request->totalOrders;
+        $menu->FK_categoryCode = $request->categoryCode;
+        $menu->FK_cuisineCode = $request->cuisineCode;
+        $menu->save();
+
+        return;
     }
 
     public function destroy(Request $request){

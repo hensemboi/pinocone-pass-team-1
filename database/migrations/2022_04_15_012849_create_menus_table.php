@@ -14,15 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->unsignedMediumInteger('PK_menuID')->primary();
+            $table->string('PK_menuID')->primary();
             $table->string('menuName', 50)->default('Default menu');
-            $table->string('description', 50)->default('No description');
+            $table->text('description', 50);
             $table->float('price')->default(0);
             $table->float('discount_price')->nullable();
             $table->unsignedInteger('is_promoted')->default(0);
             $table->unsignedInteger('totalOrders')->default(0);
-            $table->unsignedInteger('FK_categoryCode');
-            $table->unsignedInteger('FK_cuisineCode');
+            $table->string('FK_categoryCode', 4)->nullable();
+            $table->string('FK_cuisineCode', 4)->nullable();
+            $table->timestamps();
 
             $table->foreign('FK_categoryCode', 'FK_categoryMenu')->references('pk_categorycode')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('FK_cuisineCode', 'FK_cuisineTypeMenu')->references('pk_cuisinecode')->on('cuisine_types')->onDelete('cascade')->onUpdate('cascade');

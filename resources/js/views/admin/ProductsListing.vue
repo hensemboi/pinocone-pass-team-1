@@ -13,7 +13,6 @@ export default ({
         MenuCard
     },
     setup() {
-        const menu = [];
         function fetch(){
              const { default: axios } = require('axios');
             axios.get("http://localhost:8000/api/csrf-cookie%22").then(() => {
@@ -22,7 +21,9 @@ export default ({
                     action:'fetchAll',
                 })
                 .then((response) => {
-                    console.log(response);
+                    let menu = response.data;
+                    console.log(typeof menu);
+                    console.log(menu);
                 })
                 .catch((err) => {
                     this.errors = err.response.data.errors;

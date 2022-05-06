@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->integer('PK_voucherID')->primary();
+            $table->string('PK_voucherID', 10)->primary();
             $table->string('name', 50);
             $table->date('startDate');
             $table->date('expiryDate');
             $table->time('duration');
             $table->tinyInteger('availability');
             $table->tinyInteger('membership');
-            $table->tinyInteger('FK_voucherTypeCode');
+            $table->tinyInteger('FK_voucherTypeCode')->nullable();
             
             $table->foreign('FK_voucherTypeCode', 'FK_vouchers_voucherType')->references('pk_vouchertypecode')->on('voucher_types')->onDelete('cascade')->onUpdate('cascade');
         });

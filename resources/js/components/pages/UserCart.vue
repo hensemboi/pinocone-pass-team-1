@@ -3,8 +3,21 @@
         <h2>Your Cart</h2>
         <h3>
             Total Amount:
-            <base-badge mode="elegant">${{ cartTotal }}</base-badge>
+            <base-badge mode="elegant">RM{{ cartTotal.toFixed(2) }}</base-badge>
         </h3>
+        <input
+            type="text"
+            class="form-control rounded"
+            placeholder="Enter voucher code ..."
+            v-model="voucherCode"
+        />
+        <button
+            type="button"
+            class="btn btn-outline-primary voucher-button-mid"
+            @click="useVoucher"
+        >
+            Use
+        </button>
         <ul>
             <cart-item
                 v-for="item in cartItems"
@@ -33,9 +46,16 @@ export default {
     components: {
         CartItem,
     },
+    data() {
+        return {
+            voucherCode: '',
+            userVouchers: [],
+            userID: 47,
+        };
+    },
     computed: {
         cartTotal() {
-            return this.$store.getters["cart/totalSum"].toFixed(2);
+            return this.$store.getters["cart/totalSum"].toFixed(2) - this.$store.getters["cart/vouched"].toFixed(2);
         },
         cartItems() {
             return this.$store.getters["cart/items"];
@@ -44,8 +64,50 @@ export default {
             return this.$store.getters["cart/items"].length === 0;
         },
     },
-    mounted () {
+    methods: {
+        useVoucher() {
+            this.$router.push({
+                path: "/cart",
+                query: { voucher: this.voucherCode },
+            });
+
+            if (this.userVouchers.some(userVoucher => userVoucher.PK_FK_voucherID == this.voucherCode)) {
+                if (this.voucherCode == 1) {
+                    if (this.$store.getters["cart/totalSum"].toFixed(2) < 40.00) {
+                        alert("To apply this voucher, you must at least have a gross price of at least RM40.")
+                    }
+
+                    else {
+                        this.$store.dispatch("cart/useVoucherReducePrice", {
+                            less: 40.00,
+                        });
+                        alert("Fun 40 voucher applied!");
+                    }    
+                }
+
+                else if (this.voucherCode == 2) {
+                    if (this.$store.getters["cart/totalSum"].toFixed(2) < 200.00) {
+                        alert("To apply this voucher, you must at least have a gross price of at least RM200.")
+                    }
+
+                    else {
+                        this.$store.dispatch("cart/useVoucherReducePrice", {
+                            less: (this.$store.getters["cart/totalSum"].toFixed(2))*0.2,
+                        });
+                        alert("Happy 20 voucher applied!");
+                    }
+                }
+            }
+
+            else {
+                alert("No owned voucher of that code was found.");
+            }
+        },
+    },
+    mounted() {
         this.$store.getters["cart/items"];
+        axios.get("./uservoucher/" + this.userID)
+        .then(response => this.userVouchers = response.data);
     }
 };
 </script>
@@ -95,5 +157,9 @@ button:active {
 
     background-color: var(--button-dark-red-hover);
     border-color: var(--button-dark-red-hover);
+}
+
+.voucher-button-mid {
+    margin-left: 280px;
 }
 </style>

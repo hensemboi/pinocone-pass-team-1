@@ -2,12 +2,13 @@ export default {
     namespaced: true,
     state() {
         return {
+            productData: [],
             items: [],
             total: 0,
             qty: 0,
             effectivePrice: 0,
             effectiveQuantity: 0,
-            productData: [],
+            vouchedPrice: 0,
         };
     },
     mutations: {
@@ -27,7 +28,6 @@ export default {
                 }
 
             } else {
-                
                 if (state.productData.is_promoted == 1) {
                     state.effectivePrice = state.productData.discount_price;
                     state.effectiveQuantity = 1;
@@ -70,7 +70,6 @@ export default {
                 state.qty += 1;
             }
         },
-
         removeProductFromCart(state, payload) {
             const prodId = payload.Id;
             const productInCartIndex = state.items.findIndex(
@@ -120,6 +119,9 @@ export default {
             state.total -= state.productData.price;
             state.items.splice(productInCartIndex, 1);
         },
+        useVoucherReducePrice(state, payload) {
+            state.vouchedPrice = payload.less;
+        },
     },
     actions: {
         addToCart(context, payload) {
@@ -136,6 +138,9 @@ export default {
         removeOneFromCart(context, payload) {
             context.commit("removeOneFromCart", payload);
         },
+        useVoucherReducePrice(context, payload) {
+            context.commit("useVoucherReducePrice", payload);
+        },
     },
     getters: {
         items(state) {
@@ -143,6 +148,9 @@ export default {
         },
         totalSum(state) {
             return state.total;
+        },
+        vouched(state) {
+            return state.vouchedPrice;
         },
         quantity(state) {
             return state.qty;

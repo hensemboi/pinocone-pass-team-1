@@ -1,16 +1,16 @@
 <template>
     <div class="box">
-        <h2>Exchangeable Vouchers:</h2>
+        <h2 class="text-center">Exchangeable Vouchers:</h2>
         <div v-for="voucher in vouchers" :key="voucher.PK_voucherID">
             <div class="voucher spin">
                 <div class="row">
                     <div class="col-sm-7">
                         <strong>{{ voucher.name }}</strong>
                         <div v-if="voucher.name === 'Fun 40'">
-                            <p>Description: Reduce price by RM40</p>
+                            <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM40)</p>
                         </div>
                         <div v-else-if="voucher.name === 'Happy 20'">
-                            <p>Description: Reduce price by 20%</p>
+                            <p>Description: Reduce price by 20% <br/>(Minimum spending of RM200)</p>
                         </div>
                     </div>
 
@@ -28,6 +28,7 @@
             </div>
             <br/>
         </div>
+        <div class="text-center">Your incentive points: {{ currentIncentives }} points</div>
     </div>
 </template>
    
@@ -91,8 +92,11 @@
     }
 
     h2 {
-        text-align: center;
         font-family: "Raleway", sans-serif;
+    }
+
+    .text-center {
+        text-align: center;
     }
 
     .voucher {

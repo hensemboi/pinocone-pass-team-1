@@ -10,7 +10,7 @@
             <div class="item__data">
                 <div>
                     Price per Item:
-                    <strong>RM{{ price }}</strong>
+                    <strong>RM{{ price.toFixed(2) }}</strong>
                 </div>
                 <div>
                     Quantity:
@@ -76,18 +76,22 @@ img {
 }
 
 .item__total {
+    --item-gray: #474747;
+
     font-weight: bold;
     margin: 1rem 0;
-    border-top: 1px solid #474747;
-    border-bottom: 2px solid #474747;
+    border-top: 1px solid var(--item-gray);
+    border-bottom: 2px solid var(--item-gray);
     padding: 0.25rem 0;
     width: auto;
 }
 
 button {
+    --button-dark-red: #8f0030;
+
     font: inherit;
-    border: 1px solid #8f0030;
-    background-color: #8f0030;
+    border: 1px solid var(--button-dark-red);
+    background-color: var(--button-dark-red);
     color: white;
     border-radius: 30px;
     cursor: pointer;
@@ -96,7 +100,9 @@ button {
 
 button:hover,
 button:active {
-    background-color: #53001c;
-    border-color: #53001c;
+    --button-dark-red-hover: #53001c;
+
+    background-color: var(--button-dark-red-hover);
+    border-color: var(--button-dark-red-hover);
 }
 </style>

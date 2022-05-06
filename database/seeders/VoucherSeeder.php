@@ -25,7 +25,7 @@ class VoucherSeeder extends Seeder
             'expiryDate' =>  $futureDate,
             'duration' => date_diff($nowDate, $futureDate)->format('%h'),
             'availability' => 22,
-            'membership' => 4,
+            'membership' => 8,
             'FK_voucherTypeCode' => 1
         ]);
 

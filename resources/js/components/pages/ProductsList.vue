@@ -137,9 +137,12 @@ ul {
     padding: 1rem;
 }
 h2 {
-    color: #292929;
+    --gray-black: #292929;
+    --quick-gray: #ccc;
+
+    color: var(--gray-black);
     text-align: center;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid var(--quick-gray);
     padding-bottom: 1rem;
 }
 </style>

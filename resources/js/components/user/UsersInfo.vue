@@ -217,7 +217,7 @@ export default {
     },
     created() {
         axios.get("./uservoucher/" + this.userID)
-        .then(response => this.userVouchers = response.data)
+        .then(response => this.userVouchers = response.data);
     },
     data() {
         return {
@@ -225,7 +225,7 @@ export default {
             changeCredentials: false,
             inputIsInvalid: false,
             userID: 47,
-            userVouchers: []
+            userVouchers: [],
         };
     },
     methods: {

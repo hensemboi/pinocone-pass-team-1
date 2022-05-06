@@ -12,14 +12,14 @@
                     <h3>{{ title }}</h3>
                     <base-badge mode="highlight" :no-margin-left="true">
                         <div v-if="promotionType === 1">
-                            <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
+                            <h4 class="cancelled">RM{{ price.toFixed(2) }}</h4><h4>RM{{ discountedPrice.toFixed(2) }}</h4>
                         </div>
-                        <div v-else-if="promotionType === 2">
-                            RM{{ price }} Buy 1 Free 1
-                        </div>
-                        <h4 v-else>RM{{ price }}</h4>
+                        <h4 v-else>RM{{ price.toFixed(2) }}</h4>
                     </base-badge>
-                    <p>{{ description }}</p>
+                    <div v-if="promotionType === 2">
+                        <p>(Buy 1 Free 1)</p>
+                    </div>
+                    <p>Description: {{ description }}</p>
                     <p>Category: {{ category }}</p>
                     <p>Cuisine Type: {{ cuisineType }}</p>
                 </div>
@@ -37,14 +37,14 @@
                     <h3>{{ title }}</h3>
                     <base-badge mode="highlight" :no-margin-left="true">
                         <div v-if="promotionType === 1">
-                            <s>RM{{ price }}</s><p>{{ discountedPrice }}</p>
+                            <h4 class="cancelled">RM{{ price.toFixed(2) }}</h4><h4>RM{{ discountedPrice.toFixed(2) }}</h4>
                         </div>
-                        <div v-else-if="promotionType === 2">
-                            RM{{ price }} Buy 1 Free 1
-                        </div>
-                        <h4 v-else>RM{{ price }}</h4>
+                        <h4 v-else>RM{{ price.toFixed(2) }}</h4>
                     </base-badge>
-                    <p>{{ description }}</p>
+                    <div v-if="promotionType === 2">
+                        <em>(Buy 1 Free 1)</em>
+                    </div>
+                    <p>Description: {{ description }}</p>
                     <p>Category: {{ category }}</p>
                     <p>Cuisine Type: {{ cuisineType }}</p>
                 </div>
@@ -98,23 +98,35 @@ li {
     margin: 0;
 }
 
+.product__text em {
+    font-size: x-large;
+}
+
 .product__actions {
     text-align: center;
 }
 
+.cancelled {
+    text-decoration: line-through;
+}
+
 button {
+    --button-purple: #45006d;
+
     font: inherit;
     cursor: pointer;
-    background-color: #45006d;
+    background-color: var(--button-purple);
     color: white;
-    border: 1px solid #45006d;
+    border: 1px solid var(--button-purple);
     padding: 0.5rem 1.5rem;
     border-radius: 30px;
 }
 
 button:hover,
 button:active {
-    background-color: #760ab4;
-    border-color: #760ab4;
+    --button-purple-hover: #760ab4;
+
+    background-color: var(--button-purple-hover);
+    border-color: var(--button-purple-hover);
 }
 </style>

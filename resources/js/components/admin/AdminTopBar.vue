@@ -204,8 +204,6 @@
 <script>
 import {useStore} from 'vuex';
 import {computed, ref} from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 
 export default ({
     setup() {

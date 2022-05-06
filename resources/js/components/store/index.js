@@ -28,6 +28,7 @@ const store = createStore({
     login(state) {
       state.isLoggedIn = true;
     },
+  }
 });
 
 export default store;

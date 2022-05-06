@@ -21,7 +21,6 @@ import Error from "./components/payment/Error.vue";
 import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
 import Menu from "./components/menu/Menu.vue"
-import UserProfile from "./components/pages/UserProfilePage.vue";
 import RequestsList from "./components/request_dashboard/RequestsList.vue";
 
 const router = createRouter({
@@ -163,9 +162,6 @@ const router = createRouter({
                 footer: Footer,
                 navbar: Navbar,
             },
-                topbar: AdminTopBar,
-                sidebar: AdminSideBar,
-            }
         },
         {
             path: "/:notFound(.*)",

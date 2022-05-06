@@ -12,7 +12,6 @@ use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\PinopayController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\UserVoucherController;
-use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
 

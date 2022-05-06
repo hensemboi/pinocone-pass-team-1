@@ -48,6 +48,7 @@
 </script>
 
 <style scoped>
+    @import"./../../public/css/home.css";
     .slide{
         width:100%;
         animation: slideright 0.5s ease-in-out;

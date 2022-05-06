@@ -1,181 +1,309 @@
 <template>
-    <div class=" container-fluid">
-        <div class="row w-100">
-            <main class="px-md-4 w-100">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+    <div>
+        <div>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+                    <Suspense>
+                        <template #default>
+                            <component :is='EarningCard'></component>
+                        </template>
+                        <template #fallback>
+                            <EarningCardSkeleton></EarningCardSkeleton>
+                        </template>
+                    </Suspense>
+                    <!-- Earnings (Monthly) Card Example -->
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Earnings (Annual)</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ EarningCardsData[0].value }}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Earnings (Monthly) Card Example -->
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar"
+                                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Pending Requests Card Example -->
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Pending Requests</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body ">
+                                <div class="chart-area">
+                                    <Bar></Bar>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-primary"></i> Direct
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-success"></i> Social
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-info"></i> Referral
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+                <!-- Content Row -->
+                <div class="row">
 
-                <h2>Section title</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>1,001</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>text</td>
-                        </tr>
-                        <tr>
-                        <td>1,002</td>
-                        <td>placeholder</td>
-                        <td>irrelevant</td>
-                        <td>visual</td>
-                        <td>layout</td>
-                        </tr>
-                        <tr>
-                        <td>1,003</td>
-                        <td>data</td>
-                        <td>rich</td>
-                        <td>dashboard</td>
-                        <td>tabular</td>
-                        </tr>
-                        <tr>
-                        <td>1,003</td>
-                        <td>information</td>
-                        <td>placeholder</td>
-                        <td>illustrative</td>
-                        <td>data</td>
-                        </tr>
-                        <tr>
-                        <td>1,004</td>
-                        <td>text</td>
-                        <td>random</td>
-                        <td>layout</td>
-                        <td>dashboard</td>
-                        </tr>
-                        <tr>
-                        <td>1,005</td>
-                        <td>dashboard</td>
-                        <td>irrelevant</td>
-                        <td>text</td>
-                        <td>placeholder</td>
-                        </tr>
-                        <tr>
-                        <td>1,006</td>
-                        <td>dashboard</td>
-                        <td>illustrative</td>
-                        <td>rich</td>
-                        <td>data</td>
-                        </tr>
-                        <tr>
-                        <td>1,007</td>
-                        <td>placeholder</td>
-                        <td>tabular</td>
-                        <td>information</td>
-                        <td>irrelevant</td>
-                        </tr>
-                        <tr>
-                        <td>1,008</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>text</td>
-                        </tr>
-                        <tr>
-                        <td>1,009</td>
-                        <td>placeholder</td>
-                        <td>irrelevant</td>
-                        <td>visual</td>
-                        <td>layout</td>
-                        </tr>
-                        <tr>
-                        <td>1,010</td>
-                        <td>data</td>
-                        <td>rich</td>
-                        <td>dashboard</td>
-                        <td>tabular</td>
-                        </tr>
-                        <tr>
-                        <td>1,011</td>
-                        <td>information</td>
-                        <td>placeholder</td>
-                        <td>illustrative</td>
-                        <td>data</td>
-                        </tr>
-                        <tr>
-                        <td>1,012</td>
-                        <td>text</td>
-                        <td>placeholder</td>
-                        <td>layout</td>
-                        <td>dashboard</td>
-                        </tr>
-                        <tr>
-                        <td>1,013</td>
-                        <td>dashboard</td>
-                        <td>irrelevant</td>
-                        <td>text</td>
-                        <td>visual</td>
-                        </tr>
-                        <tr>
-                        <td>1,014</td>
-                        <td>dashboard</td>
-                        <td>illustrative</td>
-                        <td>rich</td>
-                        <td>data</td>
-                        </tr>
-                        <tr>
-                        <td>1,015</td>
-                        <td>random</td>
-                        <td>tabular</td>
-                        <td>information</td>
-                        <td>text</td>
-                        </tr>
-                    </tbody>
-                    </table>
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="small font-weight-bold">Server Migration <span
+                                        class="float-right">20%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Sales Tracking <span
+                                        class="float-right">40%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Customer Database <span
+                                        class="float-right">60%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar" role="progressbar" style="width: 60%"
+                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Payout Details <span
+                                        class="float-right">80%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Account Setup <span
+                                        class="float-right">Complete!</span></h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Top Menus</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="top-menu-label text-center d-flex flex-row">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">NO</div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">MENU</div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">TOTAL ORDERS</div>
+                                </div>
+                                <div>
+                                    <hr class="sidebar-divider my-0">
+                                    <div class="top-menu-card text-center d-flex flex-row">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">1</div>
+                                        <div class="text-xs font-weight-bold text-left text-primary text-uppercase mb-1">Ayam Goreng</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">1.9k</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
+                <!-- /.container-fluid -->
         </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
     </div>
+        <!-- End of Content Wrapper -->
 </template>
 
 <script>
+import { defineAsyncComponent } from '@vue/runtime-core'
+    import EarningCard from "../components/cards/EarningCards.vue"
+    import Bar from "../components/charts/LineChart.vue"
+import EarningCardSkeleton from '../components/cards/EarningCardSkeleton.vue'
+
     export default {
+        components:{
+    EarningCard,
+    Bar,
+    EarningCardSkeleton
+},
         name: "Dashboard",
-        data() {
+        setup(){
+            const EarningCardSkeleton = defineAsyncComponent(()=>
+                import ("../components/cards/EarningCardSkeleton.vue")
+            )
+            const EarningCardsData=[
+                {
+                    name: "HAHA",
+                    value: "$akj"
+                }
+            ]
             return {
-                name: null,
+                EarningCard,
+                EarningCardsData,
+                EarningCardSkeleton,
+                Bar
             }
-        },
-        created() {
-            if (window.Laravel.user) {
-                this.name = window.Laravel.user.name
-            }
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (!window.Laravel.isLoggedin) {
-        //         window.location.href = "/";
-        //     }
-        //     next();
-        // }
+        }
     }
 </script>
 
 <style scoped>
-    @import"./../../css/admin/adminDashboard.css";
-    .container-fluid{
-        display:flex;
+    .top-menu-card div:first-child,
+    .top-menu-label div:first-child
+    {
+        width: 10% !important;
+    }
+    .top-menu-card div:nth-child(2),
+    .top-menu-label div:nth-child(2)
+    {
+        width: 60% !important;
+    }
+    .top-menu-card div:nth-child(3),
+    .top-menu-label div:nth-child(3)
+    {
+        width: 30% !important;
+    }
+    .top-menu-card div{
+        color: var(--admin-text-body-clr) !important;
     }
 </style>

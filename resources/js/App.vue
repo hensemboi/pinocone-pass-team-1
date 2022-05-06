@@ -2,7 +2,7 @@
     <router-view name="sidebar"></router-view>
     <router-view name="topbar" v-slot="{Component}">
         <transition name="slideBody">
-            <component :class="{slide: sideSlided}" :is="Component">
+            <component :class="{slide: true}" :is="Component">
                 <template>
                 </template>
             </component>
@@ -10,7 +10,7 @@
     </router-view>
     <router-view v-slot="{Component}">
         <transition name="slideBody">
-            <component :class="{slide: sideSlided}" :is="Component" >
+            <component :class="{slide: true}" :is="Component" >
                 <template >
                 </template>
             </component>

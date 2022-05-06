@@ -34,7 +34,7 @@ export default ({
         async function fetchAllMenu(){
             await store.dispatch('menu/fetchAllCategories', {url: "/productslistingcat",action: 'fetchAll'});
             await store.dispatch('menu/fetchAllCuisines', {url: "/productslistingcui",action: 'fetchAll'});
-                        await store.dispatch('menu/fetchAllMenus', {url: "/productslisting",action: 'fetchAll'});
+            await store.dispatch('menu/fetchAllMenus', {url: "/productslisting",action: 'fetchAll'});
         }
 
         const categoryEvent = [];

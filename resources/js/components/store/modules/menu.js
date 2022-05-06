@@ -35,8 +35,8 @@ export default{
         }
     },
     actions: {
-        fetchAllMenus({commit}, {url,action}){
-            axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+        async fetchAllMenus({commit}, {url,action}){
+            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 axios.get(url, {
                         action: action,
                     })
@@ -49,8 +49,8 @@ export default{
                     });
             });
         },
-        fetchAllCategories({commit}, {url,action}){
-            axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+        async fetchAllCategories({commit}, {url,action}){
+            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 axios.get(url, {
                         action: action,
                     })
@@ -63,8 +63,8 @@ export default{
                     });
             });
         },
-        fetchAllCuisines({commit}, {url,action}){
-            axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+        async fetchAllCuisines({commit}, {url,action}){
+            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 axios.get(url, {
                         action: action,
                     })

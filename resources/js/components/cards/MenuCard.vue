@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="card-categories">
-                <a href="#" class="card-link">{{ cat.name
+                <a href="#" class="card-link">{{ menu.category.name
                     }}</a>
                 <a href="#" class="card-link">Category 2</a>
             </div>

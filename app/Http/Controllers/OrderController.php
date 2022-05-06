@@ -7,17 +7,9 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function fetchAll(Request $request)
-    {
-        return Order::all();
+    public function fetchAll(){
+        return Order::with(['category', 'category.menu'])->get();
     }
 
-    public function fetchSpecificUser(Request $request, $id)
-    {
-        return Order::where(
-            [
-                'FK_userID' => $id
-            ]
-        )->get();
-    }
+
 }

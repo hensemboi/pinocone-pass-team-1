@@ -12,6 +12,9 @@ use App\Http\Controllers\UserPaymentMethodController;
 use App\Http\Controllers\PinopayController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\UserVoucherController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CuisineController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +33,9 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('order', 'store');
     Route::put('order/{id}', 'update');
 });
+Route::get('productslisting', [MenuController::class, 'fetchAll']);
+Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
+Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('marketplace', [MenuController::class, 'fetchAll']);
@@ -76,6 +82,8 @@ Route::post('menu', [MenuController::class, 'store']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('', [OrderController::class, '']);
 
 // Route::post('login', [UserController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);

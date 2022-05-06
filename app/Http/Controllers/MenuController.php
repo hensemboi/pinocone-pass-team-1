@@ -9,7 +9,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class MenuController extends Controller
 {
     public function fetchAll(){
-        return Menu::all();
+        return Menu::with(['category', 'category.menu'])->get();
     }
 
     public function index(Request $request){

@@ -149,6 +149,9 @@ const router = createRouter({
                 footer: Footer,
                 navbar: Navbar,
             },
+                topbar: AdminTopBar,
+                sidebar: AdminSideBar,
+            }
         },
         {
             path: "/:notFound(.*)",

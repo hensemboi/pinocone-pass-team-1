@@ -13,6 +13,7 @@ import AdminTopBar from "./components/admin/AdminTopBar.vue";
 import ProductsListing from "./views/admin/ProductsListing.vue";
 import Store from "./components/store/index.js";
 import UserProfile from "./components/pages/UserProfilePage.vue";
+import RequestsList from "./components/request_dashboard/RequestsList.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -72,6 +73,12 @@ const router = createRouter({
                 default: Dashboard,
                 topbar: AdminTopBar,
                 sidebar: AdminSideBar,
+            },
+        },
+        {
+            path: "/usersrequests",
+            components: {
+                default: RequestsList,
             },
         },
         {

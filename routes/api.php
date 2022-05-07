@@ -31,8 +31,10 @@ Route::controller(OrderController::class)->group(function () {
     Route::put('order/{id}', 'update');
 });
 
-Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('marketplace', [MenuController::class, 'fetchAll']);
+Route::get('productslisting', [MenuController::class, 'fetchAll']);
+Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
+Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
 Route::controller(UserPaymentMethodController::class)->group(function () {
@@ -57,6 +59,7 @@ Route::controller(VoucherController::class)->group(function () {
 Route::controller(UserVoucherController::class)->group(function () {
     Route::get('uservoucher/{id}', 'fetchVoucherInformation');
     Route::post('uservoucher', 'store');
+    Route::delete('uservoucher/{id}', 'destroy');
 });
 
 Route::controller(UserController::class)->group(function () {

@@ -4,16 +4,18 @@ export default {
         return {
             productData: [],
             items: [],
-            total: 0,
+            total: 0.00,
             qty: 0,
-            effectivePrice: 0,
+            effectivePrice: 0.00,
             effectiveQuantity: 0,
-            vouchedPrice: 0,
+            vouchedPrice: 0.00,
+            voucherCode: 0,
         };
     },
     mutations: {
         addProductToCart(state, payload) {
             state.productData = payload;
+            console.log(state.productData.PK_menuID);
             const productInCartIndex = state.items.findIndex(
                 (ci) => ci.productId == state.productData.PK_menuID
             );
@@ -57,16 +59,31 @@ export default {
             
             if (state.productData.is_promoted == 1) {
                 state.total += state.productData.discount_price;
+
+                if (state.voucherCode == 2) {
+                    state.vouchedPrice = state.total*0.2;
+                }
+
                 state.qty += 1;
             }
 
             else if (state.productData.is_promoted == 2) {
                 state.total += state.productData.price;
+                
+                if (state.voucherCode == 2) {
+                    state.vouchedPrice = state.total*0.2;
+                }
+
                 state.qty += 2;
             }
 
             else {
                 state.total += state.productData.price;
+                
+                if (state.voucherCode == 2) {
+                    state.vouchedPrice = state.total*0.2;
+                }
+
                 state.qty += 1;
             }
         },
@@ -78,7 +95,29 @@ export default {
             const prodData = state.items[productInCartIndex];
             state.items.splice(productInCartIndex, 1);
             state.qty -= prodData.qty;
-            state.total -= prodData.price * prodData.qty;
+
+            if ((state.voucherCode == 1) && (state.total-(prodData.price * prodData.qty) < 50)) {   
+                state.total -= prodData.price * prodData.qty;
+                state.voucherCode = 0;
+                state.vouchedPrice = 0;
+                alert("Fun 40 voucher unapplied due to not meeting the minimum spending (RM50).")
+            }
+
+            else if ((state.voucherCode == 2) && (state.total-(prodData.price * prodData.qty) < 200)) {   
+                state.total -= prodData.price * prodData.qty;
+                state.voucherCode = 0;
+                state.vouchedPrice = 0;
+                alert("Happy 20 voucher unapplied due to not meeting the minimum spending (RM200).")
+            }
+
+            else if (state.voucherCode == 2) {
+                state.total -= prodData.price * prodData.qty;
+                state.vouchedPrice = state.total*0.2;
+            }
+
+            else {
+                state.total -= prodData.price * prodData.qty;
+            }
         },
         removeOneFromCart(state, payload) {
             const prodId = payload.Id;
@@ -103,8 +142,29 @@ export default {
                 else {
                     state.qty -= 1;
                 }
-
-                state.total -= state.productData.price;
+                
+                if ((state.voucherCode == 1) && (state.total-state.productData.price < 50)) {   
+                    state.total -= state.productData.price;
+                    state.voucherCode = 0;
+                    state.vouchedPrice = 0;
+                    alert("Fun 40 voucher unapplied due to not meeting the minimum spending (RM50).")
+                }
+    
+                else if ((state.voucherCode == 2) && (state.total-state.productData.price < 200)) {   
+                    state.total -= state.productData.price;
+                    state.voucherCode = 0;
+                    state.vouchedPrice = 0;
+                    alert("Happy 20 voucher unapplied due to not meeting the minimum spending (RM200).")
+                }
+    
+                else if (state.voucherCode == 2) {
+                    state.total -= state.productData.price;
+                    state.vouchedPrice = state.total*0.2;
+                }
+    
+                else {
+                    state.total -= state.productData.price;
+                }
                 return;
             }
             
@@ -116,10 +176,32 @@ export default {
                 state.qty -= 1;
             }
 
-            state.total -= state.productData.price;
+            if ((state.voucherCode == 1) && (state.total-state.productData.price < 50)) {   
+                state.total -= state.productData.price;
+                state.voucherCode = 0;
+                state.vouchedPrice = 0;
+                alert("Fun 40 voucher unapplied due to not meeting the minimum spending (RM50).")
+            }
+
+            else if ((state.voucherCode == 2) && (state.total-state.productData.price < 200)) {   
+                state.total -= state.productData.price;
+                state.voucherCode = 0;
+                state.vouchedPrice = 0;
+                alert("Happy 20 voucher unapplied due to not meeting the minimum spending (RM200).")
+            }
+
+            else if (state.voucherCode == 2) {
+                state.total -= state.productData.price;
+                state.vouchedPrice = state.total*0.2;
+            }
+
+            else {
+                state.total -= state.productData.price;
+            }
             state.items.splice(productInCartIndex, 1);
         },
         useVoucherReducePrice(state, payload) {
+            state.voucherCode = payload.code;
             state.vouchedPrice = payload.less;
         },
     },
@@ -151,6 +233,9 @@ export default {
         },
         vouched(state) {
             return state.vouchedPrice;
+        },
+        code(state) {
+            return state.voucherCode;
         },
         quantity(state) {
             return state.qty;

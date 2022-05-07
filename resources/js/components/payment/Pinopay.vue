@@ -18,7 +18,7 @@
                             </div>
 
                             <div v-else>
-                                <h3>Balance: RM{{ pinopayWallet[0].balance }}</h3>
+                                <h3>Balance: RM{{ pinopayWallet[0].balance.toFixed(2) }}</h3>
                                 <br/>
                                 <label>
                                     Topup amount:
@@ -45,7 +45,7 @@
 
                                 <tr v-for="transaction in transactionHistory" :key="transaction.PK_transactionID">
                                     <td>{{ transaction.PK_transactionID }}</td>
-                                    <td>${{ transaction.totalPrice }}</td>
+                                    <td>${{ transaction.totalPrice.toFixed(2) }}</td>
                                     <td>{{ transaction.dateTime }}</td>
                                 </tr>
                             </table>
@@ -109,8 +109,6 @@
     }
 
     button {
-        --button-dark-red: #8f0030;
-        
         font: inherit;
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
@@ -122,8 +120,6 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
     }

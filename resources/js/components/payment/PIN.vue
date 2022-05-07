@@ -59,8 +59,6 @@
     }
 
     button {
-        --button-dark-red: #8f0030;
-
         font: inherit;
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
@@ -72,8 +70,6 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
     }

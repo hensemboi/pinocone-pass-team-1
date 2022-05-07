@@ -1,0 +1,33 @@
+:root{
+    /* COLOURS  */
+    --admin-60-clr: #EBEBEB;
+    --admin-30-clr: #578399;
+    --admin-10-clr: #b8e5fd;
+    --admin-background-clr: #FFFFFF ;
+    --admin-main-theme-clr: var(--admin-10-clr);
+    --admin-topbar-clr: var(--admin-60-clr);
+    --admin-sidebar-clr: var(--admin-30-clr);
+    --admin-badge-clr: var(--admin-30-clr);
+    --admin-font-clr: var(--admin-10-clr);
+    --admin-box-shadow-clr: #94e3fe;
+    --admin-hover-clr: #303030;
+    --admin-clr: #004d65;
+    --admin-footer-bar-clr: #2d2e2c;
+    --admin-btn-primary: var(--admin-30-clr);
+    --admin-text-primary-clr: var(--admin-30-clr);
+    --admin-text-body-clr: #001324;
+
+    --admin-sidebar-fontsize: 1.3rem;
+
+    --admin-sidebar-width-maximize: 6.5rem;
+    --admin-sidebar-width-minimize: 3.5rem;
+
+    --item-gray: #474747;
+    --quick-gray: #ccc;
+    --gray-black: #292929;
+    --button-purple: #45006d;
+    --button-purple-hover: #760ab4;
+    --button-dark-red: #8f0030;
+    --button-dark-red-hover: #53001c;
+    --voucher-pink: #fe7b99;
+  }

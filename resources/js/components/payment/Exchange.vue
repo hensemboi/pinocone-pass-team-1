@@ -7,7 +7,7 @@
                     <div class="col-sm-7">
                         <strong>{{ voucher.name }}</strong>
                         <div v-if="voucher.name === 'Fun 40'">
-                            <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM40)</p>
+                            <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM50)</p>
                         </div>
                         <div v-else-if="voucher.name === 'Happy 20'">
                             <p>Description: Reduce price by 20% <br/>(Minimum spending of RM200)</p>
@@ -100,8 +100,6 @@
     }
 
     .voucher {
-        --voucher-pink: #fe7b99;
-
         background-color: var(--voucher-pink);
         padding: 4px;
     }
@@ -119,9 +117,7 @@
         font-size: large;
     }
 
-    button {
-        --button-dark-red: #8f0030;
-        
+    button {       
         font: inherit;
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
@@ -135,8 +131,6 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
     }

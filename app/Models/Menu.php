@@ -22,7 +22,5 @@ class Menu extends Model
     public function order(){
         return $this->hasMany(OrderedMenu::class);
     }
-
-    public $timestamps = false;
 }
 

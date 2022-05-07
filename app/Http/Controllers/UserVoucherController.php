@@ -93,8 +93,12 @@ class UserVoucherController extends Controller
      * @param  \App\Models\UserVoucher  $userVoucher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserVoucher $userVoucher)
+    public function destroy($id)
     {
-        //
+        UserVoucher::where(
+            [
+                'PK_FK_voucherID' => $id
+            ]
+        )->delete();
     }
 }

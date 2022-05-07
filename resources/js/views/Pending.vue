@@ -22,6 +22,8 @@
 </template>
    
 <script>
+import axios from "axios"
+
     export default {
         data() {
             return {
@@ -39,7 +41,10 @@
         },
         computed: {
             price() {
-                return this.$store.getters["cart/totalSum"].toFixed(2)
+                return this.$store.getters["cart/totalSum"] - this.$store.getters["cart/vouched"]
+            },
+            usingVoucher() {
+                return this.$store.getters["cart/code"]
             },
             paymentMethod() {
                 return this.$store.getters["checkout/getPaymentMethod"]
@@ -70,6 +75,11 @@
                 this.incentivesForm.incentives = this.newIncentives;
                 axios.put("./user/" + this.userID, this.incentivesForm)
 
+                if (this.usingVoucher)
+                {
+                    axios.delete("./uservoucher/" + this.usingVoucher)
+                }
+
                 this.$router.push("/success")
             },
             updateWallet() {
@@ -78,6 +88,11 @@
                 
                 this.incentivesForm.incentives = this.newIncentives;
                 axios.put("./user/" + this.userID, this.incentivesForm)
+
+                if (this.usingVoucher)
+                {
+                    axios.delete("./uservoucher/" + this.usingVoucher)
+                }
 
                 this.$router.push("/success")
             },

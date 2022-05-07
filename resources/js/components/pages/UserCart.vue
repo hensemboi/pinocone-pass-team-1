@@ -3,21 +3,33 @@
         <h2>Your Cart</h2>
         <h3>
             Total Amount:
-            <base-badge mode="elegant">RM{{ cartTotal.toFixed(2) }}</base-badge>
+            <base-badge mode="elegant">RM{{ cartTotal }}</base-badge>
         </h3>
-        <input
-            type="text"
-            class="form-control rounded"
-            placeholder="Enter voucher code ..."
-            v-model="voucherCode"
-        />
-        <button
-            type="button"
-            class="btn btn-outline-primary voucher-button-mid"
-            @click="useVoucher"
-        >
-            Use
-        </button>
+        <div v-if="!inputVoucher">
+            <input
+                type="text"
+                class="form-control rounded"
+                placeholder="Enter voucher code ..."
+                v-model="voucherCode"
+            />
+            <button
+                type="button"
+                class="btn btn-outline-primary voucher-button-mid"
+                @click="useVoucher"
+            >
+                Use
+            </button>
+        </div>
+        <div v-else>
+            <span>Currently using voucher: {{ voucherCode }}</span>
+            <button
+                type="button"
+                class="btn btn-outline-primary voucher-button-mid"
+                @click="removeVoucher"
+            >
+                Remove
+            </button>
+        </div>
         <ul>
             <cart-item
                 v-for="item in cartItems"
@@ -48,6 +60,7 @@ export default {
     },
     data() {
         return {
+            inputVoucher: false,
             voucherCode: '',
             userVouchers: [],
             userID: 47,
@@ -55,7 +68,7 @@ export default {
     },
     computed: {
         cartTotal() {
-            return this.$store.getters["cart/totalSum"].toFixed(2) - this.$store.getters["cart/vouched"].toFixed(2);
+            return (this.$store.getters["cart/totalSum"] - this.$store.getters["cart/vouched"]).toFixed(2);
         },
         cartItems() {
             return this.$store.getters["cart/items"];
@@ -66,22 +79,21 @@ export default {
     },
     methods: {
         useVoucher() {
-            this.$router.push({
-                path: "/cart",
-                query: { voucher: this.voucherCode },
-            });
-
             if (this.userVouchers.some(userVoucher => userVoucher.PK_FK_voucherID == this.voucherCode)) {
                 if (this.voucherCode == 1) {
-                    if (this.$store.getters["cart/totalSum"].toFixed(2) < 40.00) {
-                        alert("To apply this voucher, you must at least have a gross price of at least RM40.")
+                    if (this.$store.getters["cart/totalSum"].toFixed(2) < 50.00) {
+                        alert("To apply this voucher, you must at least have a gross price of at least RM50.")
                     }
 
                     else {
                         this.$store.dispatch("cart/useVoucherReducePrice", {
+                            code: this.voucherCode,
                             less: 40.00,
                         });
                         alert("Fun 40 voucher applied!");
+
+                        this.voucherCode = "Fun 40";
+                        this.inputVoucher = true;
                     }    
                 }
 
@@ -92,9 +104,13 @@ export default {
 
                     else {
                         this.$store.dispatch("cart/useVoucherReducePrice", {
+                            code: this.voucherCode,
                             less: (this.$store.getters["cart/totalSum"].toFixed(2))*0.2,
                         });
                         alert("Happy 20 voucher applied!");
+
+                        this.voucherCode = "Happy 20";
+                        this.inputVoucher = true;
                     }
                 }
             }
@@ -102,6 +118,15 @@ export default {
             else {
                 alert("No owned voucher of that code was found.");
             }
+        },
+        removeVoucher() {
+            this.$store.dispatch("cart/useVoucherReducePrice", {
+                code: 0,
+                less: 0.00,
+            });
+            
+            this.voucherCode = "";
+            this.inputVoucher = false;
         },
     },
     mounted() {
@@ -119,9 +144,6 @@ section {
 }
 
 h2 {
-    --gray-black: #292929;
-    --quick-gray: #ccc;
-
     color: var(--gray-black);
     text-align: center;
     border-bottom: 2px solid var(--quick-gray);
@@ -138,9 +160,11 @@ ul {
     padding: 0;
 }
 
-button {
-    --button-dark-red: #8f0030;
+span {
+    font-size: large;
+}
 
+button {
     font: inherit;
     border: 1px solid var(--button-dark-red);
     background-color: var(--button-dark-red);
@@ -153,8 +177,6 @@ button {
 
 button:hover,
 button:active {
-    --button-dark-red-hover: #53001c;
-
     background-color: var(--button-dark-red-hover);
     border-color: var(--button-dark-red-hover);
 }

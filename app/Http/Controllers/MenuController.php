@@ -16,29 +16,37 @@ class MenuController extends Controller
         return Menu::all();
     }
 
-    public function store(){
+    public function store(Request $request){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);
         
-        $this ->validate(request(),[
-            
-            'menuName'=>'required',
-            'description'=>'required',
-            'price'=>'required',
-            'categoryCode'=>'required',
-            'cuisineCode'=>'required',
-        ]);
-            Menu::forceCreate([
-            'menuName' => request('menuName'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'categoryCode' => request('categoryCode'),
-            'cuisineCode' => request('cuisineCode'),
-        ]);
+            $menu = new Menu;
+            $menu->PK_menuID = $id;
+            $menu->menuName = $request->menuName;
+            $menu->description = $request->description;
+            $menu->price = $request->price;
+            $menu->FK_categoryCode = $request->categoryCode;
+            $menu->FK_cuisineCode = $request->cuisineCode;
+            $menu->save();
 
-        return ['success'=> 'Menu created successfully!'];
+        
+        return;
     }
-
-    public function destroy(Request $request){
+    
+    public function update(Request $request){
+        $menu = Menu::where('PK_menuID', $request->menuID)
+            
+        ->update(['menuName' => $request->menuName, 
+        'description' => $request->description, 
+        'price' => $request->price, 
+        'FK_categoryCode' => $request->categoryCode, 
+        'FK_cuisineCode' => $request->cuisineCode,
+        ]);
+           
+        
+        return $menu;
+    }
+    
+     public function destroy(Request $request){
         Menu::where(
             [
                 'PK_menuID' => $request->menuID
@@ -51,4 +59,5 @@ class MenuController extends Controller
     public function show(){
         return;
     }
+    
 }

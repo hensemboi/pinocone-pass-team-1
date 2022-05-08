@@ -6,8 +6,7 @@
                     <div class="col-sm-6">
                         <h2>Menu Management</h2>
                     </div>
-                    <div class="col-sm-6">
-                      <button @click="deleteModel = true" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>	
+                    <div class="col-sm-6">	
                       <button @click="myModel = true" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Menu</span></button>			
                     </div>
                 </div>
@@ -15,12 +14,6 @@
             <table class="table table-striped table-hover" id="menuList">
                 <thead>
                     <tr>
-                        <th>
-                          <span class="custom-checkbox">
-                            <input type="checkbox" id="selectAll">
-                            <label for="selectAll"></label>
-                          </span>
-                        </th>
                         <th>Menu ID</th>
                         <th>Menu Name</th>
 						<th>Description</th>
@@ -33,26 +26,21 @@
                 </thead>
                 <tbody>
                     <tr v-for="menu in menuList" v-bind:key="menu">
-                        <td>
-                            <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                            <label for="checkbox1"></label>
-                            </span>
-                        </td>
                         <td>{{ menu.PK_menuID}}</td>
                         <td>{{ menu.menuName}}</td>
                         <td>{{ menu.description }}</td>
                         <td>{{ menu.price }}</td>
                         <td>{{ menu.totalOrders }}</td>
-                        <td>{{ menu.categoryCode}}</td>
-                        <td>{{ menu.cuisineCode}}</td>
+                        <td>{{ menu.FK_categoryCode}}</td>
+                        <td>{{ menu.FK_cuisineCode}}</td>
                         <td>
-                            <a href="" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a @click="openEdit(menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a @click="deleteMenu(menu, menu.PK_menuID)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            
             <div v-if="myModel">
                 <transition name="model">
                     <div class="modal-mask">
@@ -63,46 +51,49 @@
                                         <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">{{dynamicTitle}}</h4>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" >
                                         <div class="form-group">
                                             <label for="menuName">Menu Name</label>
-                                            <input type="text" class="form-control" id="menuName" v-model="menuName" required>
-                                            <span class="help is-danger" v-text="errors.get('menuName')"></span>
+                                            <input type="text" class="form-control" id="menuName" v-model="form.menuName" required>
+                                            
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <textarea class="form-control"  id="description" v-model="description" required></textarea>
-                                            <span class="help is-danger" v-text="errors.get('description')"></span>
+                                            <textarea class="form-control"  id="description" v-model="form.description" required></textarea>
+                                           
                                         </div>
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="text" class="form-control" id="price" v-model="price" required>
-                                            <span class="help is-danger" v-text="errors.get('price')"></span>
+                                            <input type="text" class="form-control" id="price" v-model="form.price" required>
+                                           
                                         </div>
                                         <div class="form-group">
                                             <label>Category Code</label>
-                                            <select id="categoryCode" v-model="FK_categoryCode" required> 
+                                            <select id="categoryCode" v-model="form.categoryCode" required> 
                                             <option value="">Category Code</option>
                                             <option value="A001">A001</option>
                                             <option value="W001">W001</option>
                                             <option value="L001">L001</option>
                                             </select>
-                                              <span class="help is-danger" v-text="errors.get('categoryCode')"></span>
+                                              
                                         </div>			
                                         <div class="form-group">
                                             <label>Cuisine Code</label>
-                                            <select id="cuisineCode"  v-model="FK_cuisineCode" required> 
+                                            <select id="cuisineCode"  v-model="form.cuisineCode" required> 
                                             <option value="">Cuisine Code</option>
                                             <option value="A001">A001</option>
                                             <option value="W001">W001</option>
                                             <option value="L001">L001</option>
                                             </select>
-                                            <span class="help is-danger" v-text="errors.get('cuisineCode')"></span>
+                                            
                                         </div>			
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="button" class="btn btn-default" @click="myModel=false" value="Cancel">
-                                        <input type="submit" class="btn btn-success" v-model="actionButton" >
+                                        <div class="form_action--button">
+                                            <input type="button" class="btn btn-default" @click="myModel=false" value="Cancel">
+                                            <input v-show="!editCheck" type="submit" class="btn btn-success" @click="onSubmit" v-model="actionButton">
+                                            <input v-show="editCheck" type="submit" class="btn btn-primary" @click="editMenu()" v-model="actionButton">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,24 +106,8 @@
 </template>
 	
 <script>
+import Swal from 'sweetalert2'
 
-class Errors{
-    constructor(){
-
-        this.errors = { };
-
-    }
-
-    get(field){
-        if (this.errors[field]){
-            return this.errors[field][0];
-        }
-    }
-
-    record(errors){
-        this.errors = errors;
-    }
-}
     export default {
         data() {
             return {
@@ -141,7 +116,6 @@ class Errors{
                 actionButton:'Add',
                 dynamicTitle:'',
                 menuList: [],
-                errors: new Errors(),
                 form: {
                     'menuID': "",
                     'menuName': "",
@@ -150,7 +124,8 @@ class Errors{
                     'totalOrders': "",
                     'categoryCode': "",
                     'cuisineCode': "",
-                }
+                },
+                editCheck: false,
             }
         },
         created() {
@@ -166,24 +141,47 @@ class Errors{
                 this.form.cuisineCode = ""
                 this.myModel = true
             },
-            openDeleteModel(){
-                this.deleteModel = true
-            },
             onSubmit() {
+                this.editCheck = false
                 axios.post('./menu', this.form)
-                    .then(response => alert('Success'))
-                    .catch(error => this.errors.record(error.response.data))
+                    .then(response => {
+                        Swal.fire({
+                        title: 'Success!',
+                        html: 'Menu created successfully!',
+                        icon: 'success',
+                        confirmButtonColor: '#fed531',
+                        confirmButtonText: 'OK',
+                        })
+                        })
+                    this.myModel = false
+                },
+            openEdit(editmenu){
+                this.editCheck = true
+                this.actionButton = 'Update',
+                axios.get('./menu', this.form)
+                this.form.menuID = editmenu.PK_menuID
+                this.form.menuName = editmenu.menuName
+                this.form.description = editmenu.description
+                this.form.price = editmenu.price
+                this.form.totalOrders = editmenu.totalOrders
+                this.form.categoryCode = editmenu.FK_categoryCode
+                this.form.cuisineCode = editmenu.FK_cuisineCode
+                this.myModel = true
             },
-            onSuccess(response){
-                alert(response.data.message);
+            editMenu(){
 
-            },
-            resetForm() {
-                this.form.menuName = ""
-                this.form.description = ""
-                this.form.price = ""
-                this.form.categoryCode = ""
-                this.form.cuisineCode = ""
+                axios.put('./menu', this.form)
+                .then(response => {
+                        Swal.fire({
+                        title: 'Success!',
+                        html: 'Menu updated!',
+                        icon: 'success',
+                        confirmButtonColor: '#fed531',
+                        confirmButtonText: 'OK',
+                        })
+                        })
+                this.myModel = false
+                
             },
             deleteMenu(menu) {
                 this.form.menuID = menu.PK_menuID
@@ -194,10 +192,38 @@ class Errors{
                 this.form.categoryCode = menu.FK_categoryCode
                 this.form.cuisineCode = menu.FK_cuisineCode
 
-                axios.delete('./menu/' + menu.PK_menuID, { data: this.form })
+                    Swal.fire({
+                   
+                    title: `Are you sure you want to delete this menu?`,
+                    text: "This process cannot be undone.",
+                    icon: "warning",
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonColor: '#fed531',
+                    cancelButtonColor: '#808080',
+                    confirmButtonText: 'Yes!'
+                    })
+                    .then((willDelete) => {
+                    if (willDelete.isConfirmed) {
+                        axios.delete('./menu/' + menu.PK_menuID, { data: this.form }),
+                        Swal.fire(
+                        'Deleted',
+                        'Poof! Your menu has been deleted!', 
+                        "success",
+                        )
+                    }else{
+                        Swal.fire("Canceled",
+                        'You have canceled your action',
+                        'error',
+                        )
+                    }
+                 })
+
+                }
             }
+                    
         }
-    }
+
 </script>
 
 <style scoped>

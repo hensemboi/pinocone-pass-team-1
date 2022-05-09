@@ -84,31 +84,26 @@ export default {
         handleSubmit(e) {
             e.preventDefault()
             if (this.password.length > 0) {
-                axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.get("http://localhost:8000/sanctum/csrf-cookie").then(response => {
                     axios.post('login', {
                         email: this.email,
                         password: this.password
                     })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                this.$router.go('/dashboard')
-                            } else {
-                                this.error = response.data.message
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
+                    .then((response) => {
+                        this.$router.push("/home");
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
                 })
             }
         }
     },
-    beforeRouteEnter(to, from, next) {
-        if (window.Laravel.isLoggedin) {
-            return next('dashboard');
-        }
-        next();
-    }
+    // beforeRouteEnter(to, from, next) {
+    //     if (window.Laravel.isLoggedin) {
+    //         return next('dashboard');
+    //     }
+    //     next();
+    // }
 }
 </script>

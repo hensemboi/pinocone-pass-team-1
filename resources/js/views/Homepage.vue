@@ -106,15 +106,26 @@
             <recommended-menu menu="6"></recommended-menu>
         </div>
         </div>
+        <button @click="logout">Log Out</button>
     </div>
 </template>
 
 <script>
-    import RecommendedMenu from "../components/RecommendedMenu.vue";
+    import axios from "axios";
+import RecommendedMenu from "../components/RecommendedMenu.vue";
     export default {
         components: {
             "recommended-menu": RecommendedMenu,
         },
+        methods: {
+            logout() {
+                axios.post("logout")
+            }
+        },
+        async created() {
+            const userID = (await axios.get("./user")).data.PK_userID
+            console.log(userID)
+        }
     };
 </script>
 

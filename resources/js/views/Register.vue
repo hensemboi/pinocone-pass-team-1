@@ -154,7 +154,7 @@ export default({
             event.preventDefault();
             axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 axios
-                .post("/register", {
+                .post("register", {
                     ...this.form,
                 })
                 .then((response) => {

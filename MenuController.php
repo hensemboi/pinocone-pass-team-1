@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Ramsey\Uuid\Type\Integer;
 
 class MenuController extends Controller
 {
@@ -44,5 +45,9 @@ class MenuController extends Controller
 
     public function show(){
         return;
+    }
+
+    public function fetchTopTotalOrders($qty){
+        return Menu::orderBy('totalOrders')->get($qty);
     }
 }

@@ -97,3 +97,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 // });
 
 Route::resource('menu', 'App\Http\Controllers\MenuController');
+
+Route::get('dashboard/{qty}', [MenuController::class, 'fetchTopTotalOrders']);

@@ -46,6 +46,7 @@ body p,a {
 	text-decoration: none;
 	border: none;
 	border-radius: 20px;
+	font-size: 18px;
 	padding: 7px 30px;
 	line-height: 47px;
 	cursor: pointer;

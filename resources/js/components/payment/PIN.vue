@@ -18,14 +18,13 @@
         data() {
             return {
                 secret: "8yR5t",
-                userID: 47,
                 PIN: "",
                 pinopayWallet: []
             }
         },
-        created() {
-            axios.get("./pinopay/" + this.userID)
-            .then(response => this.pinopayWallet = response.data)
+        async created() {
+            const userID = (await axios.get("./user")).data.PK_userID
+            this.pinopayWallet = (await axios.get("./pinopay/" + userID)).data
         },
         methods: {
             enterPIN() {
@@ -59,8 +58,6 @@
     }
 
     button {
-        --button-dark-red: #8f0030;
-
         font: inherit;
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
@@ -72,8 +69,6 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
     }

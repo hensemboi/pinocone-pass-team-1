@@ -27,6 +27,10 @@ class User extends Authenticatable
      */
     protected $guarded=[];
 
+    protected $primaryKey = 'PK_userID';
+
+    public $incrementing = false;
+
     public $timestamps=true;
 
     public function order(){

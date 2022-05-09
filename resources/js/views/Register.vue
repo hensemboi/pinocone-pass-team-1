@@ -122,6 +122,7 @@ export default({
                 'dateOfBirth' : '',
                 'email' : '',
                 'password' : '',
+                'password_confirmation' : '',
             }
         }
     },
@@ -151,13 +152,12 @@ export default({
         // }
         onSubmit(event) {
             event.preventDefault();
-            const { default: axios } = require('axios');
             axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 axios
                 .post("/register", {
                     ...this.form,
                 })
-                .then(() => {
+                .then((response) => {
                     this.$router.push("/home");
                 })
                 .catch((err) => {

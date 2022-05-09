@@ -76,8 +76,6 @@ img {
 }
 
 .item__total {
-    --item-gray: #474747;
-
     font-weight: bold;
     margin: 1rem 0;
     border-top: 1px solid var(--item-gray);
@@ -87,8 +85,6 @@ img {
 }
 
 button {
-    --button-dark-red: #8f0030;
-
     font: inherit;
     border: 1px solid var(--button-dark-red);
     background-color: var(--button-dark-red);
@@ -100,8 +96,6 @@ button {
 
 button:hover,
 button:active {
-    --button-dark-red-hover: #53001c;
-
     background-color: var(--button-dark-red-hover);
     border-color: var(--button-dark-red-hover);
 }

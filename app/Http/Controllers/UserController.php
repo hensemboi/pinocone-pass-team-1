@@ -7,13 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function fetchSpecificUser(Request $request, $id)
+    public function fetchAuthenticatedUser()
     {
-        return User::where(
-            [
-                'PK_userID' => $id
-            ]
-        )->get();
+        return Auth::user();
     }
 
     /**

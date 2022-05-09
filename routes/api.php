@@ -32,12 +32,11 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('order', 'store');
     Route::put('order/{id}', 'update');
 });
+
+Route::get('marketplace', [MenuController::class, 'fetchAll']);
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
 Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
-
-Route::get('productslisting', [MenuController::class, 'fetchAll']);
-Route::get('marketplace', [MenuController::class, 'fetchAll']);
 Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
 Route::controller(UserPaymentMethodController::class)->group(function () {
@@ -62,39 +61,21 @@ Route::controller(VoucherController::class)->group(function () {
 Route::controller(UserVoucherController::class)->group(function () {
     Route::get('uservoucher/{id}', 'fetchVoucherInformation');
     Route::post('uservoucher', 'store');
+    Route::delete('uservoucher/{id}', 'destroy');
 });
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('user/{id}', 'fetchSpecificUser');
+    Route::get('user', 'fetchAuthenticatedUser');
     Route::put('user/{id}', 'updateIncentives');
 });
 
-Route::controller(TestUserController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout')->middleware('auth:sanctum');
-});
-
-Route::get('menu', [MenuController::class, 'create']);
-Route::post('menu', [MenuController::class, 'store']);
+Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('', [OrderController::class, '']);
-
-// Route::post('login', [UserController::class, 'login']);
-Route::post('/register', [RegisterController::class, 'register']);
-// Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-
-// Route::group(['prefix' => 'books', 'middleware' => 'auth:sanctum'], function () {
-//     Route::get('/', [BookController::class, 'index']);
-//     Route::post('add', [BookController::class, 'add']);
-//     Route::get('edit/{id}', [BookController::class, 'edit']);
-//     Route::post('update/{id}', [BookController::class, 'update']);
-//     Route::delete('delete/{id}', [BookController::class, 'delete']);
-// });
 
 Route::resource('menu', 'App\Http\Controllers\MenuController');
 

@@ -215,16 +215,15 @@ export default {
             return !this.changeCredentials;
         },
     },
-    created() {
-        axios.get("./uservoucher/" + this.userID)
-        .then(response => this.userVouchers = response.data);
+    async created() {
+        const userID = (await axios.get("./user")).data.PK_userID;
+        this.userVouchers = (await axios.get("./uservoucher/" + userID)).data;
     },
     data() {
         return {
             isLoggedIn: true,
             changeCredentials: false,
             inputIsInvalid: false,
-            userID: 47,
             userVouchers: [],
         };
     },

@@ -108,11 +108,10 @@ li {
 
 .cancelled {
     text-decoration: line-through;
+    color: gainsboro;
 }
 
 button {
-    --button-purple: #45006d;
-
     font: inherit;
     cursor: pointer;
     background-color: var(--button-purple);
@@ -124,8 +123,6 @@ button {
 
 button:hover,
 button:active {
-    --button-purple-hover: #760ab4;
-
     background-color: var(--button-purple-hover);
     border-color: var(--button-purple-hover);
 }

@@ -44,3 +44,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 //     Route::post('update/{id}', [BookController::class, 'update']);
 //     Route::delete('delete/{id}', [BookController::class, 'delete']);
 // });
+<<<<<<< Updated upstream
+=======
+
+Route::resource('menu', 'App\Http\Controllers\MenuController');
+
+Route::get('dashboard/{qty}', [MenuController::class, 'fetchTopTotalOrders']);
+>>>>>>> Stashed changes

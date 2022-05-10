@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,10 @@ use App\Http\Controllers\TestUserController;
 
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 
-
 Route::post('menu', [MenuController::class, 'store']);
 Route::put('menu', [MenuController::class, 'update']);
+Route::post('/upload', [ImageController::class, 'upload']);
+
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);

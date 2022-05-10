@@ -14,6 +14,7 @@ import AdminSideBar from "./components/admin/AdminSideBar.vue"
 import AdminTopBar from "./components/admin/AdminTopBar.vue"
 import ProductsListing from "./views/admin/ProductsListing.vue"
 import Menu from "./components/menu/Menu.vue"
+import SpecialSection from './components/SpecialSection.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -72,6 +73,14 @@ const router = createRouter({
             path: "/menu",
             components: {
                 default: Menu,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/section",
+            components: {
+                default: SpecialSection,
                 footer: Footer,
                 navbar: Navbar,
             },

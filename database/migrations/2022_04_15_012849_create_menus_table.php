@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
+            $table->string('menuImage')->nullable();
             $table->string('PK_menuID')->primary();
             $table->string('menuName', 50)->default('Default menu');
             $table->text('description', 50);

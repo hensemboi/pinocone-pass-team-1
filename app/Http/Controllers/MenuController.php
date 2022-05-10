@@ -20,6 +20,7 @@ class MenuController extends Controller
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);
         
             $menu = new Menu;
+            $menu->menuImage = $request->menuImage;
             $menu->PK_menuID = $id;
             $menu->menuName = $request->menuName;
             $menu->description = $request->description;
@@ -29,13 +30,15 @@ class MenuController extends Controller
             $menu->save();
 
         
-        return;
+        return Menu::all();
     }
     
     public function update(Request $request){
-        $menu = Menu::where('PK_menuID', $request->menuID)
+        Menu::where('PK_menuID', $request->menuID)
             
-        ->update(['menuName' => $request->menuName, 
+        ->update([
+        'menuImage' => $request->menuImage, 
+        'menuName' => $request->menuName, 
         'description' => $request->description, 
         'price' => $request->price, 
         'FK_categoryCode' => $request->categoryCode, 
@@ -43,7 +46,7 @@ class MenuController extends Controller
         ]);
            
         
-        return $menu;
+        return Menu::all();
     }
     
      public function destroy(Request $request){
@@ -53,7 +56,7 @@ class MenuController extends Controller
             ]
         )->delete();
 
-        return;
+        return Menu::all();
     }
 
     public function show(){

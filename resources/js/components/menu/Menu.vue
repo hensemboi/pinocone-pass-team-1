@@ -14,6 +14,7 @@
             <table class="table table-striped table-hover" id="menuList">
                 <thead>
                     <tr>
+                        <th>Menu Image</th>
                         <th>Menu ID</th>
                         <th>Menu Name</th>
 						<th>Description</th>
@@ -26,6 +27,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="menu in menuList" v-bind:key="menu">
+                        <td><img src="" /></td>
                         <td>{{ menu.PK_menuID}}</td>
                         <td>{{ menu.menuName}}</td>
                         <td>{{ menu.description }}</td>
@@ -51,48 +53,60 @@
                                         <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">{{dynamicTitle}}</h4>
                                     </div>
-                                    <div class="modal-body" >
+                                    <div class="modal-body" v-if="!submitted">
                                         <div class="form-group">
-                                            <label for="menuName">Menu Name</label>
-                                            <input type="text" class="form-control" id="menuName" v-model="form.menuName" required>
-                                            
+                                            <label for="menuImage" class="form-label">Menu Image</label>
+                                            <Dropzone @drop.prevent="drop" @change="selectedFile"/>
+                                            <span class="file-info">File: {{ dropzoneFile.name }}</span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="description">Description</label>
-                                            <textarea class="form-control"  id="description" v-model="form.description" required></textarea>
-                                           
+                                            <label for="menuName" class="form-label">Menu Name</label>
+                                            <input type="text" id="menuName" v-model="form.menuName" v-bind:class="{'form-control':true, 'is-invalid' : !validMenuName(form.menuName) && menuNameBlured}" v-on:blur="menuNameBlured = true">
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description" class="form-label">Description</label>
+                                            <input type="text" id="description" v-model="form.description" v-bind:class="{'form-control':true, 'is-invalid' : !validDescription(form.description) && descriptionBlured}" v-on:blur="descriptionBlured = true">
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="text" class="form-control" id="price" v-model="form.price" required>
-                                           
+                                            <input type="text" id="price" v-model="form.price" v-bind:class="{'form-control':true, 'is-invalid' : !validPrice(form.price) && priceBlured}" v-on:blur="priceBlured = true">
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please input a valid price.</div>
                                         </div>
                                         <div class="form-group">
                                             <label>Category Code</label>
-                                            <select id="categoryCode" v-model="form.categoryCode" required> 
+                                            <select id="categoryCode" v-model="form.categoryCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCategoryCode(form.categoryCode) && categoryCodeBlured}" v-on:blur="categoryCodeBlured = true"> 
                                             <option value="">Category Code</option>
                                             <option value="A001">A001</option>
                                             <option value="W001">W001</option>
                                             <option value="L001">L001</option>
                                             </select>
-                                              
+                                            <div class="valid-feedback">Nice!</div>
+                                            <div class="invalid-feedback">Please select a category code.</div>
+                                           
                                         </div>			
                                         <div class="form-group">
                                             <label>Cuisine Code</label>
-                                            <select id="cuisineCode"  v-model="form.cuisineCode" required> 
+                                            <select id="cuisineCode"  v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
                                             <option value="">Cuisine Code</option>
                                             <option value="A001">A001</option>
                                             <option value="W001">W001</option>
                                             <option value="L001">L001</option>
                                             </select>
+                                            <div class="valid-feedback">Nice!</div>
+                                            <div class="invalid-feedback">Please select a cuisine code.</div>
                                             
                                         </div>			
                                     </div>
                                     <div class="modal-footer">
                                         <div class="form_action--button">
                                             <input type="button" class="btn btn-default" @click="myModel=false" value="Cancel">
-                                            <input v-show="!editCheck" type="submit" class="btn btn-success" @click="onSubmit" v-model="actionButton">
-                                            <input v-show="editCheck" type="submit" class="btn btn-primary" @click="editMenu()" v-model="actionButton">
+                                            <input v-show="!editCheck" type="submit" class="btn btn-success"  v-model="actionButton" v-on:click.stop.prevent="onSubmit">
+                                            <input v-show="editCheck" type="submit" class="btn btn-primary" v-model="actionButton" v-on:click.stop.prevent="editMenu()">
                                         </div>
                                     </div>
                                 </div>
@@ -107,130 +121,198 @@
 	
 <script>
 import Swal from 'sweetalert2'
+import { ref } from "vue"
+import Dropzone from './Dropzone.vue'
+
 
     export default {
-        data() {
-            return {
-                myModel: false,
-                deleteModel:false,
-                actionButton:'Add',
-                dynamicTitle:'',
-                menuList: [],
-                form: {
-                    'menuID': "",
-                    'menuName': "",
-                    'description': "",
-                    'price': "",
-                    'totalOrders': "",
-                    'categoryCode': "",
-                    'cuisineCode': "",
-                },
-                editCheck: false,
+        components:{
+            Dropzone,
+        },
+    setup(){
+        let dropzoneFile = ref("");
+        const drop = (e) => {
+            dropzoneFile.value = e.dataTransfer.files[0];
+        };
+        const selectedFile = () => {
+            dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
+        };
+        return { dropzoneFile, drop, selectedFile };
+    },
+    data() {
+        return {
+            myModel: false,
+            deleteModel: false,
+            actionButton: "Add",
+            dynamicTitle: "",
+            menuList: [],
+            form: {
+                "menuImage": "",
+                "menuID": "",
+                "menuName": "",
+                "description": "",
+                "price": "",
+                "totalOrders": "",
+                "categoryCode": "",
+                "cuisineCode": "",
+            },
+            editCheck: false,
+            menuImageBlured: false,
+            menuNameBlured: false,
+            descriptionBlured: false,
+            priceBlured: false,
+            categoryCodeBlured: false,
+            cuisineCodeBlured: false,
+            valid: false,
+            submitted: false,
+        };
+    },
+    created() {
+        axios.get("./menu", this.form)
+            .then(response => this.menuList = response.data);
+    },
+    methods: {
+        openModel() {
+            this.form.menuImage = "";
+            this.form.menuName = "";
+            this.form.description = "";
+            this.form.price = "";
+            this.form.categoryCode = "";
+            this.form.cuisineCode = "";
+            this.myModel = true;
+        },
+        validate() {
+            this.menuImageBlured = true;
+            this.menuNameBlured = true;
+            this.descriptionBlured = true;
+            this.priceBlured = true;
+            this.categoryCodeBlured = true;
+            this.cuisineCodeBlured = true;
+            if (this.validMenuImage(this.form.menuImage) && this.validMenuName(this.form.menuName) && this.validDescription(this.form.description) && this.validPrice(this.form.price) && this.validCategoryCode(this.form.categoryCode) && this.validCuisineCode(this.form.cuisineCode)) {
+                this.valid = true;
             }
         },
-        created() {
-           axios.get('./menu', this.form)
-            .then(response => this.menuList = response.data)
+        validMenuImage(menuImage) {
+            if (menuImage.length > 1) {
+                return true;
+            }
         },
-        methods: {
-            openModel(){
-                this.form.menuName = ""
-                this.form.description = ""
-                this.form.price = ""
-                this.form.categoryCode = ""
-                this.form.cuisineCode = ""
-                this.myModel = true
-            },
-            onSubmit() {
-                this.editCheck = false
-                axios.post('./menu', this.form)
-                    .then(response => {
-                        Swal.fire({
-                        title: 'Success!',
-                        html: 'Menu created successfully!',
-                        icon: 'success',
-                        confirmButtonColor: '#fed531',
-                        confirmButtonText: 'OK',
-                        })
-                        })
-                    this.myModel = false
-                },
-            openEdit(editmenu){
-                this.editCheck = true
-                this.actionButton = 'Update',
-                axios.get('./menu', this.form)
-                this.form.menuID = editmenu.PK_menuID
-                this.form.menuName = editmenu.menuName
-                this.form.description = editmenu.description
-                this.form.price = editmenu.price
-                this.form.totalOrders = editmenu.totalOrders
-                this.form.categoryCode = editmenu.FK_categoryCode
-                this.form.cuisineCode = editmenu.FK_cuisineCode
-                this.myModel = true
-            },
-            editMenu(){
-
-                axios.put('./menu', this.form)
+        validMenuName(menuName) {
+            if (menuName.length > 1) {
+                return true;
+            }
+        },
+        validDescription(description) {
+            if (description.length >= 1) {
+                return true;
+            }
+        },
+        validPrice(price) {
+            var num = /^[1-9]\d*$/;
+            if (num.test(price)) {
+                return true;
+            }
+        },
+        validCategoryCode(categoryCode) {
+            if (categoryCode != "") {
+                return true;
+            }
+        },
+        validCuisineCode(cuisineCode) {
+            if (cuisineCode != "") {
+                return true;
+            }
+        },
+        onSubmit() {
+            this.editCheck = false;
+            this.validate();
+            if (this.valid) {
+                this.submitted = true;
+                this.myModel = false;
+            }
+            axios.post("./menu", this.form)
                 .then(response => {
-                        Swal.fire({
-                        title: 'Success!',
-                        html: 'Menu updated!',
-                        icon: 'success',
-                        confirmButtonColor: '#fed531',
-                        confirmButtonText: 'OK',
-                        })
-                        })
-                this.myModel = false
-                
-            },
-            deleteMenu(menu) {
-                this.form.menuID = menu.PK_menuID
-                this.form.menuName = menu.menuName
-                this.form.description = menu.description
-                this.form.price = menu.price
-                this.form.totalOrders = menu.totalOrders
-                this.form.categoryCode = menu.FK_categoryCode
-                this.form.cuisineCode = menu.FK_cuisineCode
-
-                    Swal.fire({
-                   
-                    title: `Are you sure you want to delete this menu?`,
-                    text: "This process cannot be undone.",
-                    icon: "warning",
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    confirmButtonColor: '#fed531',
-                    cancelButtonColor: '#808080',
-                    confirmButtonText: 'Yes!'
-                    })
-                    .then((willDelete) => {
-                    if (willDelete.isConfirmed) {
-                        axios.delete('./menu/' + menu.PK_menuID, { data: this.form }),
-                        Swal.fire(
-                        'Deleted',
-                        'Poof! Your menu has been deleted!', 
-                        "success",
-                        )
-                    }else{
-                        Swal.fire("Canceled",
-                        'You have canceled your action',
-                        'error',
-                        )
-                    }
-                 })
-
+                Swal.fire({
+                    title: "Success!",
+                    html: "Menu created successfully!",
+                    icon: "success",
+                    confirmButtonColor: "#fed531",
+                    confirmButtonText: "OK",
+                });
+                this.menuList = response.data;
+            });
+        },
+        openEdit(editmenu) {
+            this.editCheck = true;
+            this.actionButton = "Update",
+                axios.get("./menu", this.form);
+            this.form.menuImage = editmenu.menuImage;
+            this.form.menuID = editmenu.PK_menuID;
+            this.form.menuName = editmenu.menuName;
+            this.form.description = editmenu.description;
+            this.form.price = editmenu.price;
+            this.form.totalOrders = editmenu.totalOrders;
+            this.form.categoryCode = editmenu.FK_categoryCode;
+            this.form.cuisineCode = editmenu.FK_cuisineCode;
+            this.myModel = true;
+        },
+        editMenu() {
+            axios.put("./menu", this.form)
+                .then(response => {
+                Swal.fire({
+                    title: "Success!",
+                    html: "Menu updated!",
+                    icon: "success",
+                    confirmButtonColor: "#fed531",
+                    confirmButtonText: "OK",
+                });
+                this.menuList = response.data;
+            });
+            this.myModel = false;
+        },
+        deleteMenu(menu) {
+            this.form.menuImage = menu.menuImage;
+            this.form.menuID = menu.PK_menuID;
+            this.form.menuName = menu.menuName;
+            this.form.description = menu.description;
+            this.form.price = menu.price;
+            this.form.totalOrders = menu.totalOrders;
+            this.form.categoryCode = menu.FK_categoryCode;
+            this.form.cuisineCode = menu.FK_cuisineCode;
+            Swal.fire({
+                title: `Are you sure you want to delete this menu?`,
+                text: "This process cannot be undone.",
+                icon: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: "#fed531",
+                cancelButtonColor: "#808080",
+                confirmButtonText: "Yes!"
+            })
+                .then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    axios.delete("./menu/" + menu.PK_menuID, { data: this.form })
+                        .then(response => this.menuList = response.data);
+                    Swal.fire("Deleted", "Poof! Your menu has been deleted!", "success");
                 }
-            }
-                    
+                else {
+                    Swal.fire("Canceled", "You have canceled your action", "error");
+                }
+            });
         }
+    },
+   
+}
 
 </script>
 
 <style scoped>
+
 body{
     background-color: #fed531;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 .table-wrapper {
     background: #fff;
     padding: 20px 25px;
@@ -361,57 +443,7 @@ table.table .avatar {
     margin-top: 10px;
     font-size: 13px;
 }    
-/* Custom checkbox */
-.custom-checkbox {
-    position: relative;
-}
-.custom-checkbox input[type="checkbox"] {    
-    opacity: 0;
-    position: absolute;
-    margin: 5px 0 0 3px;
-    z-index: 9;
-}
-.custom-checkbox label:before{
-    width: 18px;
-    height: 18px;
-}
-.custom-checkbox label:before {
-    content: '';
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: text-top;
-    background: white;
-    border: 1px solid #bbb;
-    border-radius: 2px;
-    box-sizing: border-box;
-    z-index: 2;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 3px;
-    width: 6px;
-    height: 11px;
-    border: solid #000;
-    border-width: 0 3px 3px 0;
-    transform: inherit;
-    z-index: 3;
-    transform: rotateZ(45deg);
-}
-.custom-checkbox input[type="checkbox"]:checked + label:before {
-    border-color: #03A9F4;
-    background: #03A9F4;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-    border-color: #fff;
-}
-.custom-checkbox input[type="checkbox"]:disabled + label:before {
-    color: #b8b8b8;
-    cursor: auto;
-    box-shadow: none;
-    background: #ddd;
-}
+
 /* Modal styles */
 .modal{
 position: fixed;

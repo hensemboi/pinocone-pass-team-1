@@ -22,6 +22,7 @@ import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
 import Menu from "./components/menu/Menu.vue"
 import RequestsList from "./components/request_dashboard/RequestsList.vue";
+import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -90,9 +91,9 @@ const router = createRouter({
             },
         },
         {
-            path: "/usersrequests",
+            path: "/requestdashboard",
             components: {
-                default: RequestsList,
+                default: RequestDashboard,
             },
         },
         {

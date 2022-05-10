@@ -13,6 +13,13 @@
                                 <em>Price to pay: RM{{ netPrice }}</em>
                             </div>
                             <br/>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" :disabled="membership.length === 0" :checked="membership.length === 1" value="1"/>
+                                    <p>Use Express Delivery - Only for our <span>Members</span></p>
+                                </label>
+                            </div>
+                            <br/>
                             <div>
                                 <h2>Pay with:</h2>
 
@@ -83,6 +90,7 @@
                 paymentMethods: [],
                 userPaymentMethods: [],
                 pinopayWallet: [],
+                membership: [],
                 form: {
                     "userID": 0,
                     "paymentCode": 1,
@@ -105,6 +113,7 @@
         async created() {
             const userID = (await axios.get("./user")).data.PK_userID
             this.userID = userID
+            this.membership = (await axios.get("./user/" + userID)).data
 
             this.paymentMethods = (await axios.get("./paymentmethod")).data
             this.currentPaymentMethod = this.paymentMethods[0].PK_paymentCode
@@ -136,8 +145,13 @@
         text-align: center;
     }
 
-    a, em {
+    a, em, span {
         font-size: large;
+    }
+    
+    span {
+        font-style: oblique;
+        font-family: "Playfair Display";
     }
 
     button {   

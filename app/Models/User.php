@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function membership(){
-        return $this->belongsTo(membership::class);
+        return $this->hasOne(Membership::class, 'PK_FK_userID', 'PK_userID');
     }
 
     public function uservoucher(){

@@ -23283,6 +23283,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       paymentMethods: [],
       userPaymentMethods: [],
       pinopayWallet: [],
+      membership: [],
       form: {
         "userID": 0,
         "paymentCode": 1,
@@ -23318,23 +23319,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               userID = _context.sent.data.PK_userID;
               _this.userID = userID;
               _context.next = 6;
-              return axios.get("./paymentmethod");
+              return axios.get("./user/" + userID);
 
             case 6:
+              _this.membership = _context.sent.data;
+              _context.next = 9;
+              return axios.get("./paymentmethod");
+
+            case 9:
               _this.paymentMethods = _context.sent.data;
               _this.currentPaymentMethod = _this.paymentMethods[0].PK_paymentCode;
-              _context.next = 10;
+              _context.next = 13;
               return axios.get("./userpaymentmethod/" + userID);
 
-            case 10:
+            case 13:
               _this.userPaymentMethods = _context.sent.data;
-              _context.next = 13;
+              _context.next = 16;
               return axios.get("./pinopay/" + userID);
 
-            case 13:
+            case 16:
               _this.pinopayWallet = _context.sent.data;
 
-            case 14:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -24245,13 +24251,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })), {}, {
     setDisabled: function setDisabled() {
       return !this.changeCredentials;
+    },
+    dateNow: function dateNow() {
+      return Date.now();
+    },
+    rewardTime: function rewardTime() {
+      return Date.parse(this.membership.next_reward_time);
     }
   }),
   created: function created() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var userID;
+      var user;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -24260,14 +24272,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               return axios.get("./user");
 
             case 2:
-              userID = _context.sent.data.PK_userID;
+              user = _context.sent.data;
               _context.next = 5;
-              return axios.get("./uservoucher/" + userID);
+              return axios.get("./uservoucher/" + user.PK_userID);
 
             case 5:
               _this.userVouchers = _context.sent.data;
+              _context.next = 8;
+              return axios.get("./user/" + user.PK_userID);
 
-            case 6:
+            case 8:
+              _this.membership = _context.sent.data[0];
+              _this.incentivePoints = user.incentives;
+              _this.userID = user.PK_userID;
+
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -24280,7 +24299,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isLoggedIn: true,
       changeCredentials: false,
       inputIsInvalid: false,
-      userVouchers: []
+      userVouchers: [],
+      membership: [],
+      incentivePoints: 0,
+      userID: 0
     };
   },
   methods: {
@@ -24289,6 +24311,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     confirmAction: function confirmAction() {
       this.inputIsInvalid = false;
+    },
+    claimIncentive: function claimIncentive() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var object, year, month, day, hours, minutes, seconds, next;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.incentivePoints++;
+                axios.put("./user/" + _this2.userID, {
+                  incentives: _this2.incentivePoints
+                });
+                object = new Date(Date.now() + 82800000); // 82800000 is 23 hours in milliseconds
+
+                year = object.getFullYear();
+                month = object.getMonth() + 1;
+                day = object.getDate();
+                hours = object.getHours();
+                minutes = object.getMinutes();
+                seconds = object.getSeconds();
+                next = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+                axios.put("./userprofile/" + _this2.userID, {
+                  time: next
+                });
+                _context2.next = 13;
+                return axios.get("./user/" + _this2.userID);
+
+              case 13:
+                _this2.membership = _context2.sent.data[0];
+                alert("Daily incentive point claimed!");
+
+              case 15:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -24301,7 +24363,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   \**********************************************************************************************************************************************************************************************/
 /***/ (() => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\resources\\js\\views\\Dashboard.vue: Unexpected reserved word 'await'. (15:29)\n\n\u001b[0m \u001b[90m 13 |\u001b[39m         name\u001b[33m:\u001b[39m \u001b[32m\"Dashboard\"\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 |\u001b[39m         setup(){\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m             \u001b[36mconst\u001b[39m top5 \u001b[33m=\u001b[39m ref(\u001b[36mawait\u001b[39m fetchTop5())\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 16 |\u001b[39m             \u001b[36mconst\u001b[39m \u001b[33mEarningCardSkeleton\u001b[39m \u001b[33m=\u001b[39m defineAsyncComponent(()\u001b[33m=>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m                 \u001b[36mimport\u001b[39m (\u001b[32m\"../components/cards/EarningCardSkeleton.vue\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m             )\u001b[0m\n    at instantiate (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Parser.raise (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:3335:19)\n    at Parser.checkReservedWord (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:14046:12)\n    at Parser.parseIdentifierName (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:13985:12)\n    at Parser.parseIdentifier (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:13955:23)\n    at Parser.parseExprAtom (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:12985:27)\n    at Parser.parseExprSubscripts (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:12540:23)\n    at Parser.parseUpdate (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:12519:21)\n    at Parser.parseMaybeUnary (C:\\Users\\Boss\\Downloads\\pinocone-pass-team-1\\node_modules\\@babel\\parser\\lib\\index.js:12490:23)");
+// import { defineAsyncComponent } from '@vue/runtime-core'
+//     import EarningCard from "../components/cards/EarningCards.vue"
+//     import Bar from "../components/charts/LineChart.vue"
+//     import EarningCardSkeleton from '../components/cards/EarningCardSkeleton.vue'
+//     export default {
+//         components:{
+//     EarningCard,
+//     Bar,
+//     EarningCardSkeleton
+// },
+//         name: "Dashboard",
+//         setup(){
+//             const top5 = ref(await fetchTop5())
+//             const EarningCardSkeleton = defineAsyncComponent(()=>
+//                 import ("../components/cards/EarningCardSkeleton.vue")
+//             )
+//             const EarningCardsData=[
+//                 {
+//                     name: "HAHA",
+//                     value: "$akj"
+//                 }
+//             ]
+//             const fetchTop5 = async() => {
+//                 return new Promise(()=>{
+//                     await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+//                         axios.get('/dashboard/{5}', {
+//                             action: action,
+//                         })
+//                         .then((response) => {
+//                             return response
+//                         }
+//                         )
+//                         .catch((err) => {
+//                             this.errors = err.response.data.errors;
+//                         });
+//                     });
+//                 })
+//             }
+//             return {
+//                 EarningCard,
+//                 top5,
+//                 EarningCardsData,
+//                 EarningCardSkeleton,
+//                 Bar
+//             }
+//         }
+//     }
 
 /***/ }),
 
@@ -25781,23 +25889,19 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Pay with:", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_12 = ["value"];
-
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_14 = {
-  key: 0
+var _hoisted_11 = {
+  "class": "form-check form-check-inline"
 };
+var _hoisted_12 = {
+  "class": "form-check-label"
+};
+var _hoisted_13 = ["disabled", "checked"];
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Use Express Delivery - Only for our "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Members")], -1
+  /* HOISTED */
+  );
+});
 
 var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
@@ -25805,15 +25909,13 @@ var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_16 = {
-  key: 0
-};
-
-var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "No debit cards available.", -1
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Pay with:", -1
   /* HOISTED */
   );
 });
+
+var _hoisted_17 = ["value"];
 
 var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
@@ -25821,36 +25923,62 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = {
+  key: 0
+};
+
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = {
+  key: 0
+};
+
+var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "No debit cards available.", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Add New Debit Card", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Card Number: ");
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Card Number: ");
 
-var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
   /* HOISTED */
   );
 });
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Balance: ");
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Balance: ");
 
-var _hoisted_23 = {
+var _hoisted_28 = {
   key: 1
 };
-var _hoisted_24 = {
+var _hoisted_29 = {
   key: 0
 };
 
-var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
   /* HOISTED */
   );
 });
 
-var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, "Please open up a virtual wallet first.", -1
   /* HOISTED */
   );
@@ -25865,7 +25993,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Price to pay: RM" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.netPrice), 1
   /* TEXT */
-  )]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  )]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "form-check-input",
+    type: "checkbox",
+    disabled: $data.membership.length === 0,
+    checked: $data.membership.length === 1,
+    value: "1"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_13), _hoisted_14])]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     onChange: _cache[0] || (_cache[0] = function ($event) {
       return $options.selectPaymentMethod($event);
     })
@@ -25874,15 +26010,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       value: paymentMethod.PK_paymentCode
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(paymentMethod.name), 9
     /* TEXT, PROPS */
-    , _hoisted_12);
+    , _hoisted_17);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))], 32
   /* HYDRATE_EVENTS */
-  )]), _hoisted_13, $data.currentPaymentMethod === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userPaymentMethods, function (userPaymentMethod) {
+  )]), _hoisted_18, $data.currentPaymentMethod === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userPaymentMethods, function (userPaymentMethod) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Using card: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(userPaymentMethod.cardNo), 1
     /* TEXT */
-    ), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    ), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: "/PIN",
       tag: "button"
     }, {
@@ -25899,7 +26035,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  )), $data.userPaymentMethods.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [_hoisted_17, _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )), $data.userPaymentMethods.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [_hoisted_22, _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     min: "0",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -25907,7 +26043,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.cardNo]])]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.cardNo]])]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     step: "0.01",
     min: "0",
@@ -25920,9 +26056,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.addUserDebitCard && $options.addUserDebitCard.apply($options, arguments);
     })
-  }, "Add")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.currentPaymentMethod === 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [$data.pinopayWallet.length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Balance: RM" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pinopayWallet[0].balance.toFixed(2)), 1
+  }, "Add")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.currentPaymentMethod === 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [$data.pinopayWallet.length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", null, "Balance: RM" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pinopayWallet[0].balance.toFixed(2)), 1
   /* TEXT */
-  ), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  ), _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/PIN",
     tag: "button"
   }, {
@@ -25941,7 +26077,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: "/pinopay"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_26];
+      return [_hoisted_31];
     }),
     _: 1
     /* STABLE */
@@ -27909,11 +28045,12 @@ var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_56 = [_hoisted_53, _hoisted_54, _hoisted_55];
-var _hoisted_57 = {
+var _hoisted_57 = ["disabled"];
+var _hoisted_58 = {
   key: 1
 };
 
-var _hoisted_58 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
     "class": "text-center"
   }, "Please login to view this page ...", -1
@@ -27921,11 +28058,11 @@ var _hoisted_58 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_59 = {
+var _hoisted_60 = {
   "class": "text-center"
 };
 
-var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -28044,11 +28181,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_57, [_hoisted_58, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Your incentive points: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.incentivePoints) + " points", 1
+  /* TEXT */
+  ), $data.membership.active === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
+    disabled: !($data.membership.next_reward_time === null || $options.dateNow >= $options.rewardTime),
+    "class": "btn btn-primary",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.claimIncentive && $options.claimIncentive.apply($options, arguments);
+    })
+  }, " Claim free point ", 8
+  /* PROPS */
+  , _hoisted_57)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/login"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_60];
+      return [_hoisted_61];
     }),
     _: 1
     /* STABLE */
@@ -28348,7 +28496,7 @@ var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-function render(_ctx, _cache) {
+function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_EarningCardSkeleton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EarningCardSkeleton");
 
   var _component_Bar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Bar");
@@ -42249,7 +42397,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba], em[data-v-371934ba] {\r\n        font-size: large;\n}\nbutton[data-v-371934ba] {   \r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-left: 12px;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba], em[data-v-371934ba], span[data-v-371934ba] {\r\n        font-size: large;\n}\nspan[data-v-371934ba] {\r\n        font-style: oblique;\r\n        font-family: \"Playfair Display\";\n}\nbutton[data-v-371934ba] {   \r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-left: 12px;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

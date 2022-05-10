@@ -15,6 +15,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\UserVoucherController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MembershipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::controller(UserVoucherController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('user', 'fetchAuthenticatedUser');
+    Route::get('user/{id}', 'fetchMembershipInfo');
     Route::put('user/{id}', 'updateIncentives');
 });
 
@@ -81,3 +83,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('menu', 'App\Http\Controllers\MenuController');
 
 Route::get('dashboard/{qty}', [MenuController::class, 'fetchTopTotalOrders']);
+Route::put('userprofile/{id}', [MembershipController::class, 'updateRewardTime']);

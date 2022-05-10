@@ -184,6 +184,17 @@
                             <td>{{ userVoucher.expiryDate }}</td>
                         </tr>
                     </table>
+                    <div>
+                        <p>Your incentive points: {{ incentivePoints }} points</p>
+                        <button
+                            v-if="membership.active === 1" 
+                            :disabled="!(membership.next_reward_time === null || dateNow >= rewardTime)"
+                            class="btn btn-primary"
+                            @click="claimIncentive"
+                        >
+                            Claim free point
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,10 +225,19 @@ export default {
         setDisabled() {
             return !this.changeCredentials;
         },
+        dateNow() {
+            return Date.now();
+        },
+        rewardTime() {
+            return Date.parse(this.membership.next_reward_time);
+        }
     },
     async created() {
-        const userID = (await axios.get("./user")).data.PK_userID;
-        this.userVouchers = (await axios.get("./uservoucher/" + userID)).data;
+        const user = (await axios.get("./user")).data;
+        this.userVouchers = (await axios.get("./uservoucher/" + user.PK_userID)).data;
+        this.membership = (await axios.get("./user/" + user.PK_userID)).data[0];
+        this.incentivePoints = user.incentives;
+        this.userID = user.PK_userID;
     },
     data() {
         return {
@@ -225,15 +245,35 @@ export default {
             changeCredentials: false,
             inputIsInvalid: false,
             userVouchers: [],
+            membership: [],
+            incentivePoints: 0,
+            userID: 0,
         };
     },
     methods: {
         changeAccountCredentials() {
             this.changeCredentials = !this.changeCredentials;
         },
-        confirmAction () {
+        confirmAction() {
             this.inputIsInvalid = false;
-        }
+        },
+        async claimIncentive() {
+            this.incentivePoints++;
+            axios.put("./user/" + this.userID, { incentives: this.incentivePoints });
+
+            const object = new Date(Date.now() + 82800000); // 82800000 is 23 hours in milliseconds
+            const year = object.getFullYear();
+            const month = object.getMonth() + 1;
+            const day = object.getDate();
+            const hours = object.getHours();
+            const minutes = object.getMinutes();
+            const seconds = object.getSeconds();
+            const next = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+            axios.put("./userprofile/" + this.userID, { time: next });
+
+            this.membership = (await axios.get("./user/" + this.userID)).data[0];
+            alert("Daily incentive point claimed!");
+        },
     },
 };
 </script>

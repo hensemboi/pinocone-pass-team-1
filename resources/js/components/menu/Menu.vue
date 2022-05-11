@@ -6,14 +6,21 @@
                     <div class="col-sm-6">
                         <h2>Menu Management</h2>
                     </div>
-                    <div class="col-sm-6">	
-                      <button @click="myModel = true" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Menu</span></button>			
+                    <div class="col-sm-6">
+                        <a href="#" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>			
+                      <button @click="openModel" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i><span>Add New Menu</span></button>			
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover" id="menuList">
                 <thead>
                     <tr>
+                        <th>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="selectAll">
+								<label for="selectAll"></label>
+							</span>
+						</th>
                         <th>Menu Image</th>
                         <th>Menu ID</th>
                         <th>Menu Name</th>
@@ -26,18 +33,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="menu in menuList" v-bind:key="menu">
-                        <td><img src="" /></td>
-                        <td>{{ menu.PK_menuID}}</td>
-                        <td>{{ menu.menuName}}</td>
+                    <tr v-for="menu in menuList" v-bind:key="menu.PK_menuID">
+                        <td>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="checkbox" name="options[]">
+								<label for="checkbox"></label>
+							</span>
+						</td>
+                        <td><img v-bind:src="menu.images" alt="No image" width="60" height="60"/></td>
+                        <td>{{ menu.PK_menuID }}</td>
+                        <td>{{ menu.menuName }}</td>
                         <td>{{ menu.description }}</td>
                         <td>{{ menu.price }}</td>
                         <td>{{ menu.totalOrders }}</td>
-                        <td>{{ menu.FK_categoryCode}}</td>
-                        <td>{{ menu.FK_cuisineCode}}</td>
+                        <td>{{ menu.FK_categoryCode }}</td>
+                        <td>{{ menu.FK_cuisineCode }}</td>
                         <td>
                             <a @click="openEdit(menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a @click="deleteMenu(menu, menu.PK_menuID)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a @click="deleteMenu(menu)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -51,12 +64,12 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">{{dynamicTitle}}</h4>
+                                        <h4 class="modal-title">{{ dynamicTitle }}</h4>
                                     </div>
-                                    <div class="modal-body" v-if="!submitted">
+                                    <div class="modal-body">
                                         <div class="form-group">
                                             <label for="menuImage" class="form-label">Menu Image</label>
-                                            <Dropzone @drop.prevent="drop" @change="selectedFile"/>
+                                            <Dropzone @drop.prevent="drop" @change="selectedFile" @addedFile="files = $event" @addedImage="images = $event"/>
                                             <span class="file-info">File: {{ dropzoneFile.name }}</span>
                                         </div>
                                         <div class="form-group">
@@ -86,27 +99,25 @@
                                             <option value="L001">L001</option>
                                             </select>
                                             <div class="valid-feedback">Nice!</div>
-                                            <div class="invalid-feedback">Please select a category code.</div>
-                                           
+                                            <div class="invalid-feedback">Please select a category code.</div>        
                                         </div>			
                                         <div class="form-group">
                                             <label>Cuisine Code</label>
-                                            <select id="cuisineCode"  v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
+                                            <select id="cuisineCode" v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
                                             <option value="">Cuisine Code</option>
                                             <option value="A001">A001</option>
                                             <option value="W001">W001</option>
                                             <option value="L001">L001</option>
                                             </select>
                                             <div class="valid-feedback">Nice!</div>
-                                            <div class="invalid-feedback">Please select a cuisine code.</div>
-                                            
+                                            <div class="invalid-feedback">Please select a cuisine code.</div>                       
                                         </div>			
                                     </div>
                                     <div class="modal-footer">
                                         <div class="form_action--button">
                                             <input type="button" class="btn btn-default" @click="myModel=false" value="Cancel">
-                                            <input v-show="!editCheck" type="submit" class="btn btn-success"  v-model="actionButton" v-on:click.stop.prevent="onSubmit">
-                                            <input v-show="editCheck" type="submit" class="btn btn-primary" v-model="actionButton" v-on:click.stop.prevent="editMenu()">
+                                            <input v-show="!editCheck" type="submit" class="btn btn-success" v-model="actionButton" v-on:click.stop.prevent="onSubmit">
+                                            <input v-show="editCheck" type="submit" class="btn btn-primary" v-model="actionButton" v-on:click.stop.prevent="editMenu">
                                         </div>
                                     </div>
                                 </div>
@@ -124,11 +135,10 @@ import Swal from 'sweetalert2'
 import { ref } from "vue"
 import Dropzone from './Dropzone.vue'
 
-
-    export default {
-        components:{
-            Dropzone,
-        },
+export default {
+    components:{
+        Dropzone,
+    },
     setup(){
         let dropzoneFile = ref("");
         const drop = (e) => {
@@ -146,25 +156,23 @@ import Dropzone from './Dropzone.vue'
             actionButton: "Add",
             dynamicTitle: "",
             menuList: [],
+            images: [],
+            files: [],
+            formData: new FormData(),
             form: {
-                "menuImage": "",
-                "menuID": "",
                 "menuName": "",
                 "description": "",
                 "price": "",
-                "totalOrders": "",
                 "categoryCode": "",
                 "cuisineCode": "",
             },
             editCheck: false,
-            menuImageBlured: false,
             menuNameBlured: false,
             descriptionBlured: false,
             priceBlured: false,
             categoryCodeBlured: false,
             cuisineCodeBlured: false,
             valid: false,
-            submitted: false,
         };
     },
     created() {
@@ -173,7 +181,6 @@ import Dropzone from './Dropzone.vue'
     },
     methods: {
         openModel() {
-            this.form.menuImage = "";
             this.form.menuName = "";
             this.form.description = "";
             this.form.price = "";
@@ -182,19 +189,13 @@ import Dropzone from './Dropzone.vue'
             this.myModel = true;
         },
         validate() {
-            this.menuImageBlured = true;
             this.menuNameBlured = true;
             this.descriptionBlured = true;
             this.priceBlured = true;
             this.categoryCodeBlured = true;
             this.cuisineCodeBlured = true;
-            if (this.validMenuImage(this.form.menuImage) && this.validMenuName(this.form.menuName) && this.validDescription(this.form.description) && this.validPrice(this.form.price) && this.validCategoryCode(this.form.categoryCode) && this.validCuisineCode(this.form.cuisineCode)) {
+            if (this.validMenuName(this.form.menuName) && this.validDescription(this.form.description) && this.validPrice(this.form.price) && this.validCategoryCode(this.form.categoryCode) && this.validCuisineCode(this.form.cuisineCode)) {
                 this.valid = true;
-            }
-        },
-        validMenuImage(menuImage) {
-            if (menuImage.length > 1) {
-                return true;
             }
         },
         validMenuName(menuName) {
@@ -208,7 +209,7 @@ import Dropzone from './Dropzone.vue'
             }
         },
         validPrice(price) {
-            var num = /^[1-9]\d*$/;
+            var num = /^-?\d+(,\d{3})*(\.\d{1,2})?$/;
             if (num.test(price)) {
                 return true;
             }
@@ -223,35 +224,44 @@ import Dropzone from './Dropzone.vue'
                 return true;
             }
         },
-        onSubmit() {
+        async onSubmit() {
             this.editCheck = false;
             this.validate();
             if (this.valid) {
-                this.submitted = true;
                 this.myModel = false;
             }
-            axios.post("./menu", this.form)
-                .then(response => {
-                Swal.fire({
-                    title: "Success!",
-                    html: "Menu created successfully!",
-                    icon: "success",
-                    confirmButtonColor: "#fed531",
-                    confirmButtonText: "OK",
-                });
-                this.menuList = response.data;
+
+            this.files.forEach(file => {
+                this.formData.append("images[]", file);
             });
+
+            const menu = (await axios.post("./menu", this.form)).data;
+            this.menuList = menu.menuList;
+
+            Swal.fire({
+                title: "Success!",
+                html: "Menu created successfully!",
+                icon: "success",
+                confirmButtonColor: "#fed531",
+                confirmButtonText: "OK",
+            });
+
+            axios.post('./upload/' + menu.menuID, this.formData)
+                .then(response => {
+                    this.images = [];
+                    this.files = [];
+                    this.formData = new FormData();
+                    this.$toastr.s('All images uplaoded successfully');
+                });
         },
         openEdit(editmenu) {
             this.editCheck = true;
             this.actionButton = "Update",
                 axios.get("./menu", this.form);
-            this.form.menuImage = editmenu.menuImage;
             this.form.menuID = editmenu.PK_menuID;
             this.form.menuName = editmenu.menuName;
             this.form.description = editmenu.description;
             this.form.price = editmenu.price;
-            this.form.totalOrders = editmenu.totalOrders;
             this.form.categoryCode = editmenu.FK_categoryCode;
             this.form.cuisineCode = editmenu.FK_cuisineCode;
             this.myModel = true;
@@ -271,14 +281,6 @@ import Dropzone from './Dropzone.vue'
             this.myModel = false;
         },
         deleteMenu(menu) {
-            this.form.menuImage = menu.menuImage;
-            this.form.menuID = menu.PK_menuID;
-            this.form.menuName = menu.menuName;
-            this.form.description = menu.description;
-            this.form.price = menu.price;
-            this.form.totalOrders = menu.totalOrders;
-            this.form.categoryCode = menu.FK_categoryCode;
-            this.form.cuisineCode = menu.FK_cuisineCode;
             Swal.fire({
                 title: `Are you sure you want to delete this menu?`,
                 text: "This process cannot be undone.",
@@ -291,7 +293,7 @@ import Dropzone from './Dropzone.vue'
             })
                 .then((willDelete) => {
                 if (willDelete.isConfirmed) {
-                    axios.delete("./menu/" + menu.PK_menuID, { data: this.form })
+                    axios.delete("./menu/" + menu.PK_menuID)
                         .then(response => this.menuList = response.data);
                     Swal.fire("Deleted", "Poof! Your menu has been deleted!", "success");
                 }
@@ -299,15 +301,13 @@ import Dropzone from './Dropzone.vue'
                     Swal.fire("Canceled", "You have canceled your action", "error");
                 }
             });
-        }
-    },
-   
-}
+        },
 
+    }, 
+}
 </script>
 
 <style scoped>
-
 body{
     background-color: #fed531;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -444,14 +444,65 @@ table.table .avatar {
     font-size: 13px;
 }    
 
+/* Custom checkbox */
+.custom-checkbox {
+    position: relative;
+}
+.custom-checkbox input[type="checkbox"] {    
+    opacity: 0;
+    position: absolute;
+    margin: 5px 0 0 3px;
+    z-index: 9;
+}
+.custom-checkbox label:before{
+    width: 18px;
+    height: 18px;
+}
+.custom-checkbox label:before {
+    content: '';
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    background: white;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 3px;
+    width: 6px;
+    height: 11px;
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+    transform: inherit;
+    z-index: 3;
+    transform: rotateZ(45deg);
+}
+.custom-checkbox input[type="checkbox"]:checked + label:before {
+    border-color: #03A9F4;
+    background: #03A9F4;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+    border-color: #fff;
+}
+.custom-checkbox input[type="checkbox"]:disabled + label:before {
+    color: #b8b8b8;
+    cursor: auto;
+    box-shadow: none;
+    background: #ddd;
+}
 /* Modal styles */
 .modal{
-position: fixed;
-  z-index: 999;
-  top: 20%;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
+    position: fixed;
+    z-index: 999;
+    top: 20%;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
 }
 .modal-mask{
     position: fixed;

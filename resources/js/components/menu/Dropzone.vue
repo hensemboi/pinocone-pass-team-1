@@ -1,23 +1,22 @@
 <template>
     <div class="dropzone" 
-    @dragenter.prevent="OnDragEnter" 
-    @dragleave.prevent="OnDragLeave"
-    @dragover.prevent
-    @drop.prevent="onDrop"
-    :class="{ dragging: isDragging }">
-    <i class="fa fa-cloud-upload"></i>
-    <span>Drag or Drop File</span>
+        @dragenter.prevent="OnDragEnter" 
+        @dragleave.prevent="OnDragLeave"
+        @dragover.prevent
+        @drop.prevent="onDrop"
+        :class="{ dragging: isDragging }">
+        <i class="fa fa-cloud-upload"></i>
+        <span>Drag or Drop File</span>
         <span>OR</span>
         <label for="dropzoneFile">Select File</label>
         <input type="file" id="dropzoneFile" class="dropzoneFile" />
-  </div>
+    </div>
 </template>
 
 <script>
-
 export default {
-  name: "DropZone",
-  data: () => ({
+    name: "DropZone",
+    data: () => ({
         isDragging: false,
         dragCount: 0,
         files: [],
@@ -49,28 +48,19 @@ export default {
         Array.from(files).forEach(file => this.addImage(file));
     },
     addImage(file) {
-            if (!file.type.match('image.*')) {
-                this.$toastr.e(`${file.name} is not an image`);
-                return;
-            }
-            this.files.push(file);
-            const reader = new FileReader();
-            reader.onload = (e) => this.images.push(e.target.result);
-            reader.readAsDataURL(file);
-    },
-    upload() {
-          const formData = new FormData();
-          
-          this.files.forEach(file => {
-              formData.append('images[]', file, file.name);
-          });
-          axios.post('/images-upload', formData)
-              .then(response => {
-                  this.$toastr.s('All images uplaoded successfully');
-                  this.images = [];
-                  this.files = [];
-              })
+        if (!file.type.match('image.*')) {
+            this.$toastr.e(`${file.name} is not an image`);
+            return;
         }
+        this.files.push(file);
+        
+        const reader = new FileReader();
+        reader.onload = (e) => this.images.push(e.target.result);
+        reader.readAsDataURL(file);
+        
+        this.$emit('addedFile', this.files);
+        this.$emit('addedImage', this.images);
+    },
   }
 }
 </script>

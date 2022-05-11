@@ -24,4 +24,8 @@ class Menu extends Model
     public function order(){
         return $this->hasMany(OrderedMenu::class);
     }
+
+    public function images(){
+        return $this->hasMany(Image::class, 'FK_menuID', 'PK_menuID');
+    }
 }

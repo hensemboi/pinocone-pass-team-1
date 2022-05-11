@@ -23,8 +23,7 @@ Route::get('productslisting', [MenuController::class, 'fetchAll']);
 
 Route::post('menu', [MenuController::class, 'store']);
 Route::put('menu', [MenuController::class, 'update']);
-Route::post('/upload', [ImageController::class, 'upload']);
-
+Route::post('upload/{id}', [ImageController::class, 'upload']);
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);
@@ -33,7 +32,6 @@ Route::post('logout', [TestUserController::class, 'logout'])->middleware('auth:s
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 // Route::post('login', [UserController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);

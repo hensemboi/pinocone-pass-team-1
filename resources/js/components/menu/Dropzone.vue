@@ -5,17 +5,40 @@
         @dragover.prevent
         @drop.prevent="onDrop"
         :class="{ dragging: isDragging }">
-        <i class="fa fa-cloud-upload"></i>
-        <span>Drag or Drop File</span>
-        <span>OR</span>
-        <label for="dropzoneFile">Select File</label>
-        <input type="file" id="dropzoneFile" class="dropzoneFile" />
+
+        <div class="upload-control" v-show="images.length">
+             <label for="dropzoneFile">Select file</label>
+        </div>
+
+         <div v-show="!images.length" class="dzstyle">
+            <i class="fa fa-cloud-upload"></i>
+            <p>Drag or Drop File</p>
+            <div>OR</div>
+            <label for="dropzoneFile">Select File</label>
+            <input type="file" id="dropzoneFile" class="dropzoneFile" @change="onInputChange" multiple/>
+         </div>
+
+        <div class="images-preview" v-show="images.length">
+            <div class="img-wrapper" v-for="(image, index) in images" :key="index">
+                <img :src="image" :alt="`DropZone ${index}`">
+                <div class="details">
+                    <span class="name" v-text="files[index].name"></span>
+                </div>
+            </div>
+            
+        </div>
+        <div class="images-preview" v-for="image in menuImages">
+            <div class="img-wrapper">
+            <img  :src="image.imageUrl" :alt="`DropZone ${index}`">
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "DropZone",
+    props:["menuImages"],
+    name: "Dropzone",
     data: () => ({
         isDragging: false,
         dragCount: 0,
@@ -68,7 +91,6 @@ export default {
 <style scoped>
 .dropzone {
     width: 100%;
-    height: 150px;
     padding: 40px 15px;
     display: flex;
     flex-direction: column;
@@ -91,7 +113,7 @@ label {
     border-radius: 4px;
     cursor: pointer;
   }
-  label:hover {
+label:hover {
     background-color: #fed531;
   }
 input {
@@ -109,5 +131,39 @@ i {
     background-color: #fff;
     color: #fed531;
 }
+.dzstyle{
+    text-align: center;
+}
+.images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.img-wrapper {
+    width: 160px;
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    margin: 10px;
+    height: 150px;
+    justify-content: space-between;
+    background: #fff;
+    box-shadow: 5px 5px 20px #3e3737;
+}
 
+img{
+    max-height: 105px;
+}
+ .upload-control {
+        position: absolute;
+        width: 100%;
+        background: lightgray;
+        top: 0;
+        left: 0;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        padding: 10px;
+        padding-bottom: 4px;
+        text-align: right;
+ }
 </style>

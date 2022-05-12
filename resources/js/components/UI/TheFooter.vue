@@ -52,9 +52,9 @@
                         <div class="col-md-6">
                             <h6>Follow Us</h6>
                             <div class="social">
-                                <router-link to="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></router-link>
-                                <router-link to="https://www.instagram.com/?hl=en"><i class="fa fa-instagram" aria-hidden="true"></i></router-link>
-                                <router-link to="https://twitter.com/?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></router-link>
+                                <a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="https://www.instagram.com/?hl=en"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="https://twitter.com/?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>

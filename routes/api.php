@@ -24,6 +24,7 @@ Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::post('menu', [MenuController::class, 'store']);
 Route::put('menu', [MenuController::class, 'update']);
 Route::post('upload/{id}', [ImageController::class, 'upload']);
+Route::delete('menu', [MenuController::class, 'destroySelected']);
 
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);

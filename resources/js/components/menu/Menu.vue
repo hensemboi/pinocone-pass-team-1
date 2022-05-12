@@ -7,8 +7,8 @@
                         <h2>Menu Management</h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>			
-                      <button @click="openModel" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i><span>Add New Menu</span></button>			
+                        <button @click="deleteSelected" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>			
+                        <button @click="openModel" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i><span>Add New Menu</span></button>			
                     </div>
                 </div>
             </div>
@@ -17,11 +17,12 @@
                     <tr>
                         <th>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
+								<input type="checkbox" id="checkedAll" v-model="selectAll">
+                               
+                                <label for="checkedAll"></label>
 							</span>
+							
 						</th>
-                        <th>Menu Image</th>
                         <th>Menu ID</th>
                         <th>Menu Name</th>
 						<th>Description</th>
@@ -33,14 +34,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="menu in menuList" v-bind:key="menu.PK_menuID">
+                    <tr v-for="menu in menuList" v-bind:key="menu.PK_menuID" >
                         <td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox" name="options[]">
+								<input type="checkbox" id="checkbox" :value="menu.PK_menuID" v-model="selected" number>
 								<label for="checkbox"></label>
 							</span>
 						</td>
-                        <td><img v-bind:src="menu.images" alt="No image" width="60" height="60"/></td>
                         <td>{{ menu.PK_menuID }}</td>
                         <td>{{ menu.menuName }}</td>
                         <td>{{ menu.description }}</td>
@@ -60,7 +60,7 @@
                 <transition name="model">
                     <div class="modal-mask">
                         <div class="modal-wrapper">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
@@ -69,8 +69,8 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="menuImage" class="form-label">Menu Image</label>
-                                            <Dropzone @drop.prevent="drop" @change="selectedFile" @addedFile="files = $event" @addedImage="images = $event"/>
-                                            <span class="file-info">File: {{ dropzoneFile.name }}</span>
+                                            <Dropzone @drop.prevent="drop" @change="selectedFile" @addedFile="files = $event" @addedImage="images = $event" v-bind:menuImages="currentMenu.images"/>
+
                                         </div>
                                         <div class="form-group">
                                             <label for="menuName" class="form-label">Menu Name</label>
@@ -142,10 +142,10 @@ export default {
     setup(){
         let dropzoneFile = ref("");
         const drop = (e) => {
-            dropzoneFile.value = e.dataTransfer.files[0];
+            dropzoneFile.value = e.dataTransfer.files;
         };
         const selectedFile = () => {
-            dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
+            dropzoneFile.value = document.querySelector(".dropzoneFile").files;
         };
         return { dropzoneFile, drop, selectedFile };
     },
@@ -153,6 +153,7 @@ export default {
         return {
             myModel: false,
             deleteModel: false,
+            selected:[],
             actionButton: "Add",
             dynamicTitle: "",
             menuList: [],
@@ -160,6 +161,7 @@ export default {
             files: [],
             formData: new FormData(),
             form: {
+                "menuID": "",
                 "menuName": "",
                 "description": "",
                 "price": "",
@@ -173,7 +175,26 @@ export default {
             categoryCodeBlured: false,
             cuisineCodeBlured: false,
             valid: false,
+            currentMenu : { images: [] },
         };
+    },
+    computed: {
+        selectAll: {
+            get: function () {
+                return this.menuList ? this.selected.length == this.menuList.length : false;
+            },
+            set: function (value) {
+                var selected = [];
+
+                if (value) {
+                    this.menuList.forEach(function (menu) {
+                        selected.push(menu.PK_menuID);
+                    });
+                }
+
+                this.selected = selected;
+            }
+        }
     },
     created() {
         axios.get("./menu", this.form)
@@ -181,12 +202,15 @@ export default {
     },
     methods: {
         openModel() {
+            this.editCheck = false;
+            this.actionButton = "Add",
             this.form.menuName = "";
             this.form.description = "";
             this.form.price = "";
             this.form.categoryCode = "";
             this.form.cuisineCode = "";
             this.myModel = true;
+            this.currentMenu = { images: [] };
         },
         validate() {
             this.menuNameBlured = true;
@@ -225,7 +249,6 @@ export default {
             }
         },
         async onSubmit() {
-            this.editCheck = false;
             this.validate();
             if (this.valid) {
                 this.myModel = false;
@@ -251,7 +274,7 @@ export default {
                     this.images = [];
                     this.files = [];
                     this.formData = new FormData();
-                    this.$toastr.s('All images uplaoded successfully');
+
                 });
         },
         openEdit(editmenu) {
@@ -259,6 +282,7 @@ export default {
             this.actionButton = "Update",
                 axios.get("./menu", this.form);
             this.form.menuID = editmenu.PK_menuID;
+            this.currentMenu = editmenu;
             this.form.menuName = editmenu.menuName;
             this.form.description = editmenu.description;
             this.form.price = editmenu.price;
@@ -266,18 +290,26 @@ export default {
             this.form.cuisineCode = editmenu.FK_cuisineCode;
             this.myModel = true;
         },
-        editMenu() {
-            axios.put("./menu", this.form)
-                .then(response => {
-                Swal.fire({
+        async editMenu() {
+            this.files.forEach(file => {
+                this.formData.append("images[]", file);
+            });
+            const menu = (await axios.put("./menu", this.form)).data;
+            this.menuList = menu.menuList;
+
+            Swal.fire({
                     title: "Success!",
                     html: "Menu updated!",
                     icon: "success",
                     confirmButtonColor: "#fed531",
                     confirmButtonText: "OK",
                 });
-                this.menuList = response.data;
-            });
+            axios.post('./upload/' + menu.menuID, this.formData)
+                .then(response => {
+                    this.images = [];
+                    this.files = [];
+                    this.formData = new FormData();
+                });
             this.myModel = false;
         },
         deleteMenu(menu) {
@@ -296,6 +328,28 @@ export default {
                     axios.delete("./menu/" + menu.PK_menuID)
                         .then(response => this.menuList = response.data);
                     Swal.fire("Deleted", "Poof! Your menu has been deleted!", "success");
+                }
+                else {
+                    Swal.fire("Canceled", "You have canceled your action", "error");
+                }
+            });
+        },
+        deleteSelected(){
+             Swal.fire({
+                title: `Are you sure you want to delete these menus?`,
+                text: "This process cannot be undone.",
+                icon: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: "#fed531",
+                cancelButtonColor: "#808080",
+                confirmButtonText: "Yes!"
+            })
+                .then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    axios.delete("menu", { data: {selected: this.selected}})
+                        .then(response => this.menuList = response.data);
+                    Swal.fire("Deleted", "Poof! Your menus have been deleted!", "success");
                 }
                 else {
                     Swal.fire("Canceled", "You have canceled your action", "error");
@@ -551,5 +605,13 @@ table.table .avatar {
 .modal form label {
     font-weight: normal;
 }
+.images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
 
+img{
+    max-height: 105px;
+}
 </style>

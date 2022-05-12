@@ -45,11 +45,20 @@ class MenuController extends Controller
         'FK_cuisineCode' => $request->cuisineCode,
         ]);
            
-        return Menu::all();
+        return response()->json([
+            'menuList' => Menu::all(),
+            'menuID' => $request->menuID
+        ]);
     }
     
     public function destroy($menuID){
         Menu::where('PK_menuID', $menuID)->delete();
+
+        return Menu::all();
+    }    
+
+    public function destroySelected(Request $request){
+        Menu::whereIn('PK_menuID', $request->selected)->delete();
 
         return Menu::all();
     }   

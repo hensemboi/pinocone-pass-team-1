@@ -13,8 +13,9 @@ class MenuController extends Controller
     }
 
     public function index(Request $request){
-        return Menu::all();
-    }
+        return Menu::with(['category', 'cuisinetype', 'order'])->get();
+        //return Menu::With('ordersCount')->get();
+    } 
 
     public function store(){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);

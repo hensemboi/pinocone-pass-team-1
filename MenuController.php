@@ -9,12 +9,11 @@ use Ramsey\Uuid\Type\Integer;
 
 class MenuController extends Controller
 {
-    public function fetchAll(){
-        return Menu::all();
-    }
 
-    public function index(Request $request){
-        return Menu::all();
+
+    public function index(){
+        $menu = Menu::with('category')->get();
+        dd($menu);
     }
 
     public function store(Request $request){
@@ -47,7 +46,5 @@ class MenuController extends Controller
         return;
     }
 
-    public function fetchTopTotalOrders($qty){
-        return Menu::orderBy('totalOrders')->get($qty);
-    }
+
 }

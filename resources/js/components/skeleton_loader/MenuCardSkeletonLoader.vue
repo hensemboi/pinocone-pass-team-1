@@ -1,39 +1,36 @@
 <template>
+    <!-- Earnings (Monthly) Card Example -->
     <div class="card rounded border">
-        <div>
-            <img class="card-img" src="/images/food1.png" alt="Card image cap">
+        <div class="card-img-container">
         </div>
         <div class="card-body">
-            <h3 class="card-title">{{ menu.menuName }}</h3>
+            <h3 class="card-title"></h3>
             <div class="card-categories">
-                <a href="#" class="card-link"><span>{{menu.category.name}}</span></a>
-                <a href="#" class="card-link"><span>{{menu.cuisinetype.name}}</span></a>
+                <a href="#" class="card-link"><span></span></a>
+                <a href="#" class="card-link"><span></span></a>
             </div>
             <div class="card-menu-desc">
                 <div class="price">
-                   RM {{ menu.price }}
                 </div>
                 <div class="noOrders">
-                    Orders: {{ menu.totalOrders }}
                 </div>
             </div>
         </div>
-    </div>    
+    </div> 
 </template>
 
 <script>
-
-export default ({
-    props: ["menu"],
-    setup(props){
-    }
-})
+export default {
+    setup() {
+        
+    },
+}
 </script>
 
-
 <style scoped>
-    .card{  
-        flex-flow: row;
+.card{  
+        display: flex;
+        flex-direction: row;
         margin: 1%;
         padding: 10px;
         border-radius: 1.1rem !important;
@@ -49,16 +46,18 @@ export default ({
     }
     .card-title{
         margin: 5px 0;
-        font-size: 1.2rem;
-        color: #222;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        width: 100%;
+        height: 24px;
+        animation: pulse-bg 1s infinite;
     }
-    .card-img{
+    .card-img-container{
+        width: 30%;
         height: 100%;
+        animation: pulse-bg 1s infinite;
     }
     .card-body{
         position: relative;
+        width: 70%;
         margin-left: 5px;
         padding: 5px;
         min-height: 1px;
@@ -71,26 +70,34 @@ export default ({
         justify-content: space-between;
     }
     .card-menu-desc .price{
-        font-weight: 600;
-        margin: 0;
+        width: 100px;
+        height: 15px;
+        animation: pulse-bg 1s infinite;
     }
     .card-menu-desc .noOrders{
-        letter-spacing: 1px;
-        color: #222;
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
+        width: 100px;
+        height: 15px;
+        animation: pulse-bg 1s infinite;
     }
-    .card-link span{
-        font-size: 0.7rem;
-        text-transform:  uppercase;
-        color: #777;
-        letter-spacing: 1px;
+    .card-categories{
+        width: 250px;
+        height: 15px;
+        animation: pulse-bg 1s infinite;
     }
 
     .card-link{
         color: #777;
         text-decoration: none;
     }
-
+    @keyframes pulse-bg{
+        0%{
+            background-color: #eee;
+        }
+        50%{
+            background-color: #eaeaea;
+        }
+        100%{
+            background-color: #eee;
+        }
+    }
 </style>
-

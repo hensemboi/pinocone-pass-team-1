@@ -22,6 +22,10 @@ class Order extends Model
         return $this->hasMany(OrderedMenu::class);
     }
 
+    public function menu(){
+        return $this->belongsToMany(Menu::class, 'ordered_menus', 'PK_FK_transactionID', 'PK_FK_menuID', 'PK_transactionID', 'PK_menuID');
+    }
+
     public function meansofdelivery(){
         return $this->belongsTo(MeansOfDelivery::class);
     }

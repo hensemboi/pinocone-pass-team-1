@@ -14,10 +14,10 @@ class OrderedMenu extends Model
     public $timestamps = false;
 
     public function order(){
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class,'PK_FK_transactionID', 'PK_transactionID');
     }
 
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class, 'PK_FK_menuID', 'PK_menuID');
     }
 }

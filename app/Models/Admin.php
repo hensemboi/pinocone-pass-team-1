@@ -15,7 +15,6 @@ class Admin extends Model
     public $timestamps=false;
 
     public function staff(){
-        return $this->belongsTo(Staff::class);
+        return $this->belongsTo(Staff::class, "PK_FK_staffID", "PK_staffID");
     }
-    
 }

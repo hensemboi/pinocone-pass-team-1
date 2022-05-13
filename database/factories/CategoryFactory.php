@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
         return [
             'PK_categoryCode'=>$this->faker->unique()->numerify('CA##'),
             'name'=>$this->faker->unique()->word(),
-            'decription'=>$this->faker->sentence()
+            'description'=>$this->faker->sentence()
         ];
     }
 }

@@ -24,23 +24,8 @@
     export default {
         async setup() {
             const userData = ref (await loadUserData())
-            const earningsData = ref (await loadEarningsData())
-            const ordersData = ref(await loadOrdersData())
-            const feedbacksData = ref(await loadFeedbacksData())
-            const loadUserData = async() => {
-                return new Promise((resolve)=>{
-                    setTimeout(() => {
-                        resolve({
-                            name: 
-                                'Matt Maribojoc',
-                            pic: 
-                                'https://cdn-images-1-medium.com/fit/c/100/100/2*',
-                            bio:
-                                'I run a VueJS community over at '
-                        })
-                    }, 2000)
-                })
-            }
+
+            
 
             const loadOrdersData = async() => {
                 

@@ -24,7 +24,7 @@ use App\Http\Controllers\CategoryController;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+*/ 
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('order', 'fetchAll');
@@ -32,11 +32,10 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('order', 'store');
     Route::put('order/{id}', 'update');
 });
-Route::get('productslisting', [MenuController::class, 'fetchAll']);
+// Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
 Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 
-Route::get('productslisting', [MenuController::class, 'fetchAll']);
 Route::get('marketplace', [MenuController::class, 'fetchAll']);
 Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
@@ -75,14 +74,14 @@ Route::controller(TestUserController::class)->group(function () {
     Route::post('logout', 'logout')->middleware('auth:sanctum');
 });
 
-Route::get('menu', [MenuController::class, 'create']);
+Route::get('menu', [MenuController::class, 'index']);
 Route::post('menu', [MenuController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('', [OrderController::class, '']);
+// Route::get('', [OrderController::class, '']);
 
 // Route::post('login', [UserController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
@@ -99,3 +98,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::resource('menu', 'App\Http\Controllers\MenuController');
 
 Route::get('dashboard/{qty}', [MenuController::class, 'fetchTopTotalOrders']);
+
+Route::get('/products', [MenuController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/cuisines', [CuisineController::class, 'index']);

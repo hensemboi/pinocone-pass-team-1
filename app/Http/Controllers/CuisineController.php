@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CuisineController extends Controller
 {
-    public function fetchAll(){
+    public function index(){
         return CuisineType::All();
     }
 }

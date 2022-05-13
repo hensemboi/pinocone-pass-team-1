@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function fetchAll(){
+    public function index(){
         return Category::All();
     }
 }

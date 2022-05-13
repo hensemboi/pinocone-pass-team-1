@@ -1,36 +1,25 @@
 import { ref, computed, watch } from 'vue';
 
-export default function useSearch(items, serachProp) {
-  const enteredSearchTerm = ref('');
-  const activeSearchTerm = ref('');
-
-  const availableItems = computed(function () {
-    let filteredItems = [];
-    if (activeSearchTerm.value) {
-      filteredItems = items.value.filter((item) =>
-        item[serachProp].includes(activeSearchTerm.value)
-      );
-    } else if (items.value) {
-      filteredItems = items.value;
+export default function useSearch(module = 'menu/fetchAllCategories') {
+  async function getAllCategories (){
+    if (!store.getters["menu/getIsCategoriesPopulated"]) {
+        try {
+            return await store.dispatch(module);
+        } catch (error) {
+            console.log(
+                error.errorMessage || "Failed to fetch categories"
+            );
+        }
+    } else {
+        console.log("The fetching is not executing!");
+        computed(() =>store.getters['menu/getAllCategories']);
     }
-    return filteredItems;
-  });
-
-  watch(enteredSearchTerm, function (newValue) {
-    setTimeout(() => {
-      if (newValue === enteredSearchTerm.value) {
-        activeSearchTerm.value = newValue;
-      }
-    }, 300);
-  });
-
-  function updateSearch(val) {
-    enteredSearchTerm.value = val;
-  }
+    return true
+}
 
   return {
-    enteredSearchTerm,
+      enteredSearchTerm,
     availableItems,
     updateSearch,
   };
-}
+} 

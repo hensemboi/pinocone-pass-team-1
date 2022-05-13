@@ -15,6 +15,6 @@ class MeansOfDelivery extends Model
     public $timestamps = false;
 
     public function order(){
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, "FK_deliveryCode", "PK_deliveryCode");
     }
 }

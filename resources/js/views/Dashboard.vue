@@ -268,7 +268,6 @@ import { defineAsyncComponent } from '@vue/runtime-core'
 },
         name: "Dashboard",
         setup(){
-            const top5 = ref(await fetchTop5())
             const EarningCardSkeleton = defineAsyncComponent(()=>
                 import ("../components/cards/EarningCardSkeleton.vue")
             )
@@ -278,26 +277,27 @@ import { defineAsyncComponent } from '@vue/runtime-core'
                     value: "$akj"
                 }
             ]
-            const fetchTop5 = async() => {
-                return new Promise(()=>{
-                    await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-                        axios.get('/dashboard/{5}', {
+            
+            const loadMenu = async() => {
+                console.log("hha")
+                const { default: axios } = require("axios");
+                await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+                    axios
+                        .get("products", {
                             action: action,
                         })
                         .then((response) => {
-                            return response
-                        }
-                        )
+                            console.log(response)
+                        })
                         .catch((err) => {
-                            this.errors = err.response.data.errors;
+                            console.log(err.response.data.errors);
                         });
-                    });
-                })
+                });
             }
-             
+
             return {
+                loadMenu,
                 EarningCard,
-                top5,
                 EarningCardsData,
                 EarningCardSkeleton,
                 Bar

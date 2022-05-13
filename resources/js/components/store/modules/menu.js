@@ -10,7 +10,6 @@ export default{
     mutations: {
         FETCH_ALL_MENUS(state, url, action){
             const { default: axios } = require('axios');
-
         },
         setMenus(state, payload){
             state.menus = payload;
@@ -32,53 +31,41 @@ export default{
         },
         getAllCuisines(state){
             return state.cuisines;
+        },
+        getIsMenusPopulated(state) {
+            return state.menus && state.menus.length > 0;
+        },
+        getIsCategoriesPopulated(state) {
+            return state.categories && state.categories.length > 0;
+        },
+        getIsCuisinesPopulated(state) {
+            return state.cuisines && state.cuisines.length > 0;
         }
     },
     actions: {
         async fetchAllMenus({commit}, {url,action}){
-            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-                axios.get(url, {
-                        action: action,
-                    })
-                    .then((response) => {
-                        commit('setMenus', response.data);
-                    }
-                    )
-                    .catch((err) => {
-                        this.errors = err.response.data.errors;
-                    });
-            });
+            return axios.get("http://localhost:8000/sanctum/csrf-cookie").then(async () => {    
+                return axios.get(url).then((response)=>{
+                    commit('setMenus', response.data)
+                    return response.data
+                })
+            })  
         },
-        async fetchAllCategories({commit}, {url,action}){
-            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-                axios.get(url, {
-                        action: action,
-                    })
-                    .then((response) => {
-                        commit('setCategories', response.data);
-                    }
-                    )
-                    .catch((err) => {
-                        this.errors = err.response.data.errors;
-                    });
-            });
+        async fetchAllCategories({commit}){
+            return axios.get("http://localhost:8000/sanctum/csrf-cookie").then(async () => {    
+                return axios.get('/categories').then((response)=>{
+                    commit('setCategories', response.data)
+                    return response.data
+                })
+            })
         },
-        async fetchAllCuisines({commit}, {url,action}){
-            await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-                axios.get(url, {
-                        action: action,
-                    })
-                    .then((response) => {
-                        commit('setCuisines', response.data);
-                    }
-                    )
-                    .catch((err) => {
-                        this.errors = err.response.data.errors;
-                    });
-            });
-        },
-        setMenus(context, payload){
-
+        async fetchAllCuisines({commit}){
+            return axios.get("http://localhost:8000/sanctum/csrf-cookie").then(async () => {    
+                return axios.get('/cuisines').then((response)=>{
+                    commit('setCuisines', response.data)
+                    return response.data
+                })
+            })
         }
     }
 }

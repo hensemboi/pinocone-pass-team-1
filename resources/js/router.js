@@ -22,6 +22,8 @@ import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
 import Menu from "./components/menu/Menu.vue"
 import RequestsList from "./components/request_dashboard/RequestsList.vue";
+import Tables from "./components/datatables/DataTables.vue"
+import MenuCard from "./components/cards/MenuCard.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -104,9 +106,13 @@ const router = createRouter({
             },
         },
         {
-            path:"/productslisting",
+            path:"/products",
             components:{
                 default: ProductsListing,
+                table: Tables,
+                menuCard: MenuCard,
+                topbar: AdminTopBar,
+                sidebar: AdminSideBar,
             },
         },
         {

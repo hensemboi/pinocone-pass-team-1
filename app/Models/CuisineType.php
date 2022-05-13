@@ -15,6 +15,6 @@ class CuisineType extends Model
     public $timestamps = false;
 
     public function menu(){
-        return $this->hasMany(Menu::class);
+        return $this->hasMany(Menu::class, "FK_cuisineCode", "PK_cuisineCode");
     }
 }

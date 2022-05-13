@@ -56,7 +56,7 @@ export default {
         ProductCards,
     },
     setup() {
-        const productName = ref("");
+        const productName = ref();
         const productNameValidity = ref("");
         const maxDisplay = ref(5);
 

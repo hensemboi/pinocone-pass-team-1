@@ -84,7 +84,8 @@ export default {
     },
     methods: {
         logout() {
-            axios.post("./logout");
+            const rootURL = window.location.origin;
+            axios.post(rootURL + "/logout");
             alert("Successfully logged out!");
             this.user.PK_userID = 0;
         },

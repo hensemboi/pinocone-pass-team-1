@@ -11,9 +11,9 @@
 
                                 <div class="col-md-6">
                                     <input id="username" type="text" class="form-control" v-model="form.username" :state="errors && !errors.username" name="username" required autocomplete="username" autofocus>
-                                        <!-- <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span> -->
+                                    <!-- <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span> -->
                                 </div>
                             </div>
 
@@ -22,9 +22,9 @@
 
                                 <div class="col-md-6">
                                     <input id="firstName" type="text" class="form-control" v-model="form.firstName" :state="errors && !errors.firstName" name="firstName" required autocomplete="firstName" autofocus>
-                                        <!-- <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span> -->
+                                    <!-- <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span> -->
                                 </div>
                             </div>
 
@@ -33,9 +33,9 @@
 
                                 <div class="col-md-6">
                                     <input id="lastName" type="text" class="form-control" v-model="form.lastName" :state="errors && !errors.lastName" name="lastName" required autocomplete="lastName" autofocus/>
-                                        <!-- <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span> -->
+                                    <!-- <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span> -->
                                 </div>
                             </div>
 
@@ -44,9 +44,9 @@
 
                                 <div class="col-md-6">
                                     <input id="dateOfBirth" type="date" class="form-control" v-model="form.dateOfBirth" :state="errors && !errors.dateOfBirth" name="dateOfBirth" required autocomplete="dateOfBirth" autofocus/>
-                                        <!-- <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span> -->
+                                    <!-- <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span> -->
                                 </div>
                             </div>
 
@@ -117,9 +117,10 @@ export default {
     methods: {
         onSubmit(event) {
             event.preventDefault();
-            axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+            const rootURL = window.location.origin;
+            axios.get(rootURL + "/sanctum/csrf-cookie").then(() => {
                 axios
-                .post("register", {
+                .post(rootURL + "/register", {
                     ...this.form,
                 })
                 .then((response) => {

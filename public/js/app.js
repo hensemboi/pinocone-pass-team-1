@@ -23608,7 +23608,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     logout: function logout() {
-      axios.post("./logout");
+      var rootURL = window.location.origin;
+      axios.post(rootURL + "/logout");
       alert("Successfully logged out!");
       this.user.PK_userID = 0;
     }
@@ -24514,8 +24515,9 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
 
       if (this.password.length > 0) {
-        axios.get("http://localhost:8000/sanctum/csrf-cookie").then(function (response) {
-          axios.post('login', {
+        var rootURL = window.location.origin;
+        axios.get(rootURL + "/sanctum/csrf-cookie").then(function (response) {
+          axios.post(rootURL + "/login", {
             email: _this.email,
             password: _this.password
           }).then(function (response) {
@@ -24698,8 +24700,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       event.preventDefault();
-      axios.get("http://localhost:8000/sanctum/csrf-cookie").then(function () {
-        axios.post("register", _objectSpread({}, _this.form)).then(function (response) {
+      var rootURL = window.location.origin;
+      axios.get(rootURL + "/sanctum/csrf-cookie").then(function () {
+        axios.post(rootURL + "/register", _objectSpread({}, _this.form)).then(function (response) {
           _this.$router.push("/home");
         })["catch"](function (err) {
           _this.errors = err.response.data.errors;
@@ -28897,7 +28900,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autofocus: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.username]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                            <strong>{{ $message }}</strong>\r\n                                        </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.username]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                        <strong>{{ $message }}</strong>\r\n                                    </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "firstName",
     type: "text",
     "class": "form-control",
@@ -28911,7 +28914,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autofocus: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_14), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.firstName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                            <strong>{{ $message }}</strong>\r\n                                        </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_14), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.firstName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                        <strong>{{ $message }}</strong>\r\n                                    </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "lastName",
     type: "text",
     "class": "form-control",
@@ -28925,7 +28928,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autofocus: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_18), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.lastName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                            <strong>{{ $message }}</strong>\r\n                                        </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_18), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.lastName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                        <strong>{{ $message }}</strong>\r\n                                    </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "dateOfBirth",
     type: "date",
     "class": "form-control",
@@ -28939,7 +28942,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autofocus: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_22), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.dateOfBirth]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                            <strong>{{ $message }}</strong>\r\n                                        </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_22), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.dateOfBirth]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"invalid-feedback\" role=\"alert\">\r\n                                        <strong>{{ $message }}</strong>\r\n                                    </span> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "email",
     type: "email",
     "class": "form-control",
@@ -29122,7 +29125,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
-window.axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+var rootURL = window.location.origin;
+window.axios.defaults.baseURL = rootURL + "/api";
 window.axios.defaults.withCredentials = true;
 
 /***/ }),

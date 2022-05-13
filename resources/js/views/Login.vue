@@ -55,8 +55,9 @@ export default {
         handleSubmit(e) {
             e.preventDefault()
             if (this.password.length > 0) {
-                axios.get("http://localhost:8000/sanctum/csrf-cookie").then(response => {
-                    axios.post('login', {
+                const rootURL = window.location.origin;
+                axios.get(rootURL + "/sanctum/csrf-cookie").then(response => {
+                    axios.post(rootURL + "/login", {
                         email: this.email,
                         password: this.password
                     })

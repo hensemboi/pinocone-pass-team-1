@@ -72,14 +72,6 @@ Route::controller(UserController::class)->group(function () {
     Route::put('user/{id}', 'updateIncentives');
 });
 
-Route::post('login', [LoginController::class, 'login']);
-Route::post('register', [RegisterController::class, 'register']);
-Route::post('logout', [UserController::class, 'logout'])->middleware('auth');
-
-// Route::middleware('auth:sanctum')->get('user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::resource('menu', 'App\Http\Controllers\MenuController');
 
 Route::get('dashboard/{qty}', [MenuController::class, 'fetchTopTotalOrders']);

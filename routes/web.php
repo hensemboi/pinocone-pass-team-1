@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +20,5 @@ Route::get('/', function(){
 Route::get('/{slug}', function(){
     return view('layouts.base_layout');
 });
+
+require __DIR__.'/auth.php';

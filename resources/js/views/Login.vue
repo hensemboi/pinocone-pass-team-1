@@ -3,36 +3,12 @@
         <div class="col-md-8 col-sm-10">
             <div class="form-background">
                 <div class="login-logo text-center">
-                    <img src="/images/pay-for-meds.png" height="80px" width="80px" alt="logo">
+                    <img src="/images/logo.png" height="80px" width="80px" alt="logo.png">
                 </div>
 
                 <p class="login-box-msg text-center lead">
-                    Recent Logins
+                    Login
                 </p>
-
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                    <div class="col-2 recent">
-                        <img src="/images/t7.jpeg" height="80px" width="80px" alt="logo">
-                        <p class="login-box-msg text-center lead">
-                            john297
-                        </p>
-                    </div>
-
-                    <div class="col-2 recent">
-                        <img src="/images/t7.jpeg" height="80px" width="80px" alt="logo">
-                        <p class="login-box-msg text-center lead">
-                            prat863
-                        </p>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-row justify-content-between align-items-center">
-                    <span class="border"></span>
-                    <p class="login-box-msg text-center lead">
-                        OR
-                    </p>
-                    <span class="border"></span>
-                </div>
 
                 <form class="form">
                     <div class="form-row">
@@ -51,12 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6"></div>
-                        <div class="col-6">
-                            <a href="#">Forgot Password</a>
-                        </div>
-                    </div>
+
                     <div class="row my-3">
                         <div class="col-6">
                             <button type="submit" class="btn btn-success float-right" @click="handleSubmit">Sign in</button>

@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function fetchAuthenticatedUser()
     {
-        return Auth::user();
+        if (Auth::check()) {
+            return Auth::user();
+        }
+
+        return Response::json(['PK_userID' => 0]);
     }
 
     public function fetchMembershipInfo($id)

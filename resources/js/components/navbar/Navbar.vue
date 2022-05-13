@@ -41,16 +41,27 @@
                     <base-badge mode="elegant">{{ cartQuantity }}</base-badge>
                 </li>
             </ul>
-            <router-link
-                to="/login"
-                class="btn btn-outline-success my-2 my-sm-0 mx-3"
-                >Login</router-link
-            >
-            <router-link
-                to="/register"
-                class="btn btn-outline-success my-2 my-sm-0"
-                >Sign Up</router-link
-            >
+            <div v-if="user.PK_userID !== 0">
+                <strong>Welcome, {{ user.username }}!</strong>
+                <button
+                    @click="logout"
+                    class="btn btn-outline-success my-2 my-sm-0 mx-3"
+                >
+                    Logout</button
+                >
+            </div>
+            <div v-else>
+                <router-link
+                    to="/login"
+                    class="btn btn-outline-success my-2 my-sm-0 mx-3"
+                    >Login</router-link
+                >
+                <router-link
+                    to="/register"
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    >Sign Up</router-link
+                >
+            </div>
         </div>
     </nav>
 </template>
@@ -66,5 +77,20 @@ export default {
             return this.$store.getters["cart/quantity"];
         },
     },
+    data() {
+        return {
+            user: {},
+        }
+    },
+    methods: {
+        logout() {
+            axios.post("./logout");
+            alert("Successfully logged out!");
+            this.user.PK_userID = 0;
+        },
+    },
+    async created() {
+        this.user = (await axios.get("./user")).data;
+    }
 };
 </script>

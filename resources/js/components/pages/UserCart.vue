@@ -42,9 +42,7 @@
                 :note="item.note"
             ></cart-item>
         </ul>
-        <router-link to="/checkout" tag="button">
-            <button class="button-center">Proceed to check out</button>
-        </router-link>
+        <button @click="checkout" class="button-center">Proceed to check out</button>
     </section>
     <section v-else>
         <h2>Your cart is empty. Please add an item from the marketplace.</h2>
@@ -60,6 +58,7 @@ export default {
     },
     data() {
         return {
+            userID: 0,
             inputVoucher: false,
             voucherCode: '',
             userVouchers: [],
@@ -153,10 +152,20 @@ export default {
             this.voucherCode = "";
             this.inputVoucher = false;
         },
+        checkout() {
+            if (this.userID == 0) {
+                alert("Please log in first.");
+            }
+
+            else {
+                this.$router.push("/checkout");
+            }
+        }
     },
     async created() {
-        const userID = (await axios.get("./user")).data.PK_userID
-        this.userVouchers = (await axios.get("./uservoucher/" + userID)).data
+        const userID = (await axios.get("./user")).data.PK_userID;
+        this.userID = userID;
+        this.userVouchers = (await axios.get("./uservoucher/" + userID)).data;
     }
 };
 </script>

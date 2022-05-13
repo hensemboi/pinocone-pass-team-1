@@ -2,7 +2,7 @@
     <div
         class="container rounded bg-white mt-5 mb-5"
         id="userInfo"
-        v-if="isLoggedIn"
+        v-if="isLoggedIn !== 0"
     >
         <div class="row">
             <div class="col-md-3 border-right">
@@ -11,11 +11,10 @@
                 >
                     <img
                         class="rounded-circle mt-5 border"
-                        width="150px"
                         src="https://picsum.photos/200/300"
-                    /><span class="font-weight-bold">Username</span
-                    ><span class="text-black-50">exampleEmail@gmail.com</span
-                    ><span> </span>
+                    /><span class="font-weight-bold">{{ user.username }}</span
+                    ><span class="text-black-50">{{ user.email }}</span
+                    >
                 </div>
             </div>
             <div class="col-md-5 border-right">
@@ -31,7 +30,7 @@
                             ><input
                                 type="text"
                                 class="form-control"
-                                :placeholder="getUserFirstName"
+                                :placeholder="user.firstName"
                                 value=""
                                 :disabled="setDisabled"
                             />
@@ -42,7 +41,7 @@
                                 type="text"
                                 class="form-control"
                                 value=""
-                                :placeholder="getUserLastName"
+                                :placeholder="user.lastName"
                                 :disabled="setDisabled"
                             />
                         </div>
@@ -73,7 +72,7 @@
                             ><input
                                 type="text"
                                 class="form-control"
-                                placeholder="enter address line 2"
+                                placeholder="Enter address line 2"
                                 value=""
                                 :disabled="setDisabled"
                             />
@@ -103,7 +102,7 @@
                             ><input
                                 type="text"
                                 class="form-control"
-                                placeholder="enter address line 2"
+                                placeholder="Enter address line 2"
                                 value=""
                                 :disabled="setDisabled"
                             />
@@ -113,7 +112,7 @@
                             ><input
                                 type="text"
                                 class="form-control"
-                                :placeholder="getUserEmail"
+                                :placeholder="user.email"
                                 value=""
                                 :disabled="setDisabled"
                             />
@@ -211,15 +210,18 @@
 import { mapGetters } from "vuex";
 export default {
     computed: {
+        isLoggedIn() {
+            return this.user.PK_userID;
+        },
         ...mapGetters({
-            getUserName: "user/getUserName",
-            getUserEmail: "user/getUserEmail",
+            // getUserName: "user/getUserName",
+            // getUserFirstName: "user/getUserFirstName",
+            // getUserLastName: "user/getUserLastName",
+            // getUserEmail: "user/getUserEmail",
             getUserPhoneNumber: "user/getUserPhoneNumber",
             getUserAddress: "user/getUserAddress",
             getUserPostcode: "user/getUserPostcode",
             getUserState: "user/getUserState",
-            getUserFirstName: "user/getUserFirstName",
-            getUserLastName: "user/getUserLastName",
             getUserCountry: "user/getUserCountry",
         }),
         setDisabled() {
@@ -234,20 +236,19 @@ export default {
     },
     async created() {
         const user = (await axios.get("./user")).data;
+        this.user = user;
+        this.incentivePoints = user.incentives;
         this.userVouchers = (await axios.get("./uservoucher/" + user.PK_userID)).data;
         this.membership = (await axios.get("./user/" + user.PK_userID)).data[0];
-        this.incentivePoints = user.incentives;
-        this.userID = user.PK_userID;
     },
     data() {
         return {
-            isLoggedIn: true,
             changeCredentials: false,
             inputIsInvalid: false,
             userVouchers: [],
             membership: [],
             incentivePoints: 0,
-            userID: 0,
+            user: {},
         };
     },
     methods: {
@@ -259,7 +260,7 @@ export default {
         },
         async claimIncentive() {
             this.incentivePoints++;
-            axios.put("./user/" + this.userID, { incentives: this.incentivePoints });
+            axios.put("./user/" + this.user.PK_userID, { incentives: this.incentivePoints });
 
             const object = new Date(Date.now() + 82800000); // 82800000 is 23 hours in milliseconds
             const year = object.getFullYear();
@@ -269,9 +270,9 @@ export default {
             const minutes = object.getMinutes();
             const seconds = object.getSeconds();
             const next = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
-            axios.put("./userprofile/" + this.userID, { time: next });
+            axios.put("./membership/" + this.user.PK_userID, { time: next });
 
-            this.membership = (await axios.get("./user/" + this.userID)).data[0];
+            this.membership = (await axios.get("./user/" + this.user.PK_userID)).data[0];
             alert("Daily incentive point claimed!");
         },
     },

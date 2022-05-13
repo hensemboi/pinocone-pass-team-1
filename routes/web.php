@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{slug}', function(){
-    return view('layouts.base_layout',[
-    ]);
+Route::get('/', function(){
+    return view('layouts.base_layout');
 });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/', [TestRegisterController::class, 'index']);
-// Route::post('/', [TestRegisterController::class, 'store']);
-// Route::post('/register', [RegisterController::class, 'store']);
-// Auth::routes(['verify' => true]);
+Route::get('/{slug}', function(){
+    return view('layouts.base_layout');
+});

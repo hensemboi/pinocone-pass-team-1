@@ -20,6 +20,6 @@ class Feedback extends Model
     }
 
     public function order(){
-        return $this->belongsTo(Order::class, "PK_FK_transactionID", "PK_transactionID")
+        return $this->belongsTo(Order::class, "PK_FK_transactionID", "PK_transactionID");
     }
 }

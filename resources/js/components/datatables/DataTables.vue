@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-6">
                         <button @click="deleteChecked" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>			
-                        <button @click="openModel" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i><span>Add New Menu</span></button>			
+                        <button v-on:click="addMenu" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i><span>Add New Menu</span></button>			
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <td v-html="highlight(menu.category.name, searchQuery)"></td>
                     <td v-html="highlight(menu.cuisinetype.name, searchQuery)"></td>
                     <td>
-                        <a @click="openEdit(menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a v-on:click="editMenu(menu)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a @click="deleteMenu(menu)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                     </tr>
@@ -60,7 +60,7 @@
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" v-on:click="myModel=false"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">{{ dynamicTitle }}</h4>
                                     </div>
                                     <div class="modal-body">
@@ -222,15 +222,19 @@ import useSort from '../hooks/sort'
                 axios.delete('./menu/' + menu.PK_menuID, { data: form })
             }
             function sort(key){
-                console.log("Sorting " + key)
                 context.emit('sort',key)
+            }
+            function addMenu(){
+                context.emit('add')
             }
             function highlight(current, query){
                 let it = query
-                console.log(it)
                 let c = new RegExp(it, "gi") 
                 let found = current.search(c) !== -1;
                 return !found ? current : current.replace(c, '<span class="highlight" style="background: #fc0;border-radius: 3px">' + it + '</span>');
+            }
+            function editMenu(menu){
+                context.emit('edit', menu)
             }
 
             return{
@@ -251,12 +255,11 @@ import useSort from '../hooks/sort'
                 resetForm,
                 deleteMenu,
                 sort,
-                highlight
+                highlight,
+                editMenu,
+                addMenu
             }
-        },  
-        mounted() {
-            console.log(this.$refs.searched[0].innerHTML)
-        }
+        },
     }
 </script>
 

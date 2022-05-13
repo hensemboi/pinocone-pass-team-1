@@ -12,15 +12,10 @@ class MenuController extends Controller
         return Menu::with(['category', 'category.menu'])->get();
     }
 
-    public function index(Request $request){
-<<<<<<< HEAD
-        return Menu::with(['category', 'cuisinetype', 'order'])->get();
+    public function index(){
+        return Menu::with(['category', 'cuisinetype', 'order', 'images'])->get();
         //return Menu::With('ordersCount')->get();
     } 
-=======
-        return Menu::with('images')->get();
-    }
->>>>>>> origin/pinocone-menuCRUD
 
     public function store(Request $request){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);

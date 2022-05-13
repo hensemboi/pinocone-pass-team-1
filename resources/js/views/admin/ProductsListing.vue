@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Modal :modal="openModel" v-on:closeModal="openModel=false" :menu="editedMenu" :categories="categoryList" :editCheck="editCheck" :cuisines="cuisineList"></Modal>
         <div class="input-group">
             <div class="dropdown" style="width: 93%;">
                 <input
@@ -63,7 +64,7 @@
                 <MenuCard v-for="menu in currMenus" :key="menu" :menu="menu" :searchQuery="searchQuery"></MenuCard> 
             </div>
             <div class="" v-else>
-                <Tables :menus="currMenus" v-on:sort="val => {sortBy = val ; sortDir = (sortDir == 'asc')? 'desc' : 'asc'}" :searchQuery="searchQuery"></Tables> 
+                <Tables :menus="currMenus" v-on:add="editCheck=false;openModel= true" v-on:edit="val => {editedMenu = val; openModel = !openModel; editCheck = !editCheck  }" v-on:sort="val => {sortBy = val ; sortDir = (sortDir == 'asc')? 'desc' : 'asc'}" :searchQuery="searchQuery"></Tables> 
             </div>
         </div>
         <div class="container d-flex" v-else>
@@ -78,6 +79,7 @@ import MenuCard  from '../../components/cards/MenuCard.vue'
 import Filter from '../../components/cards/Filter.vue'
 import Tables from '../../components/datatables/DataTables.vue'
 import CardSkeleton from '../../components/skeleton_loader/MenuCardSkeletonLoader.vue'
+import Modal from '../../components/modals/Modal.vue'
 import {useStore} from 'vuex';
 import {computed, ref, watch, isRef, toRefs, reactive} from 'vue';
 import { useRouter } from "vue-router";
@@ -88,16 +90,19 @@ export default ({
         MenuCard,
         Filter,
         Tables,
-        CardSkeleton
+        CardSkeleton,
+        Modal
     },
     setup(props, context) {
+        const editCheck = ref(false)
+        const openModel= ref(false)
+        const editedMenu = ref();
         const store = useStore();
-        const searchQuery = ref('')
+        const searchQuery = ref('');
         const router = useRouter();
         const isTable = ref()
         const sortBy = ref('')
-        const sortDir = ref('asc')
-
+        const sortDir = ref('asc');
         const isMenuPopulated = computed(() => {
             return store.getters["menu/getIsMenusPopulated"];
         });
@@ -116,14 +121,13 @@ export default ({
         const cuisineList = computed(()=>{
             return store.getters['menu/getAllCuisines'];
         })
+        watch(editedMenu,(c)=>{
+            console.log(c.value + openModel.value)
+        })
         
         const filterByCat= ref('')
 
         const filterByCuisine= ref('')
-
-        watch(filterByCat, (c)=>{
-            console.log(c)
-        })
 
         const sorted = computed(()=>{
             let sb = sortBy.value;
@@ -137,7 +141,6 @@ export default ({
             let input = searchQuery.value;
             let cat = filterByCat.value;
             let cuisine = filterByCuisine.value;
-            console.log(searchString)
 
             currMenus = currMenus.filter((m)=>m.category.name.includes(cat))
             currMenus = currMenus.filter((m)=>m.cuisinetype.name.includes(cuisine))
@@ -152,7 +155,7 @@ export default ({
 
             return currMenus
         })
-         const searchString  =computed(()=>{
+        const searchString=computed(()=>{
             let arr=[]
             let regex = searchQuery.value
             currMenus.value.forEach((c)=>{
@@ -162,7 +165,6 @@ export default ({
             })
             return regex === '' ? '' : _.uniq(_.filter(arr, (s)=>s.toLowerCase().trim().match(regex)))
         })
-
         async function getAllMenus (){
             if (!store.getters["menu/getIsMenusPopulated"]) {
                 try {
@@ -208,10 +210,12 @@ export default ({
         }
         function highlight(current, query){
             let it = query
-            console.log(it)
             let c = new RegExp(it, "gi") 
             let found = current.search(c) !== -1;
             return !found ? current : current.replace(c, '<strong>' + it + '</strong>');
+        }
+        function editMenu(v){
+            console.log(v)  
         }
 
         return{
@@ -237,7 +241,12 @@ export default ({
             categoryList,
             filterByCat,
             filterByCuisine,
-            cuisineList
+            cuisineList,
+            Modal,
+            editMenu,
+            editedMenu,
+            openModel,
+            editCheck
         }  
     },
     created(){

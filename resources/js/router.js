@@ -20,9 +20,9 @@ import Success from "./components/payment/Success.vue";
 import Error from "./components/payment/Error.vue";
 import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
-import Menu from "./components/menu/Menu.vue"
-import RequestsList from "./components/request_dashboard/RequestsList.vue";
+import Menu from "./components/menu/Menu.vue";
 import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
+import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -85,15 +85,16 @@ const router = createRouter({
             },
         },
         {
-            path: "/menu",
-            components: {
-                default: RequestsList,
-            },
-        },
-        {
             path: "/requestdashboard",
             components: {
                 default: RequestDashboard,
+            },
+        },
+        {
+            path: "/userorderdetail",
+            props: true,
+            components: {
+                default: UserOrderDetail,
             },
         },
         {
@@ -105,8 +106,8 @@ const router = createRouter({
             },
         },
         {
-            path:"/productslisting",
-            components:{
+            path: "/productslisting",
+            components: {
                 default: ProductsListing,
             },
         },

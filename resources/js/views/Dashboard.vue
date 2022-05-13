@@ -268,7 +268,7 @@ import { defineAsyncComponent } from '@vue/runtime-core'
 },
         name: "Dashboard",
         setup(){
-            const top5 = ref(await fetchTop5())
+            // const top5 = ref(await fetchTop5())
             const EarningCardSkeleton = defineAsyncComponent(()=>
                 import ("../components/cards/EarningCardSkeleton.vue")
             )
@@ -278,26 +278,26 @@ import { defineAsyncComponent } from '@vue/runtime-core'
                     value: "$akj"
                 }
             ]
-            const fetchTop5 = async() => {
-                return new Promise(()=>{
-                    await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-                        axios.get('/dashboard/{5}', {
-                            action: action,
-                        })
-                        .then((response) => {
-                            return response
-                        }
-                        )
-                        .catch((err) => {
-                            this.errors = err.response.data.errors;
-                        });
-                    });
-                })
-            }
+            // const fetchTop5 = async() => {
+            //     return new Promise(()=>{
+            //         await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+            //             axios.get('/dashboard/{5}', {
+            //                 action: action,
+            //             })
+            //             .then((response) => {
+            //                 return response
+            //             }
+            //             )
+            //             .catch((err) => {
+            //                 this.errors = err.response.data.errors;
+            //             });
+            //         });
+            //     })
+            // }
              
             return {
                 EarningCard,
-                top5,
+                // top5,
                 EarningCardsData,
                 EarningCardSkeleton,
                 Bar

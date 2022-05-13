@@ -1,40 +1,41 @@
-export default{
+export default {
     namespaced: true,
-    state: () => ({
-        orders: []
-    }),
-    mutations:{
-        addOrders (state) {
-            orders = state.orders;
-        }
+    state() {
+        return {
+            orders: [],
+        };
     },
-    getters: {
-        getOrders (state) {
-            return state.orders;
+    mutations: {
+        addOrders(state, payload) {
+            state.orders = payload;
         },
-        getIsOrdersPopulated (state) {
-            return state.orders && state.orders.length > 0;
-        }
     },
-    actions:{
-        async fetchOrders(context) {
+    actions: {
+        async fetchOrders({ commit }) {
             const { default: axios } = require("axios");
             await axios
-                .get("http://localhost:8000/api/marketplace")
+                .get("http://localhost:8000/sanctum/csrf-cookie")
                 .then(() => {
                     axios
-                        .get("/orders", {
-                            action: "fetchAll",
+                        .get("/requestdashboard", {
+                            action: "fetchUserDetails",
                         })
                         .then((response) => {
-                            context.commit("addOrders", response.data);
+                            commit("addOrders", response.data);
+                            console.log("Hello world");
                         })
                         .catch((err) => {
                             console.log(err.response.data.errors);
                         });
                 });
-
-            
         },
-    }
-}
+    },
+    getters: {
+        getOrders(state) {
+            return state.orders;
+        },
+        getIsOrdersPopulated(state) {
+            return state.orders && state.orders.length > 0;
+        },
+    },
+};

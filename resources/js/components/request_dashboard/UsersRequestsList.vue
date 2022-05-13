@@ -1,6 +1,6 @@
 <template>
     <base-container>
-        <h2>Active Users</h2>
+        <h2>Active Orders</h2>
         <base-search
             @search="updateSearch"
             :search-term="enteredSearchTerm"
@@ -20,44 +20,45 @@
             </button>
         </div>
         <ul>
-            <user-item
-                v-for="user in displayedUsers"
-                :key="user.id"
-                :user-name="user.fullName"
-                :id="user.id"
+            <user-requests-item
+                v-for="order in displayedItems"
+                :key="order.PK_transactionID"
+                :user-name="order.FK_userID"
+                :id="order.PK_transactionID"
                 @list-projects="$emit('list-projects', $event)"
-            ></user-item>
+            ></user-requests-item>
         </ul>
     </base-container>
 </template>
 
 <script>
-import UserItem from "./UserItem.vue";
+import UserRequestsItem from "./UserRequestsItem.vue";
 import useSort from "../hooks/sort.js";
 import useSearch from "../hooks/search.js";
-
+import { toRefs } from "vue";
 
 export default {
     components: {
-        UserItem,
+        UserRequestsItem,
     },
-    props: ["users"],
+    props: ["orders"],
     emits: ["list-projects"],
     setup(props) {
-        const { users } = toRefs(props);
+        console.log(props);
+        const { orders } = toRefs(props);
         const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
-            users,
-            "fullName"
+            orders,
+            "FK_userID"
         );
-        const { displayedUsers, sort, sorting } = useSort(
+        const { displayedItems, sort, sorting } = useSort(
             availableItems,
-            "fullName"
+            "FK_userID"
         );
 
         return {
             enteredSearchTerm,
             updateSearch,
-            displayedUsers,
+            displayedItems,
             sorting,
             sort,
         };
@@ -70,5 +71,24 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+button {
+    font: inherit;
+    border: 1px solid #00006b;
+    background-color: transparent;
+    color: #00006b;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+button:hover,
+button:active {
+    background-color: #efefff;
+}
+
+button.selected {
+    background-color: #00006b;
+    color: white;
 }
 </style>

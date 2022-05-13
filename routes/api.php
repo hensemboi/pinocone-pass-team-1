@@ -1,5 +1,11 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ImageController;
+>>>>>>> origin/pinocone-menuCRUD
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -14,6 +20,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\UserVoucherController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +43,7 @@ Route::controller(OrderController::class)->group(function () {
 Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
 Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 
+<<<<<<< HEAD
 Route::get('marketplace', [MenuController::class, 'fetchAll']);
 Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
@@ -75,14 +83,22 @@ Route::controller(TestUserController::class)->group(function () {
 });
 
 Route::get('menu', [MenuController::class, 'index']);
+=======
+>>>>>>> origin/pinocone-menuCRUD
 Route::post('menu', [MenuController::class, 'store']);
+Route::put('menu', [MenuController::class, 'update']);
+Route::post('upload/{id}', [ImageController::class, 'upload']);
+Route::delete('menu', [MenuController::class, 'destroySelected']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
 // Route::get('', [OrderController::class, '']);
 
+=======
+>>>>>>> origin/pinocone-menuCRUD
 // Route::post('login', [UserController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
 // Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');

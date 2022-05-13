@@ -34,14 +34,14 @@
                 <div class="col-md-6">
                     <div class="footer-row">
                         <div class="col-md-6 px-4">
-                            <h6>Help Us</h6>
+                            <h6>Explore</h6>
                             <div class="footer-row">
                                 <div class="col-md-6">
                                     <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Service</a></li>
-                                        <li><a href="#">Team</a></li>
+                                        <li><router-link to="/home">Home</router-link></li>
+                                        <li><router-link to="/productslisting">Menu</router-link></li>
+                                        <li><router-link to="/marketplace">Marketplace</router-link></li>
+                                        <li><router-link to="/cart">Cart</router-link></li>
                                         <li><a href="#">Help</a></li>
                                         <li><a href="#">Contact</a></li>
                                     </ul>
@@ -52,24 +52,9 @@
                         <div class="col-md-6">
                             <h6>Follow Us</h6>
                             <div class="social">
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-facebook"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-instagram"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
-                                <a href="#"
-                                    ><i
-                                        class="fa fa-twitter"
-                                        aria-hidden="true"
-                                    ></i
-                                ></a>
+                                <a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="https://www.instagram.com/?hl=en"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="https://twitter.com/?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>

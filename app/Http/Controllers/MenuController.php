@@ -13,43 +13,59 @@ class MenuController extends Controller
     }
 
     public function index(Request $request){
+<<<<<<< HEAD
         return Menu::with(['category', 'cuisinetype', 'order'])->get();
         //return Menu::With('ordersCount')->get();
     } 
+=======
+        return Menu::with('images')->get();
+    }
+>>>>>>> origin/pinocone-menuCRUD
 
-    public function store(){
+    public function store(Request $request){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);
         
-        $this ->validate(request(),[
+        $menu = new Menu;
+        $menu->PK_menuID = $id;
+        $menu->menuName = $request->menuName;
+        $menu->description = $request->description;
+        $menu->price = $request->price;
+        $menu->FK_categoryCode = $request->categoryCode;
+        $menu->FK_cuisineCode = $request->cuisineCode;
+        $menu->save();
+
+        return response()->json([
+            'menuList' => Menu::all(),
+            'menuID' => $id
+        ]);
+    }
+    
+    public function update(Request $request){
+        Menu::where('PK_menuID', $request->menuID)
             
-            'menuName'=>'required',
-            'description'=>'required',
-            'price'=>'required',
-            'categoryCode'=>'required',
-            'cuisineCode'=>'required',
+        ->update([
+        'menuName' => $request->menuName, 
+        'description' => $request->description, 
+        'price' => $request->price, 
+        'FK_categoryCode' => $request->categoryCode, 
+        'FK_cuisineCode' => $request->cuisineCode,
         ]);
-            Menu::forceCreate([
-            'menuName' => request('menuName'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'categoryCode' => request('categoryCode'),
-            'cuisineCode' => request('cuisineCode'),
+           
+        return response()->json([
+            'menuList' => Menu::all(),
+            'menuID' => $request->menuID
         ]);
-
-        return ['success'=> 'Menu created successfully!'];
     }
+    
+    public function destroy($menuID){
+        Menu::where('PK_menuID', $menuID)->delete();
 
-    public function destroy(Request $request){
-        Menu::where(
-            [
-                'PK_menuID' => $request->menuID
-            ]
-        )->delete();
+        return Menu::all();
+    }    
 
-        return;
-    }
+    public function destroySelected(Request $request){
+        Menu::whereIn('PK_menuID', $request->selected)->delete();
 
-    public function show(){
-        return;
-    }
+        return Menu::all();
+    }   
 }

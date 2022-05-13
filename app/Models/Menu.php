@@ -29,8 +29,14 @@ class Menu extends Model
         return $this->belongsToMany(Order::class, 'ordered_menus', 'PK_FK_menuID', 'PK_FK_transactionID', 'PK_menuID', 'PK_transactionID');
     }
 
+<<<<<<< HEAD
 public function mostOrdered(){
     // return $this->hasOne();
+=======
+    public function images(){
+        return $this->hasMany(Image::class, 'FK_menuID', 'PK_menuID');
+    }
+>>>>>>> origin/pinocone-menuCRUD
 }
 
 public function ordersCount(){

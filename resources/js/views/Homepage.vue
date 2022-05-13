@@ -92,28 +92,37 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+               
+                    
+                     
+                            
+                        <h1 id="Recommended-Menus">Recommendation Menus</h1>
 
-        <h1 id="Recommended-Menus">Recommendation Menus</h1>
-        <div class="row">
-            <recommended-menu menu="1"></recommended-menu>
-            <recommended-menu menu="2"></recommended-menu>
-            <recommended-menu menu="3"></recommended-menu>
-        </div>
-
-        <div class="row">
-            <recommended-menu menu="4"></recommended-menu>
-            <recommended-menu menu="5"></recommended-menu>
-            <recommended-menu menu="6"></recommended-menu>
-        </div>
-        </div>
+                            <div><special-section v-for="menu in menuList" v-bind:RecommendedMenu="menu"></special-section></div>
+                       
+                    
+               
+        
+    </div>
+    </div>
     </div>
 </template>
 
 <script>
-    import RecommendedMenu from "../components/RecommendedMenu.vue";
+    import SpecialSection from "../components/SpecialSection.vue";
     export default {
         components: {
-            "recommended-menu": RecommendedMenu,
+            SpecialSection,
         },
+        data(){
+        return{
+            menuList: [],
+        }
+    },
+        created() {
+        axios.get("./pplmenu", this.form)
+            .then(response => this.menuList = response.data);
+    },
     };
 </script>

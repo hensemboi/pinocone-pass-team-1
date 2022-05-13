@@ -14,11 +14,11 @@ class Menu extends Model
     public $timestamps=true;
 
     public function category(){
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(category::class, 'FK_categoryCode', 'PK_categoryCode');
     }
 
     public function cuisinetype(){
-        return $this->belongsTo(CuisineType::class);
+        return $this->belongsTo(CuisineType::class, 'FK_cuisineCode', 'PK_cuisineCode');
     }
 
     public function order(){

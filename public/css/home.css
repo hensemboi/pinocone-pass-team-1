@@ -115,6 +115,7 @@ body p,a {
 .gallery img {
 	width: 100%;
 	height: auto;
+	margin-bottom: 30px;
 }
 
 .clearfix:after {
@@ -134,7 +135,7 @@ body p,a {
 
 #Recommended-Menus {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .recommended-menu {

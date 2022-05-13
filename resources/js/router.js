@@ -78,14 +78,6 @@ const router = createRouter({
             },
         },
         {
-            path: "/section",
-            components: {
-                default: SpecialSection,
-                footer: Footer,
-                navbar: Navbar,
-            },
-        },
-        {
             path:"/productslisting",
             components:{
                 default: ProductsListing,

@@ -26,6 +26,8 @@ Route::put('menu', [MenuController::class, 'update']);
 Route::post('upload/{id}', [ImageController::class, 'upload']);
 Route::delete('menu', [MenuController::class, 'destroySelected']);
 
+Route::get('pplmenu', [MenuController::class, 'fetchPopularMenu']);
+
 Route::post('login', [TestUserController::class, 'login']);
 Route::post('register', [TestUserController::class, 'register']);
 Route::post('logout', [TestUserController::class, 'logout'])->middleware('auth:sanctum');

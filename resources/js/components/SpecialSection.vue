@@ -1,23 +1,23 @@
 <template>
 
-    <section class="cards">
+    <div class="cards">
         <div class="card">
-        <div class="card-header">
-            <img src="../../../public/images/food2.png" alt="Image" />
-        </div>
+            <div class="card-header">
+                <img src="../../../public/images/food2.png" alt="Image" />
+            </div>
             <div class="card-body ">
-                   <div class="text-order"><small class="text-muted">TotalOrders: {{RecommendedMenu.totalOrders}}</small></div>
+                <div class="text-order"><small class="text-muted">TotalOrders: {{RecommendedMenu.totalOrders}}</small></div>
 
                     <div class="tag tag-teal">{{RecommendedMenu.category.name}}</div>
                     <div class="tag tag-purple">{{RecommendedMenu.cuisinetype.name}}</div>
-                 
+                
                 <h4 class="card-title">{{RecommendedMenu.menuName}}</h4>
                 <p class="card-text">RM  {{RecommendedMenu.price}}</p>
             
                     <button class="btn-card">Order</button>
             </div>
+        </div>
     </div>
-    </section>
 
 
 
@@ -57,10 +57,10 @@ export default {
 	transition-duration: 0.1s;
 }
 
- .cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.cards{
+    display:inline-block;
+    position: relative;
+    margin: 0 !important;
 }
 .card {
   margin: 10px;
@@ -107,7 +107,7 @@ export default {
 .text-order{
     position: relative;
     text-align: right;
-
+    margin-bottom: 5px;
 }
 
 

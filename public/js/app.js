@@ -38467,7 +38467,7 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_6, "TotalOrders: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.RecommendedMenu.totalOrders), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_6, "TotalOrders: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.RecommendedMenu.totalOrders), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.RecommendedMenu.category.name), 1
   /* TEXT */
@@ -40232,7 +40232,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"Hero-Image-1\"><img src=\"/images/hero-1.jpeg\" alt=\"hero-1.jpeg\" style=\"width:100%;\"><div id=\"Hero-Text\"><h1>We are here to help</h1><p>We can offer you very good deals on a frequent basis.</p><button class=\"btn-body\">Check our full menu listing</button></div></div><div><div id=\"About-Us\"><div class=\"row\"><div class=\"col-lg-7\"><img class=\"about-us\" src=\"/images/about-us.jpeg\" alt=\"about-us.jpeg\"></div><div class=\"col-lg-5\"><div id=\"About-Text\"><h1>About Us</h1><p> Pinocone Catering Company of Sarawak is one of the few catering companies that offers catering services especially to schools and other companies in the state. </p><button class=\"btn-body\">Learn more</button></div></div></div></div></div><div id=\"Hero-Image-2\"><img src=\"/images/hero-2.jpeg\" alt=\"hero-2.jpeg\" style=\"width:100%;\"><div id=\"Hero-Text-2\"><h1>JOIN US AND GET DISCOUNTS UP TO 50%</h1><button class=\"btn-body\">SIGN UP NOW</button></div></div><div id=\"Order-Steps\"><h1 id=\"Order-Heading\">Order in 4 Simple Steps</h1><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step1.png\" alt=\"step1.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step2.png\" alt=\"step2.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step3.png\" alt=\"step3.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step4.png\" alt=\"step4.png\" width=\"600\" height=\"400\"></div></div></div>", 4);
 
 var _hoisted_5 = {
-  "class": "container"
+  "class": "container section"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
@@ -40246,15 +40246,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_special_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("special-section");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_navbar_component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menuList, function (menu) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_navbar_component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menuList, function (menu) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_special_section, {
-      RecommendedMenu: menu
+      "class": "col-md-4",
+      RecommendedMenu: menu,
+      key: menu.PK_menuID
     }, null, 8
     /* PROPS */
     , ["RecommendedMenu"]);
-  }), 256
-  /* UNKEYED_FRAGMENT */
-  ))])])])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])]);
 }
 
 /***/ }),
@@ -46214,7 +46216,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-451cd917] {\n  box-sizing: border-box;\n}\n.btn-card[data-v-451cd917] {\n\tcolor: #2d2e2c;\n\tbackground-color:  #fed531;\n\ttext-decoration: none;\n\tborder: none;\n\tborder-radius: 30px;\n\tfont-size: 20px;\n\tpadding: 7px 30px;\n\tline-height: 40px;\n\tcursor: pointer;\n}\n.btn-card[data-v-451cd917]:hover{\n\tcolor: #fdfdfd;\n\tbackground-color:  #866c35;\n\tbox-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);\n\ttransition-duration: 0.1s;\n}\n.cards[data-v-451cd917]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.card[data-v-451cd917] {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  overflow: hidden;\n  width: 300px;\n}\n.card-header img[data-v-451cd917] {\n  width: 100%;\n  height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-body[data-v-451cd917] {\n  \n  padding: 20px;\n}\n.tag[data-v-451cd917] {\n    display: inline-block;\n    background: #cccccc;\n    border-radius: 50px;\n    font-size: 12px;\n    margin: 0;\n    color: #fff;\n    padding: 2px 10px;\n    text-transform: uppercase;\n    cursor: pointer;\n}\n.tag-teal[data-v-451cd917] {\n  background-color: #47bcd4;\n}\n.tag-purple[data-v-451cd917] {\n  background-color: #5e76bf;\n}\n.card-body p[data-v-451cd917] {\n  font-size: 13px;\n}\n.text-order[data-v-451cd917]{\n    position: relative;\n    text-align: right;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-451cd917] {\n  box-sizing: border-box;\n}\n.btn-card[data-v-451cd917] {\n\tcolor: #2d2e2c;\n\tbackground-color:  #fed531;\n\ttext-decoration: none;\n\tborder: none;\n\tborder-radius: 30px;\n\tfont-size: 20px;\n\tpadding: 7px 30px;\n\tline-height: 40px;\n\tcursor: pointer;\n}\n.btn-card[data-v-451cd917]:hover{\n\tcolor: #fdfdfd;\n\tbackground-color:  #866c35;\n\tbox-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);\n\ttransition-duration: 0.1s;\n}\n.cards[data-v-451cd917]{\n    display:inline-block;\n    position: relative;\n    margin: 0 !important;\n}\n.card[data-v-451cd917] {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  overflow: hidden;\n  width: 300px;\n}\n.card-header img[data-v-451cd917] {\n  width: 100%;\n  height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card-body[data-v-451cd917] {\n  \n  padding: 20px;\n}\n.tag[data-v-451cd917] {\n    display: inline-block;\n    background: #cccccc;\n    border-radius: 50px;\n    font-size: 12px;\n    margin: 0;\n    color: #fff;\n    padding: 2px 10px;\n    text-transform: uppercase;\n    cursor: pointer;\n}\n.tag-teal[data-v-451cd917] {\n  background-color: #47bcd4;\n}\n.tag-purple[data-v-451cd917] {\n  background-color: #5e76bf;\n}\n.card-body p[data-v-451cd917] {\n  font-size: 13px;\n}\n.text-order[data-v-451cd917]{\n    position: relative;\n    text-align: right;\n    margin-bottom: 5px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

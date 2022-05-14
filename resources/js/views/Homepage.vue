@@ -92,19 +92,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-               
-                    
-                     
-                            
-                        <h1 id="Recommended-Menus">Recommendation Menus</h1>
-
-                            <div><special-section v-for="menu in menuList" v-bind:RecommendedMenu="menu"></special-section></div>
-                       
-                    
-               
-        
-    </div>
+        <div class="container section">
+            <h1 id="Recommended-Menus">Recommendation Menus</h1>
+                 <special-section class="col-md-4" v-for="menu in menuList" v-bind:RecommendedMenu="menu" v-bind:key="menu.PK_menuID"></special-section>
+        </div>
     </div>
     </div>
 </template>

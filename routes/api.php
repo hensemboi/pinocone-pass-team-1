@@ -33,7 +33,13 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('order', 'store');
     Route::put('order/{id}', 'update');
 });
+<<<<<<< HEAD
 // Route::get('productslisting', [MenuController::class, 'fetchAll']);
+=======
+
+Route::get('requestdashboard', [OrderController::class, 'fetchAll']);
+Route::get('productslisting', [MenuController::class, 'fetchAll']);
+>>>>>>> origin/pinocone-requestDashboard
 Route::get('productslistingcat', [CategoryController::class, 'fetchAll']);
 Route::get('productslistingcui', [CuisineController::class, 'fetchAll']);
 

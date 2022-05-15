@@ -14,7 +14,7 @@ export default {
         async fetchProducts(context) {
             const { default: axios } = require("axios");
             await axios
-                .get("http://localhost:8000/api/marketplace")
+                .get("http://localhost:8000/sanctum/csrf-cookie")
                 .then(() => {
                     axios
                         .get("/marketplace", {

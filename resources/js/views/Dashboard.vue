@@ -23,9 +23,14 @@ import { defineAsyncComponent } from '@vue/runtime-core'
             EarningCardSkeleton
         },
         name: "Dashboard",
+<<<<<<< HEAD
         async setup(){
             const {checkModule, fetchingData} = await useCheckData("menu/getIsMenusPopulated", 'menu/fetchAllCategories')
 
+=======
+        setup(){
+            // const top5 = ref(await fetchTop5())
+>>>>>>> origin/pinocone-requestDashboard
             const EarningCardSkeleton = defineAsyncComponent(()=>
                 import ("../components/cards/EarningCardSkeleton.vue")
             )
@@ -35,6 +40,7 @@ import { defineAsyncComponent } from '@vue/runtime-core'
                     value: "$akj"
                 }
             ]
+<<<<<<< HEAD
             
             // const loadMenu = async() => {
             //     console.log("hha")
@@ -53,9 +59,32 @@ import { defineAsyncComponent } from '@vue/runtime-core'
             //     });
             // }
 
+=======
+            // const fetchTop5 = async() => {
+            //     return new Promise(()=>{
+            //         await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+            //             axios.get('/dashboard/{5}', {
+            //                 action: action,
+            //             })
+            //             .then((response) => {
+            //                 return response
+            //             }
+            //             )
+            //             .catch((err) => {
+            //                 this.errors = err.response.data.errors;
+            //             });
+            //         });
+            //     })
+            // }
+             
+>>>>>>> origin/pinocone-requestDashboard
             return {
                 // loadMenu,
                 EarningCard,
+<<<<<<< HEAD
+=======
+                // top5,
+>>>>>>> origin/pinocone-requestDashboard
                 EarningCardsData,
                 EarningCardSkeleton,
                 Bar,

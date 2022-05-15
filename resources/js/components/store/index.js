@@ -7,6 +7,7 @@ import userModule from "./modules/users.js";
 import animationsModule from './modules/animations.js';
 import fetchModule from './modules/fetch.js';
 import menuModule from './modules/menu.js';
+import ordersModule from './modules/orders.js';
 
 const store = createStore({
   modules: {
@@ -17,7 +18,8 @@ const store = createStore({
     cart: cartModule,
     animations: animationsModule,
     fetch: fetchModule,
-    menu: menuModule
+    menu: menuModule,
+    order: ordersModule,
   },
   state() {
     return {

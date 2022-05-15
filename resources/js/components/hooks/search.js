@@ -1,5 +1,6 @@
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch } from "vue";
 
+<<<<<<< HEAD
 export default function useSearch(module = 'menu/fetchAllCategories') {
   async function getAllCategories (){
     if (!store.getters["menu/getIsCategoriesPopulated"]) {
@@ -23,3 +24,41 @@ export default function useSearch(module = 'menu/fetchAllCategories') {
     updateSearch,
   };
 } 
+=======
+export default function useSearch(items, searchProp) {
+    const enteredSearchTerm = ref("");
+    const activeSearchTerm = ref("");
+
+    const availableItems = computed(function () {
+        let filteredItems = [];
+        if (activeSearchTerm.value) {
+            items.value.forEach((element) => {
+                if (element[searchProp] == activeSearchTerm.value) {
+                    filteredItems.push(element);
+                }
+            });
+        } else if (items.value) {
+            filteredItems = items.value;
+        }
+        return filteredItems;
+    });
+
+    watch(enteredSearchTerm, function (newValue) {
+        setTimeout(() => {
+            if (newValue === enteredSearchTerm.value) {
+                activeSearchTerm.value = newValue;
+            }
+        }, 300);
+    });
+
+    function updateSearch(val) {
+        enteredSearchTerm.value = val;
+    }
+
+    return {
+        enteredSearchTerm,
+        availableItems,
+        updateSearch,
+    };
+}
+>>>>>>> origin/pinocone-requestDashboard

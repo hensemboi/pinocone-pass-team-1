@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +46,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:admin');
     }
 
     /**
@@ -79,5 +82,23 @@ class RegisterController extends Controller
 
         $user = User::create($validatedData);
         Auth::login($user);
+    }
+
+    public function aregister(Request $request){
+        $id = IdGenerator::generate(['table' => 'staffs', 'field' => 'PK_staffID', 'length' => 6, 'prefix' => date('ym')]);
+        Staff::create(['PK_staffID' => $id]);
+
+        $validatedData = $request->validate([
+            'username' => 'required|min:3|max:25|unique:admins',
+            'password' => ['required', 'confirmed', Password::min(10)],
+        ]);
+
+        $admin = Admin::create([
+            'PK_FK_staffID' => $id,
+            'username' => $validatedData['username'],
+            'password' => Hash::make($validatedData['password'])
+        ]);
+
+        Auth::guard('admin')->login($admin);
     }
 }

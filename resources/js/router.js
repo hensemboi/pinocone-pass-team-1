@@ -4,6 +4,8 @@ import Navbar from "./components/navbar/Navbar.vue";
 import Footer from "./components/UI/TheFooter.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
+import AdminLogin from "./views/admin/AdminLogin.vue";
+import AdminRegister from "./views/admin/AdminRegister.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ProductsList from "./components/pages/ProductsList.vue";
 import ProductsListing from "./views/admin/ProductsListing.vue";
@@ -48,6 +50,18 @@ const router = createRouter({
             path: "/register",
             components: {
                 default: Register,
+            },
+        },
+        {
+            path: "/alogin",
+            components: {
+                default: AdminLogin,
+            },
+        },
+        {
+            path: "/aregister",
+            components: {
+                default: AdminRegister,
             },
         },
         {

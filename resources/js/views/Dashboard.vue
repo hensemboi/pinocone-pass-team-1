@@ -1,4 +1,5 @@
 <template>
+<div v-if="admin.PK_FK_staffID !== 0">
     <div>
         <div>
             <!-- Begin Page Content -->
@@ -86,9 +87,6 @@
                 </div>
 
                 <!-- Content Row -->
-
-                <div class="row">
-
                     <!-- Area Chart -->
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
@@ -252,6 +250,13 @@
 
     </div>
         <!-- End of Content Wrapper -->
+
+    <div v-else>
+        <h2 class="text-center">Please login to view this page ...</h2>
+        <h2 class="text-center">
+            <router-link to="/alogin">Login</router-link>
+        </h2>
+    </div>
 </template>
 
 <script>
@@ -304,6 +309,17 @@
 //             }
 //         }
 //     }
+export default {
+    async created() {
+        const rootURL = window.location.origin;
+        this.admin = (await axios.get(rootURL + "/admin")).data;
+    },
+    data() {
+        return {
+            admin: {},
+        }
+    },
+};
 </script>
 
 <style scoped>

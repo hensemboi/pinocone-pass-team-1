@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
+use App\Models\feedback;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 

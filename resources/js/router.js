@@ -31,6 +31,8 @@ import RequestDashboard from "./components/request_dashboard/RequestDashboard.vu
 import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
 import Delivery from "./components/request_dashboard/Delivery.vue"
 
+import Store from "./store";
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -86,6 +88,19 @@ const router = createRouter({
                 footer: Footer,
                 navbar: Navbar,
             },
+        },
+        {
+            name: "Membership",
+            path: "/",
+            components: {
+                default: ProductsList,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            name: "Feedback",
+            path: "/",
         },
         {
             path: "/cart",

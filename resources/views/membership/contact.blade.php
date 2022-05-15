@@ -1,6 +1,6 @@
 @extends('membership.layouts')
 @section('title')
-    Pinocone | Feedback Page
+    Pinocone | Contact Page
 @endsection
 @section('extra-heads')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,10 +13,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="p-5 shadow rounded content">
-                        <h2 class="section-title">Get us a Feedback</h2>
-                        <form method="POST" action="/post/feedback">
+                        <h2 class="section-title">Got Any Questions</h2>
+                        <form method="POST" action="/post/membership/contact-us">
                             @csrf
-                            <h5 class="text-center" id="exampleModalLabel">Tell us about yourself.</h5>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="fname">First Name</label>
@@ -44,50 +43,31 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="email">Phone</label>
-                                <input type="number" class="form-control" id="phone" name="phone"
-                                    placeholder="Your Phone Number">
-                                @if ($errors->has('phone'))
-                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                <label for="reason">Reason of Contact</label>
+                                <select id="reason" class="form-control custom-select" name="reason">
+                                    <option selected disabled>Choose Your Reason</option>
+                                    <option value="menu">Menu</option>
+                                    <option value="membership">Membership Packages</option>
+                                    <option value="Promotions">Promotions</option>
+                                </select>
+                                @if ($errors->has('reason'))
+                                    <span class="text-danger">{{ $errors->first('reason') }}</span>
                                 @endif
                             </div>
-                            <h5 class="text-center" id="exampleModalLabel">Give us your feedback.</h5>
                             <div class="form-group">
-                                <label for="message">Start Writing From Here...</label>
-                                <textarea name="message" id="message" class="form-control" placeholder="Enter your comments (15/600 characters)..."></textarea>
+                                <label for="message">Start Writing From Here</label>
+                                <textarea name="message" id="message" class="form-control" placeholder="Your Text here ..."></textarea>
                                 @if ($errors->has('message'))
                                     <span class="text-danger">{{ $errors->first('message') }}</span>
                                 @endif
                             </div>
-                            <h5 class="text-center" id="exampleModalLabel">Tell us about your item Purchase.</h5>
-                            <div class="form-group">
-                                <label for="email">Product name</label>
-                                <input type="text" class="form-control" id="product_name" name="product_name"
-                                    placeholder="Which product you buy from us?">
-                                @if ($errors->has('product_name'))
-                                    <span class="text-danger">{{ $errors->first('product_name') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Product Quality</label>
-                                <input type="text" class="form-control" id="quality" name="quality"
-                                    placeholder="Do you like the quality of the product?">
-                                @if ($errors->has('quality'))
-                                    <span class="text-danger">{{ $errors->first('quality') }}</span>
-                                @endif
-                            </div>
-                            <p class="text-center">
-                                <button type="submit" class="btn btn-primary text-center">Send</button>
-                            </p>
+                            <button type="submit" class="btn btn-primary">Send</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-     @endsection
-      @section('extra-scripts')
-       <script>
+    </section> @endsection @section('extra-scripts') <script>
         @if (Session::has('message'))
             toastr.options = {
             "closeButton": true

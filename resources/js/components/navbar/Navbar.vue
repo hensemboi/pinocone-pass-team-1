@@ -22,13 +22,12 @@
                         title="Menu"
                     ></menu-dropdown-component>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="#"
-                        >Promotions</router-link
-                    >
+                <li class="nav-item" id="applic">
+                    <button class="nav-link" @click="gotoGoogle()" to="/pinocone/feedback">Feedback</button>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="#">Contact</router-link>
+
+                <li class="nav-item" id="app">
+                    <button class="nav-link" @click="gotoGoogle()" to="/membership/index">Membership</button>
                 </li>
                 <li>
                     <router-link to="/marketplace">Marketplace</router-link>
@@ -94,5 +93,23 @@ export default {
         const rootURL = window.location.origin;
         this.user = (await axios.get(rootURL + "/user")).data;
     }
+};
+</script>
+<script>
+export default {
+  name: "app",
+  methods: {
+    gotoGoogle() {
+      window.open("/membership/index");
+    },
+  },
+};
+export default {
+  name: "applic",
+  methods: {
+    gotoGoogle() {
+      window.open("/membership/index");
+    },
+  },
 };
 </script>

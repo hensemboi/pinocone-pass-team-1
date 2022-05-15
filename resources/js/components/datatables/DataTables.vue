@@ -128,11 +128,8 @@
 
 
 <script>
-import {useStore} from 'vuex';
 import {computed, ref, watch} from 'vue';
-import { useRouter } from "vue-router";
-import store from '../store';
-import useSort from '../hooks/sort'
+
 
     class Errors{
         constructor(){

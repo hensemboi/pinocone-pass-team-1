@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Category Code</label>
-                                    <select id="categoryCode" v-model="form.FK_categoryCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCategoryCode(form.categoryCode) && categoryCodeBlured}" v-on:blur="categoryCodeBlured = true"> 
+                                    <select id="categoryCode" v-model="form.categoryCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCategoryCode(form.categoryCode) && categoryCodeBlured}" v-on:blur="categoryCodeBlured = true"> 
                                     <option value="">Category Code</option>
                                     <option v-for="c in categories" :value="c.PK_categoryCode" :key="c.PK_categoryCode">{{c.PK_categoryCode}} - {{c.name}}</option>
                                     </select>
@@ -43,9 +43,10 @@
                                 </div>			
                                 <div class="form-group">
                                     <label>Cuisine Code</label>
-                                    <select id="cuisineCode" v-model="form.FK_cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
-                                    <option value="">Cuisine Code</option>
-                                    <option v-for="c in cuisines" :value="c.PK_cuisineCode" :key="c.PK_cuisineCode">{{c.PK_cuisineCode}} - {{c.name}}</option>
+                                    <select id="cuisineCode" v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' :
+                                     !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
+                                        <option value="">Cuisine Code</option>
+                                        <option v-for="c in cuisines" :value="c.PK_cuisineCode" :key="c.PK_cuisineCode">{{c.PK_cuisineCode}} - {{c.name}}</option>
                                     </select>
                                     <div class="valid-feedback">Nice!</div>
                                     <div class="invalid-feedback">Please select a cuisine code.</div>                       
@@ -67,14 +68,9 @@
 </template>
 
 <script>
-import {useStore} from 'vuex';
 import {computed, ref, watch, toRefs, toRef} from 'vue';
-import { useRouter } from "vue-router";
-import store from '../store';
-import useSort from '../hooks/sort'
 import Swal from 'sweetalert2'
 import Dropzone from './../menu/Dropzone.vue'
-import { ContextExclusionPlugin } from 'webpack';
 
     class Errors{
         constructor(){
@@ -229,32 +225,33 @@ import { ContextExclusionPlugin } from 'webpack';
             }
             async function  onSubmit() {
                 console.log('adding')
-                // validate();
-                // if (valid) {
-                //     myModel = false;
-                // }
+                console.log(form.categoryCode)
+                validate();
+                if (valid) {
+                    myModel = false;
+                }
 
-                // files.forEach(file => {
-                //     formData.append("images[]", file);
-                // });
+                files.forEach(file => {
+                    formData.append("images[]", file);
+                });
 
-                // let menu = (await axios.post("./menu", form)).data;
-                // menuList = menu.menuList;
+                let menu = (await axios.post("./menu", form)).data;
+                menuList = menu.menuList;
 
-                // Swal.fire({
-                //     title: "Success!",
-                //     html: "Menu created successfully!",
-                //     icon: "success",
-                //     confirmButtonColor: "#fed531",
-                //     confirmButtonText: "OK",
-                // });
+                Swal.fire({
+                    title: "Success!",
+                    html: "Menu created successfully!",
+                    icon: "success",
+                    confirmButtonColor: "#fed531",
+                    confirmButtonText: "OK",
+                });
 
-                // axios.post('./upload/' + menu.menuID, formData)
-                //     .then(response => {
-                //         images = [];
-                //         files = [];
-                //         formData = new FormData();
-                //     });
+                axios.post('./upload/' + menu.menuID, formData)
+                    .then(response => {
+                        images = [];
+                        files = [];
+                        formData = new FormData();
+                    });
             }
             function openEdit() {
                 axios.get("./menu", form);

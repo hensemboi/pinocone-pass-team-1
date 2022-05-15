@@ -71,24 +71,22 @@
             <CardSkeleton v-for="n in 15" :key="n"></CardSkeleton>
         </div>
     </div>
-
 </template>
 
 <script>
-import MenuCard  from '../../components/cards/MenuCard.vue'
-import Filter from '../../components/cards/Filter.vue'
-import Tables from '../../components/datatables/DataTables.vue'
-import CardSkeleton from '../../components/skeleton_loader/MenuCardSkeletonLoader.vue'
-import Modal from '../../components/modals/Modal.vue'
+import MenuCard  from './../../components/cards/MenuCard.vue' 
+import Tables from './../../components/datatables/DataTables.vue'
+import CardSkeleton from './../../components/skeleton_loader/MenuCardSkeletonLoader.vue'
+import Modal from './../../components/modals/Modal.vue'
+
 import {useStore} from 'vuex';
-import {computed, ref, watch, isRef, toRefs, reactive} from 'vue';
-import { useRouter } from "vue-router";
+import {computed, ref, watch} from 'vue';
 import { isString } from '@vue/shared';
+
 
 export default ({
     components:{
         MenuCard,
-        Filter,
         Tables,
         CardSkeleton,
         Modal
@@ -99,7 +97,6 @@ export default ({
         const editedMenu = ref();
         const store = useStore();
         const searchQuery = ref('');
-        const router = useRouter();
         const isTable = ref()
         const sortBy = ref('')
         const sortDir = ref('asc');
@@ -141,7 +138,7 @@ export default ({
             let input = searchQuery.value;
             let cat = filterByCat.value;
             let cuisine = filterByCuisine.value;
-
+            console.log(currMenus)
             currMenus = currMenus.filter((m)=>m.category.name.includes(cat))
             currMenus = currMenus.filter((m)=>m.cuisinetype.name.includes(cuisine))
             if(isString(searchQuery.value)){

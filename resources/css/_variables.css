@@ -21,4 +21,14 @@
 
     --admin-sidebar-width-maximize: 6.5rem;
     --admin-sidebar-width-minimize: 3.5rem;
+
+    --item-gray: #474747;
+    --quick-gray: #ccc;
+    --gray-black: #292929;
+    --button-purple: #45006d;
+    --button-purple-hover: #760ab4;
+    --button-dark-red: #8f0030;
+    --button-dark-red-hover: #53001c;
+    --voucher-pink: #fe7b99;
+    --pinocone-yellow: #fed531;
   }

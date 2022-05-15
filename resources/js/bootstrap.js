@@ -31,5 +31,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
-window.axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+const rootURL = window.location.origin;
+window.axios.defaults.baseURL = rootURL + "/api";
 window.axios.defaults.withCredentials = true;

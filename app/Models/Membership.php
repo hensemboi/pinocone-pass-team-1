@@ -15,6 +15,6 @@ class Membership extends Model
     public $timestamps = false;
 
     public function user(){
-        return $this->belongsTo(User::class, "PK_FK_userID", "PK_userID");
+        return $this->belongsTo(User::class, 'PK_FK_userID', 'PK_userID');
     }
 }

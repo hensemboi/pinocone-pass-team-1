@@ -27,6 +27,10 @@ class User extends Authenticatable
      */
     protected $guarded=[];
 
+    protected $primaryKey = 'PK_userID';
+
+    public $incrementing = false;
+
     public $timestamps=true;
 
     public function order(){
@@ -46,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function membership(){
-        return $this->belongsTo(membership::class);
+        return $this->hasOne(Membership::class, 'PK_FK_userID', 'PK_userID');
     }
 
     public function uservoucher(){

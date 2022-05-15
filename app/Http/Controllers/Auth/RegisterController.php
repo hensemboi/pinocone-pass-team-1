@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\Rules\Password;
 
@@ -43,6 +46,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:admin');
     }
 
     /**
@@ -53,11 +57,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, []);
     }
 
     /**
@@ -66,45 +66,39 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-
     public function register(Request $request){
-
         $id = IdGenerator::generate(['table' => 'users', 'field' => 'PK_userID', 'length' => 9, 'prefix' => date('ym')]);
         $validatedData = $request->validate([
-            'username' => 'required|min:3|max:25|unique:test_users',
+            'username' => 'required|min:3|max:25|unique:users',
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'dateOfBirth' => 'required',
-            'email' => 'required|email:dns|unique:test_users',
-            'password' => ['required', 'confirmed', Password::min(8)],
+            'email' => 'required|email:dns|unique:users',
+            'password' => ['required', 'confirmed', Password::min(10)],
         ]);
         
         $validatedData['PK_userID'] = $id;
         $validatedData['password'] = Hash::make($validatedData['password']);
+
         $user = User::create($validatedData);
+        Auth::login($user);
+    }
 
-        event(new Registered($user));
+    public function aregister(Request $request){
+        $id = IdGenerator::generate(['table' => 'staffs', 'field' => 'PK_staffID', 'length' => 6, 'prefix' => date('ym')]);
+        Staff::create(['PK_staffID' => $id]);
 
-        auth()->login($user);
+        $validatedData = $request->validate([
+            'username' => 'required|min:3|max:25|unique:admins',
+            'password' => ['required', 'confirmed', Password::min(10)],
+        ]);
 
-        // Later go to login
+        $admin = Admin::create([
+            'PK_FK_staffID' => $id,
+            'username' => $validatedData['username'],
+            'password' => Hash::make($validatedData['password'])
+        ]);
 
-        // $success = true;
-        //     $message = 'User register successfully';
-        // } catch (\Illuminate\Database\QueryException $ex) {
-        //     $success = false;
-        //     $message = $ex->getMessage();
-        // }
-
-        // // response
-        // $response = [
-        //     'success' => $success,
-        //     'message' => $message,
-        // ];
-        // return response()->json($response);
-        // return redirect('/register')->with('success', "Account successfully registered.");
-        return response()->json([
-            'msg' => 'Successfully registered',
-        ], 200);
+        Auth::guard('admin')->login($admin);
     }
 }

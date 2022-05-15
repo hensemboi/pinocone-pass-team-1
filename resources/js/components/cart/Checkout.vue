@@ -7,14 +7,17 @@
                     <div class="card-body">
                         <div>
                             <div>
-                                <h2>Menus to order:</h2>
-
-                                <div v-for="item in cartItems" :key="item.productID">
-                                    <p>{{ item.title }}</p>
-                                    <p>-Price of {{ item.qty }}: RM{{ item.price * item.qty }}</p>
-                                </div>
-                                <br/>
-                                <em>Total price: RM{{ cartTotal }}</em>
+                                <h2>Payment Summary</h2>
+                                Item total: RM{{ grossPrice }}<br/>
+                                Reduced by: RM{{ vouchedPrice }}<br/>
+                                <em>Price to pay: RM{{ netPrice }}</em>
+                            </div>
+                            <br/>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" :disabled="membership.length === 0" :checked="membership.length === 1" value="1"/>
+                                    <p>Use Express Delivery - Only for our <span>Members</span></p>
+                                </label>
                             </div>
                             <br/>
                             <div>
@@ -58,7 +61,7 @@
                             <div v-else-if="currentPaymentMethod === 2">
                                 <div>
                                     <div v-if="pinopayWallet.length === 1">
-                                        <em>Balance: RM{{ pinopayWallet[0].balance }}</em>
+                                        <em>Balance: RM{{ pinopayWallet[0].balance.toFixed(2) }}</em>
                                         <br/>
                                         <router-link to="/PIN" tag="button">
                                             <button @click="lockInPaymentMethod">Next</button>
@@ -82,35 +85,42 @@
     export default {
         data() {
             return {
-                userID: 47,
+                userID: 0,
                 currentPaymentMethod: 0,
                 paymentMethods: [],
                 userPaymentMethods: [],
                 pinopayWallet: [],
+                membership: [],
                 form: {
                     "userID": 0,
                     "paymentCode": 1,
-                    "cardNo": "",
-                    "balance": ""
+                    "cardNo": 0,
+                    "balance": 0.00
                 }
             }
         },
         computed: {
-            cartTotal() {
+            grossPrice() {
                 return this.$store.getters["cart/totalSum"].toFixed(2)
             },
-            cartItems() {
-                return this.$store.getters["cart/items"]
+            vouchedPrice() {
+                return this.$store.getters["cart/vouched"].toFixed(2)
+            },
+            netPrice() {
+                return (this.$store.getters["cart/totalSum"] - this.$store.getters["cart/vouched"]).toFixed(2)
             }
         },
-        created() {
-            axios.get("./paymentmethod")
-            .then(response => { this.paymentMethods = response.data
-            this.currentPaymentMethod = this.paymentMethods[0].PK_paymentCode })
-            axios.get("./userpaymentmethod/" + this.userID)
-            .then(response => this.userPaymentMethods = response.data)
-            axios.get("./pinopay/" + this.userID)
-            .then(response => this.pinopayWallet = response.data)
+        async created() {
+            const rootURL = window.location.origin
+            const userID = (await axios.get(rootURL + "/user")).data.PK_userID
+            this.userID = userID
+            this.membership = (await axios.get(rootURL + "/user/" + userID)).data
+
+            this.paymentMethods = (await axios.get("./paymentmethod")).data
+            this.currentPaymentMethod = this.paymentMethods[0].PK_paymentCode
+
+            this.userPaymentMethods = (await axios.get("./userpaymentmethod/" + userID)).data
+            this.pinopayWallet = (await axios.get("./pinopay/" + userID)).data
         },
         methods: {
             selectPaymentMethod(event) {
@@ -136,13 +146,16 @@
         text-align: center;
     }
 
-    a, em {
+    a, em, span {
         font-size: large;
     }
+    
+    span {
+        font-style: oblique;
+        font-family: "Playfair Display";
+    }
 
-    button {
-        --button-dark-red: #8f0030;
-        
+    button {   
         font: inherit;
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
@@ -155,8 +168,6 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
     }

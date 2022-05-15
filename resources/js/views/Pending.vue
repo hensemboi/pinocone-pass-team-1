@@ -22,10 +22,12 @@
 </template>
    
 <script>
+import axios from "axios"
+
     export default {
         data() {
             return {
-                userID: 47,
+                userID: 0,
                 userPaymentMethods: [],
                 pinopayWallet: [],
                 currentIncentives: 0,
@@ -39,7 +41,10 @@
         },
         computed: {
             price() {
-                return this.$store.getters["cart/totalSum"].toFixed(2)
+                return this.$store.getters["cart/totalSum"] - this.$store.getters["cart/vouched"]
+            },
+            usingVoucher() {
+                return this.$store.getters["cart/code"]
             },
             paymentMethod() {
                 return this.$store.getters["checkout/getPaymentMethod"]
@@ -54,21 +59,27 @@
                 return this.currentIncentives + Math.floor(Math.pow(this.price, 1.35) / 300)
             }
         },
-        created() {
-            axios.get("./user/" + this.userID)
-            .then(response => this.currentIncentives = response.data[0].incentives)
-            axios.get("./userpaymentmethod/" + this.userID)
-            .then(response => this.userPaymentMethods = response.data)
-            axios.get("./pinopay/" + this.userID)
-            .then(response => this.pinopayWallet = response.data)
+        async created() {
+            const rootURL = window.location.origin
+            const user = (await axios.get(rootURL + "/user")).data
+            this.userID = user.PK_userID
+            this.currentIncentives = user.incentives
+
+            this.userPaymentMethods = (await axios.get("./userpaymentmethod/" + user.PK_userID)).data
+            this.pinopayWallet = (await axios.get("./pinopay/" + user.PK_userID)).data
         },
         methods: {
             updateCard() {
                 this.balanceForm.balance = this.newCardBalance
                 axios.put("./userpaymentmethod/" + this.userID, this.balanceForm)
 
-                this.incentivesForm.incentives = this.newIncentives;
+                this.incentivesForm.incentives = this.newIncentives
                 axios.put("./user/" + this.userID, this.incentivesForm)
+
+                if (this.usingVoucher)
+                {
+                    axios.delete("./uservoucher/" + this.usingVoucher)
+                }
 
                 this.$router.push("/success")
             },
@@ -76,8 +87,13 @@
                 this.balanceForm.balance = this.newWalletBalance
                 axios.put("./pinopay/" + this.userID, this.balanceForm)
                 
-                this.incentivesForm.incentives = this.newIncentives;
+                this.incentivesForm.incentives = this.newIncentives
                 axios.put("./user/" + this.userID, this.incentivesForm)
+
+                if (this.usingVoucher)
+                {
+                    axios.delete("./uservoucher/" + this.usingVoucher)
+                }
 
                 this.$router.push("/success")
             },

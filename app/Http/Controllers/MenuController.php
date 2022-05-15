@@ -9,7 +9,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class MenuController extends Controller
 {
     public function fetchAll(){
-        return Menu::with(['category', 'category.menu'])->get();
+        return Menu::all();
     }
 
     public function index(){
@@ -19,12 +19,12 @@ class MenuController extends Controller
 
     public function store(Request $request){
         $id = IdGenerator::generate(['table' => 'menus', 'field' => 'PK_menuID', 'length' => 10, 'prefix' => 'ME']);
-        
         $menu = new Menu;
         $menu->PK_menuID = $id;
         $menu->menuName = $request->menuName;
         $menu->description = $request->description;
         $menu->price = $request->price;
+        $menu->totalOrders = $request->totalOrders;
         $menu->FK_categoryCode = $request->categoryCode;
         $menu->FK_cuisineCode = $request->cuisineCode;
         $menu->save();

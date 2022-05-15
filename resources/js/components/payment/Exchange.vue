@@ -2,28 +2,30 @@
     <div class="box">
         <h2 class="text-center">Exchangeable Vouchers:</h2>
         <div v-for="voucher in vouchers" :key="voucher.PK_voucherID">
-            <div class="voucher spin">
-                <div class="row">
-                    <div class="col-sm-7">
-                        <strong>{{ voucher.name }}</strong>
-                        <div v-if="voucher.name === 'Fun 40'">
-                            <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM40)</p>
+            <div class="wrapper">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <strong>{{ voucher.name }}</strong>
+                            <div v-if="voucher.name === 'Fun 40'">
+                                <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM50)</p>
+                            </div>
+                            <div v-else-if="voucher.name === 'Happy 20'">
+                                <p>Description: Reduce price by 20% <br/>(Minimum spending of RM200)</p>
+                            </div>
                         </div>
-                        <div v-else-if="voucher.name === 'Happy 20'">
-                            <p>Description: Reduce price by 20% <br/>(Minimum spending of RM200)</p>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-5" :disabled="!voucher.availability">
-                        <button @click="exchangeVoucher(voucher)">Exchange</button>
+                        <div class="col-sm-5" :disabled="!voucher.availability">
+                            <button @click="exchangeVoucher(voucher)">Exchange</button>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="spin" v-if="voucher.availability > 0">
-                    <span>Cost: <em>{{ voucher.membership }}</em> incentive points</span>
-                </div>
-                <div v-else>
-                    <span>This voucher is unavailable. Check back later!</span>
+                    
+                    <div v-if="voucher.availability > 0">
+                        <span>Cost: <em>{{ voucher.membership }}</em> incentive points</span>
+                    </div>
+                    <div v-else>
+                        <span>This voucher is unavailable. Check back later!</span>
+                    </div>
                 </div>
             </div>
             <br/>
@@ -36,7 +38,7 @@
     export default {
         data() {
             return {
-                userID: 47,
+                userID: 0,
                 currentIncentives: 0,
                 newIncentives: 0,
                 vouchers: [],
@@ -53,8 +55,12 @@
             }
         },
         created() {
-            axios.get("./user/" + this.userID)
-            .then(response => this.currentIncentives = response.data[0].incentives)
+            const rootURL = window.location.origin
+            axios.get(rootURL + "/user")
+            .then(response => {
+                this.userID = response.data.PK_userID
+                this.currentIncentives = response.data.incentives
+            })
             axios.get("./voucher")
             .then(response => this.vouchers = response.data)
         },
@@ -79,7 +85,7 @@
 
                 else
                 {
-                    alert("Not enough incentive points.")
+                    alert("Not enough incentive points. Purchase more items from our marketplace to gain incentive points.")
                 }
             }
         }
@@ -99,30 +105,15 @@
         text-align: center;
     }
 
-    .voucher {
-        --voucher-pink: #fe7b99;
-
-        background-color: var(--voucher-pink);
-        padding: 4px;
-    }
-
-    .spin {
-        border-radius: 25px;
-    }
-
     strong {
-        font-size: x-large;
         font-family: Arial, sans-serif;
     }
 
     span, p {
-        font-size: large;
+        font-size: 20px;
     }
 
-    button {
-        --button-dark-red: #8f0030;
-        
-        font: inherit;
+    button {       
         border: 1px solid var(--button-dark-red);
         background-color: var(--button-dark-red);
         color: white;
@@ -135,9 +126,61 @@
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
         background-color: var(--button-dark-red-hover);
         border-color: var(--button-dark-red-hover);
+    }
+
+    .card {
+        background-color: var(--voucher-pink);
+        color: var(--pinocone-yellow);
+        grid-area: 1 / 1;
+        height: 200px;
+        width: 800px;
+        transform: translateX(10px) rotateY(25deg) rotateX(10deg);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 50px;
+        font-weight: 800;
+        backface-visibility: hidden;
+        box-shadow: 0 10px 30px -3px var(--quick-gray);
+        line-height: 1;
+        padding: 0 5px;
+        transform: translate(-1px, 1px) scale(0.75);
+        transform-origin: right center;
+        display: inline-block;
+    }
+
+    .wrapper {
+        display: grid;
+        perspective: 60em;
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    .wrapper:before {
+        --bw: 3px;
+        height: 100%;
+        width: 100%;
+        grid-area: 1 / 1;
+        content: '';
+        pointer-events: none;
+        backface-visibility: hidden;
+        margin-top: calc(-1 * var(--bw));
+        margin-left: calc(-1 * var(--bw));
+        transform: translateX(-60px) rotateY(-30deg) rotateX(15deg) scale(1.03);
+        background: transparent;
+        box-sizing: content-box;
+    }
+
+    .wrapper > div,
+    .wrapper:before {
+        will-change: transform;
+        transition: .2s transform cubic-bezier(.25,.46,.45,1);
+    }
+
+    .wrapper:hover > div,
+    .wrapper:hover:before {
+        transform: none;
     }
 </style>

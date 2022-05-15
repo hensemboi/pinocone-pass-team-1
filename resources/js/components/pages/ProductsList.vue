@@ -1,45 +1,49 @@
 <template>
-    <div class="input-group">
-        <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search for food ..."
-            aria-label="Search"
-            aria-describedby="search-addon"
-            v-model.trim="productName"
-            @blur="validateInput"
-        />
-        <button
-            type="button"
-            class="btn btn-outline-primary"
-            @click="searchProduct"
-        >
-            Search
-        </button>
+    <div>
+        <div class="input-group">
+            <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search for food ..."
+                aria-label="Search"
+                aria-describedby="search-addon"
+                v-model.trim="productName"
+                @blur="validateInput"
+            />
+            <button
+                type="button"
+                class="btn btn-outline-primary"
+                @click="searchProduct"
+            >
+                Search
+            </button>
+        </div>
+        <section v-if="isProductsPopulated">
+            <ul>
+                <product-item
+                    v-for="index in maxDisplay"
+                    :key="cacheProducts[index-1].PK_menuID"
+                    :id="cacheProducts[index-1].PK_menuID"
+                    :title="cacheProducts[index-1].menuName"
+                    :image="'https://picsum.photos/200/300'"
+                    :description="cacheProducts[index-1].description"
+                    :price="cacheProducts[index-1].price"
+                    :discountedPrice="cacheProducts[index-1].discount_price"
+                    :promotionType="cacheProducts[index-1].is_promoted"
+                    :category="cacheProducts[index-1].FK_categoryCode"
+                    :cuisineType="cacheProducts[index-1].FK_cuisineCode"
+                ></product-item>
+            </ul>
+            <product-cards
+                class="card"
+                title="Things you may like"
+                :products="cacheProducts"
+            ></product-cards>
+        </section>
+        <section v-else>
+            <h2 class="text-center">Loading ...</h2>
+        </section>
     </div>
-    <section v-if="isProductsPopulated">
-        <ul>
-            <product-item
-                v-for="index in maxDisplay"
-                :key="cacheProducts[index].PK_menuID"
-                :id="cacheProducts[index].PK_menuID"
-                :title="cacheProducts[index].menuName"
-                :image="'https://picsum.photos/200/300'"
-                :description="cacheProducts[index].description"
-                :price="cacheProducts[index].price"
-                :category="cacheProducts[index].FK_categoryCode"
-                :cuisineType="cacheProducts[index].FK_cuisineCode"
-            ></product-item>
-        </ul>
-        <product-cards
-            class="card"
-            title="Things you may like"
-            :products="cacheProducts"
-        ></product-cards>
-    </section>
-    <section v-else>
-        <h2 class="text-center">Loading ...</h2>
-    </section>
 </template>
 
 <script>
@@ -133,9 +137,6 @@ ul {
     padding: 1rem;
 }
 h2 {
-    --gray-black: #292929;
-    --quick-gray: #ccc;
-
     color: var(--gray-black);
     text-align: center;
     border-bottom: 2px solid var(--quick-gray);

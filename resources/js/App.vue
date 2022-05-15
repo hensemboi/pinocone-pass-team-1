@@ -1,16 +1,17 @@
 <template>
-    <router-view name="sidebar"></router-view>
+    <router-view name="navbar"></router-view>
     <router-view name="topbar" v-slot="{Component}">
         <transition name="slideBody">
-            <component :class="{slide: true}" :is="Component">
+            <component :class="{slide: sideSlided}" :is="Component">
                 <template>
                 </template>
             </component>
         </transition>
     </router-view>
+    <router-view name="sidebar"></router-view>
     <router-view v-slot="{Component}">
         <transition name="slideBody">
-            <component :class="{slide: true}" :is="Component" >
+            <component :class="{slide: sideSlided}" :is="Component" >
                 <template >
                 </template>
             </component>
@@ -48,9 +49,8 @@
 </script>
 
 <style scoped>
-    @import"./../../public/css/home.css";
     .slide{
-        width:100%;
+        width:inherit;
         animation: slideright 0.5s ease-in-out;
         margin-left:280px;
     }

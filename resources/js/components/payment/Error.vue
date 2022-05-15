@@ -17,9 +17,6 @@
     }
 
     h2 {
-        --gray-black: #292929;
-        --quick-gray: #ccc;
-
         color: var(--gray-black);
         text-align: center;
         border-bottom: 2px solid var(--quick-gray);

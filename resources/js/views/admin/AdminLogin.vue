@@ -7,7 +7,7 @@
                 </div>
 
                 <p class="login-box-msg text-center lead">
-                    Login
+                    Admin Login
                 </p>
 
                 <form class="form">
@@ -15,7 +15,7 @@
                         <div class="form-group col-6 has-feedback">
                             <div class="form-group">
                                 <div>
-                                    <input required type="email" id="email" v-model="email" class="form-control" placeholder="Email" autofocus autocomplete="off"/>
+                                    <input required type="text" id="username" v-model="username" class="form-control" placeholder="Username" autofocus autocomplete="off"/>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <button type="submit" class="btn btn-success float-right" @click="handleSubmit">Sign in</button>
                         </div>
                         <div class="col-6">
-                            <a href="/register" class="btn btn-dark float-left">Create New Account</a>
+                            <a href="/aregister" class="btn btn-dark float-left">Create New Account</a>
                         </div>
                     </div>
                 </form>
@@ -46,7 +46,7 @@
 export default {
     data() {
         return {
-            email: "",
+            username: "",
             password: "",
             error: null
         }
@@ -57,12 +57,12 @@ export default {
             if (this.password.length > 0) {
                 const rootURL = window.location.origin;
                 axios.get(rootURL + "/sanctum/csrf-cookie").then(response => {
-                    axios.post(rootURL + "/login", {
-                        email: this.email,
+                    axios.post(rootURL + "/alogin", {
+                        username: this.username,
                         password: this.password
                     })
                     .then((response) => {
-                        this.$router.push("/home");
+                        this.$router.push("/dashboard");
                     })
                     .catch(function (error) {
                         console.error(error);

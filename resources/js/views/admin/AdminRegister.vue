@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Register</div>
+                    <div class="card-header">Admin Register</div>
                     <div class="card-body">
                         <form method="POST" @submit.prevent="onSubmit">
                             <div class="row mb-3">
@@ -14,52 +14,6 @@
                                     <!-- <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span> -->
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="firstName" class="col-md-4 col-form-label text-md-end">First Name</label>
-
-                                <div class="col-md-6">
-                                    <input id="firstName" type="text" class="form-control" v-model="form.firstName" :state="errors && !errors.firstName" name="firstName" required autocomplete="firstName" autofocus>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="lastName" class="col-md-4 col-form-label text-md-end">Last Name</label>
-
-                                <div class="col-md-6">
-                                    <input id="lastName" type="text" class="form-control" v-model="form.lastName" :state="errors && !errors.lastName" name="lastName" required autocomplete="lastName" autofocus/>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="dateOfBirth" class="col-md-4 col-form-label text-md-end">Date of Birth</label>
-
-                                <div class="col-md-6">
-                                    <input id="dateOfBirth" type="date" class="form-control" v-model="form.dateOfBirth" :state="errors && !errors.dateOfBirth" name="dateOfBirth" required autocomplete="dateOfBirth" autofocus/>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="form.email" :state="errors && !errors.email" name="email" required autocomplete="email"/>
-                                    <!-- @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror -->
                                 </div>
                             </div>
 
@@ -105,10 +59,6 @@ export default {
         return {
             form: {
                 'username' : '',
-                'firstName' : '',
-                'lastName' : '',
-                'dateOfBirth' : '',
-                'email' : '',
                 'password' : '',
                 'password_confirmation' : '',
             }
@@ -120,11 +70,11 @@ export default {
             const rootURL = window.location.origin;
             axios.get(rootURL + "/sanctum/csrf-cookie").then(() => {
                 axios
-                .post(rootURL + "/register", {
+                .post(rootURL + "/aregister", {
                     ...this.form,
                 })
                 .then((response) => {
-                    this.$router.push("/home");
+                    this.$router.push("/dashboard");
                 })
                 .catch((err) => {
                     this.errors = err.response.data.errors;

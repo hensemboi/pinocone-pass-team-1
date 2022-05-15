@@ -15,6 +15,6 @@ class Category extends Model
     public $timestamps = false;
 
     public function menu(){
-        return $this->hasMany(Menu::class, "FK_categoryCode", "PK_categoryCode");
+        return $this->hasMany(Menu::class, 'FK_categoryCode', 'PK_categoryCode');
     }
 }

@@ -1,5 +1,7 @@
 <?php
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ImageController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\UserVoucherController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MembershipController;
+
 
 
 /*
@@ -33,6 +36,7 @@ Route::get('/cuisines', [CuisineController::class, 'index']);
 Route::put('membership/{id}', [MembershipController::class, 'updateRewardTime']);
 Route::put('user/{id}', [UserController::class, 'updateIncentives']);
 Route::resource('menu', 'App\Http\Controllers\MenuController');
+Route::get('pplmenu', [MenuController::class, 'fetchPopularMenu']);
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('order', 'fetchAll');
@@ -41,8 +45,6 @@ Route::controller(OrderController::class)->group(function () {
     Route::put('order/{id}', 'update');
     Route::get('requestdashboard', 'fetchAll');
 });
-
-Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);
 
 Route::controller(UserPaymentMethodController::class)->group(function () {
     Route::get('userpaymentmethod', 'fetchAll');

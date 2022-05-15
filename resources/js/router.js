@@ -22,18 +22,14 @@ import Success from "./components/payment/Success.vue";
 import Error from "./components/payment/Error.vue";
 import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
-<<<<<<< HEAD
 import Menu from "./components/menu/Menu.vue"
 import RequestsList from "./components/request_dashboard/RequestsList.vue";
 import Tables from "./components/datatables/DataTables.vue"
 import MenuCard from "./components/cards/MenuCard.vue"
 import SpecialSection from './components/SpecialSection.vue'
-=======
-import Menu from "./components/menu/Menu.vue";
 import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
 import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
 import Delivery from "./components/request_dashboard/Delivery.vue"
->>>>>>> origin/pinocone-requestDashboard
 
 const router = createRouter({
     history: createWebHistory(),
@@ -130,7 +126,6 @@ const router = createRouter({
             },
         },
         {
-<<<<<<< HEAD
             path: "/section",
             components: {
                 default: SpecialSection,
@@ -141,10 +136,6 @@ const router = createRouter({
         {
             path:"/products",
             components:{
-=======
-            path: "/productslisting",
-            components: {
->>>>>>> origin/pinocone-requestDashboard
                 default: ProductsListing,
                 table: Tables,
                 menuCard: MenuCard,

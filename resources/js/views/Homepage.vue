@@ -106,15 +106,29 @@
                 <recommended-menu menu="6"></recommended-menu>
             </div>
         </div>
+        <div class="container section">
+            <h1 id="Recommended-Menus">Recommendation Menus</h1>
+                 <special-section class="col-md-4" v-for="menu in menuList" v-bind:RecommendedMenu="menu" v-bind:key="menu.PK_menuID"></special-section>
+        </div>
+    </div>
     </div>
 </template>
 
 <script>
-    import RecommendedMenu from "../components/RecommendedMenu.vue";
+    import SpecialSection from "../components/SpecialSection.vue";
     export default {
         components: {
-            "recommended-menu": RecommendedMenu,
+            SpecialSection,
         },
+        data(){
+        return{
+            menuList: [],
+        }
+    },
+        created() {
+        axios.get("./pplmenu", this.form)
+            .then(response => this.menuList = response.data);
+    },
     };
 </script>
 

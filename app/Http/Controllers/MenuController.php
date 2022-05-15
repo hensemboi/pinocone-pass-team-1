@@ -62,5 +62,10 @@ class MenuController extends Controller
         Menu::whereIn('PK_menuID', $request->selected)->delete();
 
         return Menu::all();
-    }   
+    }  
+    
+    public function fetchPopularMenu(){
+        $menus = Menu::with(['category', 'cuisinetype'])->orderBy('totalOrders', 'desc')->take(6)->get();
+        return $menus;
+    }
 }

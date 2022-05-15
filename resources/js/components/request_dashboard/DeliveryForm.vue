@@ -103,7 +103,7 @@
                     v-model="areas.value"
                     @blur="clearValidity('areas')"
                 />
-                <label for="career">Doorsetp delivery</label>
+                <label for="career">Doorstep delivery</label>
             </div>
             <p v-if="!areas.isValid">
                 At least one area of experties is selected

@@ -50,14 +50,14 @@
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
         const showButton = ref(true);
         const selectedUser = ref(null);
-        // const store = useStore();
+        const store = useStore();
 
         function goToDelievery() {
             showButton.value = false;
@@ -68,21 +68,24 @@ export default {
             router.replace("/requestdashboard");
         }
 
-        // function getSpecifiedUser() {
-        //     selectedUser.value = store.getters.getSpecifiedUser(route.params);
-        // }
+        function getSpecifiedUser() {
+            selectedUser.value = store.getters["order/getUserByID"](
+                route.params.id
+            );
+            console.log(selectedUser.value);
+        }
 
         return {
             goToDelievery,
             redirect,
-            // getSpecifiedUser,
+            getSpecifiedUser,
             showButton,
             selectedUser,
         };
     },
-    // created() {
-    //     this.getSpecifiedUser();
-    // },
+    created() {
+        this.getSpecifiedUser();
+    },
 };
 </script>
 

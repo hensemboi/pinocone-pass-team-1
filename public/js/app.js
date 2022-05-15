@@ -24425,15 +24425,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
- // import { useStore } from "vuex";
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.useRoute)();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
     var showButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
-    var selectedUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null); // const store = useStore();
+    var selectedUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
 
     function goToDelievery() {
       showButton.value = false;
@@ -24442,22 +24444,24 @@ __webpack_require__.r(__webpack_exports__);
 
     function redirect() {
       router.replace("/requestdashboard");
-    } // function getSpecifiedUser() {
-    //     selectedUser.value = store.getters.getSpecifiedUser(route.params);
-    // }
+    }
 
+    function getSpecifiedUser() {
+      selectedUser.value = store.getters["order/getUserByID"](route.params.id);
+      console.log(selectedUser.value);
+    }
 
     return {
       goToDelievery: goToDelievery,
       redirect: redirect,
-      // getSpecifiedUser,
+      getSpecifiedUser: getSpecifiedUser,
       showButton: showButton,
       selectedUser: selectedUser
     };
-  } // created() {
-  //     this.getSpecifiedUser();
-  // },
-
+  },
+  created: function created() {
+    this.getSpecifiedUser();
+  }
 });
 
 /***/ }),
@@ -28166,7 +28170,7 @@ var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "career"
-  }, "Doorsetp delivery", -1
+  }, "Doorstep delivery", -1
   /* HOISTED */
   );
 });
@@ -30780,9 +30784,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getUserByID: function getUserByID(state) {
       return function (PK_transactionID) {
-        return state.orders.find(function (order) {
+        var user = state.orders.find(function (order) {
           return order.PK_transactionID == PK_transactionID;
         });
+        return user;
       };
     }
   }

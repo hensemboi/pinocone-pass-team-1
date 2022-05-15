@@ -91,7 +91,8 @@ export default {
         },
     },
     async created() {
-        this.user = (await axios.get("./user")).data;
+        const rootURL = window.location.origin;
+        this.user = (await axios.get(rootURL + "/user")).data;
     }
 };
 </script>

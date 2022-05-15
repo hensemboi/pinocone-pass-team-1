@@ -66,11 +66,7 @@ Route::controller(UserVoucherController::class)->group(function () {
     Route::delete('uservoucher/{id}', 'destroy');
 });
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('user', 'fetchAuthenticatedUser');
-    Route::get('user/{id}', 'fetchMembershipInfo');
-    Route::put('user/{id}', 'updateIncentives');
-});
+Route::put('user/{id}', [UserController::class, 'updateIncentives']);
 
 Route::resource('menu', 'App\Http\Controllers\MenuController');
 

@@ -235,11 +235,12 @@ export default {
         }
     },
     async created() {
-        const user = (await axios.get("./user")).data;
+        const rootURL = window.location.origin;
+        const user = (await axios.get(rootURL + "/user")).data;
         this.user = user;
         this.incentivePoints = user.incentives;
         this.userVouchers = (await axios.get("./uservoucher/" + user.PK_userID)).data;
-        this.membership = (await axios.get("./user/" + user.PK_userID)).data[0];
+        this.membership = (await axios.get(rootURL + "/user/" + user.PK_userID)).data[0];
     },
     data() {
         return {
@@ -259,6 +260,7 @@ export default {
             this.inputIsInvalid = false;
         },
         async claimIncentive() {
+            const rootURL = window.location.origin;
             this.incentivePoints++;
             axios.put("./user/" + this.user.PK_userID, { incentives: this.incentivePoints });
 
@@ -272,7 +274,7 @@ export default {
             const next = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
             axios.put("./membership/" + this.user.PK_userID, { time: next });
 
-            this.membership = (await axios.get("./user/" + this.user.PK_userID)).data[0];
+            this.membership = (await axios.get(rootURL + "/user/" + this.user.PK_userID)).data[0];
             alert("Daily incentive point claimed!");
         },
     },

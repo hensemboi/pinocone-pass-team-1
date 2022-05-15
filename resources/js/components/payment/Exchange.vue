@@ -55,7 +55,8 @@
             }
         },
         created() {
-            axios.get("./user")
+            const rootURL = window.location.origin
+            axios.get(rootURL + "/user")
             .then(response => {
                 this.userID = response.data.PK_userID
                 this.currentIncentives = response.data.incentives

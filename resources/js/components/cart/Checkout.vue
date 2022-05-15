@@ -111,9 +111,10 @@
             }
         },
         async created() {
-            const userID = (await axios.get("./user")).data.PK_userID
+            const rootURL = window.location.origin
+            const userID = (await axios.get(rootURL + "/user")).data.PK_userID
             this.userID = userID
-            this.membership = (await axios.get("./user/" + userID)).data
+            this.membership = (await axios.get(rootURL + "/user/" + userID)).data
 
             this.paymentMethods = (await axios.get("./paymentmethod")).data
             this.currentPaymentMethod = this.paymentMethods[0].PK_paymentCode

@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\Rules\Password;
 
@@ -77,6 +78,6 @@ class RegisterController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         $user = User::create($validatedData);
-        auth()->login($user);
+        Auth::login($user);
     }
 }

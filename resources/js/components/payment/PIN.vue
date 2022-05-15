@@ -23,7 +23,8 @@
             }
         },
         async created() {
-            const userID = (await axios.get("./user")).data.PK_userID
+            const rootURL = window.location.origin
+            const userID = (await axios.get(rootURL + "/user")).data.PK_userID
             this.pinopayWallet = (await axios.get("./pinopay/" + userID)).data
         },
         methods: {

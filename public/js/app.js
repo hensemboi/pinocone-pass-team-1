@@ -23307,40 +23307,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var userID;
+      var rootURL, userID;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
-            case 2:
+            case 3:
               userID = _context.sent.data.PK_userID;
               _this.userID = userID;
-              _context.next = 6;
-              return axios.get("./user/" + userID);
+              _context.next = 7;
+              return axios.get(rootURL + "/user/" + userID);
 
-            case 6:
+            case 7:
               _this.membership = _context.sent.data;
-              _context.next = 9;
+              _context.next = 10;
               return axios.get("./paymentmethod");
 
-            case 9:
+            case 10:
               _this.paymentMethods = _context.sent.data;
               _this.currentPaymentMethod = _this.paymentMethods[0].PK_paymentCode;
-              _context.next = 13;
+              _context.next = 14;
               return axios.get("./userpaymentmethod/" + userID);
 
-            case 13:
+            case 14:
               _this.userPaymentMethods = _context.sent.data;
-              _context.next = 16;
+              _context.next = 17;
               return axios.get("./pinopay/" + userID);
 
-            case 16:
+            case 17:
               _this.pinopayWallet = _context.sent.data;
 
-            case 17:
+            case 18:
             case "end":
               return _context.stop();
           }
@@ -23618,17 +23619,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var rootURL;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
-
-            case 2:
-              _this.user = _context.sent.data;
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
             case 3:
+              _this.user = _context.sent.data;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -23888,24 +23891,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var userID;
+      var rootURL, userID;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
-            case 2:
+            case 3:
               userID = _context.sent.data.PK_userID;
               _this2.userID = userID;
-              _context.next = 6;
+              _context.next = 7;
               return axios.get("./uservoucher/" + userID);
 
-            case 6:
+            case 7:
               _this2.userVouchers = _context.sent.data;
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -23986,7 +23990,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get("./user").then(function (response) {
+    var rootURL = window.location.origin;
+    axios.get(rootURL + "/user").then(function (response) {
       _this.userID = response.data.PK_userID;
       _this.currentIncentives = response.data.incentives;
     });
@@ -24047,23 +24052,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var userID;
+      var rootURL, userID;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
-            case 2:
+            case 3:
               userID = _context.sent.data.PK_userID;
-              _context.next = 5;
+              _context.next = 6;
               return axios.get("./pinopay/" + userID);
 
-            case 5:
+            case 6:
               _this.pinopayWallet = _context.sent.data;
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -24126,29 +24132,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var userID;
+      var rootURL, userID;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
-            case 2:
+            case 3:
               userID = _context.sent.data.PK_userID;
               _this.userID = userID;
-              _context.next = 6;
+              _context.next = 7;
               return axios.get("./pinopay/" + userID);
 
-            case 6:
+            case 7:
               _this.pinopayWallet = _context.sent.data;
-              _context.next = 9;
+              _context.next = 10;
               return axios.get("./order/" + userID);
 
-            case 9:
+            case 10:
               _this.transactionHistory = _context.sent.data;
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -24319,30 +24326,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var user;
+      var rootURL, user;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios.get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios.get(rootURL + "/user");
 
-            case 2:
+            case 3:
               user = _context.sent.data;
               _this.user = user;
               _this.incentivePoints = user.incentives;
-              _context.next = 7;
+              _context.next = 8;
               return axios.get("./uservoucher/" + user.PK_userID);
 
-            case 7:
+            case 8:
               _this.userVouchers = _context.sent.data;
-              _context.next = 10;
-              return axios.get("./user/" + user.PK_userID);
-
-            case 10:
-              _this.membership = _context.sent.data[0];
+              _context.next = 11;
+              return axios.get(rootURL + "/user/" + user.PK_userID);
 
             case 11:
+              _this.membership = _context.sent.data[0];
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -24371,11 +24379,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var object, year, month, day, hours, minutes, seconds, next;
+        var rootURL, object, year, month, day, hours, minutes, seconds, next;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                rootURL = window.location.origin;
                 _this2.incentivePoints++;
                 axios.put("./user/" + _this2.user.PK_userID, {
                   incentives: _this2.incentivePoints
@@ -24392,14 +24401,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 axios.put("./membership/" + _this2.user.PK_userID, {
                   time: next
                 });
-                _context2.next = 13;
-                return axios.get("./user/" + _this2.user.PK_userID);
+                _context2.next = 14;
+                return axios.get(rootURL + "/user/" + _this2.user.PK_userID);
 
-              case 13:
+              case 14:
                 _this2.membership = _context2.sent.data[0];
                 alert("Daily incentive point claimed!");
 
-              case 15:
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -24600,30 +24609,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var user;
+      var rootURL, user;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("./user");
+              rootURL = window.location.origin;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get(rootURL + "/user");
 
-            case 2:
+            case 3:
               user = _context.sent.data;
               _this.userID = user.PK_userID;
               _this.currentIncentives = user.incentives;
-              _context.next = 7;
+              _context.next = 8;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().get("./userpaymentmethod/" + user.PK_userID);
 
-            case 7:
+            case 8:
               _this.userPaymentMethods = _context.sent.data;
-              _context.next = 10;
+              _context.next = 11;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().get("./pinopay/" + user.PK_userID);
 
-            case 10:
+            case 11:
               _this.pinopayWallet = _context.sent.data;
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }

@@ -60,7 +60,8 @@ import axios from "axios"
             }
         },
         async created() {
-            const user = (await axios.get("./user")).data
+            const rootURL = window.location.origin
+            const user = (await axios.get(rootURL + "/user")).data
             this.userID = user.PK_userID
             this.currentIncentives = user.incentives
 
@@ -72,7 +73,7 @@ import axios from "axios"
                 this.balanceForm.balance = this.newCardBalance
                 axios.put("./userpaymentmethod/" + this.userID, this.balanceForm)
 
-                this.incentivesForm.incentives = this.newIncentives;
+                this.incentivesForm.incentives = this.newIncentives
                 axios.put("./user/" + this.userID, this.incentivesForm)
 
                 if (this.usingVoucher)
@@ -86,7 +87,7 @@ import axios from "axios"
                 this.balanceForm.balance = this.newWalletBalance
                 axios.put("./pinopay/" + this.userID, this.balanceForm)
                 
-                this.incentivesForm.incentives = this.newIncentives;
+                this.incentivesForm.incentives = this.newIncentives
                 axios.put("./user/" + this.userID, this.incentivesForm)
 
                 if (this.usingVoucher)

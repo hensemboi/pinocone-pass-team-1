@@ -23,6 +23,7 @@ import Store from "./components/store/index.js";
 import Menu from "./components/menu/Menu.vue";
 import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
 import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
+import Delivery from "./components/request_dashboard/Delivery.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -91,11 +92,12 @@ const router = createRouter({
             },
         },
         {
-            path: "/userorderdetail",
+            path: "/userorderdetails/:id",
             props: true,
             components: {
                 default: UserOrderDetail,
             },
+            children: [{ path: "deliverydetails", component: Delivery }],
         },
         {
             path: "/productslisting",
@@ -172,6 +174,13 @@ const router = createRouter({
             },
         },
     ],
+    scrollBehavior(_, _2, savedPosition) {
+        // console.log(to, from, savedPosition);
+        if (savedPosition) {
+          return savedPosition;
+        }
+        return { left: 0, top: 0 };
+      }
 });
 
 router.beforeEach((to, from, next) => {

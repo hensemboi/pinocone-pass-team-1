@@ -37,5 +37,8 @@ export default {
         getIsOrdersPopulated(state) {
             return state.orders && state.orders.length > 0;
         },
+        getUserByID: (state) => (PK_transactionID) => {
+            return state.orders.find((order) => order.PK_transactionID == PK_transactionID);
+        },
     },
 };

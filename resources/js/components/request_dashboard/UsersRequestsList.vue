@@ -1,5 +1,5 @@
 <template>
-    <base-container>
+    <base-card>
         <h2>Active Orders</h2>
         <base-search
             @search="updateSearch"
@@ -25,10 +25,9 @@
                 :key="order.PK_transactionID"
                 :user-name="order.FK_userID"
                 :id="order.PK_transactionID"
-                @list-projects="$emit('list-projects', $event)"
             ></user-requests-item>
         </ul>
-    </base-container>
+    </base-card>
 </template>
 
 <script>
@@ -42,9 +41,7 @@ export default {
         UserRequestsItem,
     },
     props: ["orders"],
-    emits: ["list-projects"],
     setup(props) {
-        console.log(props);
         const { orders } = toRefs(props);
         const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
             orders,

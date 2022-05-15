@@ -6,8 +6,8 @@
                 <header>
                     <h2>Order Summary</h2>
                 </header>
-                <h4>Transaction ID : 1001</h4>
-                <h4>User ID : 1001</h4>
+                <h4>Transaction ID : {{ selectedUser.PK_transactionID }}</h4>
+                <h4>User ID : {{ selectedUser.FK_userID }}</h4>
                 <h4>Ordered Menu : Burgah</h4>
             </base-card>
         </section>
@@ -16,9 +16,17 @@
                 <header>
                     <h2>Payment Details</h2>
                 </header>
-                <h4>Voucher ID : 1001</h4>
-                <h4>Payment Type : 1001</h4>
-                <h4>Date Time : 20/3/2001</h4>
+                <h4>
+                    Voucher ID :
+                    {{
+                        selectedUser.FK_voucherID
+                            ? "No voucher selected"
+                            : selectedUser.FK_voucherID
+                    }}
+                </h4>
+                <h4>Payment Type : {{ selectedUser.FK_paymentCode }}</h4>
+                <h4>Date Time : {{ selectedUser.created_at }}</h4>
+                <h4>Total Price: {{ selectedUser.totalPrice }}</h4>
             </base-card>
         </section>
         <section>
@@ -27,14 +35,7 @@
                     <h2>Extra note</h2>
                 </header>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {{ selectedUser.extraNote }}
                 </p>
                 <base-button v-if="showButton" @click="goToDelievery"
                     >Approve Order</base-button
@@ -50,14 +51,14 @@
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
         const showButton = ref(true);
         const selectedUser = ref(null);
-        // const store = useStore();
+        const store = useStore();
 
         function goToDelievery() {
             showButton.value = false;
@@ -68,21 +69,24 @@ export default {
             router.replace("/requestdashboard");
         }
 
-        // function getSpecifiedUser() {
-        //     selectedUser.value = store.getters.getSpecifiedUser(route.params);
-        // }
+        function getSpecifiedUser() {
+            selectedUser.value = store.getters["order/getUserByID"](
+                route.params.id
+            );
+            console.log(selectedUser.value);
+        }
 
         return {
             goToDelievery,
             redirect,
-            // getSpecifiedUser,
+            getSpecifiedUser,
             showButton,
             selectedUser,
         };
     },
-    // created() {
-    //     this.getSpecifiedUser();
-    // },
+    created() {
+        this.getSpecifiedUser();
+    },
 };
 </script>
 

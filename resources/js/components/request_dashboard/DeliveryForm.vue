@@ -31,7 +31,7 @@
         </div>
         <div class="form-control">
             <iframe
-                width="600"
+                width="900"
                 height="450"
                 style="border: 0"
                 loading="lazy"
@@ -103,7 +103,7 @@
                     v-model="areas.value"
                     @blur="clearValidity('areas')"
                 />
-                <label for="career">Doorsetp delivery</label>
+                <label for="career">Doorstep delivery</label>
             </div>
             <p v-if="!areas.isValid">
                 At least one area of experties is selected

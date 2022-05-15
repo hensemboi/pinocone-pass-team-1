@@ -2,7 +2,7 @@
     <div>
         <router-view></router-view>
         <section>
-            <base-card :class="'wd-50'">
+            <base-card>
                 <header>
                     <h2>Order Summary</h2>
                 </header>

@@ -24,4 +24,10 @@ class ImageController extends Controller
 
         return;
     }
+
+    public function fetchImage($id){
+        $modalImages = Image::select('imageUrl')->where('FK_menuID', $id)->get();
+        
+        return $modalImages;
+    }
 }

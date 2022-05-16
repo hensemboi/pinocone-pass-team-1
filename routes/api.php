@@ -6,7 +6,8 @@ use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestUserController;
-
+use App\Http\Controllers\CuisineController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,15 @@ use App\Http\Controllers\TestUserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/cuisines', [CuisineController::class, 'index']);
 Route::get('productslisting', [MenuController::class, 'fetchAll']);
 
 Route::post('menu', [MenuController::class, 'store']);
 Route::put('menu', [MenuController::class, 'update']);
 Route::post('upload/{id}', [ImageController::class, 'upload']);
 Route::delete('menu', [MenuController::class, 'destroySelected']);
+Route::get('menuImage/{id}', [ImageController::class, 'fetchImage']);
 
 Route::get('pplmenu', [MenuController::class, 'fetchPopularMenu']);
 

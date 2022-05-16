@@ -15,6 +15,7 @@ import AdminTopBar from "./components/admin/AdminTopBar.vue"
 import ProductsListing from "./views/admin/ProductsListing.vue"
 import Menu from "./components/menu/Menu.vue"
 import SpecialSection from './components/SpecialSection.vue'
+import ImageModal from './components/ImageModal.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -56,6 +57,14 @@ const router = createRouter({
             path: "/cart",
             components: {
                 default: UserCart,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/image",
+            components: {
+                default: ImageModal,
                 footer: Footer,
                 navbar: Navbar,
             },

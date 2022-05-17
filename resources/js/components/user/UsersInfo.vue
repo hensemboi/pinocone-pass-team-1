@@ -194,6 +194,8 @@
                             Claim free point
                         </button>
                     </div>
+                    <br/>
+                    <router-link to="/pinopay">Click here to go to your Pinopay Wallet...</router-link>
                 </div>
             </div>
         </div>

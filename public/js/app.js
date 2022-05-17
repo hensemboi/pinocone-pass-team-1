@@ -23647,12 +23647,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
+  props: ["id", "images", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
   methods: {
     addToCart: function addToCart() {
       this.$store.dispatch("cart/addToCart", {
         id: this.id
       });
+    }
+  },
+  data: function data() {
+    return {
+      image: '/images/logo.png'
+    };
+  },
+  computed: {
+    itemTotal: function itemTotal() {
+      return (this.price * this.qty).toFixed(2);
+    }
+  },
+  created: function created() {
+    if (this.images.length > 0) {
+      this.image = this.images[0].imageUrl;
     }
   }
 });
@@ -29270,7 +29285,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_base_badge = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-badge");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.$route.query.sort === $props.category || _ctx.$route.query.sort === $props.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $props.image,
+    src: $data.image,
     alt: $props.title
   }, null, 8
   /* PROPS */
@@ -29303,7 +29318,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.addToCart && $options.addToCart.apply($options, arguments);
     })
   }, "Add to Cart")])])) : !_ctx.$route.query.sort ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $props.image,
+    src: $data.image,
     alt: $props.title
   }, null, 8
   /* PROPS */
@@ -30859,16 +30874,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: $setup.cacheProducts[index - 1].PK_menuID,
       id: $setup.cacheProducts[index - 1].PK_menuID,
       title: $setup.cacheProducts[index - 1].menuName,
-      image: 'https://picsum.photos/200/300',
+      images: $setup.cacheProducts[index - 1].images,
       description: $setup.cacheProducts[index - 1].description,
       price: $setup.cacheProducts[index - 1].price,
       discountedPrice: $setup.cacheProducts[index - 1].discount_price,
       promotionType: $setup.cacheProducts[index - 1].is_promoted,
-      category: $setup.cacheProducts[index - 1].FK_categoryCode,
-      cuisineType: $setup.cacheProducts[index - 1].FK_cuisineCode
+      category: $setup.cacheProducts[index - 1].category.name,
+      cuisineType: $setup.cacheProducts[index - 1].cuisinetype.name
     }, null, 8
     /* PROPS */
-    , ["id", "title", "image", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"]);
+    , ["id", "title", "images", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_product_cards, {
@@ -30973,7 +30988,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: item.productId,
       prodId: item.productId,
       title: item.title,
-      image: 'https://picsum.photos/200/300',
+      image: item.image,
       price: item.price,
       qty: item.qty,
       promo: item.promotionType,
@@ -32359,11 +32374,20 @@ var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_60 = [_hoisted_57, _hoisted_58, _hoisted_59];
 var _hoisted_61 = ["disabled"];
-var _hoisted_62 = {
+
+var _hoisted_62 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Click here to go to your Pinopay Wallet...");
+
+var _hoisted_64 = {
   key: 1
 };
 
-var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_65 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
     "class": "text-center"
   }, "Please login to view this page ...", -1
@@ -32371,11 +32395,11 @@ var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_64 = {
+var _hoisted_66 = {
   "class": "text-center"
 };
 
-var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -32509,11 +32533,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, " Claim free point ", 8
   /* PROPS */
-  , _hoisted_61)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  , _hoisted_61)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/pinopay"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_63];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_64, [_hoisted_65, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/login"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_65];
+      return [_hoisted_67];
     }),
     _: 1
     /* STABLE */
@@ -34323,6 +34356,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       productData: [],
       items: [],
+      image: '',
       total: 0.00,
       qty: 0,
       effectivePrice: 0.00,
@@ -34357,10 +34391,16 @@ __webpack_require__.r(__webpack_exports__);
           state.effectiveQuantity = 1;
         }
 
+        if (state.productData.images.length > 0) {
+          state.image = state.productData.images[0].imageUrl;
+        } else {
+          state.image = "/images/logo.png";
+        }
+
         var newItem = {
           productId: state.productData.PK_menuID,
           title: state.productData.menuName,
-          image: state.productData.menuName,
+          image: state.image,
           price: state.effectivePrice,
           qty: state.effectiveQuantity,
           promotionType: state.productData.is_promoted,
@@ -34673,8 +34713,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"), axios = _require["default"];
                 _context.next = 3;
                 return axios.get("http://localhost:8000/sanctum/csrf-cookie").then(function () {
-                  axios.get("/marketplace", {
-                    action: "fetchAll"
+                  axios.get("menu", {
+                    action: "index"
                   }).then(function (response) {
                     context.commit("addProducts", response.data);
                   })["catch"](function (err) {

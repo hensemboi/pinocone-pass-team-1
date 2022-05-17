@@ -17,8 +17,8 @@ export default {
                 .get("http://localhost:8000/sanctum/csrf-cookie")
                 .then(() => {
                     axios
-                        .get("/marketplace", {
-                            action: "fetchAll",
+                        .get("menu", {
+                            action: "index",
                         })
                         .then((response) => {
                             context.commit("addProducts", response.data);

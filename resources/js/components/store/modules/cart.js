@@ -4,6 +4,7 @@ export default {
         return {
             productData: [],
             items: [],
+            image: '',
             total: 0.00,
             qty: 0,
             effectivePrice: 0.00,
@@ -45,10 +46,18 @@ export default {
                     state.effectiveQuantity = 1;
                 }
 
+                if (state.productData.images.length > 0) {
+                    state.image = state.productData.images[0].imageUrl;
+                }
+
+                else {
+                    state.image = "/images/logo.png";
+                }
+
                 const newItem = {
                     productId: state.productData.PK_menuID,
                     title: state.productData.menuName,
-                    image: state.productData.menuName,
+                    image: state.image,
                     price: state.effectivePrice,
                     qty: state.effectiveQuantity,
                     promotionType: state.productData.is_promoted,

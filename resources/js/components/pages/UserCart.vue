@@ -36,7 +36,7 @@
                 :key="item.productId"
                 :prodId="item.productId"
                 :title="item.title"
-                :image="'https://picsum.photos/200/300'"
+                :image="item.image"
                 :price="item.price"
                 :qty="item.qty"
                 :promo="item.promotionType"

@@ -25,13 +25,13 @@
                     :key="cacheProducts[index-1].PK_menuID"
                     :id="cacheProducts[index-1].PK_menuID"
                     :title="cacheProducts[index-1].menuName"
-                    :image="'https://picsum.photos/200/300'"
+                    :images="cacheProducts[index-1].images"
                     :description="cacheProducts[index-1].description"
                     :price="cacheProducts[index-1].price"
                     :discountedPrice="cacheProducts[index-1].discount_price"
                     :promotionType="cacheProducts[index-1].is_promoted"
-                    :category="cacheProducts[index-1].FK_categoryCode"
-                    :cuisineType="cacheProducts[index-1].FK_cuisineCode"
+                    :category="cacheProducts[index-1].category.name"
+                    :cuisineType="cacheProducts[index-1].cuisinetype.name"
                 ></product-item>
             </ul>
             <product-cards

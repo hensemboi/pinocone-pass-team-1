@@ -58,13 +58,28 @@
 
 <script>
 export default {
-    props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
+    props: ["id", "images", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
     methods: {
         addToCart() {
             this.$store.dispatch("cart/addToCart", {
                 id: this.id,
             });
         },
+    },
+    data() {
+        return {
+            image: '/images/logo.png',
+        };
+    },
+    computed: {
+        itemTotal() {
+            return (this.price * this.qty).toFixed(2);
+        },
+    },
+    created() {
+        if (this.images.length > 0) {
+            this.image = this.images[0].imageUrl
+        }
     },
 };
 </script>

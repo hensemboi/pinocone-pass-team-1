@@ -27106,11 +27106,17 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "alert alert-danger"
 };
+var _hoisted_3 = {
+  key: 0
+};
+var _hoisted_4 = {
+  key: 1
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $options.validationErrors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.validationErrors, function (value) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(value), 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", null, [value === 'The password format is invalid.' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, " The password must have an uppercase letter, a lowercase letter, and a number. ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(value), 1
     /* TEXT */
-    );
+    ))]);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
@@ -32330,64 +32336,73 @@ var _hoisted_50 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_52 = {
+var _hoisted_51 = {
   "class": "table"
 };
-var _hoisted_53 = {
+var _hoisted_52 = {
   key: 0
 };
 
-var _hoisted_54 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "You do not have any vouchers.", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_55 = [_hoisted_54];
-var _hoisted_56 = {
+var _hoisted_54 = [_hoisted_53];
+var _hoisted_55 = {
   key: 1
 };
 
-var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_56 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "ID", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_58 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Name", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_58 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Use Before", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_60 = [_hoisted_57, _hoisted_58, _hoisted_59];
-var _hoisted_61 = ["disabled"];
+var _hoisted_59 = [_hoisted_56, _hoisted_57, _hoisted_58];
 
-var _hoisted_62 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Click here to exchange vouchers...");
+
+var _hoisted_61 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
   /* HOISTED */
   );
 });
 
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Click here to go to your Pinopay Wallet...");
+var _hoisted_62 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Incentive Points", -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_64 = {
+var _hoisted_63 = ["disabled"];
+
+var _hoisted_64 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Click here to go to your Pinopay Wallet...");
+
+var _hoisted_66 = {
   key: 1
 };
 
-var _hoisted_65 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_67 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
     "class": "text-center"
   }, "Please login to view this page ...", -1
@@ -32395,11 +32410,11 @@ var _hoisted_65 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_66 = {
+var _hoisted_68 = {
   "class": "text-center"
 };
 
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -32510,7 +32525,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.changeAccountCredentials && $options.changeAccountCredentials.apply($options, arguments);
     })
-  }, " Save Profile "))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [_hoisted_50, _hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_52, [$data.userVouchers.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_53, _hoisted_55)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_56, _hoisted_60)), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userVouchers, function (userVoucher) {
+  }, " Save Profile "))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_51, [$data.userVouchers.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_52, _hoisted_54)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_55, _hoisted_59)), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.userVouchers, function (userVoucher) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: userVoucher.PK_FK_voucherID
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(userVoucher.PK_FK_voucherID), 1
@@ -32522,7 +32537,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Your incentive points: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.incentivePoints) + " points", 1
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/exchange"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_60];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Amount: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.incentivePoints) + " points", 1
   /* TEXT */
   ), $data.membership.active === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
@@ -32533,20 +32557,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, " Claim free point ", 8
   /* PROPS */
-  , _hoisted_61)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  , _hoisted_63)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_64, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/pinopay"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_63];
+      return [_hoisted_65];
     }),
     _: 1
     /* STABLE */
 
-  })])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_64, [_hoisted_65, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_66, [_hoisted_67, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/login"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_67];
+      return [_hoisted_69];
     }),
     _: 1
     /* STABLE */
@@ -33105,17 +33129,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.updateCard && $options.updateCard.apply($options, arguments);
     })
-  }, "Proceed")) : $options.paymentMethod === 2 && $options.newWalletBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, "Click to confirm your payment")) : $options.paymentMethod === 2 && $options.newWalletBalance >= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.updateWallet && $options.updateWallet.apply($options, arguments);
     })
-  }, "Proceed")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, "Click to confirm your payment")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 2,
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.transactionFailed && $options.transactionFailed.apply($options, arguments);
     })
-  }, "Proceed"))])]);
+  }, "Click to confirm your payment"))])]);
 }
 
 /***/ }),
@@ -47626,7 +47650,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nli[data-v-f3f51972] {\r\n    margin: 1rem auto;\r\n    padding: 1rem;\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\r\n    text-align: center;\r\n    max-width: 25rem;\n}\nimg[data-v-f3f51972] {\r\n    width: 5rem;\r\n    height: 5rem;\r\n    border-radius: 50%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.item__data[data-v-f3f51972] {\r\n    display: flex;\r\n    justify-content: space-between;\n}\n.item__total[data-v-f3f51972] {\r\n    font-weight: bold;\r\n    margin: 1rem 0;\r\n    border-top: 1px solid var(--item-gray);\r\n    border-bottom: 2px solid var(--item-gray);\r\n    padding: 0.25rem 0;\r\n    width: auto;\n}\nbutton[data-v-f3f51972] {\r\n    font: inherit;\r\n    border: 1px solid var(--button-dark-red);\r\n    background-color: var(--button-dark-red);\r\n    color: white;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\n}\nbutton[data-v-f3f51972]:hover,\r\nbutton[data-v-f3f51972]:active {\r\n    background-color: var(--button-dark-red-hover);\r\n    border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nli[data-v-f3f51972] {\r\n    margin: 1rem auto;\r\n    padding: 1rem;\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\r\n    text-align: center;\r\n    max-width: 25rem;\n}\nimg[data-v-f3f51972] {\r\n    width: 5rem;\r\n    height: 5rem;\r\n    border-radius: 50%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.item__data[data-v-f3f51972] {\r\n    display: flex;\r\n    justify-content: space-between;\n}\n.item__total[data-v-f3f51972] {\r\n    font-weight: bold;\r\n    margin: 1rem 0;\r\n    border-top: 1px solid var(--item-gray);\r\n    border-bottom: 2px solid var(--item-gray);\r\n    padding: 0.25rem 0;\r\n    width: auto;\n}\nbutton[data-v-f3f51972] {\r\n    font: inherit;\r\n    border: 1px solid var(--pinocone-yellow);\r\n    background-color: var(--pinocone-yellow);\r\n    color: black;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\n}\nbutton[data-v-f3f51972]:hover,\r\nbutton[data-v-f3f51972]:active {\r\n    background-color: var(--pinocone-yellow-hover);\r\n    border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47650,7 +47674,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba], em[data-v-371934ba], span[data-v-371934ba] {\r\n        font-size: large;\n}\nspan[data-v-371934ba] {\r\n        font-style: oblique;\r\n        font-family: \"Playfair Display\";\n}\nbutton[data-v-371934ba] {   \r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-left: 12px;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-371934ba] {\r\n        text-align: center;\n}\na[data-v-371934ba], em[data-v-371934ba], span[data-v-371934ba] {\r\n        font-size: large;\n}\nspan[data-v-371934ba] {\r\n        font-style: oblique;\r\n        font-family: \"Playfair Display\";\n}\nbutton[data-v-371934ba] {\r\n        font: inherit;\r\n        border: 1px solid var(--pinocone-yellow);\r\n        background-color: var(--pinocone-yellow);\r\n        color: black;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-371934ba]:hover,\r\n    button[data-v-371934ba]:active {\r\n        background-color: var(--pinocone-yellow-hover);\r\n        border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47698,7 +47722,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nli[data-v-0ea39b43] {\r\n    margin: 1.5rem auto;\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\r\n    padding: 1rem;\n}\n.product__data[data-v-0ea39b43] {\r\n    display: flex;\n}\n.product__image[data-v-0ea39b43] {\r\n    margin-right: 1rem;\n}\n.product__image img[data-v-0ea39b43] {\r\n    height: 10rem;\r\n    width: 10rem;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.product__text h3[data-v-0ea39b43] {\r\n    margin: 0 0 0.5rem 0;\n}\n.product__text h4[data-v-0ea39b43] {\r\n    margin: 0;\n}\n.product__text em[data-v-0ea39b43] {\r\n    font-size: x-large;\n}\n.product__actions[data-v-0ea39b43] {\r\n    text-align: center;\n}\n.cancelled[data-v-0ea39b43] {\r\n    text-decoration: line-through;\r\n    color: gainsboro;\n}\nbutton[data-v-0ea39b43] {\r\n    font: inherit;\r\n    cursor: pointer;\r\n    background-color: var(--button-purple);\r\n    color: white;\r\n    border: 1px solid var(--button-purple);\r\n    padding: 0.5rem 1.5rem;\r\n    border-radius: 30px;\n}\nbutton[data-v-0ea39b43]:hover,\r\nbutton[data-v-0ea39b43]:active {\r\n    background-color: var(--button-purple-hover);\r\n    border-color: var(--button-purple-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nli[data-v-0ea39b43] {\r\n    margin: 1.5rem auto;\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\r\n    padding: 1rem;\n}\n.product__data[data-v-0ea39b43] {\r\n    display: flex;\n}\n.product__image[data-v-0ea39b43] {\r\n    margin-right: 1rem;\n}\n.product__image img[data-v-0ea39b43] {\r\n    height: 10rem;\r\n    width: 10rem;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.product__text h3[data-v-0ea39b43] {\r\n    margin: 0 0 0.5rem 0;\n}\n.product__text h4[data-v-0ea39b43] {\r\n    margin: 0;\n}\n.product__text em[data-v-0ea39b43] {\r\n    font-size: x-large;\n}\n.product__actions[data-v-0ea39b43] {\r\n    text-align: center;\n}\n.cancelled[data-v-0ea39b43] {\r\n    text-decoration: line-through;\r\n    color: gainsboro;\n}\nbutton[data-v-0ea39b43] {\r\n    font: inherit;\r\n    border: 1px solid var(--pinocone-yellow);\r\n    background-color: var(--pinocone-yellow);\r\n    color: black;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\n}\nbutton[data-v-0ea39b43]:hover,\r\nbutton[data-v-0ea39b43]:active {\r\n    background-color: var(--pinocone-yellow-hover);\r\n    border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47818,7 +47842,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-c93178be] {\r\n    margin: 2rem auto;\r\n    max-width: 40rem;\n}\nh2[data-v-c93178be] {\r\n    color: var(--gray-black);\r\n    text-align: center;\r\n    border-bottom: 2px solid var(--quick-gray);\r\n    padding-bottom: 1rem;\n}\nh3[data-v-c93178be] {\r\n    text-align: center;\n}\nul[data-v-c93178be] {\r\n    list-style: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nspan[data-v-c93178be] {\r\n    font-size: large;\n}\nbutton[data-v-c93178be] {\r\n    font: inherit;\r\n    border: 1px solid var(--button-dark-red);\r\n    background-color: var(--button-dark-red);\r\n    color: white;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\r\n    margin-left: 240px;\n}\nbutton[data-v-c93178be]:hover,\r\nbutton[data-v-c93178be]:active {\r\n    background-color: var(--button-dark-red-hover);\r\n    border-color: var(--button-dark-red-hover);\n}\n.voucher-button-mid[data-v-c93178be] {\r\n    margin-left: 280px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-c93178be] {\r\n    margin: 2rem auto;\r\n    max-width: 40rem;\n}\nh2[data-v-c93178be] {\r\n    color: var(--gray-black);\r\n    text-align: center;\r\n    border-bottom: 2px solid var(--quick-gray);\r\n    padding-bottom: 1rem;\n}\nh3[data-v-c93178be] {\r\n    text-align: center;\n}\nul[data-v-c93178be] {\r\n    list-style: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nspan[data-v-c93178be] {\r\n    font-size: large;\n}\nbutton[data-v-c93178be] {\r\n    font: inherit;\r\n    border: 1px solid var(--pinocone-yellow);\r\n    background-color: var(--pinocone-yellow);\r\n    color: black;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    padding: 0.5rem 1.5rem;\r\n    margin-left: 230px;\n}\nbutton[data-v-c93178be]:hover,\r\nbutton[data-v-c93178be]:active {\r\n    background-color: var(--pinocone-yellow-hover);\r\n    border-color: var(--pinocone-yellow-hover);\n}\n.voucher-button-mid[data-v-c93178be] {\r\n    margin-left: 280px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47866,7 +47890,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.box[data-v-514f1f12] {\r\n        margin: 0% 30% 10% 30%;\n}\nh2[data-v-514f1f12] {\r\n        font-family: \"Raleway\", sans-serif;\n}\n.text-center[data-v-514f1f12] {\r\n        text-align: center;\n}\nstrong[data-v-514f1f12] {\r\n        font-family: Arial, sans-serif;\n}\nspan[data-v-514f1f12], p[data-v-514f1f12] {\r\n        font-size: 20px;\n}\nbutton[data-v-514f1f12] {       \r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-left: 12px;\r\n        margin-top: 12px;\n}\nbutton[data-v-514f1f12]:hover,\r\n    button[data-v-514f1f12]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\n.card[data-v-514f1f12] {\r\n        background-color: var(--voucher-pink);\r\n        color: var(--pinocone-yellow);\r\n        grid-area: 1 / 1;\r\n        height: 200px;\r\n        width: 800px;\r\n        transform: translateX(10px) rotateY(25deg) rotateX(10deg);\r\n        display: flex;\r\n        justify-content: flex-start;\r\n        align-items: center;\r\n        font-size: 50px;\r\n        font-weight: 800;\r\n        -webkit-backface-visibility: hidden;\r\n                backface-visibility: hidden;\r\n        box-shadow: 0 10px 30px -3px var(--quick-gray);\r\n        line-height: 1;\r\n        padding: 0 5px;\r\n        transform: translate(-1px, 1px) scale(0.75);\r\n        transform-origin: right center;\r\n        display: inline-block;\n}\n.wrapper[data-v-514f1f12] {\r\n        display: grid;\r\n        perspective: 60em;\r\n        position: relative;\r\n        transform-style: preserve-3d;\n}\n.wrapper[data-v-514f1f12]:before {\r\n        --bw: 3px;\r\n        height: 100%;\r\n        width: 100%;\r\n        grid-area: 1 / 1;\r\n        content: '';\r\n        pointer-events: none;\r\n        -webkit-backface-visibility: hidden;\r\n                backface-visibility: hidden;\r\n        margin-top: calc(-1 * var(--bw));\r\n        margin-left: calc(-1 * var(--bw));\r\n        transform: translateX(-60px) rotateY(-30deg) rotateX(15deg) scale(1.03);\r\n        background: transparent;\r\n        box-sizing: content-box;\n}\n.wrapper > div[data-v-514f1f12],\r\n    .wrapper[data-v-514f1f12]:before {\r\n        will-change: transform;\r\n        transition: .2s transform cubic-bezier(.25,.46,.45,1);\n}\n.wrapper:hover > div[data-v-514f1f12],\r\n    .wrapper[data-v-514f1f12]:hover:before {\r\n        transform: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.box[data-v-514f1f12] {\r\n        margin: 0% 30% 10% 30%;\n}\nh2[data-v-514f1f12] {\r\n        font-family: \"Raleway\", sans-serif;\n}\n.text-center[data-v-514f1f12] {\r\n        text-align: center;\n}\nstrong[data-v-514f1f12] {\r\n        font-family: Arial, sans-serif;\n}\nspan[data-v-514f1f12], p[data-v-514f1f12] {\r\n        font-size: 20px;\n}\nbutton[data-v-514f1f12] {\r\n        font: inherit;\r\n        border: 1px solid var(--voucher-pink);\r\n        background-color: var(--voucher-pink);\r\n        color: black;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\r\n        margin-top: 20px;\n}\nbutton[data-v-514f1f12]:hover,\r\n    button[data-v-514f1f12]:active {\r\n        background-color: var(--voucher-pink-hover);\r\n        border-color: var(--voucher-pink-hover);\n}\n.card[data-v-514f1f12] {\r\n        background-color: var(--pinocone-yellow);\r\n        color: var(--voucher-pink);\r\n        grid-area: 1 / 1;\r\n        height: 200px;\r\n        width: 800px;\r\n        transform: translateX(10px) rotateY(25deg) rotateX(10deg);\r\n        display: flex;\r\n        justify-content: flex-start;\r\n        align-items: center;\r\n        font-size: 50px;\r\n        font-weight: 800;\r\n        -webkit-backface-visibility: hidden;\r\n                backface-visibility: hidden;\r\n        box-shadow: 0 10px 30px -3px var(--quick-gray);\r\n        line-height: 1;\r\n        padding: 0 5px;\r\n        transform: translate(-1px, 1px) scale(0.75);\r\n        transform-origin: right center;\r\n        display: inline-block;\n}\n.wrapper[data-v-514f1f12] {\r\n        display: grid;\r\n        perspective: 60em;\r\n        position: relative;\r\n        transform-style: preserve-3d;\n}\n.wrapper[data-v-514f1f12]:before {\r\n        --bw: 3px;\r\n        height: 100%;\r\n        width: 100%;\r\n        grid-area: 1 / 1;\r\n        content: '';\r\n        pointer-events: none;\r\n        -webkit-backface-visibility: hidden;\r\n                backface-visibility: hidden;\r\n        margin-top: calc(-1 * var(--bw));\r\n        margin-left: calc(-1 * var(--bw));\r\n        transform: translateX(-60px) rotateY(-30deg) rotateX(15deg) scale(1.03);\r\n        background: transparent;\r\n        box-sizing: content-box;\n}\n.wrapper > div[data-v-514f1f12],\r\n    .wrapper[data-v-514f1f12]:before {\r\n        will-change: transform;\r\n        transition: .2s transform cubic-bezier(.25,.46,.45,1);\n}\n.wrapper:hover > div[data-v-514f1f12],\r\n    .wrapper[data-v-514f1f12]:hover:before {\r\n        transform: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47890,7 +47914,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-0dbbbef1] {\r\n        margin: 2rem auto;\r\n        max-width: 40rem;\n}\nh3[data-v-0dbbbef1] {\r\n        text-align: center;\n}\ninput[data-v-0dbbbef1], p[data-v-0dbbbef1] {\r\n        margin-left: 200px;\n}\nbutton[data-v-0dbbbef1] {\r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-0dbbbef1]:hover,\r\n    button[data-v-0dbbbef1]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nsection[data-v-0dbbbef1] {\r\n        margin: 2rem auto;\r\n        max-width: 40rem;\n}\nh3[data-v-0dbbbef1] {\r\n        text-align: center;\n}\ninput[data-v-0dbbbef1], p[data-v-0dbbbef1] {\r\n        margin-left: 200px;\n}\nbutton[data-v-0dbbbef1] {\r\n        font: inherit;\r\n        border: 1px solid var(--pinocone-yellow);\r\n        background-color: var(--pinocone-yellow);\r\n        color: black;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-0dbbbef1]:hover,\r\n    button[data-v-0dbbbef1]:active {\r\n        background-color: var(--pinocone-yellow-hover);\r\n        border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47914,7 +47938,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh2[data-v-4e837fca], h3[data-v-4e837fca], p[data-v-4e837fca], label[data-v-4e837fca] {\r\n        text-align: center;\n}\nlabel[data-v-4e837fca] {\r\n        font-size: medium;\r\n        margin-left: 23%;\n}\nbutton[data-v-4e837fca] {\r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-4e837fca]:hover,\r\n    button[data-v-4e837fca]:active {\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh2[data-v-4e837fca], h3[data-v-4e837fca], p[data-v-4e837fca], label[data-v-4e837fca] {\r\n        text-align: center;\n}\nlabel[data-v-4e837fca] {\r\n        font-size: medium;\r\n        margin-left: 23%;\n}\nbutton[data-v-4e837fca] {\r\n        font: inherit;\r\n        border: 1px solid var(--pinocone-yellow);\r\n        background-color: var(--pinocone-yellow);\r\n        color: black;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-4e837fca]:hover,\r\n    button[data-v-4e837fca]:active {\r\n        background-color: var(--pinocone-yellow-hover);\r\n        border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48082,7 +48106,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#userInfo[data-v-1c42977d] {\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#userInfo[data-v-1c42977d] {\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);\n}\nspan[data-v-1c42977d] {\r\n    font-size: large;\n}\nhr[data-v-1c42977d] {\r\n    display: block;\r\n    height: 1px;\r\n    border: 0;\r\n    border-top: 1px solid black;\r\n    margin: 1em 0;\r\n    padding: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48130,7 +48154,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-5d7d7a48] {\r\n        margin: 0;\r\n        padding: 0;\r\n        box-sizing: border-box;\n}\n.center[data-v-5d7d7a48] {\r\n        height: 100vh;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n        background: white;\n}\n.wave[data-v-5d7d7a48] {\r\n        --pinocone-yellow: #fed531;\r\n\r\n        width: 5px;\r\n        height: 100px;\r\n        background: linear-gradient(45deg, var(--pinocone-yellow), white);\r\n        margin: 10px;\r\n        -webkit-animation: wave-5d7d7a48 1s linear infinite;\r\n                animation: wave-5d7d7a48 1s linear infinite;\r\n        border-radius: 20px;\n}\n.wave[data-v-5d7d7a48]:nth-child(2) {\r\n        -webkit-animation-delay: 0.1s;\r\n                animation-delay: 0.1s;\n}\n.wave[data-v-5d7d7a48]:nth-child(3) {\r\n        -webkit-animation-delay: 0.2s;\r\n                animation-delay: 0.2s;\n}\n.wave[data-v-5d7d7a48]:nth-child(4) {\r\n        -webkit-animation-delay: 0.3s;\r\n                animation-delay: 0.3s;\n}\n.wave[data-v-5d7d7a48]:nth-child(5) {\r\n        -webkit-animation-delay: 0.4s;\r\n                animation-delay: 0.4s;\n}\n.wave[data-v-5d7d7a48]:nth-child(6) {\r\n        -webkit-animation-delay: 0.5s;\r\n                animation-delay: 0.5s;\n}\n.wave[data-v-5d7d7a48]:nth-child(7) {\r\n        -webkit-animation-delay: 0.6s;\r\n                animation-delay: 0.6s;\n}\n.wave[data-v-5d7d7a48]:nth-child(8) {\r\n        -webkit-animation-delay: 0.7s;\r\n                animation-delay: 0.7s;\n}\n.wave[data-v-5d7d7a48]:nth-child(9) {\r\n        -webkit-animation-delay: 0.8s;\r\n                animation-delay: 0.8s;\n}\n.wave[data-v-5d7d7a48]:nth-child(10) {\r\n        -webkit-animation-delay: 0.9s;\r\n                animation-delay: 0.9s;\n}\n@-webkit-keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n@keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n.proceed[data-v-5d7d7a48] {\r\n        background-color: white;\r\n        text-align: center;\r\n        height: 50px;\n}\nbutton[data-v-5d7d7a48] {\r\n        --button-dark-red: #8f0030;\r\n\r\n        font: inherit;\r\n        border: 1px solid var(--button-dark-red);\r\n        background-color: var(--button-dark-red);\r\n        color: white;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-5d7d7a48]:hover,\r\n    button[data-v-5d7d7a48]:active {\r\n        --button-dark-red-hover: #53001c;\r\n\r\n        background-color: var(--button-dark-red-hover);\r\n        border-color: var(--button-dark-red-hover);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-5d7d7a48] {\r\n        margin: 0;\r\n        padding: 0;\r\n        box-sizing: border-box;\n}\n.center[data-v-5d7d7a48] {\r\n        height: 80vh;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n        background: white;\n}\n.wave[data-v-5d7d7a48] {\r\n        width: 5px;\r\n        height: 100px;\r\n        background: linear-gradient(45deg, var(--pinocone-yellow), white);\r\n        margin: 10px;\r\n        -webkit-animation: wave-5d7d7a48 1s linear infinite;\r\n                animation: wave-5d7d7a48 1s linear infinite;\r\n        border-radius: 20px;\n}\n.wave[data-v-5d7d7a48]:nth-child(2) {\r\n        -webkit-animation-delay: 0.1s;\r\n                animation-delay: 0.1s;\n}\n.wave[data-v-5d7d7a48]:nth-child(3) {\r\n        -webkit-animation-delay: 0.2s;\r\n                animation-delay: 0.2s;\n}\n.wave[data-v-5d7d7a48]:nth-child(4) {\r\n        -webkit-animation-delay: 0.3s;\r\n                animation-delay: 0.3s;\n}\n.wave[data-v-5d7d7a48]:nth-child(5) {\r\n        -webkit-animation-delay: 0.4s;\r\n                animation-delay: 0.4s;\n}\n.wave[data-v-5d7d7a48]:nth-child(6) {\r\n        -webkit-animation-delay: 0.5s;\r\n                animation-delay: 0.5s;\n}\n.wave[data-v-5d7d7a48]:nth-child(7) {\r\n        -webkit-animation-delay: 0.6s;\r\n                animation-delay: 0.6s;\n}\n.wave[data-v-5d7d7a48]:nth-child(8) {\r\n        -webkit-animation-delay: 0.7s;\r\n                animation-delay: 0.7s;\n}\n.wave[data-v-5d7d7a48]:nth-child(9) {\r\n        -webkit-animation-delay: 0.8s;\r\n                animation-delay: 0.8s;\n}\n.wave[data-v-5d7d7a48]:nth-child(10) {\r\n        -webkit-animation-delay: 0.9s;\r\n                animation-delay: 0.9s;\n}\n@-webkit-keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n@keyframes wave-5d7d7a48 {\n0% {\r\n            transform: scale(0);\n}\n50% {\r\n            transform: scale(1);\n}\n100% {\r\n            transform: scale(0);\n}\n}\n.proceed[data-v-5d7d7a48] {\r\n        background-color: white;\r\n        text-align: center;\r\n        height: 50px;\n}\nbutton[data-v-5d7d7a48] {\r\n        font: inherit;\r\n        border: 1px solid var(--pinocone-yellow);\r\n        background-color: var(--pinocone-yellow);\r\n        color: black;\r\n        border-radius: 30px;\r\n        cursor: pointer;\r\n        padding: 0.5rem 1.5rem;\n}\nbutton[data-v-5d7d7a48]:hover,\r\n    button[data-v-5d7d7a48]:active {\r\n        background-color: var(--pinocone-yellow-hover);\r\n        border-color: var(--pinocone-yellow-hover);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48178,7 +48202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    /* COLOURS  */\r\n    --admin-60-clr: #EBEBEB;\r\n    --admin-30-clr: #578399;\r\n    --admin-10-clr: #b8e5fd;\r\n    --admin-background-clr: #FFFFFF ;\r\n    --admin-main-theme-clr: var(--admin-10-clr);\r\n    --admin-topbar-clr: var(--admin-60-clr);\r\n    --admin-sidebar-clr: var(--admin-30-clr);\r\n    --admin-badge-clr: var(--admin-30-clr);\r\n    --admin-font-clr: var(--admin-10-clr);\r\n    --admin-box-shadow-clr: #94e3fe;\r\n    --admin-hover-clr: #303030;\r\n    --admin-clr: #004d65;\r\n    --admin-footer-bar-clr: #2d2e2c;\r\n    --admin-btn-primary: var(--admin-30-clr);\r\n    --admin-text-primary-clr: var(--admin-30-clr);\r\n    --admin-text-body-clr: #001324;\r\n\r\n    --admin-sidebar-fontsize: 1.3rem;\r\n\r\n    --admin-sidebar-width-maximize: 6.5rem;\r\n    --admin-sidebar-width-minimize: 3.5rem;\r\n\r\n    --item-gray: #474747;\r\n    --quick-gray: #ccc;\r\n    --gray-black: #292929;\r\n    --button-purple: #45006d;\r\n    --button-purple-hover: #760ab4;\r\n    --button-dark-red: #8f0030;\r\n    --button-dark-red-hover: #53001c;\r\n    --voucher-pink: #fe7b99;\r\n    --pinocone-yellow: #fed531;\r\n  }\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    /* COLOURS  */\r\n    --admin-60-clr: #EBEBEB;\r\n    --admin-30-clr: #578399;\r\n    --admin-10-clr: #b8e5fd;\r\n    --admin-background-clr: #FFFFFF ;\r\n    --admin-main-theme-clr: var(--admin-10-clr);\r\n    --admin-topbar-clr: var(--admin-60-clr);\r\n    --admin-sidebar-clr: var(--admin-30-clr);\r\n    --admin-badge-clr: var(--admin-30-clr);\r\n    --admin-font-clr: var(--admin-10-clr);\r\n    --admin-box-shadow-clr: #94e3fe;\r\n    --admin-hover-clr: #303030;\r\n    --admin-clr: #004d65;\r\n    --admin-footer-bar-clr: #2d2e2c;\r\n    --admin-btn-primary: var(--admin-30-clr);\r\n    --admin-text-primary-clr: var(--admin-30-clr);\r\n    --admin-text-body-clr: #001324;\r\n\r\n    --admin-sidebar-fontsize: 1.3rem;\r\n\r\n    --admin-sidebar-width-maximize: 6.5rem;\r\n    --admin-sidebar-width-minimize: 3.5rem;\r\n\r\n    --footer-white: #fdfdfd;\r\n    --item-gray: #474747;\r\n    --quick-gray: #ccc;\r\n    --gray-black: #292929;\r\n    --pinocone-yellow: #fed531;\r\n    --pinocone-yellow-hover: #866c35;\r\n    --voucher-pink: #fe7b99;\r\n    --voucher-pink-hover: #e07bfe;\r\n  }\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

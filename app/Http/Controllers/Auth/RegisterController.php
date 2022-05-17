@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'lastName' => 'required|max:255',
             'dateOfBirth' => 'required',
             'email' => 'required|email:dns|unique:users',
-            'password' => ['required', 'confirmed', Password::min(10)],
+            'password' => ['required', 'confirmed', 'regex:/[a-z]/', 'regex:/[A-Z]/', 'regex:/[0-9]/', Password::min(10)],
         ]);
         
         $validatedData['PK_userID'] = $id;
@@ -90,7 +90,7 @@ class RegisterController extends Controller
 
         $validatedData = $request->validate([
             'username' => 'required|min:3|max:25|unique:admins',
-            'password' => ['required', 'confirmed', Password::min(10)],
+            'password' => ['required', 'confirmed', 'regex:/[a-z]/', 'regex:/[A-Z]/', 'regex:/[0-9]/', Password::min(10)],
         ]);
 
         $admin = Admin::create([

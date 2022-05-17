@@ -128,17 +128,17 @@ li {
 
 button {
     font: inherit;
-    cursor: pointer;
-    background-color: var(--button-purple);
-    color: white;
-    border: 1px solid var(--button-purple);
-    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--pinocone-yellow);
+    background-color: var(--pinocone-yellow);
+    color: black;
     border-radius: 30px;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
 }
 
 button:hover,
 button:active {
-    background-color: var(--button-purple-hover);
-    border-color: var(--button-purple-hover);
+    background-color: var(--pinocone-yellow-hover);
+    border-color: var(--pinocone-yellow-hover);
 }
 </style>

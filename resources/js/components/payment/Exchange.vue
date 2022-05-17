@@ -114,26 +114,26 @@
         font-size: 20px;
     }
 
-    button {       
-        border: 1px solid var(--button-dark-red);
-        background-color: var(--button-dark-red);
-        color: white;
+    button {
+        font: inherit;
+        border: 1px solid var(--voucher-pink);
+        background-color: var(--voucher-pink);
+        color: black;
         border-radius: 30px;
         cursor: pointer;
         padding: 0.5rem 1.5rem;
-        margin-left: 12px;
-        margin-top: 12px;
+        margin-top: 20px;
     }
 
     button:hover,
     button:active {
-        background-color: var(--button-dark-red-hover);
-        border-color: var(--button-dark-red-hover);
+        background-color: var(--voucher-pink-hover);
+        border-color: var(--voucher-pink-hover);
     }
 
     .card {
-        background-color: var(--voucher-pink);
-        color: var(--pinocone-yellow);
+        background-color: var(--pinocone-yellow);
+        color: var(--voucher-pink);
         grid-area: 1 / 1;
         height: 200px;
         width: 800px;

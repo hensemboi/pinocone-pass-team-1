@@ -14,9 +14,9 @@
         </div>
 
         <div class="proceed">
-            <button v-if="paymentMethod === 1 && newCardBalance >= 0" @click="updateCard">Proceed</button>
-            <button v-else-if="paymentMethod === 2 && newWalletBalance >= 0" @click="updateWallet">Proceed</button>
-            <button v-else @click="transactionFailed">Proceed</button>
+            <button v-if="paymentMethod === 1 && newCardBalance >= 0" @click="updateCard">Click to confirm your payment</button>
+            <button v-else-if="paymentMethod === 2 && newWalletBalance >= 0" @click="updateWallet">Click to confirm your payment</button>
+            <button v-else @click="transactionFailed">Click to confirm your payment</button>
         </div>
     </div> 
 </template>
@@ -112,7 +112,7 @@ import axios from "axios"
     }
 
     .center {
-        height: 100vh;
+        height: 80vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -120,8 +120,6 @@ import axios from "axios"
     }
 
     .wave {
-        --pinocone-yellow: #fed531;
-
         width: 5px;
         height: 100px;
         background: linear-gradient(45deg, var(--pinocone-yellow), white);
@@ -185,12 +183,10 @@ import axios from "axios"
     }
 
     button {
-        --button-dark-red: #8f0030;
-
         font: inherit;
-        border: 1px solid var(--button-dark-red);
-        background-color: var(--button-dark-red);
-        color: white;
+        border: 1px solid var(--pinocone-yellow);
+        background-color: var(--pinocone-yellow);
+        color: black;
         border-radius: 30px;
         cursor: pointer;
         padding: 0.5rem 1.5rem;
@@ -198,9 +194,7 @@ import axios from "axios"
 
     button:hover,
     button:active {
-        --button-dark-red-hover: #53001c;
-
-        background-color: var(--button-dark-red-hover);
-        border-color: var(--button-dark-red-hover);
+        background-color: var(--pinocone-yellow-hover);
+        border-color: var(--pinocone-yellow-hover);
     }
 </style>

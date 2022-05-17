@@ -1,7 +1,7 @@
 <template>
   <section>
     <base-card>
-      <h2>Register delivery information</h2>
+      <h2 class="text-center">Register delivery information</h2>
       <delivery-form @save-data="saveData"></delivery-form>
     </base-card>
   </section>

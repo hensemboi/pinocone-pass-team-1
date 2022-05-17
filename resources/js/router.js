@@ -29,7 +29,7 @@ import MenuCard from "./components/cards/MenuCard.vue"
 import SpecialSection from './components/SpecialSection.vue'
 import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
 import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
-import Delivery from "./components/request_dashboard/Delivery.vue"
+import Delivery from "./components/request_dashboard/Delivery.vue";
 
 import Store from "./store";
 
@@ -119,16 +119,20 @@ const router = createRouter({
             },
         },
         {
-            path: "/requestdashboard",
+            path: "/orderdashboard",
             components: {
+                navbar: Navbar,
                 default: RequestDashboard,
+                footer: Footer,
             },
         },
         {
             path: "/userorderdetails/:id",
             props: true,
             components: {
+                navbar: Navbar,
                 default: UserOrderDetail,
+                footer: Footer,
             },
             children: [{ path: "deliverydetails", component: Delivery }],
         },
@@ -222,10 +226,10 @@ const router = createRouter({
     scrollBehavior(_, _2, savedPosition) {
         // console.log(to, from, savedPosition);
         if (savedPosition) {
-          return savedPosition;
+            return savedPosition;
         }
         return { left: 0, top: 0 };
-      }
+    },
 });
 
 router.beforeEach((to, from, next) => {

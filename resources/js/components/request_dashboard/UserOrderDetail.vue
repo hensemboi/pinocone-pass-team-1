@@ -4,26 +4,20 @@
         <section>
             <base-card>
                 <header>
-                    <h2>Order Summary</h2>
+                    <h2 class="text-center">Order Summary</h2>
                 </header>
                 <h4>Transaction ID : {{ selectedUser.PK_transactionID }}</h4>
                 <h4>User ID : {{ selectedUser.FK_userID }}</h4>
                 <h4>Ordered Menu : Burgah</h4>
+                <h4>Express delievery: Yes</h4>
             </base-card>
         </section>
         <section>
             <base-card>
                 <header>
-                    <h2>Payment Details</h2>
+                    <h2 class="text-center">Payment Details</h2>
                 </header>
-                <h4>
-                    Voucher ID :
-                    {{
-                        selectedUser.FK_voucherID
-                            ? "No voucher selected"
-                            : selectedUser.FK_voucherID
-                    }}
-                </h4>
+                <h4>Voucher ID : {{ isVoucherUsed }}</h4>
                 <h4>Payment Type : {{ selectedUser.FK_paymentCode }}</h4>
                 <h4>Date Time : {{ selectedUser.created_at }}</h4>
                 <h4>Total Price: {{ selectedUser.totalPrice }}</h4>
@@ -32,7 +26,7 @@
         <section>
             <base-card>
                 <header>
-                    <h2>Extra note</h2>
+                    <h2 class="text-center">Extra note</h2>
                 </header>
                 <p>
                     {{ selectedUser.extraNote }}
@@ -41,7 +35,7 @@
                     >Approve Order</base-button
                 >
                 <base-button v-if="showButton" @click="redirect"
-                    >Reject Order</base-button
+                    >Cancel Order</base-button
                 >
             </base-card>
         </section>
@@ -50,7 +44,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 export default {
     setup() {
@@ -65,8 +59,15 @@ export default {
             router.replace(route.path + "/deliverydetails");
         }
 
+        const isVoucherUsed = computed(() => {
+            if (!selectedUser.value.FK_voucherID) {
+                return "No voucher used";
+            }
+            return selectedUser.value.FK_voucherID;
+        });
+
         function redirect() {
-            router.replace("/requestdashboard");
+            router.replace("/orderdashboard");
         }
 
         function getSpecifiedUser() {
@@ -82,6 +83,7 @@ export default {
             getSpecifiedUser,
             showButton,
             selectedUser,
+            isVoucherUsed,
         };
     },
     created() {

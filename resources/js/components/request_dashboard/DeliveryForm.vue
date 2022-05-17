@@ -10,7 +10,7 @@
     </base-dialog>
     <form @submit.prevent="submitForm">
         <div class="form-control" :class="{ invalid: !firstName.isValid }">
-            <label for="firstname">Driver Firstname</label>
+            <label for="firstname">First information</label>
             <input
                 type="text"
                 id="firstname"
@@ -20,7 +20,7 @@
             <p v-if="!firstName.isValid">Firstname must not be empty</p>
         </div>
         <div class="form-control" :class="{ invalid: !lastName.isValid }">
-            <label for="lastname">Driver Lastname</label>
+            <label for="lastname">Second information</label>
             <input
                 type="text"
                 id="lastname"
@@ -42,14 +42,13 @@
             </iframe>
         </div>
         <div class="form-control" :class="{ invalid: !address.isValid }">
-            <label for="address">Vendor Address</label>
+            <label for="address">Address</label>
             <input
                 type="text"
                 id="address"
                 v-model.trim="address.value"
                 @blur="clearValidity('address')"
             />
-            
         </div>
         <p v-if="!address.isValid">Address must not be empty</p>
         <div class="form-control" :class="{ invalid: !description.isValid }">
@@ -63,6 +62,16 @@
             />
         </div>
         <p v-if="!description.isValid">Description must not be empty</p>
+        <div class="form-control" :class="{ invalid: !date.isValid }">
+            <label for="time">Delivery date</label>
+            <input
+                type="date"
+                id="date"
+                v-model="date.value"
+                @blur="clearValidity('date')"
+            />
+        </div>
+        <p v-if="!description.isValid">Date must not be empty</p>
         <div class="form-control" :class="{ invalid: !time.isValid }">
             <label for="time">Delivery time (Minutes)</label>
             <input
@@ -72,7 +81,7 @@
                 @blur="clearValidity('time')"
             />
         </div>
-        <p v-if="!description.isValid">time must be greate than zero</p>
+        <p v-if="!description.isValid">time must be greater than zero</p>
         <div class="form-control" :class="{ invalid: !time.isValid }">
             <h3>Additional Requests</h3>
             <div>
@@ -135,6 +144,10 @@ export default {
                 value: "",
                 isValid: true,
             },
+            date: {
+                value: null,
+                isValid: true,
+            },
             time: {
                 value: null,
                 isValid: true,
@@ -166,6 +179,10 @@ export default {
                 this.description.isValid = false;
                 this.formIsValid = false;
             }
+            if (this.date.value == null) {
+                this.date.isValid = false;
+                this.formIsValid = false;
+            }
             if (!this.time.value || this.time.value < 0) {
                 this.time.isValid = false;
                 this.formIsValid = false;
@@ -188,16 +205,16 @@ export default {
                 last: this.lastName.value,
                 desc: this.description.value,
                 address: this.address.value,
+                date: this.date.value,
                 time: this.time.value,
                 areas: this.areas.value,
             };
-            console.log(formData);
             this.showDialog = true;
             this.$emit("save-data", formData);
         },
         redirect() {
             setTimeout(() => {
-                this.$router.replace("/requestdashboard");
+                this.$router.replace("/orderdashboard");
             }, 300);
         },
     },

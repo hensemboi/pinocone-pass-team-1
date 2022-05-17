@@ -43,6 +43,7 @@ export default {
     props: ["orders"],
     setup(props) {
         const { orders } = toRefs(props);
+        
         const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
             orders,
             "FK_userID"

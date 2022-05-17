@@ -22,7 +22,6 @@ export default {
                         })
                         .then((response) => {
                             commit("addOrders", response.data);
-                            console.log("Hello world");
                         })
                         .catch((err) => {
                             console.log(err.response.data.errors);

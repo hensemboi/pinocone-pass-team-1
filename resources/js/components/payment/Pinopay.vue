@@ -82,12 +82,12 @@
         },
         methods: {
             openPinopayWallet() {
-                // const CryptoJS = require("crypto-js");
-                // this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
-                // this.form.userID = this.userID
-                // axios.post("./pinopay", this.form)
+                const CryptoJS = require("crypto-js");
+                this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
+                this.form.userID = this.userID
+                axios.post("./pinopay", this.form)
 
-                // this.$router.push("/success")
+                this.$router.push("/success")
             },
             topUp() {
                 this.form.balance = this.pinopayWallet[0].balance + this.topup

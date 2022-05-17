@@ -3,6 +3,8 @@
         <div>
             <h2 class="text-center">{{ title }}</h2>
         </div>
+        <div v-if="promo === 1"><em>Discounted</em></div>
+        <div v-else-if="promo === 2"><em>Buy 1 Free 1</em></div>
         <div>
             <img :src="image" :alt="title" />
         </div>
@@ -27,7 +29,7 @@
 
 <script>
 export default {
-    props: ["prodId", "title", "image", "price", "qty", "note"],
+    props: ["prodId", "title", "image", "price", "qty", "promo", "note"],
     data() {
         return {
           toggleDOM: false,

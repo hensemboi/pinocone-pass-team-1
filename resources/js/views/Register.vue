@@ -6,14 +6,12 @@
                     <div class="card-header">Register</div>
                     <div class="card-body">
                         <form method="POST" @submit.prevent="onSubmit">
+                            <validation-errors :errors="validationErrors" v-if="validationErrors"></validation-errors>
                             <div class="row mb-3">
                                 <label for="username" class="col-md-4 col-form-label text-md-end">Username</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="text" class="form-control" v-model="form.username" :state="errors && !errors.username" name="username" required autocomplete="username" autofocus>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
+                                    <input id="username" type="text" class="form-control" v-model="form.username" name="username" required autocomplete="username" autofocus>
                                 </div>
                             </div>
 
@@ -21,10 +19,7 @@
                                 <label for="firstName" class="col-md-4 col-form-label text-md-end">First Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="firstName" type="text" class="form-control" v-model="form.firstName" :state="errors && !errors.firstName" name="firstName" required autocomplete="firstName" autofocus>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
+                                    <input id="firstName" type="text" class="form-control" v-model="form.firstName" name="firstName" required autocomplete="firstName" autofocus>
                                 </div>
                             </div>
 
@@ -32,10 +27,7 @@
                                 <label for="lastName" class="col-md-4 col-form-label text-md-end">Last Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="lastName" type="text" class="form-control" v-model="form.lastName" :state="errors && !errors.lastName" name="lastName" required autocomplete="lastName" autofocus/>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
+                                    <input id="lastName" type="text" class="form-control" v-model="form.lastName" name="lastName" required autocomplete="lastName" autofocus/>
                                 </div>
                             </div>
 
@@ -43,10 +35,7 @@
                                 <label for="dateOfBirth" class="col-md-4 col-form-label text-md-end">Date of Birth</label>
 
                                 <div class="col-md-6">
-                                    <input id="dateOfBirth" type="date" class="form-control" v-model="form.dateOfBirth" :state="errors && !errors.dateOfBirth" name="dateOfBirth" required autocomplete="dateOfBirth" autofocus/>
-                                    <!-- <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span> -->
+                                    <input id="dateOfBirth" type="date" class="form-control" v-model="form.dateOfBirth" name="dateOfBirth" required autocomplete="dateOfBirth" autofocus/>
                                 </div>
                             </div>
 
@@ -54,12 +43,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="form.email" :state="errors && !errors.email" name="email" required autocomplete="email"/>
-                                    <!-- @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror -->
+                                    <input id="email" type="email" class="form-control" v-model="form.email" name="email" required autocomplete="email"/>
                                 </div>
                             </div>
 
@@ -67,12 +51,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="form.password" :state="errors && !errors.password" name="password" required autocomplete="new-password">
-                                    <!-- @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror -->
+                                    <input id="password" type="password" class="form-control" v-model="form.password" name="password" required autocomplete="new-password">
                                 </div>
                             </div>
 
@@ -80,7 +59,7 @@
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirm Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" v-model="form.password_confirmation" :state="errors && !errors.password" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control" v-model="form.password_confirmation" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
 
@@ -100,7 +79,11 @@
 </template>
 
 <script>
+import ValidationErrors from "../components/ValidationErrors.vue";
 export default {
+    components: {
+        ValidationErrors,
+    },
     data() {
         return {
             form: {
@@ -111,7 +94,8 @@ export default {
                 'email' : '',
                 'password' : '',
                 'password_confirmation' : '',
-            }
+            },
+            validationErrors : '',
         }
     },
     methods: {
@@ -126,8 +110,10 @@ export default {
                 .then((response) => {
                     this.$router.push("/home");
                 })
-                .catch((err) => {
-                    this.errors = err.response.data.errors;
+                .catch(error => {
+                    if (error.response.status == 422) {
+                        this.validationErrors = error.response.data.errors;
+                    }
                 });
             });
         },

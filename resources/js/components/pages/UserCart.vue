@@ -39,6 +39,7 @@
                 :image="'https://picsum.photos/200/300'"
                 :price="item.price"
                 :qty="item.qty"
+                :promo="item.promotionType"
                 :note="item.note"
             ></cart-item>
         </ul>

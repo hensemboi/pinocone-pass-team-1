@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +15,6 @@ use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MembershipController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,7 +25,6 @@ use App\Http\Controllers\MembershipController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */ 
-
 
 Route::post('upload/{id}', [ImageController::class, 'upload']);
 Route::get('paymentmethod', [PaymentMethodController::class, 'fetchAll']);

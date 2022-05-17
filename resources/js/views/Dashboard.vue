@@ -274,10 +274,10 @@
         },
         name: "Dashboard",
         async setup(){
-            const rootURL = window.location.origin;
-            const admin = computed(()=>{
+            const rootURL = window.location.origin
+            const admin = computed(async ()=>{
                 await axios.get(rootURL + "/admin").data
-            }),
+            })
             const {checkModule, fetchingData} = await useCheckData("menu/getIsMenusPopulated", 'menu/fetchAllCategories')
 
             const EarningCardSkeleton = defineAsyncComponent(()=>
@@ -316,7 +316,7 @@
                 Bar,
                 checkModule
             }
-        };
+        }
     }
 </script>
 

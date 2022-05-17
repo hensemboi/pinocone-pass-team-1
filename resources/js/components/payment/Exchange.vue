@@ -70,8 +70,9 @@
 
                 if (this.newIncentives >= 0)
                 {
-                    this.incentivesForm.incentives = this.newIncentives;
+                    this.incentivesForm.incentives = this.newIncentives
                     axios.put("./user/" + this.userID, this.incentivesForm)
+                    this.currentIncentives = this.newIncentives
 
                     this.availabilityForm.availability = voucher.availability - 1;
                     axios.put("./voucher/" + this.userID, this.availabilityForm)

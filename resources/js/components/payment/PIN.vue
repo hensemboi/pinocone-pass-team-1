@@ -29,16 +29,16 @@
         },
         methods: {
             enterPIN() {
-                // const CryptoJS = require("crypto-js")
-                // this.pinopayWallet[0].PIN = CryptoJS.AES.decrypt(this.pinopayWallet[0].PIN, this.secret).toString(CryptoJS.enc.Utf8)
+                const CryptoJS = require("crypto-js")
+                this.pinopayWallet[0].PIN = CryptoJS.AES.decrypt(this.pinopayWallet[0].PIN, this.secret).toString(CryptoJS.enc.Utf8)
                 
-                // if (this.pinopayWallet[0].PIN == this.PIN) {
-                //     this.$router.push("/pending")
-                // }
+                if (this.pinopayWallet[0].PIN == this.PIN) {
+                    this.$router.push("/pending")
+                }
 
-                // else {
-                //     this.$router.push("/error")
-                // }
+                else {
+                    this.$router.push("/error")
+                }
             }
         }
     }

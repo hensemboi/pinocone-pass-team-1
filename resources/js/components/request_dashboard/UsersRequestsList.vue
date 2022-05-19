@@ -1,6 +1,6 @@
 <template>
     <base-card>
-        <h2>Active Orders</h2>
+        <h2>All Orders</h2>
         <base-search
             @search="updateSearch"
             :search-term="enteredSearchTerm"
@@ -23,8 +23,10 @@
             <user-requests-item
                 v-for="order in displayedItems"
                 :key="order.PK_transactionID"
-                :user-name="order.FK_userID"
+                :user-name="order.PK_transactionID"
                 :id="order.PK_transactionID"
+                :date="order.created_at"
+                :price="order.total_Price"
             ></user-requests-item>
         </ul>
     </base-card>
@@ -73,7 +75,7 @@ ul {
 
 button {
     font: inherit;
-    border: 1px solid #00006b;
+    border: 1px solid #d7b52a;
     background-color: transparent;
     color: #00006b;
     padding: 0.5rem 1.5rem;
@@ -86,7 +88,7 @@ button:active {
 }
 
 button.selected {
-    background-color: #00006b;
+    background-color: #fed531;
     color: white;
 }
 </style>

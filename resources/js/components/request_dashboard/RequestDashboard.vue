@@ -1,18 +1,24 @@
 <template>
-    <section v-if="isOrdersPopulated">
-        <users-requests-list
-            :orders="getCacheOrders"
-        ></users-requests-list>
-    </section>
-    <section v-else>
-        <section>
-            <base-spinner></base-spinner>
+    <div v-if="isLoggedIn">
+        <section v-if="isOrdersPopulated">
+            <users-requests-list :orders="getCacheOrders"></users-requests-list>
         </section>
-    </section>
+        <section v-else>
+            <section>
+                <base-spinner></base-spinner>
+            </section>
+        </section>
+    </div>
+    <div v-else>
+        <h2 class="text-center">Please login to view this page ...</h2>
+        <h2 class="text-center">
+            <router-link to="/login">Login</router-link>
+        </h2>
+    </div>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
 import UsersRequestsList from "./UsersRequestsList.vue";
@@ -23,6 +29,7 @@ export default {
     },
     setup() {
         const store = useStore();
+        const user = ref();
 
         const getCacheOrders = computed(() => {
             return store.getters["order/getOrders"];
@@ -33,6 +40,7 @@ export default {
         });
 
         async function getOrders() {
+            console.log("Fetching the orders now");
             if (!store.getters["order/getIsOrdersPopulated"]) {
                 try {
                     await store.dispatch("order/fetchOrders");
@@ -46,23 +54,29 @@ export default {
             }
         }
 
-        async function refreshOrders() {
-            try {
-                await store.dispatch("order/fetchOrders");
-            } catch (error) {
-                console.log(error.errorMessage || "Failed to fetch prodcucts");
-            }
+        const isLoggedIn = computed(() => {
+            // if (user.value == null) {
+            //     return false;
+            // }
+            return true;
+        });
+
+        async function getUser() {
+            const rootURL = window.location.origin;
+            user.value = (await axios.get(rootURL + "/user")).data;
         }
 
         return {
             getOrders,
-            refreshOrders,
+            getUser,
             getCacheOrders,
             isOrdersPopulated,
+            isLoggedIn,
         };
     },
     created() {
         this.getOrders();
+        this.getUser();
     },
 };
 </script>

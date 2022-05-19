@@ -131,7 +131,7 @@
 </template>
 	
 <script>
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import { ref } from "vue"
 import Dropzone from './Dropzone.vue'
 

@@ -1,26 +1,41 @@
 <template>
     <li>
-        <h3>{{ userName }}</h3>
-        <base-button link :to=userIDLink
-            >View order details</base-button
-        >
+        <h4>Transaction ID: {{ userName }}</h4>
+        <h5>Created Date: {{ date }}</h5>
+        <h5>Order Status: {{ orderStatus }}</h5>
+        <base-button @click="userIDLink">View order details</base-button>
     </li>
 </template>
 
 <script>
 import { toRefs } from "@vue/reactivity";
-import { computed } from "@vue/runtime-core";
+import { useRouter } from "vue-router";
+
 export default {
-    props: ["id", "userName"],
+    props: ["id", "userName", "date", "price"],
     setup(props) {
         const { userName, id } = toRefs(props);
-        const userIDLink = computed(() => {
-            return "/userorderdetails/" + id.value;
-        });
-        return {
-          userName,
-          userIDLink
+        const orderStatus = setOrderStatus();
+        const router = useRouter();
+
+        function userIDLink() {
+            router.push({
+                path: "/userorderdetails/" + id.value,
+                query: { status: orderStatus },
+            });
         }
+
+        function setOrderStatus() {
+            const randomIndex = Math.floor(Math.random() * 2);
+            const statuses = ["Pending", "Completed"];
+            return statuses[randomIndex];
+        }
+
+        return {
+            userName,
+            userIDLink,
+            orderStatus,
+        };
     },
 };
 </script>

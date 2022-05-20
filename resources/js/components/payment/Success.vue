@@ -6,7 +6,13 @@
    
 <script>
     export default {
-        
+        mounted() {
+            if (this.$route.query.balance != null) {
+                this.$store.dispatch("cart/resetCart", {})
+
+                alert("Purchase successful. Your remaining balance is RM" + this.$route.query.balance + ".")
+            }
+        }
     }
 </script>
 

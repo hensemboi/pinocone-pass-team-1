@@ -48,6 +48,16 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
+                            <label class="labels">Email Address</label
+                            ><input
+                                type="text"
+                                class="form-control"
+                                :placeholder="user.email"
+                                value=""
+                                :disabled="setDisabled"
+                            />
+                        </div>
+                        <div class="col-md-12">
                             <label class="labels">Mobile Number</label
                             ><input
                                 type="text"
@@ -103,16 +113,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Enter address line 2"
-                                value=""
-                                :disabled="setDisabled"
-                            />
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Email ID</label
-                            ><input
-                                type="text"
-                                class="form-control"
-                                :placeholder="user.email"
                                 value=""
                                 :disabled="setDisabled"
                             />
@@ -218,10 +218,6 @@ export default {
             return this.user.PK_userID;
         },
         ...mapGetters({
-            // getUserName: "user/getUserName",
-            // getUserFirstName: "user/getUserFirstName",
-            // getUserLastName: "user/getUserLastName",
-            // getUserEmail: "user/getUserEmail",
             getUserPhoneNumber: "user/getUserPhoneNumber",
             getUserAddress: "user/getUserAddress",
             getUserPostcode: "user/getUserPostcode",

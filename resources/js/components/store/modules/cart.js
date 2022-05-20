@@ -209,6 +209,17 @@ export default {
             }
             state.items.splice(productInCartIndex, 1);
         },
+        resetCart(state, payload) {
+            state.productData = [];
+            state.items = [];
+            state.image = '';
+            state.total = 0.00;
+            state.qty = 0;
+            state.effectivePrice = 0.00;
+            state.effectiveQuantity = 0;
+            state.vouchedPrice = 0.00;
+            state.voucherCode = 0;
+        },
         useVoucherReducePrice(state, payload) {
             state.voucherCode = payload.code;
             state.vouchedPrice = payload.less;
@@ -228,6 +239,9 @@ export default {
         },
         removeOneFromCart(context, payload) {
             context.commit("removeOneFromCart", payload);
+        },
+        resetCart(context, payload) {
+            context.commit("resetCart", payload);
         },
         useVoucherReducePrice(context, payload) {
             context.commit("useVoucherReducePrice", payload);

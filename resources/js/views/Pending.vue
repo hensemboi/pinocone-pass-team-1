@@ -81,7 +81,10 @@ import axios from "axios"
                     axios.delete("./uservoucher/" + this.usingVoucher)
                 }
 
-                this.$router.push("/success")
+                this.$router.push({
+                    path: "/success",
+                    query: { balance: this.newCardBalance },
+                })
             },
             updateWallet() {
                 this.balanceForm.balance = this.newWalletBalance
@@ -95,7 +98,10 @@ import axios from "axios"
                     axios.delete("./uservoucher/" + this.usingVoucher)
                 }
 
-                this.$router.push("/success")
+                this.$router.push({
+                    path: "/success",
+                    query: { balance: this.newWalletBalance },
+                })
             },
             transactionFailed() {
                 this.$router.push("/error")

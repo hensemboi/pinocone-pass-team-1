@@ -25129,7 +25129,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function mounted() {
+    if (this.$route.query.balance != null) {
+      this.$store.dispatch("cart/resetCart", {});
+      alert("Purchase successful. Your remaining balance is RM" + this.$route.query.balance + ".");
+    }
+  }
+});
 
 /***/ }),
 
@@ -25602,10 +25609,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.user.PK_userID;
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
-    // getUserName: "user/getUserName",
-    // getUserFirstName: "user/getUserFirstName",
-    // getUserLastName: "user/getUserLastName",
-    // getUserEmail: "user/getUserEmail",
     getUserPhoneNumber: "user/getUserPhoneNumber",
     getUserAddress: "user/getUserAddress",
     getUserPostcode: "user/getUserPostcode",
@@ -26021,7 +26024,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("./uservoucher/" + this.usingVoucher);
       }
 
-      this.$router.push("/success");
+      this.$router.push({
+        path: "/success",
+        query: {
+          balance: this.newCardBalance
+        }
+      });
     },
     updateWallet: function updateWallet() {
       this.balanceForm.balance = this.newWalletBalance;
@@ -26033,7 +26041,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("./uservoucher/" + this.usingVoucher);
       }
 
-      this.$router.push("/success");
+      this.$router.push({
+        path: "/success",
+        query: {
+          balance: this.newWalletBalance
+        }
+      });
     },
     transactionFailed: function transactionFailed() {
       this.$router.push("/error");
@@ -32205,7 +32218,7 @@ var _hoisted_19 = {
 var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Mobile Number", -1
+  }, "Email Address", -1
   /* HOISTED */
   );
 });
@@ -32218,7 +32231,7 @@ var _hoisted_22 = {
 var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Address Line 1", -1
+  }, "Mobile Number", -1
   /* HOISTED */
   );
 });
@@ -32231,12 +32244,12 @@ var _hoisted_25 = {
 var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Address Line 2", -1
+  }, "Address Line 1", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_27 = ["disabled"];
+var _hoisted_27 = ["placeholder", "disabled"];
 var _hoisted_28 = {
   "class": "col-md-12"
 };
@@ -32244,12 +32257,12 @@ var _hoisted_28 = {
 var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Postcode", -1
+  }, "Address Line 2", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_30 = ["placeholder", "disabled"];
+var _hoisted_30 = ["disabled"];
 var _hoisted_31 = {
   "class": "col-md-12"
 };
@@ -32257,7 +32270,7 @@ var _hoisted_31 = {
 var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "State", -1
+  }, "Postcode", -1
   /* HOISTED */
   );
 });
@@ -32270,12 +32283,12 @@ var _hoisted_34 = {
 var _hoisted_35 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Area", -1
+  }, "State", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_36 = ["disabled"];
+var _hoisted_36 = ["placeholder", "disabled"];
 var _hoisted_37 = {
   "class": "col-md-12"
 };
@@ -32283,12 +32296,12 @@ var _hoisted_37 = {
 var _hoisted_38 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "labels"
-  }, "Email ID", -1
+  }, "Area", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_39 = ["placeholder", "disabled"];
+var _hoisted_39 = ["disabled"];
 var _hoisted_40 = {
   "class": "row mt-3"
 };
@@ -32442,7 +32455,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_17)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: _ctx.getUserPhoneNumber,
+    placeholder: $data.user.email,
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32450,7 +32463,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: _ctx.getUserAddress,
+    placeholder: _ctx.getUserPhoneNumber,
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32458,7 +32471,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_24)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: "Enter address line 2",
+    placeholder: _ctx.getUserAddress,
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32466,7 +32479,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_27)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: _ctx.getUserPostcode,
+    placeholder: "Enter address line 2",
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32474,7 +32487,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_30)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: _ctx.getUserState,
+    placeholder: _ctx.getUserPostcode,
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32482,7 +32495,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_33)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: "Enter address line 2",
+    placeholder: _ctx.getUserState,
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -32490,7 +32503,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_36)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    placeholder: $data.user.email,
+    placeholder: "Enter address line 2",
     value: "",
     disabled: $options.setDisabled
   }, null, 8
@@ -34550,6 +34563,17 @@ __webpack_require__.r(__webpack_exports__);
 
       state.items.splice(productInCartIndex, 1);
     },
+    resetCart: function resetCart(state, payload) {
+      state.productData = [];
+      state.items = [];
+      state.image = '';
+      state.total = 0.00;
+      state.qty = 0;
+      state.effectivePrice = 0.00;
+      state.effectiveQuantity = 0;
+      state.vouchedPrice = 0.00;
+      state.voucherCode = 0;
+    },
     useVoucherReducePrice: function useVoucherReducePrice(state, payload) {
       state.voucherCode = payload.code;
       state.vouchedPrice = payload.less;
@@ -34569,6 +34593,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeOneFromCart: function removeOneFromCart(context, payload) {
       context.commit("removeOneFromCart", payload);
+    },
+    resetCart: function resetCart(context, payload) {
+      context.commit("resetCart", payload);
     },
     useVoucherReducePrice: function useVoucherReducePrice(context, payload) {
       context.commit("useVoucherReducePrice", payload);

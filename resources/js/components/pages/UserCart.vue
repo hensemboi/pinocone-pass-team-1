@@ -36,9 +36,10 @@
                 :key="item.productId"
                 :prodId="item.productId"
                 :title="item.title"
-                :image="'https://picsum.photos/200/300'"
+                :image="item.image"
                 :price="item.price"
                 :qty="item.qty"
+                :promo="item.promotionType"
                 :note="item.note"
             ></cart-item>
         </ul>
@@ -200,19 +201,19 @@ span {
 
 button {
     font: inherit;
-    border: 1px solid var(--button-dark-red);
-    background-color: var(--button-dark-red);
-    color: white;
+    border: 1px solid var(--pinocone-yellow);
+    background-color: var(--pinocone-yellow);
+    color: black;
     border-radius: 30px;
     cursor: pointer;
     padding: 0.5rem 1.5rem;
-    margin-left: 240px;
+    margin-left: 230px;
 }
 
 button:hover,
 button:active {
-    background-color: var(--button-dark-red-hover);
-    border-color: var(--button-dark-red-hover);
+    background-color: var(--pinocone-yellow-hover);
+    border-color: var(--pinocone-yellow-hover);
 }
 
 .voucher-button-mid {

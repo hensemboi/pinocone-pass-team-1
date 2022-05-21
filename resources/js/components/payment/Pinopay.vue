@@ -82,12 +82,12 @@
         },
         methods: {
             openPinopayWallet() {
-                // const CryptoJS = require("crypto-js");
-                // this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
-                // this.form.userID = this.userID
-                // axios.post("./pinopay", this.form)
+                const CryptoJS = require("crypto-js");
+                this.form.PIN = CryptoJS.AES.encrypt(this.form.PIN, this.secret).toString()
+                this.form.userID = this.userID
+                axios.post("./pinopay", this.form)
 
-                // this.$router.push("/success")
+                this.$router.push("/success")
             },
             topUp() {
                 this.form.balance = this.pinopayWallet[0].balance + this.topup
@@ -111,9 +111,9 @@
 
     button {
         font: inherit;
-        border: 1px solid var(--button-dark-red);
-        background-color: var(--button-dark-red);
-        color: white;
+        border: 1px solid var(--pinocone-yellow);
+        background-color: var(--pinocone-yellow);
+        color: black;
         border-radius: 30px;
         cursor: pointer;
         padding: 0.5rem 1.5rem;
@@ -121,7 +121,7 @@
 
     button:hover,
     button:active {
-        background-color: var(--button-dark-red-hover);
-        border-color: var(--button-dark-red-hover);
+        background-color: var(--pinocone-yellow-hover);
+        border-color: var(--pinocone-yellow-hover);
     }
 </style>

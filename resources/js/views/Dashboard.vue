@@ -153,6 +153,7 @@
             EarningCardSkeleton,
         },
         name: "Dashboard",
+<<<<<<< HEAD
         setup(){
             const rootURL = window.location.origin;
             const store = useStore()
@@ -208,6 +209,14 @@
             watch(userCount,(c)=>{
                 console.log(c)
             })
+=======
+        async setup(){
+            const rootURL = window.location.origin
+            const admin = computed(async ()=>{
+                await axios.get(rootURL + "/admin").data
+            })
+            const {checkModule, fetchingData} = await useCheckData("menu/getIsMenusPopulated", 'menu/fetchAllCategories')
+>>>>>>> pinocone-incentives-v3
 
             const EarningCardsData=[
                 {
@@ -250,6 +259,7 @@
                 cardObj
 
             }
+<<<<<<< HEAD
         },
         async created(){
             await axios.get('/yearlyRevenue').then((response)=>{
@@ -264,6 +274,8 @@
             await axios.get('/totalRevenue').then((response)=>{
                 this.totalRevenue = response.data
             })
+=======
+>>>>>>> pinocone-incentives-v3
         }
     }
 </script>

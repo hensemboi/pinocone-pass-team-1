@@ -155,20 +155,19 @@
         font-family: "Playfair Display";
     }
 
-    button {   
+    button {
         font: inherit;
-        border: 1px solid var(--button-dark-red);
-        background-color: var(--button-dark-red);
-        color: white;
+        border: 1px solid var(--pinocone-yellow);
+        background-color: var(--pinocone-yellow);
+        color: black;
         border-radius: 30px;
         cursor: pointer;
         padding: 0.5rem 1.5rem;
-        margin-left: 12px;
     }
 
     button:hover,
     button:active {
-        background-color: var(--button-dark-red-hover);
-        border-color: var(--button-dark-red-hover);
+        background-color: var(--pinocone-yellow-hover);
+        border-color: var(--pinocone-yellow-hover);
     }
 </style>

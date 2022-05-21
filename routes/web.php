@@ -7,8 +7,6 @@ use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/feedback', [FeedbackController::class, 'getfeedback'])->name('get.feedback');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,16 +20,17 @@ Route::get('/feedback', [FeedbackController::class, 'getfeedback'])->name('get.f
 
 require __DIR__.'/auth.php';
 
-// Route::get('/', function(){
-//     return view('layouts.base_layout');
-// });
+Route::get('/', function(){
+    return view('layouts.base_layout');
+});
 
 Route::get('/{slug}', function(){
     return view('layouts.base_layout');
 });
-Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/pinocone/feedback', [FeedbackController::class, 'getfeedback'])->name('get.feedback');
+
+Route::get('/pinocone/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/membership/index', [FrontController::class, 'index'])->name('index');
 
@@ -42,7 +41,6 @@ Route::post('/post/membership/login', [FrontController::class, 'authenticate'])-
 Route::get('/membership/register', [FrontController::class, 'register'])->name('register');
 Route::post('/post/membership/register', [FrontController::class, 'postregister'])->name('register');
 Route::post('/post/membership/profile', [FrontController::class, 'postprofile'])->name('profile');
-
 
 Route::post('/post/feedback', [FeedbackController::class, 'feedback'])->name('feedback');
 

@@ -48,6 +48,16 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
+                            <label class="labels">Email Address</label
+                            ><input
+                                type="text"
+                                class="form-control"
+                                :placeholder="user.email"
+                                value=""
+                                :disabled="setDisabled"
+                            />
+                        </div>
+                        <div class="col-md-12">
                             <label class="labels">Mobile Number</label
                             ><input
                                 type="text"
@@ -107,16 +117,6 @@
                                 :disabled="setDisabled"
                             />
                         </div>
-                        <div class="col-md-12">
-                            <label class="labels">Email ID</label
-                            ><input
-                                type="text"
-                                class="form-control"
-                                :placeholder="user.email"
-                                value=""
-                                :disabled="setDisabled"
-                            />
-                        </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
@@ -167,7 +167,6 @@
                     >
                         <span>Vouchers Owned</span>
                     </div>
-                    <br />
                     <table class="table">
                         <tr v-if="userVouchers.length === 0">
                             <p>You do not have any vouchers.</p>
@@ -183,8 +182,11 @@
                             <td>{{ userVoucher.expiryDate }}</td>
                         </tr>
                     </table>
+                    <router-link to="/exchange">Click here to exchange vouchers...</router-link>
+                    <hr/>
                     <div>
-                        <p>Your incentive points: {{ incentivePoints }} points</p>
+                        <span>Incentive Points</span>
+                        <p>Amount: {{ incentivePoints }} points</p>
                         <button
                             v-if="membership.active === 1" 
                             :disabled="!(membership.next_reward_time === null || dateNow >= rewardTime)"
@@ -194,6 +196,8 @@
                             Claim free point
                         </button>
                     </div>
+                    <hr/>
+                    <router-link to="/pinopay">Click here to go to your Pinopay Wallet...</router-link>
                 </div>
             </div>
         </div>
@@ -214,10 +218,6 @@ export default {
             return this.user.PK_userID;
         },
         ...mapGetters({
-            // getUserName: "user/getUserName",
-            // getUserFirstName: "user/getUserFirstName",
-            // getUserLastName: "user/getUserLastName",
-            // getUserEmail: "user/getUserEmail",
             getUserPhoneNumber: "user/getUserPhoneNumber",
             getUserAddress: "user/getUserAddress",
             getUserPostcode: "user/getUserPostcode",
@@ -284,5 +284,16 @@ export default {
 <style scoped>
 #userInfo {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+span {
+    font-size: large;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black;
+    margin: 1em 0;
+    padding: 0;
 }
 </style>

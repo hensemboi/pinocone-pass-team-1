@@ -4,6 +4,7 @@ export default {
         return {
             productData: [],
             items: [],
+            image: '',
             total: 0.00,
             qty: 0,
             effectivePrice: 0.00,
@@ -45,10 +46,18 @@ export default {
                     state.effectiveQuantity = 1;
                 }
 
+                if (state.productData.images.length > 0) {
+                    state.image = state.productData.images[0].imageUrl;
+                }
+
+                else {
+                    state.image = "/images/logo.png";
+                }
+
                 const newItem = {
                     productId: state.productData.PK_menuID,
                     title: state.productData.menuName,
-                    image: state.productData.menuName,
+                    image: state.image,
                     price: state.effectivePrice,
                     qty: state.effectiveQuantity,
                     promotionType: state.productData.is_promoted,
@@ -200,6 +209,17 @@ export default {
             }
             state.items.splice(productInCartIndex, 1);
         },
+        resetCart(state, payload) {
+            state.productData = [];
+            state.items = [];
+            state.image = '';
+            state.total = 0.00;
+            state.qty = 0;
+            state.effectivePrice = 0.00;
+            state.effectiveQuantity = 0;
+            state.vouchedPrice = 0.00;
+            state.voucherCode = 0;
+        },
         useVoucherReducePrice(state, payload) {
             state.voucherCode = payload.code;
             state.vouchedPrice = payload.less;
@@ -219,6 +239,9 @@ export default {
         },
         removeOneFromCart(context, payload) {
             context.commit("removeOneFromCart", payload);
+        },
+        resetCart(context, payload) {
+            context.commit("resetCart", payload);
         },
         useVoucherReducePrice(context, payload) {
             context.commit("useVoucherReducePrice", payload);

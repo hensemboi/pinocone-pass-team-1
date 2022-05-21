@@ -3,6 +3,8 @@
         <div>
             <h2 class="text-center">{{ title }}</h2>
         </div>
+        <div v-if="promo === 1"><em>Discounted</em></div>
+        <div v-else-if="promo === 2"><em>Buy 1 Free 1</em></div>
         <div>
             <img :src="image" :alt="title" />
         </div>
@@ -27,7 +29,7 @@
 
 <script>
 export default {
-    props: ["prodId", "title", "image", "price", "qty", "note"],
+    props: ["prodId", "title", "image", "price", "qty", "promo", "note"],
     data() {
         return {
           toggleDOM: false,
@@ -86,9 +88,9 @@ img {
 
 button {
     font: inherit;
-    border: 1px solid var(--button-dark-red);
-    background-color: var(--button-dark-red);
-    color: white;
+    border: 1px solid var(--pinocone-yellow);
+    background-color: var(--pinocone-yellow);
+    color: black;
     border-radius: 30px;
     cursor: pointer;
     padding: 0.5rem 1.5rem;
@@ -96,7 +98,7 @@ button {
 
 button:hover,
 button:active {
-    background-color: var(--button-dark-red-hover);
-    border-color: var(--button-dark-red-hover);
+    background-color: var(--pinocone-yellow-hover);
+    border-color: var(--pinocone-yellow-hover);
 }
 </style>

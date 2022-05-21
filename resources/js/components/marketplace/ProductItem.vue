@@ -58,13 +58,28 @@
 
 <script>
 export default {
-    props: ["id", "image", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
+    props: ["id", "images", "title", "description", "price", "discountedPrice", "promotionType", "category", "cuisineType"],
     methods: {
         addToCart() {
             this.$store.dispatch("cart/addToCart", {
                 id: this.id,
             });
         },
+    },
+    data() {
+        return {
+            image: '/images/logo.png',
+        };
+    },
+    computed: {
+        itemTotal() {
+            return (this.price * this.qty).toFixed(2);
+        },
+    },
+    created() {
+        if (this.images.length > 0) {
+            this.image = this.images[0].imageUrl
+        }
     },
 };
 </script>
@@ -113,17 +128,17 @@ li {
 
 button {
     font: inherit;
-    cursor: pointer;
-    background-color: var(--button-purple);
-    color: white;
-    border: 1px solid var(--button-purple);
-    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--pinocone-yellow);
+    background-color: var(--pinocone-yellow);
+    color: black;
     border-radius: 30px;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
 }
 
 button:hover,
 button:active {
-    background-color: var(--button-purple-hover);
-    border-color: var(--button-purple-hover);
+    background-color: var(--pinocone-yellow-hover);
+    border-color: var(--pinocone-yellow-hover);
 }
 </style>

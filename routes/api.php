@@ -15,6 +15,7 @@ use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MembershipController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,6 +34,14 @@ Route::get('/cuisines', [CuisineController::class, 'index']);
 Route::put('membership/{id}', [MembershipController::class, 'updateRewardTime']);
 Route::put('user/{id}', [UserController::class, 'updateIncentives']);
 Route::resource('menu', 'App\Http\Controllers\MenuController');
+Route::get('productslisting', [MenuController::class, 'fetchAll']);
+
+Route::post('menu', [MenuController::class, 'store']);
+Route::put('menu', [MenuController::class, 'update']);
+Route::post('upload/{id}', [ImageController::class, 'upload']);
+Route::delete('menu', [MenuController::class, 'destroySelected']);
+Route::get('menuImage/{id}', [ImageController::class, 'fetchImage']);
+
 Route::get('pplmenu', [MenuController::class, 'fetchPopularMenu']);
 
 Route::controller(OrderController::class)->group(function () {

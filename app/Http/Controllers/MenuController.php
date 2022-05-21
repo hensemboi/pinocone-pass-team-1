@@ -65,7 +65,7 @@ class MenuController extends Controller
     }  
     
     public function fetchPopularMenu(){
-        $menus = Menu::with(['category', 'cuisinetype'])->orderBy('totalOrders', 'desc')->take(6)->get();
+        $menus = Menu::with(['category', 'cuisinetype', 'images'])->orderBy('totalOrders', 'desc')->take(6)->get();
         return $menus;
     }
 }

@@ -94,25 +94,22 @@
                                             <label>Category Code</label>
                                             <select id="categoryCode" v-model="form.categoryCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCategoryCode(form.categoryCode) && categoryCodeBlured}" v-on:blur="categoryCodeBlured = true"> 
                                             <option value="">Category Code</option>
-                                            <option value="A001">A001</option>
-                                            <option value="W001">W001</option>
-                                            <option value="L001">L001</option>
+                                            <option v-for="c in categories" :value="c.PK_categoryCode" :key="c.PK_categoryCode">{{c.PK_categoryCode}} - {{c.name}}</option>
                                             </select>
                                             <div class="valid-feedback">Nice!</div>
                                             <div class="invalid-feedback">Please select a category code.</div>        
                                         </div>			
                                         <div class="form-group">
                                             <label>Cuisine Code</label>
-                                            <select id="cuisineCode" v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' : !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
-                                            <option value="">Cuisine Code</option>
-                                            <option value="A001">A001</option>
-                                            <option value="W001">W001</option>
-                                            <option value="L001">L001</option>
+                                            <select id="cuisineCode" v-model="form.cuisineCode" v-bind:class="{'form-control':true, 'is-invalid' :
+                                            !validCuisineCode(form.cuisineCode) && cuisineCodeBlured}" v-on:blur="cuisineCodeBlured = true">
+                                                <option value="">Cuisine Code</option>
+                                                <option v-for="c in cuisines" :value="c.PK_cuisineCode" :key="c.PK_cuisineCode">{{c.PK_cuisineCode}} - {{c.name}}</option>
                                             </select>
                                             <div class="valid-feedback">Nice!</div>
                                             <div class="invalid-feedback">Please select a cuisine code.</div>                       
-                                        </div>			
-                                    </div>
+                                        </div>		
+                                        </div>
                                     <div class="modal-footer">
                                         <div class="form_action--button">
                                             <input type="button" class="btn btn-default" @click="myModel=false" value="Cancel">
@@ -157,6 +154,8 @@ export default {
             actionButton: "Add",
             dynamicTitle: "",
             menuList: [],
+            categories: [],
+            cuisines: [],
             images: [],
             files: [],
             formData: new FormData(),
@@ -199,6 +198,11 @@ export default {
     created() {
         axios.get("./menu", this.form)
             .then(response => this.menuList = response.data);
+        axios.get("./categories")
+            .then(response => this.categories = response.data);
+        axios.get("./cuisines")
+            .then(response => this.cuisines = response.data);
+
     },
     methods: {
         openModel() {

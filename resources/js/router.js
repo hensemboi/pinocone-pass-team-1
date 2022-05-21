@@ -30,6 +30,7 @@ import SpecialSection from './components/SpecialSection.vue'
 import RequestDashboard from "./components/request_dashboard/RequestDashboard.vue";
 import UserOrderDetail from "./components/request_dashboard/UserOrderDetail.vue";
 import Delivery from "./components/request_dashboard/Delivery.vue"
+import ImageModal from './components/ImageModal.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -104,6 +105,14 @@ const router = createRouter({
             path: "/cart",
             components: {
                 default: UserCart,
+                footer: Footer,
+                navbar: Navbar,
+            },
+        },
+        {
+            path: "/image",
+            components: {
+                default: ImageModal,
                 footer: Footer,
                 navbar: Navbar,
             },

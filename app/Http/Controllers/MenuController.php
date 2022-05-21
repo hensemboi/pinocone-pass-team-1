@@ -24,7 +24,6 @@ class MenuController extends Controller
         $menu->menuName = $request->menuName;
         $menu->description = $request->description;
         $menu->price = $request->price;
-        $menu->totalOrders = $request->totalOrders;
         $menu->FK_categoryCode = $request->categoryCode;
         $menu->FK_cuisineCode = $request->cuisineCode;
         $menu->save();

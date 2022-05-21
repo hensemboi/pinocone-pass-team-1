@@ -18,7 +18,7 @@
                             </div>
 
                             <div v-else>
-                                <h3>Balance: RM{{ pinopayWallet[0].balance.toFixed(2) }}</h3>
+                                <h3>Balance: RM {{ pinopayWallet[0].balance.toFixed(2) }}</h3>
                                 <br/>
                                 <label>
                                     Topup amount:
@@ -35,7 +35,7 @@
                             <table class="table">
                                 <tr v-if="transactionHistory.length !== 0">
                                     <th>Transaction ID</th>
-                                    <th>Total Price</th>
+                                    <th>Total Price (RM)</th>
                                     <th>Date and Time</th>
                                 </tr>
 

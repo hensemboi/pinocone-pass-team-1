@@ -12,7 +12,7 @@
             <div class="item__data">
                 <div>
                     Price per Item:
-                    <strong>RM{{ price.toFixed(2) }}</strong>
+                    <strong>RM {{ price.toFixed(2) }}</strong>
                 </div>
                 <div>
                     Quantity:
@@ -20,7 +20,7 @@
                 </div>
                 <div>Note: {{ note }}</div>
             </div>
-            <div class="item__total">Total: RM{{ itemTotal }}</div>
+            <div class="item__total">Total: RM {{ itemTotal }}</div>
             <button @click="removeAll">Remove All</button>
             <button @click="removeOne">Remove One</button>
         </div>

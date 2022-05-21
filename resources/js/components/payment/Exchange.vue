@@ -8,10 +8,10 @@
                         <div class="col-sm-7">
                             <strong>{{ voucher.name }}</strong>
                             <div v-if="voucher.name === 'Fun 40'">
-                                <p>Description: Reduce price by RM40 <br/>(Minimum spending of RM50)</p>
+                                <p>Description: Reduce price by RM 40 <br/>(Minimum spending of RM 50)</p>
                             </div>
                             <div v-else-if="voucher.name === 'Happy 20'">
-                                <p>Description: Reduce price by 20% <br/>(Minimum spending of RM200)</p>
+                                <p>Description: Reduce price by 20% <br/>(Minimum spending of RM 200)</p>
                             </div>
                         </div>
 

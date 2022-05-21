@@ -8,9 +8,9 @@
                         <div>
                             <div>
                                 <h2>Payment Summary</h2>
-                                Item total: RM{{ grossPrice }}<br/>
-                                Reduced by: RM{{ vouchedPrice }}<br/>
-                                <em>Price to pay: RM{{ netPrice }}</em>
+                                Item total: RM {{ grossPrice }}<br/>
+                                Reduced by: RM {{ vouchedPrice }}<br/>
+                                <em>Price to pay: RM {{ netPrice }}</em>
                             </div>
                             <br/>
                             <div class="form-check form-check-inline">
@@ -61,7 +61,7 @@
                             <div v-else-if="currentPaymentMethod === 2">
                                 <div>
                                     <div v-if="pinopayWallet.length === 1">
-                                        <em>Balance: RM{{ pinopayWallet[0].balance.toFixed(2) }}</em>
+                                        <em>Balance: RM {{ pinopayWallet[0].balance.toFixed(2) }}</em>
                                         <br/>
                                         <router-link to="/PIN" tag="button">
                                             <button @click="lockInPaymentMethod">Next</button>

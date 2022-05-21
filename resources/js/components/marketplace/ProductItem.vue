@@ -12,9 +12,9 @@
                     <h3>{{ title }}</h3>
                     <base-badge mode="highlight" :no-margin-left="true">
                         <div v-if="promotionType === 1">
-                            <h4 class="cancelled">RM{{ price.toFixed(2) }}</h4><h4>RM{{ discountedPrice.toFixed(2) }}</h4>
+                            <h4 class="cancelled">RM {{ price.toFixed(2) }}</h4><h4>RM {{ discountedPrice.toFixed(2) }}</h4>
                         </div>
-                        <h4 v-else>RM{{ price.toFixed(2) }}</h4>
+                        <h4 v-else>RM {{ price.toFixed(2) }}</h4>
                     </base-badge>
                     <div v-if="promotionType === 2">
                         <p>(Buy 1 Free 1)</p>
@@ -37,9 +37,9 @@
                     <h3>{{ title }}</h3>
                     <base-badge mode="highlight" :no-margin-left="true">
                         <div v-if="promotionType === 1">
-                            <h4 class="cancelled">RM{{ price.toFixed(2) }}</h4><h4>RM{{ discountedPrice.toFixed(2) }}</h4>
+                            <h4 class="cancelled">RM {{ price.toFixed(2) }}</h4><h4>RM {{ discountedPrice.toFixed(2) }}</h4>
                         </div>
-                        <h4 v-else>RM{{ price.toFixed(2) }}</h4>
+                        <h4 v-else>RM {{ price.toFixed(2) }}</h4>
                     </base-badge>
                     <div v-if="promotionType === 2">
                         <em>(Buy 1 Free 1)</em>

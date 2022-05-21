@@ -25,7 +25,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded = ['*'];
+    protected $guarded = [];
 
     protected $primaryKey = 'PK_userID';
 
@@ -69,9 +69,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    
     protected $hidden = [
         'password',
         'remember_token',

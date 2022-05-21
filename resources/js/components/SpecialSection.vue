@@ -11,7 +11,7 @@
                     <div class="tag tag-purple">{{RecommendedMenu.cuisinetype.name}}</div>
                 
                 <h4 class="card-title">{{RecommendedMenu.menuName}}</h4>
-                <p class="card-text">RM  {{RecommendedMenu.price}}</p>
+                <p class="card-text">RM  {{RecommendedMenu.price.toFixed(2)}}</p>
             
                     <button class="btn-card">Order</button>
             </div>
@@ -63,13 +63,11 @@ export default {
     },
     methods: {
         next() {
-        this.index = (this.index + 1) % mImages.length;
-        this.mImage = mImages[this.index];
+        this.index = (this.index + 1) % this.mImages.length;
         this.displayModal = true;
         },
         prev() {
-        this.index = (this.index - 1) % mImages.length;
-        this.mImage = mImages[this.index];
+        this.index = (this.index - 1) % this.mImages.length;
         this.displayModal = true;
         },
   },

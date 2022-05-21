@@ -92,23 +92,10 @@
                     </div>
                 </div>
             </div>
-
-            <h1 id="Recommended-Menus">Recommendation Menus</h1>
-            <div class="row">
-                <recommended-menu menu="1"></recommended-menu>
-                <recommended-menu menu="2"></recommended-menu>
-                <recommended-menu menu="3"></recommended-menu>
+            <div class="container section">
+                <h1 id="Recommended-Menus">Recommendation Menus</h1>
+                <special-section class="col-md-4" v-for="menu in menuList" v-bind:RecommendedMenu="menu" v-bind:key="menu.PK_menuID"></special-section>
             </div>
-
-            <div class="row">
-                <recommended-menu menu="4"></recommended-menu>
-                <recommended-menu menu="5"></recommended-menu>
-                <recommended-menu menu="6"></recommended-menu>
-            </div>
-        </div>
-        <div class="container section">
-            <h1 id="Recommended-Menus">Recommendation Menus</h1>
-                 <special-section class="col-md-4" v-for="menu in menuList" v-bind:RecommendedMenu="menu" v-bind:key="menu.PK_menuID"></special-section>
         </div>
     </div>
 </template>

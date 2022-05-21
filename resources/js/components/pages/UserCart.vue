@@ -3,7 +3,7 @@
         <h2>Your Cart</h2>
         <h3>
             Total Amount:
-            <base-badge mode="elegant">RM{{ cartTotal }}</base-badge>
+            <base-badge mode="elegant">RM {{ cartTotal }}</base-badge>
         </h3>
         <div v-if="!inputVoucher">
             <input
@@ -90,7 +90,7 @@ export default {
 
                     if (this.expiryDate > this.dateNow) {
                         if (this.$store.getters["cart/totalSum"].toFixed(2) < 50.00) {
-                            alert("To apply this voucher, you must at least have a gross price of at least RM50.")
+                            alert("To apply this voucher, you must at least have a gross price of at least RM 50.")
                         }
 
                         else {
@@ -119,7 +119,7 @@ export default {
 
                     if (this.expiryDate > this.dateNow) {
                         if (this.$store.getters["cart/totalSum"].toFixed(2) < 200.00) {
-                            alert("To apply this voucher, you must at least have a gross price of at least RM200.")
+                            alert("To apply this voucher, you must at least have a gross price of at least RM 200.")
                         }
 
                         else {

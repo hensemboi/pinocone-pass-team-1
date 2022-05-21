@@ -26,7 +26,7 @@
                         <th>Menu ID</th>
                         <th>Menu Name</th>
 						<th>Description</th>
-                        <th>Price</th>
+                        <th>Price (RM)</th>
                         <th>Total Orders</th>
                         <th>Category Code</th>
                         <th>Cuisine Code</th>
@@ -44,7 +44,7 @@
                         <td>{{ menu.PK_menuID }}</td>
                         <td>{{ menu.menuName }}</td>
                         <td>{{ menu.description }}</td>
-                        <td>{{ menu.price }}</td>
+                        <td>{{ menu.price.toFixed(2) }}</td>
                         <td>{{ menu.totalOrders }}</td>
                         <td>{{ menu.FK_categoryCode }}</td>
                         <td>{{ menu.FK_cuisineCode }}</td>

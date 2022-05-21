@@ -1,6 +1,6 @@
 @extends('membership.layouts')
 @section('title')
-    Pinocone | Home Page
+    Pinocone
 @endsection
 @section('extra-heads')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pinocone | Feedback Page</title>
+    <title>Pinocone</title>
 
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

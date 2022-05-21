@@ -23,10 +23,7 @@ import Error from "./components/payment/Error.vue";
 import NotFound from "./components/NotFound.vue";
 import Store from "./components/store/index.js";
 import Menu from "./components/menu/Menu.vue"
-<<<<<<< HEAD
-=======
 // import RequestsList from "./components/request_dashboard/RequestsList.vue";
->>>>>>> pinocone-incentives-v3
 import Tables from "./components/datatables/DataTables.vue"
 import MenuCard from "./components/cards/MenuCard.vue"
 import SpecialSection from './components/SpecialSection.vue'

@@ -30,8 +30,7 @@ class FeedbackController extends Controller
     public function feedback(Request $request)
     {
         $request->validate([
-            'fname' => 'required|max:250',
-            'lname' => 'required|max:250',
+            'name' => 'required|max:250',
             'email' => 'required|max:250',
             'phone' => 'required|max:250',
             'message' => 'required|max:250',
@@ -40,8 +39,7 @@ class FeedbackController extends Controller
         ]);
 
         $contact = new feedback();
-        $contact->fname = $request->fname;
-        $contact->lname = $request->lname;
+        $contact->fname = $request->name;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
         $contact->message = $request->message;

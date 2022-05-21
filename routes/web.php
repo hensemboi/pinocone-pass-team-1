@@ -7,6 +7,8 @@ use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/feedback', [FeedbackController::class, 'getfeedback'])->name('get.feedback');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +33,7 @@ Route::get('/{slug}', function(){
 Route::get('/pinocone/feedback', [FeedbackController::class, 'getfeedback'])->name('get.feedback');
 
 Route::get('/pinocone/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/membership/index', [FrontController::class, 'index'])->name('index');
 

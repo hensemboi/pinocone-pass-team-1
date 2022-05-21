@@ -22,13 +22,12 @@
                         title="Menu"
                     ></menu-dropdown-component>
                 </li>
-                &nbsp;
-                <li>
-                    <router-link to="" @click="gotoGoogle('/pinocone/feedback')">Feedback</router-link>
+                <li class="nav-item" id="applic">
+                    <button class="nav-link" @click="gotoGoogle()" to="/pinocone/feedback">Feedback</button>
                 </li>
-                &nbsp;
-                <li>
-                    <router-link to="" @click="gotoGoogle('/membership/index')">Membership</router-link>
+
+                <li class="nav-item" id="app">
+                    <button class="nav-link" @click="gotoGoogle()" to="/membership/index">Membership</button>
                 </li>
                 &nbsp;
                 <li>
@@ -39,6 +38,9 @@
                     <router-link to="/userprofile">Profile</router-link>
                 </li>
                 &nbsp;
+                <li>
+                    <router-link to="/">Marketplace</router-link>
+                </li>
                 <li>
                     <router-link to="/cart">Cart</router-link>
                     <base-badge mode="elegant">{{ cartQuantity }}</base-badge>
@@ -100,5 +102,15 @@ export default {
         const rootURL = window.location.origin;
         this.user = (await axios.get(rootURL + "/user")).data;
     }
+};
+</script>
+<script>
+export default {
+  name: "app",
+  methods: {
+    gotoGoogle() {
+      window.open("/membership/index");
+    },
+  },
 };
 </script>

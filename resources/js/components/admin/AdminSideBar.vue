@@ -1,73 +1,11 @@
 <template>
     <transition name="slide" >
-        <!-- <div v-if="sideSlide" class=" d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; margin: 0;">
-            <div class="d-flex d-flex justify-content-between">
-                <div>
-                    <router-link to="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-                        <span class="fs-4">Sidebar</span>
-                    </router-link>
-                </div>
-                <div>
-                    <i @click="hideSideBar()" class="text-white fa fa-xmark fa-2xl"></i>
-                </div>
-            </div>
-            
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-            <li>
-                <router-link to="dashboard" class="nav-link text-white">
-                    <i class="fa fa-2xl fa-chart-line"></i>
-                    Dashboard
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/12" class="nav-link text-white">
-                    <i class="fa fa-2xl fa-file-invoice-dollar"></i>
-                    Orders
-                </router-link>
-            </li>
-            <li>
-                <router-link to="productslisting" class="nav-link text-white">
-                    <i class="fa fa-2xl fa-bowl-food"></i>
-                    Products
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/12" class="nav-link text-white">
-                    <i class="fa fa-2xl fa-user-group"></i>
-                    Customers
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/12" class="nav-link text-white">
-                    <i class="fa fa-2xl fa-bullhorn"></i>
-                    Reports
-                </router-link>
-            </li>
-            </ul>
-            <hr>
-            <div class="dropdown">
-            <router-link to="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
-            </router-link>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><router-link to="/12" class="dropdown-item" >New project...</router-link></li>
-                <li><router-link to="/12" class="dropdown-item" >Settings</router-link></li>
-                <li><router-link to="/12" class="dropdown-item" >Profile</router-link></li>
-                <li><hr to="/12" class="dropdown-divider"></li>
-                <li><router-link to="/12" class="dropdown-item" >Sign out</router-link></li>
-            </ul>
-            </div>
-        </div> -->
         <ul class="bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <router-link to="/dashboard" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div>
+                    <img src="./../../../../public/images/logo-removebg.png" alt="logo.png" style="width: 200px;">
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </router-link>
 
             <!-- Divider -->
@@ -163,10 +101,6 @@ export default ({
 
 <style scoped>
     @import"./../../../css/admin/adminSideBar.css";
-    .router-link-active.router-link-exact-active.collapse-item{
-        color: var(--admin-30-clr) !important;
-        font-weight: 500;
-    }
 
     .sidenav{
         height: 100%;

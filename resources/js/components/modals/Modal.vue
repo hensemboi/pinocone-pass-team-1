@@ -69,7 +69,7 @@
 
 <script>
 import {computed, ref, watch, toRefs, toRef} from 'vue';
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import Dropzone from './../menu/Dropzone.vue'
 
     class Errors{

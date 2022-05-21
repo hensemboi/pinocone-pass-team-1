@@ -9,26 +9,6 @@
         </section>
     </base-dialog>
     <form @submit.prevent="submitForm">
-        <div class="form-control" :class="{ invalid: !firstName.isValid }">
-            <label for="firstname">Driver Firstname</label>
-            <input
-                type="text"
-                id="firstname"
-                v-model.trim="firstName.value"
-                @blur="clearValidity('firstName')"
-            />
-            <p v-if="!firstName.isValid">Firstname must not be empty</p>
-        </div>
-        <div class="form-control" :class="{ invalid: !lastName.isValid }">
-            <label for="lastname">Driver Lastname</label>
-            <input
-                type="text"
-                id="lastname"
-                v-model.trim="lastName.value"
-                @blur="clearValidity('lastName')"
-            />
-            <p v-if="!lastName.isValid">Lastname must not be empty</p>
-        </div>
         <div class="form-control">
             <iframe
                 width="900"
@@ -42,14 +22,13 @@
             </iframe>
         </div>
         <div class="form-control" :class="{ invalid: !address.isValid }">
-            <label for="address">Vendor Address</label>
+            <label for="address">Address</label>
             <input
                 type="text"
                 id="address"
                 v-model.trim="address.value"
                 @blur="clearValidity('address')"
             />
-            
         </div>
         <p v-if="!address.isValid">Address must not be empty</p>
         <div class="form-control" :class="{ invalid: !description.isValid }">
@@ -63,17 +42,19 @@
             />
         </div>
         <p v-if="!description.isValid">Description must not be empty</p>
-        <div class="form-control" :class="{ invalid: !time.isValid }">
-            <label for="time">Delivery time (Minutes)</label>
+
+        <div class="form-control" :class="{ invalid: !dateTime.isValid }">
+            <label for="dateTime">Delivery date and time</label>
             <input
-                type="number"
-                id="time"
-                v-model.number="time.value"
-                @blur="clearValidity('time')"
+                type="datetime-local"
+                id="dateTime"
+                v-model="dateTime.value"
+                @blur="clearValidity('dateTime')"
             />
         </div>
-        <p v-if="!description.isValid">time must be greate than zero</p>
-        <div class="form-control" :class="{ invalid: !time.isValid }">
+        <p v-if="!dateTime.isValid">Date or time must not be empty</p>
+
+        <div class="form-control" :class="{ invalid: !areas.isValid }">
             <h3>Additional Requests</h3>
             <div>
                 <input
@@ -83,7 +64,7 @@
                     v-model="areas.value"
                     @blur="clearValidity('areas')"
                 />
-                <label for="frontend">No cutlery</label>
+                <label for="cutlery">No cutlery</label>
             </div>
             <div>
                 <input
@@ -93,7 +74,7 @@
                     v-model="areas.value"
                     @blur="clearValidity('areas')"
                 />
-                <label for="backend">Contactless delievery</label>
+                <label for="contactless">Contactless delievery</label>
             </div>
             <div>
                 <input
@@ -103,12 +84,10 @@
                     v-model="areas.value"
                     @blur="clearValidity('areas')"
                 />
-                <label for="career">Doorstep delivery</label>
+                <label for="doorstep">Doorstep delivery</label>
             </div>
-            <p v-if="!areas.isValid">
-                At least one area of experties is selected
-            </p>
         </div>
+        <p v-if="!areas.isValid">At least one area of experties is selected</p>
         <p v-if="!formIsValid">Please fix the above errors and submit again</p>
         <base-button>Register</base-button>
     </form>
@@ -119,15 +98,7 @@ export default {
     emits: ["save-data"],
     data() {
         return {
-            firstName: {
-                value: "",
-                isValid: true,
-            },
             address: {
-                value: "",
-                isValid: true,
-            },
-            lastName: {
                 value: "",
                 isValid: true,
             },
@@ -135,7 +106,7 @@ export default {
                 value: "",
                 isValid: true,
             },
-            time: {
+            dateTime: {
                 value: null,
                 isValid: true,
             },
@@ -150,14 +121,6 @@ export default {
     methods: {
         validateForm() {
             this.formIsValid = true;
-            if (this.firstName.value === "") {
-                this.firstName.isValid = false;
-                this.formIsValid = false;
-            }
-            if (this.lastName.value === "") {
-                this.lastName.isValid = false;
-                this.formIsValid = false;
-            }
             if (this.address.value === "") {
                 this.address.isValid = false;
                 this.formIsValid = false;
@@ -166,8 +129,8 @@ export default {
                 this.description.isValid = false;
                 this.formIsValid = false;
             }
-            if (!this.time.value || this.time.value < 0) {
-                this.time.isValid = false;
+            if (this.dateTime.value == null) {
+                this.dateTime.isValid = false;
                 this.formIsValid = false;
             }
             if (this.areas.value.length === 0) {
@@ -184,20 +147,17 @@ export default {
                 return;
             }
             const formData = {
-                first: this.firstName.value,
-                last: this.lastName.value,
                 desc: this.description.value,
                 address: this.address.value,
-                time: this.time.value,
+                dateTime: this.dateTime.value,
                 areas: this.areas.value,
             };
-            console.log(formData);
             this.showDialog = true;
             this.$emit("save-data", formData);
         },
         redirect() {
             setTimeout(() => {
-                this.$router.replace("/requestdashboard");
+                this.$router.replace("/orderdashboard");
             }, 300);
         },
     },

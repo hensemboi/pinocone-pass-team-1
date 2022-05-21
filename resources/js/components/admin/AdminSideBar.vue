@@ -63,7 +63,7 @@
         </div> -->
         <ul class="bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <router-link to="" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <router-link to="/dashboard" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -74,81 +74,38 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <router-link to="" class="nav-link" href="index.html">
+            <li class="nav-item">
+                <router-link to="/dashboard" class="nav-link">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></router-link>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <router-link to="" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <router-link to="/orders" class="nav-link">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Orders</span>
                 </router-link>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <router-link to="" class="collapse-item" href="buttons.html">Buttons</router-link>
-                        <router-link to="" class="collapse-item" href="cards.html">Cards</router-link>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <router-link to="/products" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Products</span>
-                </router-link>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <router-link to="" class="collapse-item" href="utilities-color.html">Colors</router-link>
-                        <router-link to="" class="collapse-item" href="utilities-border.html">Borders</router-link>
-                        <router-link to="" class="collapse-item" href="utilities-animation.html">Animations</router-link>
-                        <router-link to="" class="collapse-item" href="utilities-other.html">Other</router-link>
-                    </div>
-                </div>
+                <DropdownMenu :title="productsDropdown.title" :droppedList="productsDropdown.list"></DropdownMenu>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <router-link to="" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <router-link to="/customers" class="nav-link">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Customers</span>
                 </router-link>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <router-link to="" class="collapse-item" href="login.html">Login</router-link>
-                        <router-link to="" class="collapse-item" href="register.html">Register</router-link>
-                        <router-link to="" class="collapse-item" href="forgot-password.html">Forgot Password</router-link>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <router-link to="" class="collapse-item" href="404.html">404 Page</router-link>
-                        <router-link to="" class="collapse-item" href="blank.html">Blank Page</router-link>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <router-link to="" class="nav-link" href="charts.html">
+                <router-link to="/feedbacks" class="nav-link" >
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Feedbacks</span></router-link>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <router-link to="" class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </router-link>
             </li>
         </ul>
     </transition>
@@ -157,11 +114,32 @@
 <script>
 import {useStore} from 'vuex';
 import {computed, ref} from 'vue';
+import DropdownMenu from './DropdownMenu.vue';
 
 export default ({
+    components:{
+        DropdownMenu
+    },
     setup() {
         const store = useStore();
         const sideSlide = computed(() => store.getters['animations/getAdminSideSlide']);
+        const productsDropdown = {
+            title: 'Products',
+            list: [
+                {
+                    link: '/products',
+                    name: 'All Products'
+                },
+                {
+                    link: '/vouchers',
+                    name: 'Vouchers'
+                },
+                {
+                    link: '/rewards',
+                    name: 'Rewards'
+                }
+            ]
+        }
         
         function showSideBar(){
             store.dispatch('animations/changeState', true)
@@ -172,9 +150,11 @@ export default ({
         }
 
         return {
+            DropdownMenu,
             showSideBar,
             hideSideBar,
-            sideSlide
+            sideSlide,
+            productsDropdown
         }
     },
 })
@@ -183,6 +163,11 @@ export default ({
 
 <style scoped>
     @import"./../../../css/admin/adminSideBar.css";
+    .router-link-active.router-link-exact-active.collapse-item{
+        color: var(--admin-30-clr) !important;
+        font-weight: 500;
+    }
+
     .sidenav{
         height: 100%;
         width: 0;
@@ -200,7 +185,6 @@ export default ({
     .slide-leave-active {
         transition: all 0.74 ease-in-out;
     }
-
 
     .slide-enter-to {
         position: absolute;

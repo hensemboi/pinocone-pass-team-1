@@ -95,21 +95,3 @@ export default {
     }
 };
 </script>
-<script>
-export default {
-  name: "app",
-  methods: {
-    gotoGoogle() {
-      window.open("/membership/index");
-    },
-  },
-};
-export default {
-  name: "applic",
-  methods: {
-    gotoGoogle() {
-      window.open("/membership/index");
-    },
-  },
-};
-</script>

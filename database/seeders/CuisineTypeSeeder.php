@@ -15,24 +15,22 @@ class CuisineTypeSeeder extends Seeder
      */
     public function run()
     {
-        CuisineType::factory()->count(3)->create();
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT01',
+            'name' => "Malaysian",
+            'description' => "Malaysian Type is delicious"
+        ]);
 
-        // CuisineType::create([
-        //     'PK_cuisineCode' => 1,
-        //     'name' => "Malaysian",
-        //     'description' => "Malaysian Type is delicious"
-        // ]);
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT02',
+            'name' => "Chinese",
+            'description' => "Chinese Type is delicious"
+        ]);
 
-        // CuisineType::create([
-        //     'PK_cuisineCode' => 2,
-        //     'name' => "Chinese",
-        //     'description' => "Chinese Type is delicious"
-        // ]);
-
-        // CuisineType::create([
-        //     'PK_cuisineCode' => 3,
-        //     'name' => "Indian",
-        //     'description' => "Indian Type is delicious"
-        // ]);
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT03',
+            'name' => "Indian",
+            'description' => "Indian Type is delicious"
+        ]);
     }
 }

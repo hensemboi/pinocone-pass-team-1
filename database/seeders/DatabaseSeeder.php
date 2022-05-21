@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Staff;
 use App\Models\Address;
-use App\Models\Admin;
 use App\Models\Pinopay;
 use App\Models\Voucher;
 use App\Models\Category;
@@ -27,7 +27,9 @@ use App\Models\StaffInCharge;
 use App\Models\MeansOfDelivery;
 use Illuminate\Database\Seeder;
 use App\Models\UserPaymentMethod;
+use Database\Seeders\CategorySeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Databse\Seeders\CuisineTypeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,8 +43,37 @@ class DatabaseSeeder extends Seeder
         // Strong Enttity
         User::factory()->count(20)->create();
         TestUser::factory()->count(1)->create();
-        Category::factory()->count(4)->create();
-        CuisineType::factory()->count(3)->create();
+        
+        Category::create([
+            'PK_categoryCode' => 'CA01',
+            'name' => "Warm",
+            'description' => "Main Course Type is delicious"
+        ]);
+
+       Category::create([
+            'PK_categoryCode' => 'CA02',
+            'name' => "Cold",
+            'description' => "Dessert Type is delicious"
+        ]);
+
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT01',
+            'name' => "Malaysian",
+            'description' => "Malaysian Type is delicious"
+        ]);
+
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT02',
+            'name' => "Chinese",
+            'description' => "Chinese Type is delicious"
+        ]);
+
+        CuisineType::create([
+            'PK_cuisineCode' => 'CT03',
+            'name' => "Indian",
+            'description' => "Indian Type is delicious"
+        ]);
+
         Division::factory()->count(3)->create();
         PaymentMethod::factory()->count(3)->create();
         MeansOfDelivery::factory()->count(3)->create();

@@ -5,10 +5,6 @@
         </div>
         <div class="card-body">
             <h3 class="card-title"></h3>
-            <div class="card-categories">
-                <a href="#" class="card-link"><span></span></a>
-                <a href="#" class="card-link"><span></span></a>
-            </div>
             <div class="card-menu-desc">
                 <div class="price">
                 </div>
@@ -37,7 +33,7 @@ export default {
         width:31%;
         max-width: 700px;
         height: 120PX;
-        background: beige ;
+        background-color:  #fff;
         margin: 5px auto;
         padding: 10px;
         box-sizing: border-box;
@@ -80,7 +76,7 @@ export default {
         animation: pulse-bg 1s infinite;
     }
     .card-categories{
-        width: 250px;
+        width: 100px;
         height: 15px;
         animation: pulse-bg 1s infinite;
     }

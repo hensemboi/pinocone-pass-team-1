@@ -2,7 +2,7 @@
     /* COLOURS  */
     --admin-60-clr: #EBEBEB;
     --admin-30-clr: #578399;
-    --admin-10-clr: #b8e5fd;
+    --admin-10-clr: var(--pinocone-yellow);
     --admin-background-clr: #FFFFFF ;
     --admin-main-theme-clr: var(--admin-10-clr);
     --admin-topbar-clr: var(--admin-60-clr);
@@ -13,9 +13,10 @@
     --admin-hover-clr: #303030;
     --admin-clr: #004d65;
     --admin-footer-bar-clr: #2d2e2c;
-    --admin-btn-primary: var(--admin-30-clr);
+    --admin-btn-primary: var(--pinocone-yellow);
     --admin-text-primary-clr: var(--admin-30-clr);
     --admin-text-body-clr: #001324;
+    --admin-bg-clr: #f5f6fa;
 
     --admin-sidebar-fontsize: 1.3rem;
 

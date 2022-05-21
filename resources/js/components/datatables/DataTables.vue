@@ -26,8 +26,8 @@
                         <th>Description</th>
                         <th v-on:click="sort('price');sortField = 'price'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='price', asc:!isAsc && sortField =='price'}"  class="tablesorter-header">Price</th>
                         <th v-on:click="sort('totalOrders');sortField = 'totalOrders'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='totalOrders', asc:!isAsc && sortField =='totalOrders'}" class="tablesorter-header">Total Orders</th>
-                        <th v-on:click="sort('category.name');sortField = 'category'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='category', asc:!isAsc && sortField =='category'}" class="tablesorter-header">Category</th>
-                        <th v-on:click="sort('cuisinetype.name');sortField = 'cuisinetype'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='cuisinetype', asc:!isAsc && sortField =='cuisinetype'}" class="tablesorter-header">Cuisine</th>
+                        <th v-on:click="sort('category.name');sortField = 'category'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='category', asc:!isAsc && sortField =='category'}" class="tablesorter-header col-1">Category</th>
+                        <th v-on:click="sort('cuisinetype.name');sortField = 'cuisinetype'; isAsc = !isAsc" :class="{desc:isAsc && sortField =='cuisinetype', asc:!isAsc && sortField =='cuisinetype'}" class="tablesorter-header col-1">Cuisine</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

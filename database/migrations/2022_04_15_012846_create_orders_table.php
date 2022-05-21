@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('FK_paymentCode')->nullable();
             $table->text('extraNote')->nullable();
             $table->float('totalPrice');
-            $table->unsignedInteger('is_express');
+            $table->unsignedInteger('is_express')->default(false);
             $table->string('FK_voucherID', 10)->nullable();
             $table->string('FK_deliveryCode', 4); 
             $table->timestamps();

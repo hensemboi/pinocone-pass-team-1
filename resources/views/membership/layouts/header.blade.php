@@ -11,21 +11,21 @@
                 <i class="ti-align-right h4 text-dark"></i></button>
             <div class="collapse navbar-collapse text-center" id=navigation>
                 <ul class="navbar-nav mx-auto align-items-center">
-                    @if (Auth::guard('web')->check() == true)
+                    @if (Auth::guard('mem')->check() == true)
                         <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#MembershipPackages">Membership
                                 Plans</a></li>
                                 {{-- <li class="nav-item"><a class="nav-link" href="{{ route('get.feedback') }}">Feedback</a></li> --}}
                                 <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#exampleModal">Feedback</a></li>
                         <li class="nav-item"><a class="nav-link"
-                                href="/membership/profile">{{ Auth::guard('web')->user()->name }}</a></li>
-                                @if (Auth::guard('web')->user()->package == '1')
+                                href="/membership/profile">{{ Auth::guard('mem')->user()->name }}</a></li>
+                                @if (Auth::guard('mem')->user()->package == '1')
                                 <a href="/membership/basic" class="btn btn-sm btn-primary ml-lg-4">Basic</a>
                             @endif
-                            @if (Auth::guard('web')->user()->package == '2')
+                            @if (Auth::guard('mem')->user()->package == '2')
                                 <a href="/membership/standard" class="btn btn-sm btn-primary ml-lg-4">Standard</a>
                             @endif
-                            @if (Auth::guard('web')->user()->package == '3')
+                            @if (Auth::guard('mem')->user()->package == '3')
                                 <a href="/membership/premium" class="btn btn-sm btn-primary ml-lg-4">Premium</a>
                             @endif
                         <a href="/membership/logout" class="btn btn-sm btn-outline-primary ml-lg-4">Logout</a>

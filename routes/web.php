@@ -47,7 +47,7 @@ Route::post('/post/membership/profile', [FrontController::class, 'postprofile'])
 
 Route::post('/post/feedback', [FeedbackController::class, 'feedback'])->name('feedback');
 
-Route::group(['middleware' => 'auth:web'], function () {
+Route::group(['middleware' => 'auth:mem'], function () {
     Route::get('/membership/subscribe/basic', [PackageController::class, 'basic'])->name('basic');
     Route::get('/membership/subscribe/standard', [PackageController::class, 'standard'])->name('standard');
     Route::get('/membership/subscribe/premium', [PackageController::class, 'premium'])->name('premium');

@@ -1,6 +1,6 @@
 @extends('membership.layouts')
 @section('title')
-    Pinocone | {{ Auth::guard('web')->user()->name }}'s Profile
+    Pinocone | {{ Auth::guard('mem')->user()->name }}'s Profile
 @endsection
 @section('extra-heads')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,24 +16,24 @@
                 <div class="col-lg-7 text-center text-lg-left">
                     <h1 class="mb-4">Update Your Account</h1>
                     <div style="text-align: center; margin-bottom: 40px; ">
-                        @if (Auth::guard('web')->user()->package == '1')
+                        @if (Auth::guard('mem')->user()->package == '1')
                             <a href="/membership/basic"> <button type="submit" class="btn btn-primary" style="margin-top: 12px;">Basic
                                     MemberShip
                                     Activated</button></a>
                         @endif
-                        @if (Auth::guard('web')->user()->package == '2')
+                        @if (Auth::guard('mem')->user()->package == '2')
                             <a href="/membership/standard">
                                 <button type="submit" class="btn btn-primary" style="margin-top: 12px;">Standard MemberShip
                                     Activated</button>
                             </a>
                         @endif
-                        @if (Auth::guard('web')->user()->package == '3')
+                        @if (Auth::guard('mem')->user()->package == '3')
                             <a href="/membership/premium">
                                 <button type="submit" class="btn btn-primary" style="margin-top: 12px;">Premium MemberShip
                                     Activated</button>
                             </a>
                         @endif
-                        @if (Auth::guard('web')->user()->package == null)
+                        @if (Auth::guard('mem')->user()->package == null)
                             <button type="submit" class="btn btn-primary" style="margin-top: 12px;">You dont have MemberShip
                                 Activated</button>
                         @endif
@@ -44,7 +44,7 @@
                             <div class="col-12">
                                 <label for="">Name</label>
                                 <input type="text" class="form-control form-control-lg" id="name"
-                                    value="{{ Auth::guard('web')->user()->name }}" name="name"
+                                    value="{{ Auth::guard('mem')->user()->name }}" name="name"
                                     placeholder="Enter Your Name...">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -53,7 +53,7 @@
                             <div class="col-12">
                                 <label for="">Email</label>
                                 <input type="email" class="form-control form-control-lg" id="email" readonly
-                                    value="{{ Auth::guard('web')->user()->email }}" name="email"
+                                    value="{{ Auth::guard('mem')->user()->email }}" name="email"
                                     placeholder="Enter Your Email...">
                                 @if ($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>

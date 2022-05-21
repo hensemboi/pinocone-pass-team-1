@@ -19,7 +19,7 @@
                                 <h3 class="card-title h4">Standard Package</h3>
                                 <p class="card-text">15 Vouchers.</p>
                                 <p class="card-text">Available For 30 Days.</p>
-                                <p class="card-text">Your Package Will Be Expire at : {{ Auth::guard('web')->user()->expires_at }}</p>
+                                <p class="card-text">Your Package Will Be Expire at : {{ Auth::guard('mem')->user()->expires_at }}</p>
                             </div>
                         </div>
                 </div>

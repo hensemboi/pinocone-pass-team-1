@@ -27488,7 +27488,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-md-6\"><h6>Follow Us</h6><div class=\"social\"><a href=\"https://www.facebook.com/\"><i class=\"fa fa-facebook\" aria-hidden=\"true\"></i></a><a href=\"https://www.instagram.com/?hl=en\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a><a href=\"https://twitter.com/?lang=en\"><i class=\"fa fa-twitter\" aria-hidden=\"true\"></i></a></div></div>", 1);
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"footer-bar\"><div class=\"foot\"><ul><li><a href=\"\">©Copyright </a> |</li><li><a href=\"\">Privacy Policy </a> |</li><li><a href=\"\">Terms &amp; Conditions</a></li></ul></div></div>", 1);
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"footer-bar\"><div class=\"foot\"><ul><li><a href=\"#\">©Copyright </a> |</li><li><a href=\"#\">Privacy Policy </a> |</li><li><a href=\"#\">Terms &amp; Conditions</a></li></ul></div></div>", 1);
 
 function render(_ctx, _cache) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -33001,14 +33001,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  id: "Hero-Image-1"
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"Hero-Image-1\"><img src=\"/images/hero-1.jpeg\" alt=\"hero-1.jpeg\" style=\"width:100%;\"><div id=\"Hero-Text\"><h1>We are here to help</h1><p>We can offer you very good deals on a frequent basis.</p><button class=\"btn-body\">Check our full menu listing</button></div></div><div><div id=\"About-Us\"><div class=\"row\"><div class=\"col-lg-7\"><img class=\"about-us\" src=\"/images/about-us.jpeg\" alt=\"about-us.jpeg\"></div><div class=\"col-lg-5\"><div id=\"About-Text\"><h1>About Us</h1><p> Pinocone Catering Company of Sarawak is one of the few catering companies that offers catering services especially to schools and other companies in the state. </p><button class=\"btn-body\">Learn more</button></div></div></div></div></div><div id=\"Hero-Image-2\"><img src=\"/images/hero-2.jpeg\" alt=\"hero-2.jpeg\" style=\"width:100%;\"><div id=\"Hero-Text-2\"><h1>JOIN US AND GET DISCOUNTS UP TO 50%</h1><button class=\"btn-body\">SIGN UP NOW</button></div></div><div id=\"Order-Steps\"><h1 id=\"Order-Heading\">Order in 4 Simple Steps</h1><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step1.png\" alt=\"step1.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step2.png\" alt=\"step2.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step3.png\" alt=\"step3.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step4.png\" alt=\"step4.png\" width=\"600\" height=\"400\"></div></div></div>", 4);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/images/hero-1.jpeg",
+  alt: "hero-1.jpeg",
+  style: {
+    "width": "100%"
+  }
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_5 = {
+var _hoisted_3 = {
+  id: "Hero-Text"
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "We are here to help", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "We can offer you very good deals on a frequent basis.", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn-body"
+}, "Check our full menu listing", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><div id=\"About-Us\"><div class=\"row\"><div class=\"col-lg-7\"><img class=\"about-us\" src=\"/images/about-us.jpeg\" alt=\"about-us.jpeg\"></div><div class=\"col-lg-5\"><div id=\"About-Text\"><h1>About Us</h1><p> Pinocone Catering Company of Sarawak is one of the few catering companies that offers catering services especially to schools and other companies in the state. </p><button class=\"btn-body\">Learn more</button></div></div></div></div></div>", 1);
+
+var _hoisted_8 = {
+  id: "Hero-Image-2"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/images/hero-2.jpeg",
+  alt: "hero-2.jpeg",
+  style: {
+    "width": "100%"
+  }
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  id: "Hero-Text-2"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "JOIN US AND GET DISCOUNTS UP TO 50%", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn-body"
+}, "SIGN UP NOW", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"Order-Steps\"><h1 id=\"Order-Heading\">Order in 4 Simple Steps</h1><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step1.png\" alt=\"step1.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step2.png\" alt=\"step2.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step3.png\" alt=\"step3.png\" width=\"600\" height=\"400\"></div></div><div class=\"responsive\"><div class=\"gallery\"><img src=\"/images/step4.png\" alt=\"step4.png\" width=\"600\" height=\"400\"></div></div></div>", 1);
+
+var _hoisted_14 = {
   "class": "container section"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   id: "Recommended-Menus"
 }, "Recommendation Menus", -1
 /* HOISTED */
@@ -33017,9 +33078,29 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_navbar_component = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("navbar-component");
 
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+
   var _component_special_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("special-section");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_navbar_component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menuList, function (menu) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_navbar_component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/marketplace"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_6];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/register"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_12];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menuList, function (menu) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_special_section, {
       "class": "col-md-4",
       RecommendedMenu: menu,

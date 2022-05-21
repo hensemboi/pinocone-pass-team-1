@@ -7,7 +7,9 @@
                 <div id="Hero-Text">
                     <h1>We are here to help</h1>
                     <p>We can offer you very good deals on a frequent basis.</p>
-                    <button class="btn-body">Check our full menu listing</button>
+                    <router-link to="/marketplace">
+                        <button class="btn-body">Check our full menu listing</button>
+                    </router-link>
                 </div>
             </div>
 
@@ -42,7 +44,9 @@
                 <img src="/images/hero-2.jpeg" alt="hero-2.jpeg" style="width: 100%" />
                 <div id="Hero-Text-2">
                     <h1>JOIN US AND GET DISCOUNTS UP TO 50%</h1>
-                    <button class="btn-body">SIGN UP NOW</button>
+                    <router-link to="/register">
+                        <button class="btn-body">SIGN UP NOW</button>
+                    </router-link>
                 </div>
             </div>
 

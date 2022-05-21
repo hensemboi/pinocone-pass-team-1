@@ -35,8 +35,8 @@
                             <p class="card-text">Get 10 Vouchers.</p>
                             <p class="card-text">Available For 30 Days.</p>
                             <div class="div text-center">
-                                @if (Auth::guard('web')->check() == true)
-                                @if (Auth::guard('web')->user()->package == '0')
+                                @if (Auth::guard('mem')->check() == true)
+                                @if (Auth::guard('mem')->user()->package == '0')
                                     <a href="/membership/subscribe/basic" class="text-center btn btn-sm btn-primary "
                                         style="margin-top: 12px;">Subscribe</a>
                                 @endif
@@ -58,8 +58,8 @@
                             <p class="card-text">Get 15 Vouchers.</p>
                             <p class="card-text">Available For 30 Days.</p>
                             <div class="div text-center">
-                                @if (Auth::guard('web')->check() == true)
-                                @if (Auth::guard('web')->user()->package == '0')
+                                @if (Auth::guard('mem')->check() == true)
+                                @if (Auth::guard('mem')->user()->package == '0')
                                     <a href="/membership/subscribe/standard" class="text-center btn btn-sm btn-primary "
                                         style="margin-top: 12px;">Subscribe</a>
                                 @endif
@@ -82,8 +82,8 @@
                             <p class="card-text">Get 20 Vouchers.</p>
                             <p class="card-text">Available For 30 Days.</p>
                             <div class="div text-center">
-                                @if (Auth::guard('web')->check() == true)
-                                @if (Auth::guard('web')->user()->package == '0' ?? '')
+                                @if (Auth::guard('mem')->check() == true)
+                                @if (Auth::guard('mem')->user()->package == '0' ?? '')
                                     <a href="/membership/subscribe/premium" class="text-center btn btn-sm btn-primary "
                                         style="margin-top: 12px;">Subscribe</a>
                                 @endif

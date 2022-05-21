@@ -12,9 +12,9 @@
             </div>
             <div class="col-lg-4">
                 <ul class="list-inline social-icons text-lg-right text-center">
-                    <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="ti-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.facebook.com/"><i class="ti-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.instagram.com/?hl=en"><i class="ti-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="https://twitter.com/?lang=en"><i class="ti-twitter-alt"></i></a></li>
 
 
                 </ul>

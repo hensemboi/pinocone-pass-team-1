@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'mem' => [
+            'driver' => 'session',
+            'provider' => 'testusers',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -68,6 +73,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'testusers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TestUser::class,
         ],
 
         'admins' => [

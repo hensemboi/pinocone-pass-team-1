@@ -65,9 +65,9 @@
         <div class="footer-bar">
             <div class="foot">
                 <ul>
-                    <li><a href="">©Copyright </a> |</li>
-                    <li><a href="">Privacy Policy </a> |</li>
-                    <li><a href="">Terms & Conditions</a></li>
+                    <li><a href="#">©Copyright </a> |</li>
+                    <li><a href="#">Privacy Policy </a> |</li>
+                    <li><a href="#">Terms & Conditions</a></li>
                 </ul>
             </div>
         </div>

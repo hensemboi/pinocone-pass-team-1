@@ -19,8 +19,8 @@ class PackageController extends Controller
     public function basic()
     {
         $date = Carbon::now();
-        $email = Auth::guard('web')->user()->email;
-        $id = Auth::guard('web')->user()->id;
+        $email = Auth::guard('mem')->user()->email;
+        $id = Auth::guard('mem')->user()->id;
             $package = TestUser::find($id);
             $package->package = '1';
             $package->expires_at = date('m-d-Y', strtotime($date. ' + 30 days'));
@@ -38,8 +38,8 @@ class PackageController extends Controller
     public function standard()
     {
         $date = Carbon::now();
-        $email = Auth::guard('web')->user()->email;
-        $id = Auth::guard('web')->user()->id;
+        $email = Auth::guard('mem')->user()->email;
+        $id = Auth::guard('mem')->user()->id;
             $package = TestUser::find($id);
             $package->package = '2';
             $package->expires_at = date('m-d-Y', strtotime($date. ' + 30 days'));
@@ -57,8 +57,8 @@ class PackageController extends Controller
     public function premium()
     {
         $date = Carbon::now();
-        $email = Auth::guard('web')->user()->email;
-        $id = Auth::guard('web')->user()->id;
+        $email = Auth::guard('mem')->user()->email;
+        $id = Auth::guard('mem')->user()->id;
             $package = TestUser::find($id);
             $package->package = '3';
             $package->expires_at = date('m-d-Y', strtotime($date. ' + 30 days'));

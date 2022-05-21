@@ -56,7 +56,7 @@ class FrontController extends Controller
     }
     public function postprofile(Request $request)
     {
-        $id = Auth::guard('web')->user()->id;
+        $id = Auth::guard('mem')->user()->id;
         $request->validate([
             'name' => 'required|max:250',
         ]);
@@ -74,14 +74,14 @@ class FrontController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            return redirect('/membership/index')->with('message','Welcome Back ' . Auth::guard('web')->user()->name );
+        if (Auth::guard('mem')->attempt($credentials)) {
+            return redirect('/membership/index')->with('message','Welcome Back ' . Auth::guard('mem')->user()->name );
         }
         return redirect()->back()->with('error', 'Email or Password is Invalid!');
     }
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('mem')->logout();
         Session::flush();
         return redirect('/membership/index');
     }
